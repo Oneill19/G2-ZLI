@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ShowOrdersScreenController">
+   <children>
+      <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="406.0" layoutY="48.0">
+         <image>
+            <Image url="@Zli_logo.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="ordersTable" layoutX="20.0" layoutY="188.0" prefHeight="401.0" prefWidth="960.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px;">
+         <columns>
+            <TableColumn fx:id="orderNumberCol" prefWidth="94.0" style="-fx-background-color: #FCFCFE;" text="Order Number" />
+            <TableColumn fx:id="priceCol" prefWidth="66.0" style="-fx-background-color: #FCFCFE;" text="Price" />
+            <TableColumn fx:id="greetingCardCol" prefWidth="171.0" style="-fx-background-color: #FCFCFE;" text="Greeting Card Description" />
+            <TableColumn fx:id="colorCol" minWidth="0.0" prefWidth="74.0" style="-fx-background-color: #FCFCFE;" text="Color" />
+            <TableColumn fx:id="dOrderCol" prefWidth="159.0" style="-fx-background-color: #FCFCFE;" text="Order Description" />
+            <TableColumn fx:id="shopCol" minWidth="0.0" prefWidth="92.0" style="-fx-background-color: #FCFCFE;" text="Shop" />
+            <TableColumn fx:id="dateCol" prefWidth="156.0" style="-fx-background-color: #FCFCFE;" text="Supply Date" />
+            <TableColumn fx:id="orderDateCol" prefWidth="147.0" style="-fx-background-color: #FCFCFE;" text="Order Date" />
+         </columns>
+      </TableView>
+      <Button fx:id="onBack" alignment="CENTER" layoutX="420.0" layoutY="612.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Back" textFill="#fcfcfe" />
+      <Button fx:id="exitClient" alignment="CENTER" layoutX="420.0" layoutY="666.0" mnemonicParsing="false" onAction="#onExit" prefHeight="43.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Exit" textFill="#fcfcfe" />
+   </children>
+</Pane>
