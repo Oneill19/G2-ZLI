@@ -92,7 +92,7 @@ public class ServerConnectController {
 	}
 
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/ServerConnect.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/controllers/ServerConnect.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li Server");
 		primaryStage.setScene(scene);

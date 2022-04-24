@@ -35,7 +35,7 @@ public class EnterIPClientController {
     private TextField portClient;
 
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/controllers/client/EnterIPClient.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/controllers/EnterIPClient.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li Client");
 		primaryStage.setScene(scene);
