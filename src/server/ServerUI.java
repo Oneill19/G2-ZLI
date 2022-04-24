@@ -1,6 +1,6 @@
 package server;
 
-import controllers.server.ServerConnectController;
+import controllers.ServerConnectController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

@@ -7,11 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-
-import common.entities.Order;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import common.Order;
 
 public class mysqlConnection {
 

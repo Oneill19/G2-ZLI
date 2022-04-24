@@ -1,8 +1,8 @@
-package controllers.server;
+package controllers;
 
 import java.io.IOException;
 
-import common.entities.ClientInfo;
+import common.ClientInfo;
 import server.EchoServer;
 import server.ServerUI;
 import javafx.event.ActionEvent;

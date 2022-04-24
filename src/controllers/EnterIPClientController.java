@@ -1,4 +1,4 @@
-package controllers.client;
+package controllers;
 
 import client.ClientController;
 import client.ClientUI;

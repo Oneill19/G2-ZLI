@@ -1,10 +1,10 @@
-package controllers.client;
+package controllers;
 
 import java.sql.Timestamp;
 
 import client.ChatClient;
 import client.ClientUI;
-import common.entities.Order;
+import common.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
