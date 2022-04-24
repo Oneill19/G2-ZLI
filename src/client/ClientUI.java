@@ -1,8 +1,8 @@
 package client;
 
+import controllers.client.EnterIPClientController;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import controllers.EnterIPClientController;
 
 public class ClientUI extends Application {
 	

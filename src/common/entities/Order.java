@@ -1,4 +1,4 @@
-package common;
+package common.entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
