@@ -51,7 +51,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <TextField fx:id="dateField" layoutX="487.0" layoutY="359.0" prefHeight="33.0" prefWidth="200.0" promptText="yyyy-mm-dd hh:mm:ss" style="-fx-font-size: 15px; -fx-border-color: #2B0548;">
+      <TextField fx:id="dateField" layoutX="487.0" layoutY="359.0" prefHeight="33.0" prefWidth="200.0" promptText="yyyy-mm-dd hh:mm" style="-fx-font-size: 15px; -fx-border-color: #2B0548;">
          <font>
             <Font size="20.0" />
          </font>

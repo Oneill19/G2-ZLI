@@ -71,10 +71,11 @@ public class ServerConnectController {
 
 	@FXML
 	void onConnect(ActionEvent event) throws IOException {
-		ServerUI.runServer(ipField.getText(), portField.getText(), usernameField.getText(), passwordField.getText(),
+		boolean status = ServerUI.runServer(ipField.getText(), portField.getText(), usernameField.getText(), passwordField.getText(),
 				dbnameField.getText());
-		connectToDB.disableProperty();
-		statusLabel.setText("Server Running");
+		if (status) {
+			statusLabel.setText("Server Running");			
+		}
 	}
 
 	@FXML

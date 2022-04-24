@@ -17,7 +17,7 @@ public class ServerUI extends Application {
 		aFrame.start(primaryStage);
 	}
 
-	public static void runServer(String ip, String portString, String userName, String password, String name) {
+	public static boolean runServer(String ip, String portString, String userName, String password, String name) {
 		int port = 0; // Port to listen on
 
 		try {
@@ -25,6 +25,7 @@ public class ServerUI extends Application {
 
 		} catch (Throwable t) {
 			System.out.println("ERROR - Could not connect!");
+			return false;
 		}
 
 		sv = new EchoServer(ip, port, userName, password, name);
@@ -33,7 +34,9 @@ public class ServerUI extends Application {
 			sv.listen(); // Start listening for connections
 		} catch (Exception ex) {
 			System.out.println("ERROR - Could not listen for clients!");
+			return false;
 		}
+		return true;
 	}
 	
 	public static void stopServer() {
