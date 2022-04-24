@@ -46,7 +46,7 @@ public class EchoServer extends AbstractServer {
 		}
 
 		try {
-			String dblink = String.format("jdbc:mysql://%s:3306/%s?serverTimezone=IST", ip, name);
+			String dblink = String.format("jdbc:mysql://%s/%s?serverTimezone=IST", ip, name);
 			System.out.println(dblink);
 			conn = DriverManager.getConnection(dblink, userName, pwd);
 			System.out.println("SQL connection succeed");
