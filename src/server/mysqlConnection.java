@@ -68,8 +68,7 @@ public class mysqlConnection {
 			Timestamp timestamp = Timestamp.valueOf(date);
 			timestamp.setHours(timestamp.getHours() - 2);
 			timestamp.setMinutes(timestamp.getMinutes() - 30);
-			String sql = "UPDATE zli.orders SET color=?,date=? WHERE orderNumber=" + Integer.parseInt(orderNumber)
-					+ ";";
+			String sql = "UPDATE zli.orders SET color=?,date=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, color);
 			ps.setTimestamp(2, timestamp);
