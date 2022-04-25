@@ -12,7 +12,7 @@ public class Order implements Serializable {
 	private String color;
 	private String dorder;
 	private String shop;
-	private Timestamp date;
+	private String date;
 	private Timestamp orderDate;
 	
 	public Order() {
@@ -26,7 +26,7 @@ public class Order implements Serializable {
 		orderDate = null;
 	}
 	
-	public Order(int orderNumber, double price, String greetingCard, String color, String dOrder, String shop, Timestamp date, Timestamp orderDate) {
+	public Order(int orderNumber, double price, String greetingCard, String color, String dOrder, String shop, String date, Timestamp orderDate) {
 		this.orderNumber = orderNumber;
 		this.price = price;
 		this.greetingCard = greetingCard;
@@ -97,12 +97,12 @@ public class Order implements Serializable {
 	}
 
 
-	public Timestamp getDate() {
+	public String getDate() {
 		return date;
 	}
 
 
-	public void setDate(Timestamp date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

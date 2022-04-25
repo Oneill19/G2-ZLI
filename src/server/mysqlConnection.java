@@ -49,7 +49,8 @@ public class mysqlConnection {
 				String color = rs.getString(4);
 				String dorder = rs.getString(5);
 				String shop = rs.getString(6);
-				Timestamp date = Timestamp.valueOf(rs.getString(7));
+				//Timestamp date = Timestamp.valueOf(rs.getString(7));
+				String date = rs.getString(7);
 				Timestamp orderDate = Timestamp.valueOf(rs.getString(8));
 				Order order = new Order(orderNumber, price, greetingCard, color, dorder, shop, date, orderDate);
 				orders.add(order);
@@ -97,16 +98,21 @@ public class mysqlConnection {
 			case DATE:
 				sql = "UPDATE zli.orders SET date=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
 				ps = con.prepareStatement(sql);
-				Timestamp timestamp = Timestamp.valueOf(newValue);
-				timestamp.setHours(timestamp.getHours() - 2);
-				timestamp.setMinutes(timestamp.getMinutes() - 30);
-				ps.setTimestamp(2, timestamp);
+				//Timestamp timestamp = Timestamp.valueOf(newValue);
+				//timestamp.set
+				//timestamp.setHours(timestamp.getHours() - 2);
+				//timestamp.setMinutes(timestamp.getMinutes() - 30);
+				//ps.setTimestamp(2, timestamp);
+				ps.setString(1, newValue);
 				ps.executeUpdate();
 				ps.close();
 				break;
 			}// end SWITCH
 			System.out.println("Order Updated");
 			return true;
+		}catch(IllegalArgumentException e) {
+			System.out.println("please enter valid date");
+			return false;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
