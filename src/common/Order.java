@@ -3,6 +3,7 @@ package common;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+@SuppressWarnings("serial")
 public class Order implements Serializable {
 	
 	private int orderNumber;

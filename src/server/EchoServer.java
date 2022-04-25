@@ -29,10 +29,10 @@ public class EchoServer extends AbstractServer {
 
 	public EchoServer(String ip, int port, String userName, String pwd, String name) {
 		super(port);
-		this.ip = ip;
-		this.userName = userName;
-		this.pwd = pwd;
-		this.name = name;
+		EchoServer.ip = ip;
+		EchoServer.userName = userName;
+		EchoServer.pwd = pwd;
+		EchoServer.name = name;
 	}
 
 	// Instance methods ************************************************

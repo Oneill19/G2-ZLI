@@ -18,6 +18,7 @@ public class ChatClient extends AbstractClient {
 		this.clientUI = clientUI;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void handleMessageFromServer(Object msg) {
 		System.out.println("--> handleMessageFromServer");
