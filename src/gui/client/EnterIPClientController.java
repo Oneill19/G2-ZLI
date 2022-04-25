@@ -1,4 +1,4 @@
-package gui;
+package gui.client;
 
 import client.ClientController;
 import client.ClientUI;
@@ -35,7 +35,7 @@ public class EnterIPClientController {
     private TextField portClient;
 
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/gui/EnterIPClient.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/gui/client/EnterIPClient.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li Client");
 		primaryStage.setScene(scene);
@@ -73,7 +73,7 @@ public class EnterIPClientController {
 			ClientUI.chat.accept("Connected");
 			((Node) event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
-			Pane root = new FXMLLoader().<Pane>load(getClass().getResource("OptionsScreen.fxml"));
+			Pane root = new FXMLLoader().<Pane>load(getClass().getResource("/gui/client/OptionsScreen.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("Zer-Li Client");
 			primaryStage.setScene(scene);

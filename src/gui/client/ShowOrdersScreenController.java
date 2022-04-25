@@ -1,10 +1,10 @@
-package gui;
+package gui.client;
 
 import java.sql.Timestamp;
 
 import client.ChatClient;
 import client.ClientUI;
-import common.Order;
+import entity.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -60,7 +60,7 @@ public class ShowOrdersScreenController {
     public void onBack(ActionEvent event) throws Exception {
     	((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
-		Pane root = new FXMLLoader().<Pane>load(getClass().getResource("OptionsScreen.fxml"));
+		Pane root = new FXMLLoader().<Pane>load(getClass().getResource("/gui/client/OptionsScreen.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li Client");
 		primaryStage.setScene(scene);

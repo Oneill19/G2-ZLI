@@ -1,12 +1,12 @@
 package server;
 
-import gui.ServerConnectController;
+import gui.server.ServerConnectController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class ServerUI extends Application {
 	public static final int DEFAULT_PORT = 5555;
-	static EchoServer sv = null;
+	private static EchoServer sv = null;
 
 	public static void main(String[] args) throws Exception {
 		launch(args);

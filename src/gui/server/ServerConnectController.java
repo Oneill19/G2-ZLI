@@ -1,4 +1,4 @@
-package gui;
+package gui.server;
 
 import java.io.IOException;
 
@@ -93,7 +93,7 @@ public class ServerConnectController {
 	}
 
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("ServerConnect.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/gui/server/ServerConnect.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li Server");
 		primaryStage.setScene(scene);

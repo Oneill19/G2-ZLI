@@ -1,4 +1,4 @@
-package common;
+package entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -9,7 +9,7 @@ public class Order implements Serializable {
 	private double price;
 	private String greetingCard;
 	private String color;
-	private String dorder;
+	private String dOrder;
 	private String shop;
 	private Timestamp date;
 	private Timestamp orderDate;
@@ -19,7 +19,7 @@ public class Order implements Serializable {
 		price = 0;
 		greetingCard = null;
 		color = null;
-		dorder = null;
+		dOrder = null;
 		shop = null;
 		date = null;
 		orderDate = null;
@@ -30,7 +30,7 @@ public class Order implements Serializable {
 		this.price = price;
 		this.greetingCard = greetingCard;
 		this.color = color;
-		this.dorder = dOrder;
+		this.dOrder = dOrder;
 		this.shop = shop;
 		this.date = date;
 		this.orderDate = orderDate;
@@ -77,12 +77,12 @@ public class Order implements Serializable {
 
 
 	public String getDorder() {
-		return dorder;
+		return dOrder;
 	}
 
 
-	public void setDrder(String dorder) {
-		this.dorder = dorder;
+	public void setDorder(String dOrder) {
+		this.dOrder = dOrder;
 	}
 
 

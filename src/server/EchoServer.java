@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.ClientInfo;
-import common.Order;
+import entity.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ocsf.server.AbstractServer;
@@ -37,12 +37,13 @@ public class EchoServer extends AbstractServer {
 
 	// Instance methods ************************************************
 	
-	public static void connectToDB() {
+	public static boolean connectToDB() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			System.out.println("Driver definition succeed");
 		} catch (Exception ex) {
 			System.out.println("Driver definition failed");
+			return false;
 		}
 
 		try {
@@ -54,7 +55,9 @@ public class EchoServer extends AbstractServer {
 			System.out.println("SQLException: " + ex.getMessage());
 			System.out.println("SQLState: " + ex.getSQLState());
 			System.out.println("VendorError: " + ex.getErrorCode());
+			return false;
 		}
+		return true;
 	}
 	
 	/**

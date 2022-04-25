@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import common.ChatIF;
-import common.Order;
+import entity.Order;
 import ocsf.client.AbstractClient;
 
 public class ChatClient extends AbstractClient {
