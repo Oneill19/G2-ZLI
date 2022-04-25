@@ -15,6 +15,7 @@ import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
 public class EchoServer extends AbstractServer {
+
 	private static String ip;
 	private static String userName;
 	private static String pwd;
@@ -36,7 +37,7 @@ public class EchoServer extends AbstractServer {
 	}
 
 	// Instance methods ************************************************
-	
+
 	public static void connectToDB() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -56,7 +57,7 @@ public class EchoServer extends AbstractServer {
 			System.out.println("VendorError: " + ex.getErrorCode());
 		}
 	}
-	
+
 	/**
 	 * This method overrides the one in the superclass. Called when the server
 	 * starts listening for connections.
@@ -99,7 +100,7 @@ public class EchoServer extends AbstractServer {
 				}
 			}
 			break;
-			
+
 		case "Load":
 			orders = mysqlConnection.loadOrders(conn);
 			if (orders != null) {
@@ -121,7 +122,7 @@ public class EchoServer extends AbstractServer {
 				}
 			}
 			break;
-			
+
 		case "Connected":
 			String[] clientInfo = client.toString().split(" ");
 			ipAddress = clientInfo[1].substring(1, clientInfo[1].length() - 1);
@@ -149,8 +150,19 @@ public class EchoServer extends AbstractServer {
 				e1.printStackTrace();
 			}
 			break;
+			//clientMsg[1]= editedOrderNumber
+			//clientMsg[2]= editedNewValue
+			//clientMsg[3]= editedColumn
+		case "CellUpdate":
+			if (mysqlConnection.updateCell(conn, clientMsg[1], (clientMsg[2]), Integer.parseInt(clientMsg[3]))) {
+				try {
+					client.sendToClient("Order Updated");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			break;
 		}
-
 	}
 
 	private int searchClientByIp(String ip) {
