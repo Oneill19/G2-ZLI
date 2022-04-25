@@ -56,11 +56,10 @@ public class EditScreenController {
 			errorLabel.setText("Must enter all fields!");
 			return;
 		}
-		if (!getDate().matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}") && !getDate().equals("")) {
+		if (!getDate().matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}")) {
 			errorLabel.setText("please enter string in {yyyy/mm/dd hh:mm} format!");
 			return;
 		}
-		System.out.println(getDate());
 		String result = String.format("Update\t%s\t%s\t%s", getOrderNumber(), getColor(), getDate());
 		ClientUI.chat.accept(result);
 		errorLabel.setText("Success");
