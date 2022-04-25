@@ -1,4 +1,4 @@
-package controllers;
+package gui;
 
 import client.ClientUI;
 import javafx.event.ActionEvent;
@@ -71,7 +71,7 @@ public class EditScreenController {
 	public void onCancel(ActionEvent event) throws Exception {
 		((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
-		Pane root = new FXMLLoader().<Pane>load(getClass().getResource("/controllers/OptionsScreen.fxml"));
+		Pane root = new FXMLLoader().<Pane>load(getClass().getResource("OptionsScreen.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li Client");
 		primaryStage.setScene(scene);

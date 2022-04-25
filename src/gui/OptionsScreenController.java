@@ -1,4 +1,4 @@
-package controllers;
+package gui;
 
 import client.ClientUI;
 import javafx.event.ActionEvent;
@@ -28,7 +28,7 @@ public class OptionsScreenController {
     	ClientUI.chat.accept("Load");
     	((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
-		Pane root = new FXMLLoader().<Pane>load(getClass().getResource("/controllers/ShowOrdersScreen.fxml"));
+		Pane root = new FXMLLoader().<Pane>load(getClass().getResource("ShowOrdersScreen.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li Client");
 		primaryStage.setScene(scene);
@@ -39,7 +39,7 @@ public class OptionsScreenController {
     public void onEdit(ActionEvent event) throws Exception {
 		((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
-		Pane root = new FXMLLoader().<Pane>load(getClass().getResource("/controllers/EditScreen.fxml"));
+		Pane root = new FXMLLoader().<Pane>load(getClass().getResource("EditScreen.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li Client");
 		primaryStage.setScene(scene);
