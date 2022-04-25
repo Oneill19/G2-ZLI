@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.ClientInfo;
-import common.Order;
+import entities.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ocsf.server.AbstractServer;

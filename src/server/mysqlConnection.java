@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import common.Order;
+import entities.Order;
 
 public class mysqlConnection {
 

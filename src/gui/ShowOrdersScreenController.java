@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import client.ChatClient;
 import client.ClientUI;
-import common.Order;
+import entities.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
