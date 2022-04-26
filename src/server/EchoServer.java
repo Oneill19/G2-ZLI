@@ -15,6 +15,7 @@ import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
 public class EchoServer extends AbstractServer {
+
 	private static String ip;
 	private static String userName;
 	private static String pwd;
@@ -29,10 +30,10 @@ public class EchoServer extends AbstractServer {
 
 	public EchoServer(String ip, int port, String userName, String pwd, String name) {
 		super(port);
-		this.ip = ip;
-		this.userName = userName;
-		this.pwd = pwd;
-		this.name = name;
+		EchoServer.ip = ip;
+		EchoServer.userName = userName;
+		EchoServer.pwd = pwd;
+		EchoServer.name = name;
 	}
 
 	// Instance methods ************************************************
@@ -59,7 +60,7 @@ public class EchoServer extends AbstractServer {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * This method overrides the one in the superclass. Called when the server
 	 * starts listening for connections.
@@ -152,8 +153,22 @@ public class EchoServer extends AbstractServer {
 				e1.printStackTrace();
 			}
 			break;
+			//clientMsg[1]= editedOrderNumber
+			//clientMsg[2]= editedNewValue
+			//clientMsg[3]= editedColumn
+		case "CellUpdate":
+			if (mysqlConnection.CellUpdate(conn, clientMsg[1], (clientMsg[2]), Integer.parseInt(clientMsg[3]))) {
+				try {
+					client.sendToClient("Order Updated");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				
+			}
+			break;
 		}
-
 	}
 
 	private int searchClientByIp(String ip) {
