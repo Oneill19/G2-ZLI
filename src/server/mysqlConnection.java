@@ -94,7 +94,7 @@ public class mysqlConnection {
 			case DATE:
 				sql = "UPDATE zli.orders SET date=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
 				ps = con.prepareStatement(sql);
-				ps.setString(1, ((LocalDate) newValue).toString());
+				ps.setString(1, newValue.toString());
 				ps.executeUpdate();
 				ps.close();
 				break;

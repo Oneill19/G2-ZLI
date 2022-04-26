@@ -22,6 +22,7 @@ public class ChatClient extends AbstractClient {
 	@Override
 	public void handleMessageFromServer(Object msg) {
 		System.out.println("--> handleMessageFromServer");
+		clientUI.display(msg.toString());
 		awaitResponse = false;
 		if (msg instanceof ArrayList) {
 			orders = (ArrayList<Order>) msg;
@@ -33,6 +34,8 @@ public class ChatClient extends AbstractClient {
 	public void handleMessageFromClientUI(String msg) {
 		try {
 			openConnection();
+			System.out.println("--> handleMessageFromClient");
+			clientUI.display(msg.toString());
 			awaitResponse = true;
 			sendToServer(msg);
 			while (awaitResponse) {

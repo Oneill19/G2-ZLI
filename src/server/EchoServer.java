@@ -157,9 +157,12 @@ public class EchoServer extends AbstractServer {
 			if (mysqlConnection.CellUpdate(conn, clientMsg[1], (clientMsg[2]), Integer.parseInt(clientMsg[3]))) {
 				try {
 					client.sendToClient("Order Updated");
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
+			}
+			else {
+				
 			}
 			break;
 		}
