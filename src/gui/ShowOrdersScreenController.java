@@ -87,53 +87,40 @@ public class ShowOrdersScreenController {
 	}
 
 	public void initialize() {
-		// Set color column as editable and send UPDATE query to DB
+
+		// Set handler on cell double click: Take input string and call accept.
+		class cellHanler implements EventHandler<CellEditEvent<Order, String>> {
+
+			@Override
+			public void handle(CellEditEvent<Order, String> t) {
+				((Order) t.getTableView().getItems().get(t.getTablePosition().getRow())).setColor((t.getNewValue()));
+				editedOrderNumber = t.getRowValue().getOrderNumber();
+				editedNewValue = t.getNewValue();
+				editedColumn = t.getTablePosition().getColumn();
+				try {
+					ClientUI.chat
+							.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue + " \t" + editedColumn);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				editedOrderNumber = 0;
+				editedNewValue = null;
+				editedColumn = 0;
+			}
+		}
+
+		// Set table and columns as editable
 		ordersTable.setEditable(true);
+
 		colorCol.setEditable(true);
-		dateCol.setEditable(true);
 		colorCol.setCellFactory(TextFieldTableCell.forTableColumn());
+		colorCol.setOnEditCommit(new cellHanler());
+
+		dateCol.setEditable(true);
 		dateCol.setCellFactory(TextFieldTableCell.forTableColumn());
+		dateCol.setOnEditCommit(new cellHanler());
 
-		// anonymous class for edit color cell event
-		colorCol.setOnEditCommit(new EventHandler<CellEditEvent<Order, String>>() {
-			@Override
-			public void handle(CellEditEvent<Order, String> t) {
-				((Order) t.getTableView().getItems().get(t.getTablePosition().getRow())).setColor((t.getNewValue()));
-				editedOrderNumber = t.getRowValue().getOrderNumber();
-				editedNewValue = t.getNewValue();
-				editedColumn = t.getTablePosition().getColumn();
-				try {
-					ClientUI.chat
-							.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue + " \t" + editedColumn);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				editedOrderNumber = 0;
-				editedNewValue = null;
-				editedColumn = 0;
-			}
-		});
-
-		// anonymous class for edit date event
-		dateCol.setOnEditCommit(new EventHandler<CellEditEvent<Order, String>>() {
-			@Override
-			public void handle(CellEditEvent<Order, String> t) {
-				((Order) t.getTableView().getItems().get(t.getTablePosition().getRow())).setColor((t.getNewValue()));
-				editedOrderNumber = t.getRowValue().getOrderNumber();
-				editedNewValue = t.getNewValue();
-				editedColumn = t.getTablePosition().getColumn();
-				try {
-					ClientUI.chat
-							.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue + " \t" + editedColumn);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				editedOrderNumber = 0;
-				editedNewValue = null;
-				editedColumn = 0;
-			}
-		});
-
+		// Bind columns
 		observableList = FXCollections.observableArrayList(ChatClient.orders);
 		ordersTable.getItems().clear();
 		orderNumberCol.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
@@ -145,7 +132,6 @@ public class ShowOrdersScreenController {
 		dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 		orderDateCol.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
 		ordersTable.setItems(observableList);
-
 	}
 
 }
