@@ -1,11 +1,7 @@
 package gui;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import javax.swing.text.DateFormatter;
 
 import client.ChatClient;
 import client.ClientUI;
@@ -21,7 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -33,7 +28,7 @@ public class ShowOrdersScreenController {
 	ObservableList<Order> observableList;
 	private int editedOrderNumber;
 	private int editedColumn;
-	private String editedNewValue;
+	private Object editedNewValue;
 
 	@FXML
 	private TableView<Order> ordersTable;
@@ -57,10 +52,10 @@ public class ShowOrdersScreenController {
 	private TableColumn<Order, String> shopCol;
 
 	@FXML
-	private TableColumn<Order, String> dateCol;
+	private TableColumn<Order, LocalDate> dateCol;
 
 	@FXML
-	private TableColumn<Order, Timestamp> orderDateCol;
+	private TableColumn<Order, LocalDate> orderDateCol;
 
 	@FXML
 	private Button onBack;
@@ -87,7 +82,6 @@ public class ShowOrdersScreenController {
 	}
 
 	public void initialize() {
-
 		// Set handler on cell double click: Take input string and call accept.
 		class cellHanler implements EventHandler<CellEditEvent<Order, String>> {
 
@@ -97,9 +91,10 @@ public class ShowOrdersScreenController {
 				editedOrderNumber = t.getRowValue().getOrderNumber();
 				editedNewValue = t.getNewValue();
 				editedColumn = t.getTablePosition().getColumn();
+
 				try {
-					ClientUI.chat
-							.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue + " \t" + editedColumn);
+					ClientUI.chat.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + " \t"
+							+ editedColumn);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -116,9 +111,10 @@ public class ShowOrdersScreenController {
 		colorCol.setCellFactory(TextFieldTableCell.forTableColumn());
 		colorCol.setOnEditCommit(new cellHanler());
 
+		dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+		dateCol.setCellFactory(col -> new MyDateCell());
 		dateCol.setEditable(true);
-		dateCol.setCellFactory(TextFieldTableCell.forTableColumn());
-		dateCol.setOnEditCommit(new cellHanler());
+		dateCol.setOnEditCommit(event -> event.getRowValue().setDate(event.getNewValue()));
 
 		// Bind columns
 		observableList = FXCollections.observableArrayList(ChatClient.orders);
@@ -129,7 +125,6 @@ public class ShowOrdersScreenController {
 		colorCol.setCellValueFactory(new PropertyValueFactory<>("color"));
 		dOrderCol.setCellValueFactory(new PropertyValueFactory<>("dorder"));
 		shopCol.setCellValueFactory(new PropertyValueFactory<>("shop"));
-		dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 		orderDateCol.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
 		ordersTable.setItems(observableList);
 	}

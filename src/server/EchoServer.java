@@ -154,7 +154,7 @@ public class EchoServer extends AbstractServer {
 			//clientMsg[2]= editedNewValue
 			//clientMsg[3]= editedColumn
 		case "CellUpdate":
-			if (mysqlConnection.updateCell(conn, clientMsg[1], (clientMsg[2]), Integer.parseInt(clientMsg[3]))) {
+			if (mysqlConnection.CellUpdate(conn, clientMsg[1], (clientMsg[2]), Integer.parseInt(clientMsg[3]))) {
 				try {
 					client.sendToClient("Order Updated");
 				} catch (IOException e) {

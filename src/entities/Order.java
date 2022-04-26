@@ -1,7 +1,7 @@
 package entities;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @SuppressWarnings("serial")
 public class Order implements Serializable {
@@ -12,8 +12,8 @@ public class Order implements Serializable {
 	private String color;
 	private String dorder;
 	private String shop;
-	private String date;
-	private Timestamp orderDate;
+	private LocalDate date;
+	private LocalDate orderDate;
 	
 	public Order() {
 		orderNumber = 0;
@@ -26,7 +26,7 @@ public class Order implements Serializable {
 		orderDate = null;
 	}
 	
-	public Order(int orderNumber, double price, String greetingCard, String color, String dOrder, String shop, String date, Timestamp orderDate) {
+	public Order(int orderNumber, double price, String greetingCard, String color, String dOrder, String shop, LocalDate date, LocalDate orderDate) {
 		this.orderNumber = orderNumber;
 		this.price = price;
 		this.greetingCard = greetingCard;
@@ -97,22 +97,22 @@ public class Order implements Serializable {
 	}
 
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setDate(LocalDate localDate) {
+		this.date = localDate;
 	}
 
 
-	public Timestamp getOrderDate() {
+	public LocalDate getOrderDate() {
 		return orderDate;
 	}
 
 
-	public void setOrderDate(Timestamp orderDate) {
+	public void setOrderDate(LocalDate orderDate) {
 		this.orderDate = orderDate;
 	}
 }
