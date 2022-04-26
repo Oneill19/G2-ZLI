@@ -5,15 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import entity.Order;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class mysqlConnection {
+	private static final int COLOR = 3;
+	private static final int DATE = 6;
 
 	public static String showOrder(Connection con, String orderNumber) {
 		Statement stmt;
@@ -50,8 +49,8 @@ public class mysqlConnection {
 				String color = rs.getString(4);
 				String dorder = rs.getString(5);
 				String shop = rs.getString(6);
-				Timestamp date = Timestamp.valueOf(rs.getString(7));
-				Timestamp orderDate = Timestamp.valueOf(rs.getString(8));
+				LocalDate date = LocalDate.parse(rs.getString(7));
+				LocalDate orderDate = LocalDate.parse(rs.getString(8));
 				Order order = new Order(orderNumber, price, greetingCard, color, dorder, shop, date, orderDate);
 				orders.add(order);
 			}
@@ -62,20 +61,49 @@ public class mysqlConnection {
 		return null;
 	}
 
-	public static boolean updateOrder(Connection con, String orderNumber, String color, String date) {
+	public static boolean updateOrder(Connection con, String orderNumber, String color, Object date) {
 		PreparedStatement ps;
 		try {
-			Timestamp timestamp = Timestamp.valueOf(date);
-			timestamp.setHours(timestamp.getHours() - 2);
-			timestamp.setMinutes(timestamp.getMinutes() - 30);
-			String sql = "UPDATE zli.orders SET color=?,date=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
+			String sql = "UPDATE zli.orders SET color=?,date=? WHERE orderNumber=" + Integer.parseInt(orderNumber)
+					+ ";";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, color);
-			ps.setTimestamp(2, timestamp);
+			ps.setString(2, ((LocalDate) date).toString());
 			ps.executeUpdate();
 			System.out.println("Order Updated");
 			ps.close();
 			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static boolean CellUpdate(Connection con, String orderNumber, Object newValue, int column) {
+		PreparedStatement ps;
+		String sql;
+		try {
+			switch (column) {// start SWITCH
+			case COLOR:
+				sql = "UPDATE zli.orders SET color=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, newValue.toString());
+				ps.executeUpdate();
+				ps.close();
+				break;
+			case DATE:
+				sql = "UPDATE zli.orders SET date=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, newValue.toString());
+				ps.executeUpdate();
+				ps.close();
+				break;
+			}// end SWITCH
+			System.out.println("Order Updated");
+			return true;
+		}catch(IllegalArgumentException e) {
+			System.out.println("please enter valid date");
+			return false;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;

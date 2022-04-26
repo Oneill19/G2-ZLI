@@ -8,7 +8,7 @@ import entity.Order;
 import ocsf.client.AbstractClient;
 
 public class ChatClient extends AbstractClient {
-	
+
 	ChatIF clientUI;
 	public static ArrayList<Order> orders;
 	public static boolean awaitResponse = false;
@@ -18,6 +18,7 @@ public class ChatClient extends AbstractClient {
 		this.clientUI = clientUI;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void handleMessageFromServer(Object msg) {
 		System.out.println("--> handleMessageFromServer");
@@ -25,10 +26,9 @@ public class ChatClient extends AbstractClient {
 		if (msg instanceof ArrayList) {
 			orders = (ArrayList<Order>) msg;
 		}
-//		String str = msg.toString();
-//		String[] result;
+
 	}
-	
+
 	public void handleMessageFromClientUI(String msg) {
 		try {
 			openConnection();
@@ -41,7 +41,7 @@ public class ChatClient extends AbstractClient {
 					e.printStackTrace();
 				}
 			}
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			clientUI.display("Could not send message to server");
 			System.exit(0);
