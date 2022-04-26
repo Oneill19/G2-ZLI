@@ -19,7 +19,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -131,7 +130,8 @@ public class ShowOrdersScreenController {
 		ordersTable.setEditable(true);
 
 		colorCol.setCellValueFactory(new PropertyValueFactory<>("color"));
-		colorCol.setCellFactory(TextFieldTableCell.forTableColumn());
+		//colorCol.setCellFactory(TextFieldTableCell.forTableColumn());
+		colorCol.setCellFactory(col -> EditCell.createStringEditCell());
 		colorCol.setOnEditCommit(new CellHandler());
 		colorCol.setEditable(true);
 
