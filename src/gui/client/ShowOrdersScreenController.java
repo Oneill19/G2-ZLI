@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
@@ -81,12 +82,14 @@ public class ShowOrdersScreenController {
 	}
 
 	public void initialize() {
+		ordersTable.setEditable(true);
 
 		// Set handler on cell double click: Take input string and call accept.
 		class CellHandler implements EventHandler<CellEditEvent<Order, String>> {
 
 			@Override
 			public void handle(CellEditEvent<Order, String> t) {
+				ordersTable.setFocusTraversable(true);			
 				((Order) t.getTableView().getItems().get(t.getTablePosition().getRow())).setColor((t.getNewValue()));
 				editedOrderNumber = t.getRowValue().getOrderNumber();
 				editedNewValue = t.getNewValue();
@@ -98,6 +101,8 @@ public class ShowOrdersScreenController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				
+				
 				editedOrderNumber = 0;
 				editedNewValue = null;
 				editedColumn = 0;
@@ -109,6 +114,7 @@ public class ShowOrdersScreenController {
 
 			@Override
 			public void handle(CellEditEvent<Order, LocalDate> event) {
+				ordersTable.requestFocus();
 				event.getRowValue().setDate(event.getNewValue());
 
 				editedOrderNumber = event.getRowValue().getOrderNumber();
@@ -126,11 +132,8 @@ public class ShowOrdersScreenController {
 				editedColumn = 0;
 			}
 		}
-
-		ordersTable.setEditable(true);
-
+		
 		colorCol.setCellValueFactory(new PropertyValueFactory<>("color"));
-		//colorCol.setCellFactory(TextFieldTableCell.forTableColumn());
 		colorCol.setCellFactory(col -> EditCell.createStringEditCell());
 		colorCol.setOnEditCommit(new CellHandler());
 		colorCol.setEditable(true);
