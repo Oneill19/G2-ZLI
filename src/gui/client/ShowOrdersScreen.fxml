@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/8.0.321" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.ShowOrdersScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.ShowOrdersScreenController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="406.0" layoutY="48.0">
          <image>
@@ -22,15 +22,15 @@
             <TableColumn fx:id="colorCol" minWidth="0.0" prefWidth="74.0" style="-fx-text-alignment: center; -fx-alignment: center; -fx-text-alignment: center;" text="Color" />
             <TableColumn fx:id="dOrderCol" prefWidth="159.0" style="-fx-text-alignment: center;" text="Order Description" />
             <TableColumn fx:id="shopCol" minWidth="0.0" prefWidth="92.0" style="-fx-text-alignment: center;" text="Shop" />
-            <TableColumn fx:id="supplyDateCol" prefWidth="156.0" style="-fx-text-alignment: center; -fx-alignment: CENTER_RIGHT;" text="Supply Date">
+            <TableColumn fx:id="supplyCol" prefWidth="156.0" style="-fx-text-alignment: center; -fx-alignment: CENTER_RIGHT;" text="Supply Date">
                <columns>
-                  <TableColumn fx:id="supplyDateCol" prefWidth="75.0" text="Date" />
-                  <TableColumn fx:id="timeDateCol" prefWidth="75.0" text="Time" />
+                  <TableColumn fx:id="supplyDateCol" prefWidth="75.0" text="Date2" />
+                  <TableColumn fx:id="supplyTimeCol" prefWidth="75.0" text="Time" />
                </columns></TableColumn>
-            <TableColumn fx:id="orderDateCol" prefWidth="147.0" style="-fx-text-alignment: center;" text="Order Date">
+            <TableColumn fx:id="orderCol" prefWidth="147.0" style="-fx-text-alignment: center;" text="Order Date">
                <columns>
                   <TableColumn fx:id="orderDateCol" prefWidth="75.0" text="Date" />
-                  <TableColumn fx:id="timeDateCol" prefWidth="75.0" text="Time" />
+                  <TableColumn fx:id="orderTimeCol" prefWidth="75.0" text="Time" />
                </columns></TableColumn>
          </columns>
       </TableView>

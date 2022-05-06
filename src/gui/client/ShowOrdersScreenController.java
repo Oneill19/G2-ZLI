@@ -30,42 +30,49 @@ public class ShowOrdersScreenController {
 	private int editedColumn;
 	private Object editedNewValue;
 
-    @FXML
-    private TableColumn<Order, String> colorCol;
-
-    @FXML
-    private TableColumn<Order, String> dOrderCol;
-
+	//******************
+	//*****Buttons******
+	//******************	
     @FXML
     private Button exitClient;
-
-    @FXML
-    private TableColumn<Order, String> greetingCardCol;
-
     @FXML
     private Button onBack;
-
-    @FXML
-    private TableColumn<Order, LocalDate> orderDateCol;
-
+    
+    
+	//******************
+	//*****Columns******
+	//******************
     @FXML
     private TableColumn<Order, Integer> orderNumberCol;
-
+    @FXML
+    private TableColumn<Order, Double> priceCol;
+    @FXML
+    private TableColumn<Order, String> greetingCardCol;
+    @FXML
+    private TableColumn<Order, String> colorCol;
+    @FXML
+    private TableColumn<Order, String> dOrderCol;
+    @FXML
+    private TableColumn<Order, String> shopCol;
+    @FXML
+    private TableColumn<Order, LocalDate> supplyDateCol;
+    @FXML
+    private TableColumn<Order, LocalTime> supplyTimeCol;
+    @FXML
+    private TableColumn<Order, LocalDate> orderDateCol;
+    @FXML
+    private TableColumn<Order, LocalTime> orderTimeCol;
+   
+	//******************
+	//*****Table******
+	//******************   
     @FXML
     private TableView<Order> ordersTable;
 
-    @FXML
-    private TableColumn<Order, Double> priceCol;
-
-    @FXML
-    private TableColumn<Order, String> shopCol;
-
-    @FXML
-    private TableColumn<Order, LocalDate> supplyDateCol;
-
-    @FXML
-    private TableColumn<Order, LocalTime> timeDateCol;
-
+    
+	//******************
+	//*****ActionEvent**
+	//******************
 	@FXML
 	public void onBack(ActionEvent event) throws Exception {
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -160,24 +167,21 @@ public class ShowOrdersScreenController {
 				editedColumn = 0;
 			}
 		}
-		
-		
-		
-		
+	
 		colorCol.setCellValueFactory(new PropertyValueFactory<>("color"));
 		colorCol.setCellFactory(col -> EditCell.createStringEditCell());
 		colorCol.setOnEditCommit(new CellHandler());
 		colorCol.setEditable(true);
 
-		supplyDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+		supplyDateCol.setCellValueFactory(new PropertyValueFactory<>("supplyDate"));
 		supplyDateCol.setCellFactory(col -> new MyDateCell());
 		supplyDateCol.setOnEditCommit(new DateCellHandler());
 		supplyDateCol.setEditable(true);
 				
-		timeDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
-		timeDateCol.setCellFactory(col -> new EditTimeCell());
-		timeDateCol.setOnEditCommit(new TimeCellHandler());
-		timeDateCol.setEditable(true);
+		supplyTimeCol.setCellValueFactory(new PropertyValueFactory<>("supplyTime"));
+		supplyTimeCol.setCellFactory(col -> new EditTimeCell());
+		supplyTimeCol.setOnEditCommit(new TimeCellHandler());
+		supplyTimeCol.setEditable(true);
 
 		// Bind other columns
 		observableList = FXCollections.observableArrayList(ChatClient.orders);
