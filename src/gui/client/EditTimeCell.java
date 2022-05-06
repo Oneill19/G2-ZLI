@@ -20,6 +20,7 @@ import javafx.scene.input.KeyEvent;
 
 public class EditTimeCell extends TableCell<Order, LocalTime> {
 	public static final String DefaultFormat = "HH:mm";
+	private boolean enterflag=false;
 
 	private DateTimeFormatter formatter;
 	private ObjectProperty<LocalDateTime> dateTimeValue = new SimpleObjectProperty<>(LocalDateTime.now());
@@ -67,13 +68,23 @@ public class EditTimeCell extends TableCell<Order, LocalTime> {
 		setGraphic(textField);
 		setContentDisplay(ContentDisplay.TEXT_ONLY);
 
-		/*
+		
 		textField.setOnAction(evt -> {
+			//flag is because this commitEdit is triggered and also the loose focus is triggred
+			//and result is 2 commitEdit instead of 1.
+			//so flag is fix
+			enterflag=true;
 			commitEdit(LocalTime.parse(textField.getText()));
+			enterflag=false;
 		});
-		*/
+		
+		
 		textField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-			if (!isNowFocused) {
+			if (enterflag)
+			{
+				
+			}
+			else if (!isNowFocused) {
 				commitEdit(LocalTime.parse(textField.getText()));
 			}
 		});
@@ -82,7 +93,12 @@ public class EditTimeCell extends TableCell<Order, LocalTime> {
 				textField.setText((getItem().toString()));
 				cancelEdit();
 				event.consume();
-			} else if (event.getCode() == KeyCode.RIGHT) {
+			} 
+
+			
+			//disable ability to trail with arrows
+			/*
+			else if (event.getCode() == KeyCode.RIGHT) {
 				getTableView().getSelectionModel().selectRightCell();
 				event.consume();
 			} else if (event.getCode() == KeyCode.LEFT) {
@@ -95,6 +111,8 @@ public class EditTimeCell extends TableCell<Order, LocalTime> {
 				getTableView().getSelectionModel().selectBelowCell();
 				event.consume();
 			}
+			*/
+			
 		});
 	}
 
