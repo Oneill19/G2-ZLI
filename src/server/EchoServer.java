@@ -37,7 +37,7 @@ public class EchoServer extends AbstractServer {
 	}
 
 	// Instance methods ************************************************
-	
+
 	public static boolean connectToDB() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -103,7 +103,7 @@ public class EchoServer extends AbstractServer {
 				}
 			}
 			break;
-			
+
 		case "Load":
 			orders = mysqlConnection.loadOrders(conn);
 			if (orders != null) {
@@ -115,17 +115,6 @@ public class EchoServer extends AbstractServer {
 				}
 			}
 			break;
-
-		case "Update":
-			if (mysqlConnection.updateOrder(conn, clientMsg[1], clientMsg[2], clientMsg[3])) {
-				try {
-					client.sendToClient("Order Updated");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			break;
-			
 		case "Connected":
 			String[] clientInfo = client.toString().split(" ");
 			ipAddress = clientInfo[1].substring(1, clientInfo[1].length() - 1);
@@ -139,7 +128,6 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
-
 		case "Disconnect":
 			clientInfo = client.toString().split(" ");
 			ipAddress = clientInfo[1].substring(1, clientInfo[1].length() - 1);
@@ -153,19 +141,18 @@ public class EchoServer extends AbstractServer {
 				e1.printStackTrace();
 			}
 			break;
-			//clientMsg[1]= editedOrderNumber
-			//clientMsg[2]= editedNewValue
-			//clientMsg[3]= editedColumn
+		// clientMsg[1]= editedOrderNumber
+		// clientMsg[2]= editedNewValue
+		// clientMsg[3]= editedColumn
 		case "CellUpdate":
-			if (mysqlConnection.CellUpdate(conn, clientMsg[1], (clientMsg[2]), Integer.parseInt(clientMsg[3]))) {
+			if (mysqlConnection.cellUpdate(conn, clientMsg[1], (clientMsg[2]), Integer.parseInt(clientMsg[3]))) {
 				try {
 					client.sendToClient("Order Updated");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
-			else {
-				
+			} else {
+
 			}
 			break;
 		}

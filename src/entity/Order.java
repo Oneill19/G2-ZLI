@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @SuppressWarnings("serial")
 public class Order implements Serializable {
@@ -12,29 +13,35 @@ public class Order implements Serializable {
 	private String color;
 	private String dOrder;
 	private String shop;
-	private LocalDate date;
+	private LocalDate supplyDate;
+	private LocalTime supplyTime;
 	private LocalDate orderDate;
+	private LocalTime orderTime;
 	
+	//Empty constructor nullifies fields
 	public Order() {
-		orderNumber = 0;
-		price = 0;
-		greetingCard = null;
-		color = null;
-		dOrder = null;
-		shop = null;
-		date = null;
-		orderDate = null;
+		orderNumber = 0; price = 0;
+		greetingCard = null; color = null; dOrder = null;
+		shop = null; supplyDate = null; supplyTime = null;
+		orderDate = null; orderTime = null;
 	}
 	
-	public Order(int orderNumber, double price, String greetingCard, String color, String dOrder, String shop, LocalDate date, LocalDate orderDate) {
+	//Constructor initiates fields
+	public Order(
+			int orderNumber, double price, String greetingCard, 
+			String color, String dOrder, String shop, 
+			LocalDate supplyDate,LocalTime supplyTime,
+			LocalDate orderDate, LocalTime orderTime) {
 		this.orderNumber = orderNumber;
 		this.price = price;
 		this.greetingCard = greetingCard;
 		this.color = color;
 		this.dOrder = dOrder;
 		this.shop = shop;
-		this.date = date;
+		this.supplyDate = supplyDate;
+		this.supplyTime = supplyTime;
 		this.orderDate = orderDate;
+		this.orderTime = orderTime;
 	}
 	
 	public int getOrderNumber() {
@@ -97,16 +104,6 @@ public class Order implements Serializable {
 	}
 
 
-	public LocalDate getDate() {
-		return date;
-	}
-
-
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-
-
 	public LocalDate getOrderDate() {
 		return orderDate;
 	}
@@ -115,4 +112,29 @@ public class Order implements Serializable {
 	public void setOrderDate(LocalDate orderDate) {
 		this.orderDate = orderDate;
 	}
+
+	public LocalDate getSupplyDate() {
+		return supplyDate;
+	}
+
+	public void setSupplyDate(LocalDate supplyDate) {
+		this.supplyDate = supplyDate;
+	}
+
+	public LocalTime getSupplyTime() {
+		return supplyTime;
+	}
+
+	public void setSupplyTime(LocalTime supplyTime) {
+		this.supplyTime = supplyTime;
+	}
+
+	public LocalTime getOrderTime() {
+		return orderTime;
+	}
+
+	public void setOrderTime(LocalTime orderTime) {
+		this.orderTime = orderTime;
+	}
+	
 }

@@ -1,0 +1,122 @@
+package gui.client;
+
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import entity.Order;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.event.Event;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TablePosition;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
+public class EditTimeCell extends TableCell<Order, LocalTime> {
+	public static final String DefaultFormat = "HH:mm";
+
+	private DateTimeFormatter formatter;
+	private ObjectProperty<LocalDateTime> dateTimeValue = new SimpleObjectProperty<>(LocalDateTime.now());
+	private ObjectProperty<String> format = new SimpleObjectProperty<String>() {
+		public void set(String newValue) {
+			super.set(newValue);
+			formatter = DateTimeFormatter.ofPattern(newValue);
+		}
+	};
+
+	// Text field for editing
+	private final TextField textField = new TextField();
+
+	public EditTimeCell() {
+
+		itemProperty().addListener((obx, oldItem, newItem) -> {
+			if (newItem == null) {
+				setText(null);
+			} else {
+				if (dateTimeValue.get() == null) {
+					setText(LocalTime.now().toString());
+				} else {
+					LocalTime time = dateTimeValue.get().toLocalTime();
+					setText(time.toString());
+				}
+
+			}
+		});
+		setGraphic(textField);
+		setContentDisplay(ContentDisplay.TEXT_ONLY);
+
+		textField.setOnAction(evt -> {
+			commitEdit(LocalTime.parse(textField.getText()));
+		});
+		textField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+			if (!isNowFocused) {
+				commitEdit(LocalTime.parse(textField.getText()));
+			}
+		});
+		textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+			if (event.getCode() == KeyCode.ESCAPE) {
+				textField.setText((getItem().toString()));
+				cancelEdit();
+				event.consume();
+			} else if (event.getCode() == KeyCode.RIGHT) {
+				getTableView().getSelectionModel().selectRightCell();
+				event.consume();
+			} else if (event.getCode() == KeyCode.LEFT) {
+				getTableView().getSelectionModel().selectLeftCell();
+				event.consume();
+			} else if (event.getCode() == KeyCode.UP) {
+				getTableView().getSelectionModel().selectAboveCell();
+				event.consume();
+			} else if (event.getCode() == KeyCode.DOWN) {
+				getTableView().getSelectionModel().selectBelowCell();
+				event.consume();
+			}
+		});
+	}
+
+	// set the text of the text field and display the graphic
+	@Override
+	public void startEdit() {
+		super.startEdit();
+		textField.setText(getItem().toString());
+		setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+		textField.requestFocus();
+	}
+
+	// revert to text display
+	@Override
+	public void cancelEdit() {
+		super.cancelEdit();
+		setContentDisplay(ContentDisplay.TEXT_ONLY);
+	}
+
+	// commits the edit. Update property if possible and revert to text display
+	@Override
+	public void commitEdit(LocalTime item) {
+
+		// This block is necessary to support commit on losing focus, because the
+		// baked-in mechanism
+		// sets our editing state to false before we can intercept the loss of focus.
+		// The default commitEdit(...) method simply bails if we are not editing...
+		if (!isEditing() && !item.equals(getItem())) {
+			TableView<Order> table = getTableView();
+			if (table != null) {
+				TableColumn<Order, LocalTime> column = getTableColumn();
+				CellEditEvent<Order, LocalTime> event = new CellEditEvent<>(table,
+						new TablePosition<Order, LocalTime>(table, getIndex(), column), TableColumn.editCommitEvent(),
+						item);
+				Event.fireEvent(column, event);
+			}
+		}
+
+		super.commitEdit(item);
+
+		setContentDisplay(ContentDisplay.TEXT_ONLY);
+	}
+}
