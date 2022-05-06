@@ -29,8 +29,9 @@ CREATE TABLE `orders` (
   `color` varchar(45) DEFAULT NULL,
   `dOrder` varchar(45) DEFAULT NULL,
   `shop` varchar(45) NOT NULL,
-  `date` datetime NOT NULL,
-  `orderDate` datetime NOT NULL,
+  `date` varchar(45) NOT NULL,
+  `orderDate` varchar(45) NOT NULL,
+  `time` varchar(45) NOT NULL,
   PRIMARY KEY (`orderNumber`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +42,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,200,'Love You','red',NULL,'Haifa','2022-04-19 22:11:12','2022-04-18 10:10:10'),(2,300,'Merry me?','White','Bouquet of roses only','Karmiel','2022-05-12 10:09:08','2022-05-10 09:09:09'),(3,125.5,NULL,'pink',NULL,'kiryat atta ','2021-05-11 10:09:08','2021-05-09 08:09:08'),(4,111,NULL,NULL,NULL,'Eilat','2021-07-12 10:09:08','2021-07-12 07:07:07');
+INSERT INTO `orders` VALUES (1,200,'Love You','Triecolor',NULL,'Haifa','2022-06-14T10:10','2022-04-18T10:10','');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-20 18:09:21
+-- Dump completed on 2022-05-06 12:10:26
