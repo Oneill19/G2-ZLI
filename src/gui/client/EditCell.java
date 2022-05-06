@@ -87,7 +87,7 @@ public class EditCell<S, T> extends TableCell<S, T> {
     public static <S> EditCell<S, String> createStringEditCell() {
         return new EditCell<S, String>(IDENTITY_CONVERTER);
     }
-    
+   
 
     // set the text of the text field and display the graphic
     @Override

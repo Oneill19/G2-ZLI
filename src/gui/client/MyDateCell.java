@@ -60,7 +60,6 @@ public class MyDateCell extends TableCell<Order, LocalDate> {
     @Override
     public void updateItem(LocalDate date, boolean empty) {
         super.updateItem(date, empty);
-        System.out.println(date);
         if (empty) {
             setText(null);
             setGraphic(null);

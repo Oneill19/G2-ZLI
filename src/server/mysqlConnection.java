@@ -20,7 +20,6 @@ public class mysqlConnection {
 	public static String showOrder(Connection con, String orderNumber) {
 		Statement stmt;
 		try {
-			System.out.println("here");
 			String sql = "SELECT * FROM zli.orders WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
 			String order_detalis = null;
 			stmt = con.createStatement();

@@ -34,26 +34,44 @@ public class EditTimeCell extends TableCell<Order, LocalTime> {
 	private final TextField textField = new TextField();
 
 	public EditTimeCell() {
+		format.set(DefaultFormat);
 
-		itemProperty().addListener((obx, oldItem, newItem) -> {
+		/*
+		itemProperty().addListener((obx, oldItem, newItem) -> {			
 			if (newItem == null) {
-				setText(null);
+				String text = oldItem.format(formatter);
+				setText(text);
+				textField.setText(text);
 			} else {
 				if (dateTimeValue.get() == null) {
-					setText(LocalTime.now().toString());
+					String text = LocalTime.now().format(formatter);
+					setText(text);
+					textField.setText(text);
 				} else {
 					LocalTime time = dateTimeValue.get().toLocalTime();
-					setText(time.toString());
+					String text = time.format(formatter);
+					setText(text);
+					textField.setText(text);
 				}
-
 			}
 		});
+		*/
+		
+        itemProperty().addListener((obx, oldItem, newItem) -> {
+            if (newItem == null) {
+                setText(null);
+            } else {
+                setText(newItem.toString());
+            }
+        });
 		setGraphic(textField);
 		setContentDisplay(ContentDisplay.TEXT_ONLY);
 
+		/*
 		textField.setOnAction(evt -> {
 			commitEdit(LocalTime.parse(textField.getText()));
 		});
+		*/
 		textField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
 			if (!isNowFocused) {
 				commitEdit(LocalTime.parse(textField.getText()));
@@ -116,7 +134,7 @@ public class EditTimeCell extends TableCell<Order, LocalTime> {
 		}
 
 		super.commitEdit(item);
-
+		System.out.println("yay");
 		setContentDisplay(ContentDisplay.TEXT_ONLY);
 	}
 }

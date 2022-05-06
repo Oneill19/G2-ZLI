@@ -105,12 +105,14 @@ public class ShowOrdersScreenController {
 				editedNewValue = event.getNewValue();
 				editedColumn = event.getTablePosition().getColumn();
 
+				/*
 				try {
 					ClientUI.chat.accept("cellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
 							+ editedColumn);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				*/
 				
 				
 				editedOrderNumber = 0;
@@ -131,11 +133,13 @@ public class ShowOrdersScreenController {
 				editedColumn = event.getTablePosition().getColumn();
 
 				try {
-					ClientUI.chat.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
-							+ editedColumn);
+					String toAccept = "CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t" + editedColumn;
+					System.out.println(toAccept);
+					ClientUI.chat.accept(toAccept);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				System.out.println("end");
 				
 				
 				editedOrderNumber = 0;
