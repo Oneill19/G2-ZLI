@@ -2,6 +2,7 @@ package gui.client;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import client.ChatClient;
 import client.ClientUI;
@@ -17,7 +18,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
@@ -30,38 +30,41 @@ public class ShowOrdersScreenController {
 	private int editedColumn;
 	private Object editedNewValue;
 
-	@FXML
-	private TableView<Order> ordersTable;
+    @FXML
+    private TableColumn<Order, String> colorCol;
 
-	@FXML
-	private TableColumn<Order, Integer> orderNumberCol;
+    @FXML
+    private TableColumn<Order, String> dOrderCol;
 
-	@FXML
-	private TableColumn<Order, Double> priceCol;
+    @FXML
+    private Button exitClient;
 
-	@FXML
-	private TableColumn<Order, String> greetingCardCol;
+    @FXML
+    private TableColumn<Order, String> greetingCardCol;
 
-	@FXML
-	private TableColumn<Order, String> colorCol;
+    @FXML
+    private Button onBack;
 
-	@FXML
-	private TableColumn<Order, String> dOrderCol;
+    @FXML
+    private TableColumn<Order, LocalDate> orderDateCol;
 
-	@FXML
-	private TableColumn<Order, String> shopCol;
+    @FXML
+    private TableColumn<Order, Integer> orderNumberCol;
 
-	@FXML
-	private TableColumn<Order, LocalDate> dateCol;
+    @FXML
+    private TableView<Order> ordersTable;
 
-	@FXML
-	private TableColumn<Order, LocalDate> orderDateCol;
+    @FXML
+    private TableColumn<Order, Double> priceCol;
 
-	@FXML
-	private Button onBack;
+    @FXML
+    private TableColumn<Order, String> shopCol;
 
-	@FXML
-	private Button exitClient;
+    @FXML
+    private TableColumn<Order, LocalDate> supplyDateCol;
+
+    @FXML
+    private TableColumn<Order, LocalTime> timeDateCol;
 
 	@FXML
 	public void onBack(ActionEvent event) throws Exception {
@@ -138,10 +141,10 @@ public class ShowOrdersScreenController {
 		colorCol.setOnEditCommit(new CellHandler());
 		colorCol.setEditable(true);
 
-		dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
-		dateCol.setCellFactory(col -> new MyDateCell());
-		dateCol.setOnEditCommit(new DateCellHandler());
-		dateCol.setEditable(true);
+		supplyDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+		supplyDateCol.setCellFactory(col -> new MyDateCell());
+		supplyDateCol.setOnEditCommit(new DateCellHandler());
+		supplyDateCol.setEditable(true);
 
 		// Bind other columns
 		observableList = FXCollections.observableArrayList(ChatClient.orders);
