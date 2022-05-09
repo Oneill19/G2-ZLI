@@ -16,34 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `orders`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `orders` (
-  `orderNumber` int NOT NULL AUTO_INCREMENT,
-  `price` double NOT NULL,
-  `greetingCard` varchar(3000) DEFAULT NULL,
-  `color` varchar(45) DEFAULT NULL,
-  `dOrder` varchar(45) DEFAULT NULL,
-  `shop` varchar(45) NOT NULL,
-  `date` varchar(45) NOT NULL,
-  `orderDate` varchar(45) NOT NULL,
-  `time` varchar(45) NOT NULL,
-  PRIMARY KEY (`orderNumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `users` (
+  `UserID` int NOT NULL,
+  `FirstName` varchar(45) NOT NULL,
+  `LastName` varchar(45) NOT NULL,
+  `CreditCard` varchar(45) NOT NULL,
+  `Phone` varchar(45) NOT NULL,
+  `Email` varchar(45) NOT NULL,
+  `Password` varchar(45) NOT NULL,
+  `UserRole` varchar(45) NOT NULL,
+  `IsConfirmed` varchar(45) NOT NULL,
+  `IsLogged` int NOT NULL,
+  PRIMARY KEY (`UserID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `orders`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `orders` WRITE;
-/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,200,'Love You','Triecolor',NULL,'Haifa','2022-06-14T10:10','2022-04-18T10:10','');
-/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-06 12:10:26
+-- Dump completed on 2022-05-09 10:04:38
