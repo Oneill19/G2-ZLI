@@ -12,11 +12,24 @@ import java.util.ArrayList;
 import entity.Order;
 
 public class mysqlConnection {
-	private static final int COLOR = 3;
-	private static final int SUPPLYDATE = 6;
-	private static final int SUPPLYTIME = 7;
+	private static final int ORDERNUMBER=1;
+	private static final int TOTALPRICE = 2;
+	private static final int GREETINGCARD = 3;
+	private static final int COLOR = 4;
+	private static final int ORDERDESC = 5;
+	private static final int FROMSTORE=6;
+	private static final int ORDERTIMEDATE = 7;
+	private static final int CUSTOMERID = 8;
+	private static final int PAYMENTMETHOD =9;
+	private static final int ORDERSTATUS =10;
+	private static final int CONFIRMEDDATE=11;
+	private static final int COMPLETEDATE=12;
+	private static final int DELIVERYMETHOD=13;
+	private static final int EXPECTEDDATETIMEINSTORE=14;
 	
 
+	//Details to show to table
+	//Triggred by clicking on "Show Orders" button
 	public static String showOrder(Connection con, String orderNumber) {
 		Statement stmt;
 		try {
@@ -25,9 +38,11 @@ public class mysqlConnection {
 			stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			if (rs.next())
-				order_detalis = (rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4)
-						+ " " + rs.getString(5) + " " + rs.getString(6) + " " + rs.getString(7) + " "
-						+ rs.getString(8));
+				order_detalis = (rs.getInt(ORDERNUMBER) + " " + rs.getString(TOTALPRICE) + " " + rs.getString(GREETINGCARD) + " "
+								+ rs.getString(COLOR) + " " + rs.getString(ORDERDESC) + " " + rs.getString(FROMSTORE) + " " + 
+								rs.getString(ORDERTIMEDATE) + " " + rs.getString(CUSTOMERID) + " " + rs.getString(PAYMENTMETHOD)
+								 + " " + rs.getString(ORDERSTATUS) + " " + rs.getString(CONFIRMEDDATE) + " " + rs.getString(COMPLETEDATE)
+								 + " " + rs.getString(DELIVERYMETHOD) + " " + rs.getString(EXPECTEDDATETIMEINSTORE));
 			return order_detalis;
 		} catch (SQLException e) {
 			e.printStackTrace();
