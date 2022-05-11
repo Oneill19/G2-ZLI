@@ -6,74 +6,96 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
 import entity.Order;
 
 public class mysqlConnection {
-	private static final int ORDERNUMBER=1;
+	private static final int ORDERNUMBER = 1;
 	private static final int TOTALPRICE = 2;
 	private static final int GREETINGCARD = 3;
 	private static final int COLOR = 4;
 	private static final int ORDERDESC = 5;
-	private static final int FROMSTORE=6;
-	private static final int ORDERTIMEDATE = 7;
-	private static final int CUSTOMERID = 8;
-	private static final int PAYMENTMETHOD =9;
-	private static final int ORDERSTATUS =10;
-	private static final int CONFIRMEDDATE=11;
-	private static final int COMPLETEDATE=12;
-	private static final int DELIVERYMETHOD=13;
-	private static final int EXPECTEDDATETIMEINSTORE=14;
-	
+	private static final int FROMSTORE = 6;
+	private static final int ORDERDATE = 7;
+	private static final int ORDERTIME = 8;
+	private static final int CUSTOMERID = 9;
+	private static final int PAYMENTMETHOD = 10;
+	private static final int ORDERSTATUS = 11;
+	private static final int CONFIRMEDDATE = 12;
+	private static final int COMPLETEDATE = 13;
+	private static final int DELIVERYMETHOD = 14;
+	private static final int EXPECTEDDATEINSTORE = 15;
+	private static final int EXPECTEDTIMEINSTORE = 16;
 
-	//Details to show to table
-	//Triggred by clicking on "Show Orders" button
+	// function shows details from DB on tableview of
+	// gui.client.ShowOrdersScreen.fxml
+	// Triggered by clicking on "Show Orders" button
 	public static String showOrder(Connection con, String orderNumber) {
 		Statement stmt;
+		String sqlQuery = "SELECT * FROM zli.orders WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
+		String orderDetails = null;
+		ResultSet rs = null;
 		try {
-			String sql = "SELECT * FROM zli.orders WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
-			String order_detalis = null;
 			stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+			rs = stmt.executeQuery(sqlQuery);
 			if (rs.next())
-				order_detalis = (rs.getInt(ORDERNUMBER) + " " + rs.getString(TOTALPRICE) + " " + rs.getString(GREETINGCARD) + " "
-								+ rs.getString(COLOR) + " " + rs.getString(ORDERDESC) + " " + rs.getString(FROMSTORE) + " " + 
-								rs.getString(ORDERTIMEDATE) + " " + rs.getString(CUSTOMERID) + " " + rs.getString(PAYMENTMETHOD)
-								 + " " + rs.getString(ORDERSTATUS) + " " + rs.getString(CONFIRMEDDATE) + " " + rs.getString(COMPLETEDATE)
-								 + " " + rs.getString(DELIVERYMETHOD) + " " + rs.getString(EXPECTEDDATETIMEINSTORE));
-			return order_detalis;
+				orderDetails = (rs.getInt(ORDERNUMBER) + " " + rs.getString(TOTALPRICE) + " "
+						+ rs.getString(GREETINGCARD) + " " + rs.getString(COLOR) + " " + rs.getString(ORDERDESC) + " "
+						+ rs.getString(FROMSTORE) + " " + rs.getString(ORDERDATE) + " " + rs.getString(ORDERTIME) + " "
+						+ rs.getString(CUSTOMERID) + " " + rs.getString(PAYMENTMETHOD) + " " + rs.getString(ORDERSTATUS)
+						+ " " + rs.getString(CONFIRMEDDATE) + " " + rs.getString(COMPLETEDATE) + " "
+						+ rs.getString(DELIVERYMETHOD) + " " + rs.getString(EXPECTEDDATEINSTORE) + " "
+						+ rs.getString(EXPECTEDTIMEINSTORE));
+			return orderDetails;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		/*
-		 * finally{ rs.close(); }
-		 */
-
 	}
-	
+
+	//sets orders' parameters from DB and returns an initialed order array list.
 	public static ArrayList<Order> loadOrders(Connection con) {
-		Statement stmt;
+		Statement stmt = null;
+		int orderNumber = 0, customerID = 0;
+		double totalPrice = 0;
+		String greetingCard = null, color = null, orderDesc = null, fromStore = null, paymentMethos = null;
+		String orderStatus = null, confirmedDate = null, completeDate = null, deliveryMethod = null;
+		LocalDate orderDate = null, expectedDateInStore = null;
+		LocalTime orderTime = null, expectedTimeInStore = null;
 		try {
 			stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM zli.orders");
 			ArrayList<Order> orders = new ArrayList<>();
-			while(rs.next()) {
-				int orderNumber = rs.getInt(1);
-				double price = rs.getDouble(2);
-				String greetingCard = rs.getString(3);
-				String color = rs.getString(4);
-				String dorder = rs.getString(5);
-				String shop = rs.getString(6);
-				LocalDate supplyDate = LocalDate.parse(rs.getString(7));
-				LocalTime supplyTime = LocalTime.parse(rs.getString(8));
-				LocalDate orderDate = LocalDate.parse(rs.getString(9));
-				LocalTime orderTime = LocalTime.parse(rs.getString(10));
-				Order order = new Order(orderNumber, price, greetingCard,
-										color, dorder, shop, supplyDate,
-										supplyTime, orderDate, orderTime);
+			while (rs.next()) {
+				orderNumber = rs.getInt(ORDERNUMBER);
+				totalPrice = rs.getDouble(TOTALPRICE);
+				greetingCard = rs.getString(GREETINGCARD);
+				color = rs.getString(COLOR);
+				orderDesc = rs.getString(ORDERDESC);
+				fromStore = rs.getString(FROMSTORE);
+				orderDate = LocalDate.parse(rs.getString(ORDERDATE));
+				orderTime = LocalTime.parse(rs.getString(ORDERTIME));
+				customerID = rs.getInt(CUSTOMERID);
+				paymentMethos = rs.getString(PAYMENTMETHOD);
+				orderStatus = rs.getString(ORDERSTATUS);
+				confirmedDate = rs.getString(CONFIRMEDDATE);
+				completeDate = rs.getString(COMPLETEDATE);
+				deliveryMethod = rs.getString(DELIVERYMETHOD);
+				expectedDateInStore = LocalDate.parse(rs.getString(EXPECTEDDATEINSTORE));
+				expectedTimeInStore = LocalTime.parse(rs.getString(EXPECTEDTIMEINSTORE));
+
+				Order order = new Order(orderNumber, totalPrice, greetingCard, color, orderDesc, fromStore, orderDate,
+						orderTime, customerID, paymentMethos, orderStatus, confirmedDate, completeDate, deliveryMethod,
+						expectedDateInStore, expectedTimeInStore);
 				orders.add(order);
 			}
 			return orders;
@@ -83,6 +105,7 @@ public class mysqlConnection {
 		return null;
 	}
 
+	//Recognizes the edited column and updates changes in DB.
 	public static boolean cellUpdate(Connection con, String orderNumber, Object newValue, int column) {
 		PreparedStatement ps;
 		String sql;
@@ -95,21 +118,21 @@ public class mysqlConnection {
 				ps.executeUpdate();
 				ps.close();
 				break;
-			case SUPPLYDATE:
-				sql = "UPDATE zli.orders SET supplyDate=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
+			case ORDERDATE:
+				sql = "UPDATE zli.orders SET ORDERDATE=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, newValue.toString());
 				ps.executeUpdate();
 				ps.close();
 				break;
-			case SUPPLYTIME:
-				sql = "UPDATE zli.orders SET supplyTime=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
+			case ORDERTIME:
+				sql = "UPDATE zli.orders SET ORDERTIME=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, newValue.toString());
 				ps.executeUpdate();
 				ps.close();
 				break;
-			default://debugging
+			default:// debugging
 				System.out.println("Command doesn't exist");
 			}// end SWITCH
 			System.out.println("Order Updated");
