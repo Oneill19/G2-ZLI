@@ -7,47 +7,58 @@ import java.time.LocalTime;
 @SuppressWarnings("serial")
 public class Order implements Serializable {
 
-	private int orderNumber;
-	private double price;
-	private String greetingCard;
-	private String color;
-	private String dOrder;
-	private String shop;
-	private LocalDate supplyDate;
-	private LocalTime supplyTime;
-	private LocalDate orderDate;
-	private LocalTime orderTime;
+	private int orderNumber = 0, customerID = 0;
+	private double totalPrice = 0;
+	private String greetingCard = null, color = null, orderDesc = null, fromStore = null, paymentMethos = null;
+	private String orderStatus = null, confirmedDate = null, completeDate = null, deliveryMethod = null;
+	private LocalDate orderDate = null, expectedDateInStore = null;
+	private LocalTime orderTime = null, expectedTimeInStore = null;
 
-	// Empty constructor nullifies fields
+	// Empty Constructor
 	public Order() {
-		orderNumber = 0;
-		price = 0;
-		greetingCard = null;
-		color = null;
-		dOrder = null;
-		shop = null;
-		supplyDate = null;
-		supplyTime = null;
-		orderDate = null;
-		orderTime = null;
+		this.orderNumber = 0;
+		this.customerID = 0;
+		this.totalPrice = 0;
+		this.greetingCard = null;
+		this.color = null;
+		this.orderDesc = null;
+		this.fromStore = null;
+		this.paymentMethos = null;
+		this.orderStatus = null;
+		this.confirmedDate = null;
+		this.completeDate = null;
+		this.deliveryMethod = null;
+		this.orderDate = null;
+		this.expectedDateInStore = null;
+		this.orderTime = null;
+		this.expectedTimeInStore = null;
 	}
 
-	// Constructor initiates fields
+
+
 	public Order(int orderNumber, double totalPrice, String greetingCard, String color, String orderDesc,
 			String fromStore, LocalDate orderDate, LocalTime orderTime, int customerID, String paymentMethos,
 			String orderStatus, String confirmedDate, String completeDate, String deliveryMethod,
 			LocalDate expectedDateInStore, LocalTime expectedTimeInStore) {
+		super();
 		this.orderNumber = orderNumber;
-		this.price = price;
+		this.customerID = customerID;
+		this.totalPrice = totalPrice;
 		this.greetingCard = greetingCard;
 		this.color = color;
-		this.dOrder = dOrder;
-		this.shop = shop;
-		this.supplyDate = supplyDate;
-		this.supplyTime = supplyTime;
+		this.orderDesc = orderDesc;
+		this.fromStore = fromStore;
+		this.paymentMethos = paymentMethos;
+		this.orderStatus = orderStatus;
+		this.confirmedDate = confirmedDate;
+		this.completeDate = completeDate;
+		this.deliveryMethod = deliveryMethod;
 		this.orderDate = orderDate;
+		this.expectedDateInStore = expectedDateInStore;
 		this.orderTime = orderTime;
+		this.expectedTimeInStore = expectedTimeInStore;
 	}
+
 
 	public int getOrderNumber() {
 		return orderNumber;
@@ -57,12 +68,20 @@ public class Order implements Serializable {
 		this.orderNumber = orderNumber;
 	}
 
-	public double getPrice() {
-		return price;
+	public int getCustomerID() {
+		return customerID;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
+	public void setCustomerID(int customerID) {
+		this.customerID = customerID;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public String getGreetingCard() {
@@ -81,20 +100,60 @@ public class Order implements Serializable {
 		this.color = color;
 	}
 
-	public String getDorder() {
-		return dOrder;
+	public String getOrderDesc() {
+		return orderDesc;
 	}
 
-	public void setDorder(String dOrder) {
-		this.dOrder = dOrder;
+	public void setOrderDesc(String orderDesc) {
+		this.orderDesc = orderDesc;
 	}
 
-	public String getShop() {
-		return shop;
+	public String getFromStore() {
+		return fromStore;
 	}
 
-	public void setShop(String shop) {
-		this.shop = shop;
+	public void setFromStore(String fromStore) {
+		this.fromStore = fromStore;
+	}
+
+	public String getPaymentMethos() {
+		return paymentMethos;
+	}
+
+	public void setPaymentMethos(String paymentMethos) {
+		this.paymentMethos = paymentMethos;
+	}
+
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+	public String getConfirmedDate() {
+		return confirmedDate;
+	}
+
+	public void setConfirmedDate(String confirmedDate) {
+		this.confirmedDate = confirmedDate;
+	}
+
+	public String getCompleteDate() {
+		return completeDate;
+	}
+
+	public void setCompleteDate(String completeDate) {
+		this.completeDate = completeDate;
+	}
+
+	public String getDeliveryMethod() {
+		return deliveryMethod;
+	}
+
+	public void setDeliveryMethod(String deliveryMethod) {
+		this.deliveryMethod = deliveryMethod;
 	}
 
 	public LocalDate getOrderDate() {
@@ -105,20 +164,12 @@ public class Order implements Serializable {
 		this.orderDate = orderDate;
 	}
 
-	public LocalDate getSupplyDate() {
-		return supplyDate;
+	public LocalDate getExpectedDateInStore() {
+		return expectedDateInStore;
 	}
 
-	public void setSupplyDate(LocalDate supplyDate) {
-		this.supplyDate = supplyDate;
-	}
-
-	public LocalTime getSupplyTime() {
-		return supplyTime;
-	}
-
-	public void setSupplyTime(LocalTime supplyTime) {
-		this.supplyTime = supplyTime;
+	public void setExpectedDateInStore(LocalDate expectedDateInStore) {
+		this.expectedDateInStore = expectedDateInStore;
 	}
 
 	public LocalTime getOrderTime() {
@@ -127,6 +178,24 @@ public class Order implements Serializable {
 
 	public void setOrderTime(LocalTime orderTime) {
 		this.orderTime = orderTime;
+	}
+
+	public LocalTime getExpectedTimeInStore() {
+		return expectedTimeInStore;
+	}
+
+	public void setExpectedTimeInStore(LocalTime expectedTimeInStore) {
+		this.expectedTimeInStore = expectedTimeInStore;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [orderNumber=" + orderNumber + ", customerID=" + customerID + ", totalPrice=" + totalPrice
+				+ ", greetingCard=" + greetingCard + ", color=" + color + ", orderDesc=" + orderDesc + ", fromStore="
+				+ fromStore + ", paymentMethos=" + paymentMethos + ", orderStatus=" + orderStatus + ", confirmedDate="
+				+ confirmedDate + ", completeDate=" + completeDate + ", deliveryMethod=" + deliveryMethod
+				+ ", orderDate=" + orderDate + ", expectedDateInStore=" + expectedDateInStore + ", orderTime="
+				+ orderTime + ", expectedTimeInStore=" + expectedTimeInStore + "]";
 	}
 
 }
