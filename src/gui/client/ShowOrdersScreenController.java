@@ -127,7 +127,7 @@ public class ShowOrdersScreenController {
 			@Override
 			public void handle(CellEditEvent<Order, LocalTime> event) {
 				ordersTable.setFocusTraversable(true);			
-				((Order) event.getTableView().getItems().get(event.getTablePosition().getRow())).setSupplyTime(event.getNewValue());
+				((Order) event.getTableView().getItems().get(event.getTablePosition().getRow())).setExpectedTimeInStore((event.getNewValue()));
 				editedOrderNumber = event.getRowValue().getOrderNumber();
 				editedNewValue = event.getNewValue();
 				editedColumn = event.getTablePosition().getColumn();
@@ -154,7 +154,7 @@ public class ShowOrdersScreenController {
 			@Override
 			public void handle(CellEditEvent<Order, LocalDate> event) {
 				ordersTable.requestFocus();
-				event.getRowValue().setSupplyDate(event.getNewValue());
+				event.getRowValue().setExpectedDateInStore((event.getNewValue()));
 
 				editedOrderNumber = event.getRowValue().getOrderNumber();
 				editedNewValue = event.getNewValue();
