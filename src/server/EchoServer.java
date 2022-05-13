@@ -95,7 +95,6 @@ public class EchoServer extends AbstractServer {
 		case "Load":
 			orders = mysqlConnection.loadOrders(conn);
 			if (orders != null) {
-				System.out.println("Server Found");
 				try {
 					client.sendToClient(orders);
 				} catch (IOException e) {

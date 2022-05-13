@@ -35,11 +35,12 @@ public class Order implements Serializable {
 	}
 
 
-
+	//Constructor Excluding 'supplyDate' and 'supplyTime' columns
+	//These columns need to be checked if null or not
+	//They are not initialed from the start
 	public Order(int orderNumber, double totalPrice, String greetingCard, String color, String orderDesc,
 			String fromStore, LocalDate orderCreationDate, LocalTime orderCreationTime, int customerID, String paymentMethos,
-			String orderStatus, String confirmedDate, String completeDate, String deliveryMethod,
-			LocalDate supplyDate, LocalTime supplyTime) {
+			String orderStatus, String confirmedDate, String completeDate, String deliveryMethod) {
 		super();
 		this.orderNumber = orderNumber;
 		this.customerID = customerID;
@@ -54,9 +55,7 @@ public class Order implements Serializable {
 		this.completeDate = completeDate;
 		this.deliveryMethod = deliveryMethod;
 		this.orderCreationDate = orderCreationDate;
-		this.supplyDate = supplyDate;
 		this.orderCreationTime = orderCreationTime;
-		this.supplyTime = supplyTime;
 	}
 
 
