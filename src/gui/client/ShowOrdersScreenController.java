@@ -118,14 +118,12 @@ public class ShowOrdersScreenController {
 				editedOrderNumber = event.getRowValue().getOrderNumber();
 				editedNewValue = event.getNewValue();
 				editedColumn = event.getTablePosition().getColumn();
-				System.out.println("here1");
 				try {
 					ClientUI.chat.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
 							+ editedColumn);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				System.out.println("here2");
 
 				editedOrderNumber = 0;
 				editedNewValue = null;

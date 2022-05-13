@@ -145,18 +145,13 @@ public class EchoServer extends AbstractServer {
 		// clientMsg[2]= editedNewValue
 		// clientMsg[3]= editedColumn
 		case "CellUpdate":
-			System.out.println("heeere 600");
 			if (mysqlConnection.cellUpdate(conn, clientMsg[1], (clientMsg[2]), Integer.parseInt(clientMsg[3]))) {
-				System.out.println("heeere 601");
 				try {
 					client.sendToClient("Order Updated");
-					System.out.println("heeere 602");
 				} catch (Exception e) {
-					System.out.println("heeere 603");
 					e.printStackTrace();
 				}
 			} else {
-				System.out.println("heeere 604");
 			}
 			break;
 			default:
