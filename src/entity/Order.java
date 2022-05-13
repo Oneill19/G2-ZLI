@@ -37,9 +37,9 @@ public class Order implements Serializable {
 
 
 	public Order(int orderNumber, double totalPrice, String greetingCard, String color, String orderDesc,
-			String fromStore, LocalDate orderDate, LocalTime orderTime, int customerID, String paymentMethos,
+			String fromStore, LocalDate orderCreationDate, LocalTime orderCreationTime, int customerID, String paymentMethos,
 			String orderStatus, String confirmedDate, String completeDate, String deliveryMethod,
-			LocalDate expectedDateInStore, LocalTime expectedTimeInStore) {
+			LocalDate supplyDate, LocalTime supplyTime) {
 		super();
 		this.orderNumber = orderNumber;
 		this.customerID = customerID;
@@ -53,10 +53,10 @@ public class Order implements Serializable {
 		this.confirmedDate = confirmedDate;
 		this.completeDate = completeDate;
 		this.deliveryMethod = deliveryMethod;
-		this.orderCreationDate = orderDate;
-		this.supplyDate = expectedDateInStore;
-		this.orderCreationTime = orderTime;
-		this.supplyTime = expectedTimeInStore;
+		this.orderCreationDate = orderCreationDate;
+		this.supplyDate = supplyDate;
+		this.orderCreationTime = orderCreationTime;
+		this.supplyTime = supplyTime;
 	}
 
 
@@ -156,36 +156,36 @@ public class Order implements Serializable {
 		this.deliveryMethod = deliveryMethod;
 	}
 
-	public LocalDate getOrderDate() {
+	public LocalDate getOrderCreationDate() {
 		return orderCreationDate;
 	}
 
-	public void setOrderDate(LocalDate orderDate) {
-		this.orderCreationDate = orderDate;
+	public void setOrderCreationDate(LocalDate orderCreationDate) {
+		this.orderCreationDate = orderCreationDate;
 	}
 
-	public LocalDate getExpectedDateInStore() {
+	public LocalDate getSupplyDate() {
 		return supplyDate;
 	}
 
-	public void setExpectedDateInStore(LocalDate expectedDateInStore) {
-		this.supplyDate = expectedDateInStore;
+	public void setSupplyDate(LocalDate supplyDate) {
+		this.supplyDate = supplyDate;
 	}
 
-	public LocalTime getOrderTime() {
+	public LocalTime getOrderCreationTime() {
 		return orderCreationTime;
 	}
 
-	public void setOrderTime(LocalTime orderTime) {
-		this.orderCreationTime = orderTime;
+	public void setOrderCreationTime(LocalTime orderCreationTime) {
+		this.orderCreationTime = orderCreationTime;
 	}
 
-	public LocalTime getExpectedTimeInStore() {
+	public LocalTime getSupplyTime() {
 		return supplyTime;
 	}
 
-	public void setExpectedTimeInStore(LocalTime expectedTimeInStore) {
-		this.supplyTime = expectedTimeInStore;
+	public void setSuppplyTime(LocalTime supplyTime) {
+		this.supplyTime = supplyTime;
 	}
 
 	@Override

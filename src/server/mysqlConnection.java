@@ -84,9 +84,7 @@ public class mysqlConnection {
 				orderDesc = rs.getString(5);
 				fromStore = rs.getString(16);
 				orderCreationDate = LocalDate.parse(rs.getString(6));
-				System.out.println(orderCreationDate);
 				orderCreationTime = LocalTime.parse(rs.getString(7));
-				System.out.println(orderCreationTime);
 				customerID = rs.getInt(8);
 				paymentMethos = rs.getString(9);
 				orderStatus = rs.getString(10);
