@@ -92,18 +92,6 @@ public class EchoServer extends AbstractServer {
 		String ipAddress = null;
 		ArrayList<Order> orders;
 		switch (clientMsg[0]) {
-		case "Search":
-			orderDetalis = mysqlConnection.showOrder(conn, clientMsg[1]);
-			if (orderDetalis != null) {
-				System.out.println("Server Found");
-				try {
-					client.sendToClient(orderDetalis);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			break;
-
 		case "Load":
 			orders = mysqlConnection.loadOrders(conn);
 			if (orders != null) {
@@ -154,11 +142,11 @@ public class EchoServer extends AbstractServer {
 			} else {
 			}
 			break;
-			default:
-				System.out.println("No Command Found");
-				System.exit(-1);
-				break;
-			
+		default:
+			System.out.println("No Command Found");
+			System.exit(-1);
+			break;
+
 		}
 	}
 
