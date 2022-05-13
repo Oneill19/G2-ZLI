@@ -21,29 +21,31 @@ public class mysqlConnection {
 		LocalTime supplyTime = null;
 		try {
 			stmt = con.createStatement();
-			stmt.executeUpdate(//Create temporary table to exclude unnecessary columns from it
+			stmt.executeUpdate(// Create temporary table to exclude unnecessary columns from it
 					"CREATE TEMPORARY TABLE temp_order_store AS SELECT * FROM orders o INNER JOIN shop s ON o.fromStore=s.storeID;");
-			stmt.executeUpdate(//Remove the unnecessary columns
+			stmt.executeUpdate(// Remove the unnecessary columns
 					"ALTER TABLE temp_order_store DROP storeID, DROP fromStore, DROP storeAddress, DROP storePhone;");
 			ResultSet rs = stmt.executeQuery("select * from temp_order_store;");
 			ArrayList<Order> orders = new ArrayList<>();
 			while (rs.next()) {
-				Order order = new Order(rs.getInt(1), 	// orderNumber
-						rs.getDouble(2), 				// total price
-						rs.getString(3), 				// greetingCard
-						rs.getString(4), 				// color
-						rs.getString(5), 				// orderDesc
-						rs.getString(16), 				// fromStore
+				Order order = new Order(rs.getInt(1), // orderNumber
+						rs.getDouble(2), // total price
+						rs.getString(3), // greetingCard
+						rs.getString(4), // color
+						rs.getString(5), // orderDesc
+						rs.getString(16), // fromStore
 						LocalDate.parse(rs.getString(6)), // orderCreationDate
 						LocalTime.parse(rs.getString(7)), // orderCreationTime
-						rs.getInt(8), 					// customerID
-						rs.getString(9), 				// paymentMethos
-						rs.getString(10), 				// orderStatus
-						rs.getString(11), 				// confirmedDate
-						rs.getString(12), 				// completeDate
-						rs.getString(13) 				// deliveryMethod
+						rs.getInt(8), // customerID
+						rs.getString(9), // paymentMethos
+						rs.getString(10), // orderStatus
+						rs.getString(11), // confirmedDate
+						rs.getString(12), // completeDate
+						rs.getString(13) // deliveryMethod
 				);
 
+				// For now, this can't be null
+				// TODO
 				String checkNotNull = rs.getString(14);
 				if (checkNotNull != null)
 					supplyDate = LocalDate.parse(rs.getString(14));
@@ -61,8 +63,8 @@ public class mysqlConnection {
 			return orders;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {//DROP the temporary table that was created at the beginning of the function
+		} finally {
+			try {// DROP the temporary table that was created at the beginning of the function
 				stmt.executeUpdate("DROP TEMPORARY TABLE temp_order_store;");
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -71,49 +73,19 @@ public class mysqlConnection {
 		return null;
 	}
 
-	// Recognizes the edited column and updates changes in DB.
-	public static boolean cellUpdate(Connection con, String orderNumber, Object newValue, int column) {
+
+	// Updates relevant column in DB.
+	public static void cellUpdate(Connection con, String orderNumber, String newValue, String column) {
 		PreparedStatement ps;
-		String sql;
+		String sql = "UPDATE zli.orders SET " + column + " =? WHERE orderNumber = " + orderNumber + ";";
 		try {
-			switch (column) {// start SWITCH
-			case 3://update color
-				sql = "UPDATE zli.orders SET color=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
-				ps = con.prepareStatement(sql);
-				ps.setString(1, newValue.toString());
-				ps.executeUpdate();
-				ps.close();
-				break;
-			case 6://update orderCreationDate
-				sql = "UPDATE zli.orders SET orderCreationDate=? WHERE orderNumber=" + Integer.parseInt(orderNumber)
-						+ ";";
-				ps = con.prepareStatement(sql);
-				ps.setString(1, newValue.toString());
-				ps.executeUpdate();
-				ps.close();
-				break;
-			case 7://update orderCreationTime
-				sql = "UPDATE zli.orders SET orderCreationTime=? WHERE orderNumber=" + Integer.parseInt(orderNumber)
-						+ ";";
-				ps = con.prepareStatement(sql);
-				ps.setString(1, newValue.toString());
-				ps.executeUpdate();
-				ps.close();
-				break;
-			default:// debugging
-				System.out.println("Command doesn't exist");
-			}// end SWITCH
-		} catch (SQLException e) {
-			System.out.println("CellUpdateQuery failed");
-			e.printStackTrace();
-			System.exit(-1);
+			ps = con.prepareStatement(sql);
+			ps.setString(1, newValue.toString());
+			ps.executeUpdate();
+			ps.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.exit(-1);
 		}
-		System.out.println("Order Updated");
-		return true;
-
+		System.out.println("Order "+ orderNumber +" was updated successfuly");
 	}
-
 }

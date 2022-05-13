@@ -132,13 +132,11 @@ public class EchoServer extends AbstractServer {
 		// clientMsg[2]= editedNewValue
 		// clientMsg[3]= editedColumn
 		case "CellUpdate":
-			if (mysqlConnection.cellUpdate(conn, clientMsg[1], (clientMsg[2]), Integer.parseInt(clientMsg[3]))) {
-				try {
-					client.sendToClient("Order Updated");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			} else {
+			mysqlConnection.cellUpdate(conn, clientMsg[1], clientMsg[2], clientMsg[3]);
+			try {
+				client.sendToClient("Order Updated");
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			break;
 		default:
@@ -148,6 +146,7 @@ public class EchoServer extends AbstractServer {
 
 		}
 	}
+
 
 	private int searchClientByIp(String ip) {
 		int position = 0;

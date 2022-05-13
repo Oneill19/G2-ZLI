@@ -129,10 +129,10 @@ CREATE TABLE `orders` (
   `greetingCard` varchar(3000) DEFAULT NULL,
   `color` varchar(45) DEFAULT NULL,
   `orderDesc` varchar(45) DEFAULT NULL,
-  `fromStore` int NOT NULL,
-  `orderCreationDate` varchar(45) DEFAULT NULL,
+  `fromStore` varchar(20) NOT NULL,
+  `orderCreationDate` varchar(45) NOT NULL,
   `orderCreationTime` varchar(45) NOT NULL,
-  `cutomerID` int NOT NULL,
+  `cutomerID` varchar(20) NOT NULL,
   `paymentMethod` varchar(45) NOT NULL,
   `orderStatus` varchar(45) NOT NULL,
   `confirmedDate` varchar(45) DEFAULT NULL,
@@ -150,7 +150,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,50.52,'Thanks','White','Wedding',1,'2022-05-12','22:22',316397983,'Credit','In Progress',NULL,NULL,'Store',NULL,NULL);
+INSERT INTO `orders` VALUES (1,50.52,'Thanks','OffWhite','Wedding','1','2022-11-23','18:18','316397983','Credit','In Progress',NULL,NULL,'Store',NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,6 +204,7 @@ CREATE TABLE `shop` (
 
 LOCK TABLES `shop` WRITE;
 /*!40000 ALTER TABLE `shop` DISABLE KEYS */;
+INSERT INTO `shop` VALUES (1,'Karmiel','Karmiel','0545344778');
 /*!40000 ALTER TABLE `shop` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,4 +295,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-12 22:26:35
+-- Dump completed on 2022-05-13 22:33:27

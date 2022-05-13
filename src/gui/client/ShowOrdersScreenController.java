@@ -36,8 +36,8 @@ public class ShowOrdersScreenController {
 
 	ObservableList<Order> observableList;
 	private int editedOrderNumber;
-	private int editedColumn;
-	private Object editedNewValue;
+	private String editedColumn;
+	private String editedNewValue;
 
 	// ******************
 	// *****Buttons******
@@ -122,21 +122,27 @@ public class ShowOrdersScreenController {
 			@Override
 			public void handle(CellEditEvent<Order, String> event) {
 				ordersTable.setFocusTraversable(true);
+				
+				//Set the new value of the cell
 				((Order) event.getTableView().getItems().get(event.getTablePosition().getRow()))
 						.setColor((event.getNewValue()));
+				
+				//initial values for accept
 				editedOrderNumber = event.getRowValue().getOrderNumber();
-				editedNewValue = event.getNewValue();
-				editedColumn = event.getTablePosition().getColumn();
+				editedNewValue = event.getNewValue().toString();
+				editedColumn = event.getTableColumn().getId();
+				
 				try {
-					ClientUI.chat.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
+					ClientUI.chat.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue + "\t"
 							+ editedColumn);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
+				//nullify values
 				editedOrderNumber = 0;
 				editedNewValue = null;
-				editedColumn = 0;
+				editedColumn = null;
 			}
 		}
 
@@ -145,37 +151,30 @@ public class ShowOrdersScreenController {
 			@Override
 			public void handle(CellEditEvent<Order, LocalTime> event) {
 				ordersTable.setFocusTraversable(true);
+				
+				//initial values for accept
+				editedColumn = event.getTableColumn().getId();
+				editedOrderNumber = event.getRowValue().getOrderNumber();
+				editedNewValue = event.getNewValue().toString();
+				String toAccept = "CellUpdate" + "\t" + editedOrderNumber + "\t" + editedNewValue + "\t" + editedColumn;
 
 				// BEWARE
-				editedColumn = event.getTablePosition().getColumn();
-				if (editedColumn == 7)
+				//set the new value of the cell
+				if (editedColumn.equals("orderCreationTime"))
 					((Order) event.getTableView().getItems().get(event.getTablePosition().getRow()))
 							.setOrderCreationTime(((event.getNewValue())));
-				/*
-				else if(editedColumn == 6)
-					((Order) event.getTableView().getItems().get(event.getTablePosition().getRow()))
-					.setOrderCreationTime(((event.getNewValue())));
-					*/
-
-				// initials values for accept
-				editedOrderNumber = event.getRowValue().getOrderNumber();
-				editedNewValue = event.getNewValue();
-				editedColumn = event.getTablePosition().getColumn();
+				// else if(editedColumn.equals("supplyDate"))
 
 				try {
-					String toAccept = "CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
-							+ editedColumn;
-					System.out.println(toAccept);
 					ClientUI.chat.accept(toAccept);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				System.out.println("end");
 
 				// nullify values for accept
 				editedOrderNumber = 0;
 				editedNewValue = null;
-				editedColumn = 0;
+				editedColumn = null;
 			}
 		}
 
@@ -187,19 +186,18 @@ public class ShowOrdersScreenController {
 				event.getRowValue().setOrderCreationDate(((event.getNewValue())));
 
 				editedOrderNumber = event.getRowValue().getOrderNumber();
-				editedNewValue = event.getNewValue();
-				editedColumn = event.getTablePosition().getColumn();
-				System.out.println("editedColumn is: " + editedColumn);
+				editedColumn = event.getTableColumn().getId();
+				editedNewValue = event.getNewValue().toString();
 
 				try {
-					ClientUI.chat.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
-							+ editedColumn);
+					ClientUI.chat.accept(
+							"CellUpdate" + "\t" + editedOrderNumber + "\t" + editedNewValue + "\t" + editedColumn);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				editedOrderNumber = 0;
 				editedNewValue = null;
-				editedColumn = 0;
+				editedColumn = null;
 			}
 		}
 
@@ -235,6 +233,28 @@ public class ShowOrdersScreenController {
 		supplyDateCol.setCellValueFactory(new PropertyValueFactory<>("supplyDate"));
 		supplyTimeCol.setCellValueFactory(new PropertyValueFactory<>("supplyTime"));
 
+		// Set ID for each column
+		// Benefit: mysqlConnection.java
+		// Concatenate the column id to the [sqlQuery], leads to shorter code
+		// approximately by 16*7 lines.
+		orderNumberCol.setId("orderNumber");
+		priceCol.setId("totalPrice");
+		greetingCardCol.setId("greetingCard");
+		DOrderCol.setId("orderDesc");
+		shopCol.setId("fromStore");
+		completeDateCol.setId("completeDate");
+		confirmedDateCol.setId("confirmedDate");
+		customerIDCol.setId("customerID");
+		deliveryMethidCol.setId("deliveryMethod");
+		orderStatusCol.setId("orderStatus");
+		paymentMethodCol.setId("paymentMethod");
+		supplyDateCol.setId("supplyDate");
+		supplyTimeCol.setId("supplyTime");
+		colorCol.setId("color");
+		orderCreationDateCol.setId("orderCreationDate");
+		orderCreationTimeCol.setId("orderCreationTime");
+
+		ordersTable.getItems().clear();
 		ordersTable.setItems(observableList);
 	}
 
