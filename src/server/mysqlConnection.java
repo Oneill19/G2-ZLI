@@ -29,38 +29,6 @@ public class mysqlConnection {
 	private static final int EXPECTEDDATEINSTORE = 15;
 	private static final int EXPECTEDTIMEINSTORE = 16;
 
-	// function shows details from DB on tableview of
-	// gui.client.ShowOrdersScreen.fxml
-	// Triggered by clicking on "Show Orders" button
-	public static String showOrder(Connection con, String orderNumber) {
-		Statement stmt;
-		String sqlQuery = "SELECT * FROM zli.orders WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
-		String orderDetails = null;
-		ResultSet rs = null;
-		try {
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(sqlQuery);
-			if (rs.next())
-				orderDetails = (rs.getInt(ORDERNUMBER) + " " + rs.getString(TOTALPRICE) + " "
-						+ rs.getString(GREETINGCARD) + " " + rs.getString(COLOR) + " " + rs.getString(ORDERDESC) + " "
-						+ rs.getString(storeName) + " " + rs.getString(Order_Creation_Date) + " " + rs.getString(Order_Creation_Time) + " "
-						+ rs.getString(CUSTOMERID) + " " + rs.getString(PAYMENTMETHOD) + " " + rs.getString(ORDERSTATUS)
-						+ " " + rs.getString(CONFIRMEDDATE) + " " + rs.getString(COMPLETEDATE) + " "
-						+ rs.getString(DELIVERYMETHOD) + " " + rs.getString(EXPECTEDDATEINSTORE) + " "
-						+ rs.getString(EXPECTEDTIMEINSTORE));
-			return orderDetails;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		} finally {
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	// sets orders' parameters from DB and returns an initialed order array list.
 	public static ArrayList<Order> loadOrders(Connection con) {
 		Statement stmt = null;
