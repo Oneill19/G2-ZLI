@@ -7,31 +7,43 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.ShowOrdersScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1232.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.ShowOrdersScreenController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="406.0" layoutY="48.0">
          <image>
             <Image url="@Zli_logo.png" />
          </image>
       </ImageView>
-      <TableView fx:id="ordersTable" editable="true" layoutX="20.0" layoutY="188.0" prefHeight="401.0" prefWidth="960.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px;" tableMenuButtonVisible="true">
+      <TableView fx:id="ordersTable" editable="true" layoutX="20.0" layoutY="188.0" prefHeight="401.0" prefWidth="1192.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px; -fx-text-alignment: center;">
          <columns>
-            <TableColumn fx:id="orderNumberCol" prefWidth="94.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center;" text="Order Number" />
-            <TableColumn fx:id="priceCol" prefWidth="66.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center;" text="Price" />
-            <TableColumn fx:id="greetingCardCol" prefWidth="171.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center;" text="Greeting Card Description" />
-            <TableColumn fx:id="colorCol" minWidth="0.0" prefWidth="74.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Color" />
-            <TableColumn fx:id="dOrderCol" prefWidth="159.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Order Description" />
-            <TableColumn fx:id="shopCol" minWidth="0.0" prefWidth="92.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Shop" />
-            <TableColumn fx:id="supplyCol" prefWidth="156.0" style="-fx-background-color: #FCFCFE;" text="Supply Date">
+            <TableColumn fx:id="orderNumberCol" prefWidth="54.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Order&#10;Number" />
+            <TableColumn fx:id="priceCol" minWidth="5.0" prefWidth="45.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center; -fx: true;" text="Total&#10;Price" />
+            <TableColumn fx:id="greetingCardCol" prefWidth="132.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-alignment: center;" text="Greeting Card" />
+            <TableColumn fx:id="colorCol" minWidth="0.0" prefWidth="56.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Color" />
+            <TableColumn fx:id="DOrderCol" prefWidth="92.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Order&#10;Description" />
+            <TableColumn fx:id="shopCol" minWidth="0.0" prefWidth="68.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="From&#10;Store" />
+            <TableColumn fx:id="orderCol" prefWidth="96.0" style="-fx-background-color: #FCFCFE;" text="Order &#10;Creation Date">
                <columns>
-                  <TableColumn fx:id="supplyDateCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Date2" />
-                  <TableColumn fx:id="supplyTimeCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Time" />
-               </columns></TableColumn>
-            <TableColumn fx:id="orderCol" prefWidth="147.0" style="-fx-background-color: #FCFCFE;" text="Order Date">
+                  <TableColumn fx:id="orderCreationDateCol" prefWidth="46.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="C Date" />
+                  <TableColumn fx:id="orderCreationTimeCol" prefWidth="57.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="C Time" />
+               </columns>
+            </TableColumn>
+            <TableColumn fx:id="supplyCol" prefWidth="119.0" style="-fx-background-color: #FCFCFE;" text="Supply Date">
                <columns>
-                  <TableColumn fx:id="orderDateCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Date" />
-                  <TableColumn fx:id="orderTimeCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Time" />
+                  <TableColumn fx:id="supplyDateCol" prefWidth="47.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="S Date" />
+                  <TableColumn fx:id="supplyTimeCol" prefWidth="53.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="S Time" />
                </columns></TableColumn>
+            <TableColumn fx:id="customerIDCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Customer&#10;ID" />
+            <TableColumn fx:id="paymentMethodCol" prefWidth="55.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Payment&#10;Method" />
+            <TableColumn fx:id="orderStatusCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Order&#10;Status" />
+            <TableColumn fx:id="confirmedDateCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Confirmed&#10;Date" />
+            <TableColumn fx:id="completeDateCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Complete&#10;Date" />
+            <TableColumn fx:id="deliveryMethidCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Delivery&#10;Method" />
+            <TableColumn prefWidth="105.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;">
+               <graphic>
+                  <Button mnemonicParsing="false" text="Button" />
+               </graphic>
+            </TableColumn>
          </columns>
       </TableView>
       <Button fx:id="onBack" alignment="CENTER" layoutX="420.0" layoutY="612.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Back" textFill="#fcfcfe" />

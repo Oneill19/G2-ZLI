@@ -152,9 +152,13 @@ public class EchoServer extends AbstractServer {
 					e.printStackTrace();
 				}
 			} else {
-
 			}
 			break;
+			default:
+				System.out.println("No Command Found");
+				System.exit(-1);
+				break;
+			
 		}
 	}
 

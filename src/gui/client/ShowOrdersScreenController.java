@@ -23,6 +23,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/*
+ * IMPORTANT - Writer: Dorin
+ * This is a prototype class for all screens which have a tableview object.
+ * It is important to know that TimeCellHandler and DateCellHandler
+ * have to know which column is being edited
+ * in order to decide which order.field is being get\set.
+ * please notice these, and change the methods' where BEWARE is written
+ * 
+ */
 public class ShowOrdersScreenController {
 
 	ObservableList<Order> observableList;
@@ -30,49 +39,63 @@ public class ShowOrdersScreenController {
 	private int editedColumn;
 	private Object editedNewValue;
 
-	//******************
-	//*****Buttons******
-	//******************	
-    @FXML
-    private Button exitClient;
-    @FXML
-    private Button onBack;
-    
-    
-	//******************
-	//*****Columns******
-	//******************
-    @FXML
-    private TableColumn<Order, Integer> orderNumberCol;
-    @FXML
-    private TableColumn<Order, Double> priceCol;
-    @FXML
-    private TableColumn<Order, String> greetingCardCol;
-    @FXML
-    private TableColumn<Order, String> colorCol;
-    @FXML
-    private TableColumn<Order, String> dOrderCol;
-    @FXML
-    private TableColumn<Order, String> shopCol;
-    @FXML
-    private TableColumn<Order, LocalDate> supplyDateCol;
-    @FXML
-    private TableColumn<Order, LocalTime> supplyTimeCol;
-    @FXML
-    private TableColumn<Order, LocalDate> orderDateCol;
-    @FXML
-    private TableColumn<Order, LocalTime> orderTimeCol;
-   
-	//******************
-	//*****Table******
-	//******************   
-    @FXML
-    private TableView<Order> ordersTable;
+	// ******************
+	// *****Buttons******
+	// ******************
+	@FXML
+	private Button exitClient;
+	@FXML
+	private Button onBack;
 
-    
-	//******************
-	//*****ActionEvent**
-	//******************
+	// ******************
+	// *****Columns******
+	// ******************
+	@FXML
+	private TableColumn<Order, String> colorCol;
+	@FXML
+	private TableColumn<Order, LocalDate> completeDateCol;
+	@FXML
+	private TableColumn<Order, LocalDate> confirmedDateCol;
+	@FXML
+	private TableColumn<Order, Integer> customerIDCol;
+	@FXML
+	private TableColumn<Order, String> deliveryMethidCol;
+	@FXML
+	private TableColumn<Order, LocalDate> orderCreationDateCol;
+	@FXML
+	private TableColumn<Order, LocalTime> orderCreationTimeCol;
+	@FXML
+	private TableColumn<Order, String> orderStatusCol;
+	@FXML
+	private TableColumn<Order, String> paymentMethodCol;
+	@FXML
+	private TableColumn<Order, Integer> orderNumberCol;
+	@FXML
+	private TableColumn<Order, Double> priceCol;
+	@FXML
+	private TableColumn<Order, String> greetingCardCol;
+	@FXML
+	private TableColumn<Order, String> DOrderCol;
+	@FXML
+	private TableColumn<Order, String> shopCol;
+	@FXML
+	private TableColumn<Order, LocalDate> supplyDateCol;
+	@FXML
+	private TableColumn<Order, LocalTime> supplyTimeCol;
+	@FXML
+	private TableColumn<Order, LocalDate> orderDateCol;
+	@FXML
+	private TableColumn<Order, LocalTime> orderTimeCol;
+
+	// ******************
+	// *****Table******
+	// ******************
+	@FXML
+	private TableView<Order> ordersTable;
+
+	// ******************
+	// *****ActionEvent**
+	// ******************
 	@FXML
 	public void onBack(ActionEvent event) throws Exception {
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -96,52 +119,60 @@ public class ShowOrdersScreenController {
 
 		// Set handler on cell double click: Take input string and call accept.
 		class CellHandler implements EventHandler<CellEditEvent<Order, String>> {
-
 			@Override
 			public void handle(CellEditEvent<Order, String> event) {
-				ordersTable.setFocusTraversable(true);			
-				((Order) event.getTableView().getItems().get(event.getTablePosition().getRow())).setColor((event.getNewValue()));
+				ordersTable.setFocusTraversable(true);
+				((Order) event.getTableView().getItems().get(event.getTablePosition().getRow()))
+						.setColor((event.getNewValue()));
 				editedOrderNumber = event.getRowValue().getOrderNumber();
 				editedNewValue = event.getNewValue();
 				editedColumn = event.getTablePosition().getColumn();
-
-				/*
 				try {
-					ClientUI.chat.accept("cellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
+					ClientUI.chat.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
 							+ editedColumn);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				*/
-				
-				
+
 				editedOrderNumber = 0;
 				editedNewValue = null;
 				editedColumn = 0;
 			}
 		}
-		
-		// Set handler on date column double click to trigger DatePicker
-		class TimeCellHandler implements EventHandler<CellEditEvent<Order, LocalTime>> {
 
+		// Set handler on Time column
+		class TimeCellHandler implements EventHandler<CellEditEvent<Order, LocalTime>> {
 			@Override
 			public void handle(CellEditEvent<Order, LocalTime> event) {
-				ordersTable.setFocusTraversable(true);			
-				((Order) event.getTableView().getItems().get(event.getTablePosition().getRow())).setExpectedTimeInStore((event.getNewValue()));
+				ordersTable.setFocusTraversable(true);
+
+				// BEWARE
+				editedColumn = event.getTablePosition().getColumn();
+				if (editedColumn == 7)
+					((Order) event.getTableView().getItems().get(event.getTablePosition().getRow()))
+							.setOrderCreationTime(((event.getNewValue())));
+				/*
+				else if(editedColumn == 6)
+					((Order) event.getTableView().getItems().get(event.getTablePosition().getRow()))
+					.setOrderCreationTime(((event.getNewValue())));
+					*/
+
+				// initials values for accept
 				editedOrderNumber = event.getRowValue().getOrderNumber();
 				editedNewValue = event.getNewValue();
 				editedColumn = event.getTablePosition().getColumn();
 
 				try {
-					String toAccept = "CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t" + editedColumn;
+					String toAccept = "CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
+							+ editedColumn;
 					System.out.println(toAccept);
 					ClientUI.chat.accept(toAccept);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				System.out.println("end");
-				
-				
+
+				// nullify values for accept
 				editedOrderNumber = 0;
 				editedNewValue = null;
 				editedColumn = 0;
@@ -150,18 +181,18 @@ public class ShowOrdersScreenController {
 
 		// Set handler on date column double click to trigger DatePicker
 		class DateCellHandler implements EventHandler<CellEditEvent<Order, LocalDate>> {
-
 			@Override
 			public void handle(CellEditEvent<Order, LocalDate> event) {
 				ordersTable.requestFocus();
-				event.getRowValue().setExpectedDateInStore((event.getNewValue()));
+				event.getRowValue().setOrderCreationDate(((event.getNewValue())));
 
 				editedOrderNumber = event.getRowValue().getOrderNumber();
 				editedNewValue = event.getNewValue();
 				editedColumn = event.getTablePosition().getColumn();
+				System.out.println("editedColumn is: " + editedColumn);
 
 				try {
-					ClientUI.chat.accept("cellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
+					ClientUI.chat.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
 							+ editedColumn);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -171,31 +202,39 @@ public class ShowOrdersScreenController {
 				editedColumn = 0;
 			}
 		}
-	
+
 		colorCol.setCellValueFactory(new PropertyValueFactory<>("color"));
 		colorCol.setCellFactory(col -> EditCell.createStringEditCell());
 		colorCol.setOnEditCommit(new CellHandler());
 		colorCol.setEditable(true);
 
-		supplyDateCol.setCellValueFactory(new PropertyValueFactory<>("supplyDate"));
-		supplyDateCol.setCellFactory(col -> new MyDateCell());
-		supplyDateCol.setOnEditCommit(new DateCellHandler());
-		supplyDateCol.setEditable(true);
-				
-		supplyTimeCol.setCellValueFactory(new PropertyValueFactory<>("supplyTime"));
-		supplyTimeCol.setCellFactory(col -> new EditTimeCell());
-		supplyTimeCol.setOnEditCommit(new TimeCellHandler());
-		supplyTimeCol.setEditable(true);
+		orderCreationDateCol.setCellValueFactory(new PropertyValueFactory<>("orderCreationDate"));
+		orderCreationDateCol.setCellFactory(col -> new MyDateCell());
+		orderCreationDateCol.setOnEditCommit(new DateCellHandler());
+		orderCreationDateCol.setEditable(true);
+
+		orderCreationTimeCol.setCellValueFactory(new PropertyValueFactory<>("orderCreationTime"));
+		orderCreationTimeCol.setCellFactory(col -> new EditTimeCell());
+		orderCreationTimeCol.setOnEditCommit(new TimeCellHandler());
+		orderCreationTimeCol.setEditable(true);
 
 		// Bind other columns
 		observableList = FXCollections.observableArrayList(ChatClient.orders);
 		ordersTable.getItems().clear();
 		orderNumberCol.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
-		priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+		priceCol.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
 		greetingCardCol.setCellValueFactory(new PropertyValueFactory<>("greetingCard"));
-		dOrderCol.setCellValueFactory(new PropertyValueFactory<>("dorder"));
-		shopCol.setCellValueFactory(new PropertyValueFactory<>("shop"));
-		orderDateCol.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
+		DOrderCol.setCellValueFactory(new PropertyValueFactory<>("orderDesc"));
+		shopCol.setCellValueFactory(new PropertyValueFactory<>("fromStore"));
+		completeDateCol.setCellValueFactory(new PropertyValueFactory<>("completeDate"));
+		confirmedDateCol.setCellValueFactory(new PropertyValueFactory<>("confirmedDate"));
+		customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+		deliveryMethidCol.setCellValueFactory(new PropertyValueFactory<>("deliveryMethod"));
+		orderStatusCol.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
+		paymentMethodCol.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
+		supplyDateCol.setCellValueFactory(new PropertyValueFactory<>("supplyDate"));
+		supplyTimeCol.setCellValueFactory(new PropertyValueFactory<>("supplyTime"));
+
 		ordersTable.setItems(observableList);
 	}
 

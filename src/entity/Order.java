@@ -9,10 +9,10 @@ public class Order implements Serializable {
 
 	private int orderNumber = 0, customerID = 0;
 	private double totalPrice = 0;
-	private String greetingCard = null, color = null, orderDesc = null, fromStore = null, paymentMethos = null;
+	private String greetingCard = null, color = null, orderDesc = null, fromStore = null, paymentMethod = null;
 	private String orderStatus = null, confirmedDate = null, completeDate = null, deliveryMethod = null;
-	private LocalDate orderDate = null, expectedDateInStore = null;
-	private LocalTime orderTime = null, expectedTimeInStore = null;
+	private LocalDate orderCreationDate = null, supplyDate = null;
+	private LocalTime orderCreationTime = null, supplyTime = null;
 
 	// Empty Constructor
 	public Order() {
@@ -23,23 +23,23 @@ public class Order implements Serializable {
 		this.color = null;
 		this.orderDesc = null;
 		this.fromStore = null;
-		this.paymentMethos = null;
+		this.paymentMethod = null;
 		this.orderStatus = null;
 		this.confirmedDate = null;
 		this.completeDate = null;
 		this.deliveryMethod = null;
-		this.orderDate = null;
-		this.expectedDateInStore = null;
-		this.orderTime = null;
-		this.expectedTimeInStore = null;
+		this.orderCreationDate = null;
+		this.supplyDate = null;
+		this.orderCreationTime = null;
+		this.supplyTime = null;
 	}
 
 
 
 	public Order(int orderNumber, double totalPrice, String greetingCard, String color, String orderDesc,
-			String fromStore, LocalDate orderDate, LocalTime orderTime, int customerID, String paymentMethos,
+			String fromStore, LocalDate orderCreationDate, LocalTime orderCreationTime, int customerID, String paymentMethos,
 			String orderStatus, String confirmedDate, String completeDate, String deliveryMethod,
-			LocalDate expectedDateInStore, LocalTime expectedTimeInStore) {
+			LocalDate supplyDate, LocalTime supplyTime) {
 		super();
 		this.orderNumber = orderNumber;
 		this.customerID = customerID;
@@ -48,15 +48,15 @@ public class Order implements Serializable {
 		this.color = color;
 		this.orderDesc = orderDesc;
 		this.fromStore = fromStore;
-		this.paymentMethos = paymentMethos;
+		this.paymentMethod = paymentMethos;
 		this.orderStatus = orderStatus;
 		this.confirmedDate = confirmedDate;
 		this.completeDate = completeDate;
 		this.deliveryMethod = deliveryMethod;
-		this.orderDate = orderDate;
-		this.expectedDateInStore = expectedDateInStore;
-		this.orderTime = orderTime;
-		this.expectedTimeInStore = expectedTimeInStore;
+		this.orderCreationDate = orderCreationDate;
+		this.supplyDate = supplyDate;
+		this.orderCreationTime = orderCreationTime;
+		this.supplyTime = supplyTime;
 	}
 
 
@@ -117,11 +117,11 @@ public class Order implements Serializable {
 	}
 
 	public String getPaymentMethos() {
-		return paymentMethos;
+		return paymentMethod;
 	}
 
 	public void setPaymentMethos(String paymentMethos) {
-		this.paymentMethos = paymentMethos;
+		this.paymentMethod = paymentMethos;
 	}
 
 	public String getOrderStatus() {
@@ -156,46 +156,46 @@ public class Order implements Serializable {
 		this.deliveryMethod = deliveryMethod;
 	}
 
-	public LocalDate getOrderDate() {
-		return orderDate;
+	public LocalDate getOrderCreationDate() {
+		return orderCreationDate;
 	}
 
-	public void setOrderDate(LocalDate orderDate) {
-		this.orderDate = orderDate;
+	public void setOrderCreationDate(LocalDate orderCreationDate) {
+		this.orderCreationDate = orderCreationDate;
 	}
 
-	public LocalDate getExpectedDateInStore() {
-		return expectedDateInStore;
+	public LocalDate getSupplyDate() {
+		return supplyDate;
 	}
 
-	public void setExpectedDateInStore(LocalDate expectedDateInStore) {
-		this.expectedDateInStore = expectedDateInStore;
+	public void setSupplyDate(LocalDate supplyDate) {
+		this.supplyDate = supplyDate;
 	}
 
-	public LocalTime getOrderTime() {
-		return orderTime;
+	public LocalTime getOrderCreationTime() {
+		return orderCreationTime;
 	}
 
-	public void setOrderTime(LocalTime orderTime) {
-		this.orderTime = orderTime;
+	public void setOrderCreationTime(LocalTime orderCreationTime) {
+		this.orderCreationTime = orderCreationTime;
 	}
 
-	public LocalTime getExpectedTimeInStore() {
-		return expectedTimeInStore;
+	public LocalTime getSupplyTime() {
+		return supplyTime;
 	}
 
-	public void setExpectedTimeInStore(LocalTime expectedTimeInStore) {
-		this.expectedTimeInStore = expectedTimeInStore;
+	public void setSuppplyTime(LocalTime supplyTime) {
+		this.supplyTime = supplyTime;
 	}
 
 	@Override
 	public String toString() {
 		return "Order [orderNumber=" + orderNumber + ", customerID=" + customerID + ", totalPrice=" + totalPrice
 				+ ", greetingCard=" + greetingCard + ", color=" + color + ", orderDesc=" + orderDesc + ", fromStore="
-				+ fromStore + ", paymentMethos=" + paymentMethos + ", orderStatus=" + orderStatus + ", confirmedDate="
+				+ fromStore + ", paymentMethos=" + paymentMethod + ", orderStatus=" + orderStatus + ", confirmedDate="
 				+ confirmedDate + ", completeDate=" + completeDate + ", deliveryMethod=" + deliveryMethod
-				+ ", orderDate=" + orderDate + ", expectedDateInStore=" + expectedDateInStore + ", orderTime="
-				+ orderTime + ", expectedTimeInStore=" + expectedTimeInStore + "]";
+				+ ", orderDate=" + orderCreationDate + ", expectedDateInStore=" + supplyDate + ", orderTime="
+				+ orderCreationTime + ", expectedTimeInStore=" + supplyTime + "]";
 	}
 
 }
