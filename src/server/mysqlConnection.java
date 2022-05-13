@@ -68,8 +68,8 @@ public class mysqlConnection {
 		double totalPrice = 0;
 		String greetingCard = null, color = null, orderDesc = null, fromStore = null, paymentMethos = null;
 		String orderStatus = null, confirmedDate = null, completeDate = null, deliveryMethod = null;
-		LocalDate orderDate = null, expectedDateInStore = null;
-		LocalTime orderTime = null, expectedTimeInStore = null;
+		LocalDate orderCreationDate = null, supplyDate = null;
+		LocalTime orderCreationTime = null, supplyTime = null;
 		try {
 			stmt = con.createStatement();
 			stmt.executeUpdate("CREATE TEMPORARY TABLE temp_order_store AS SELECT * FROM orders o INNER JOIN shop s ON o.fromStore=s.storeID;");
@@ -83,8 +83,10 @@ public class mysqlConnection {
 				color = rs.getString(4);
 				orderDesc = rs.getString(5);
 				fromStore = rs.getString(16);
-				orderDate = LocalDate.parse(rs.getString(6));
-				orderTime = LocalTime.parse(rs.getString(7));
+				orderCreationDate = LocalDate.parse(rs.getString(6));
+				System.out.println(orderCreationDate);
+				orderCreationTime = LocalTime.parse(rs.getString(7));
+				System.out.println(orderCreationTime);
 				customerID = rs.getInt(8);
 				paymentMethos = rs.getString(9);
 				orderStatus = rs.getString(10);
@@ -93,17 +95,17 @@ public class mysqlConnection {
 				deliveryMethod = rs.getString(13);
 				String checkNotNull = rs.getString(14);
 				if (checkNotNull!=null)
-					expectedDateInStore = LocalDate.parse(rs.getString(14));
+					supplyDate = LocalDate.parse(rs.getString(14));
 				else
-					expectedDateInStore=LocalDate.parse("2012-12-12");
+					supplyDate=LocalDate.parse("2012-12-12");
 				checkNotNull = rs.getString(15);
 				if (checkNotNull!=null)
-					expectedTimeInStore = LocalTime.parse(rs.getString(15));
+					supplyTime = LocalTime.parse(rs.getString(15));
 				else
-					expectedTimeInStore=LocalTime.parse("12:12");;				
-				Order order = new Order(orderNumber, totalPrice, greetingCard, color, orderDesc, fromStore, orderDate,
-						orderTime, customerID, paymentMethos, orderStatus, confirmedDate, completeDate, deliveryMethod,
-						expectedDateInStore, expectedTimeInStore);
+					supplyTime=LocalTime.parse("12:12");;				
+				Order order = new Order(orderNumber, totalPrice, greetingCard, color, orderDesc, fromStore, orderCreationDate,
+						orderCreationTime, customerID, paymentMethos, orderStatus, confirmedDate, completeDate, deliveryMethod,
+						supplyDate, supplyTime);
 				orders.add(order);
 			}
 			try {
@@ -114,7 +116,6 @@ public class mysqlConnection {
 			return orders;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("here5");
 		}
 		return null;
 	}
@@ -123,9 +124,10 @@ public class mysqlConnection {
 	public static boolean cellUpdate(Connection con, String orderNumber, Object newValue, int column) {
 		PreparedStatement ps;
 		String sql;
+		System.out.println("column:" + column);
 		try {
 			switch (column) {// start SWITCH
-			case COLOR:
+			case 3:
 				sql = "UPDATE zli.orders SET color=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, newValue.toString());
@@ -155,7 +157,12 @@ public class mysqlConnection {
 			System.out.println("CellUpdateQuery failed");
 			e.printStackTrace();
 			return false;
-		}
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.exit(-1);
+			}
+		return false;
+			
 	}
 
 }

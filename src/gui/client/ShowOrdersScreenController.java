@@ -118,13 +118,14 @@ public class ShowOrdersScreenController {
 				editedOrderNumber = event.getRowValue().getOrderNumber();
 				editedNewValue = event.getNewValue();
 				editedColumn = event.getTablePosition().getColumn();
-
+				System.out.println("here1");
 				try {
-					ClientUI.chat.accept("cellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
+					ClientUI.chat.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
 							+ editedColumn);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				System.out.println("here2");
 
 				editedOrderNumber = 0;
 				editedNewValue = null;
@@ -143,6 +144,7 @@ public class ShowOrdersScreenController {
 				editedNewValue = event.getNewValue();
 				editedColumn = event.getTablePosition().getColumn();
 
+				/*
 				try {
 					String toAccept = "CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
 							+ editedColumn;
@@ -152,7 +154,8 @@ public class ShowOrdersScreenController {
 					e.printStackTrace();
 				}
 				System.out.println("end");
-
+				 */
+				
 				editedOrderNumber = 0;
 				editedNewValue = null;
 				editedColumn = 0;
@@ -188,18 +191,18 @@ public class ShowOrdersScreenController {
 		colorCol.setEditable(true);
 
 		/*
-		supplyDateCol.setCellValueFactory(new PropertyValueFactory<>("supplyDate"));
-		supplyDateCol.setCellFactory(col -> new MyDateCell());
-		supplyDateCol.setOnEditCommit(new DateCellHandler());
-		supplyDateCol.setEditable(true);
+		orderCreationDateCol.setCellValueFactory(new PropertyValueFactory<>("orderCreationDate"));
+		orderCreationDateCol.setCellFactory(col -> new MyDateCell());
+		orderCreationDateCol.setOnEditCommit(new DateCellHandler());
+		orderCreationDateCol.setEditable(true);
 		*/
 
-		/*
-		supplyTimeCol.setCellValueFactory(new PropertyValueFactory<>("supplyTime"));
-		supplyTimeCol.setCellFactory(col -> new EditTimeCell());
-		supplyTimeCol.setOnEditCommit(new TimeCellHandler());
-		supplyTimeCol.setEditable(true);
-		*/
+		
+		orderCreationTimeCol.setCellValueFactory(new PropertyValueFactory<>("orderCreationTime"));
+		orderCreationTimeCol.setCellFactory(col -> new EditTimeCell());
+		orderCreationTimeCol.setOnEditCommit(new TimeCellHandler());
+		orderCreationTimeCol.setEditable(true);
+		
 
 		// Bind other columns
 		observableList = FXCollections.observableArrayList(ChatClient.orders);
@@ -213,8 +216,6 @@ public class ShowOrdersScreenController {
 		confirmedDateCol.setCellValueFactory(new PropertyValueFactory<>("confirmedDate"));
 		customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
 		deliveryMethidCol.setCellValueFactory(new PropertyValueFactory<>("deliveryMethod"));
-		orderCreationDateCol.setCellValueFactory(new PropertyValueFactory<>("orderCreationDate"));
-		orderCreationTimeCol.setCellValueFactory(new PropertyValueFactory<>("orderCreationTime"));
 		orderStatusCol.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
 		paymentMethodCol.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));	
 		supplyDateCol.setCellValueFactory(new PropertyValueFactory<>("supplyDate"));
