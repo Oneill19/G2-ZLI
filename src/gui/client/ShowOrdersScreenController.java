@@ -145,15 +145,19 @@ public class ShowOrdersScreenController {
 			@Override
 			public void handle(CellEditEvent<Order, LocalTime> event) {
 				ordersTable.setFocusTraversable(true);
-				
+
 				// BEWARE
 				editedColumn = event.getTablePosition().getColumn();
 				if (editedColumn == 7)
 					((Order) event.getTableView().getItems().get(event.getTablePosition().getRow()))
 							.setOrderCreationTime(((event.getNewValue())));
-				// meanwhile - no else
-				
-				//initials values for accept
+				/*
+				else if(editedColumn == 6)
+					((Order) event.getTableView().getItems().get(event.getTablePosition().getRow()))
+					.setOrderCreationTime(((event.getNewValue())));
+					*/
+
+				// initials values for accept
 				editedOrderNumber = event.getRowValue().getOrderNumber();
 				editedNewValue = event.getNewValue();
 				editedColumn = event.getTablePosition().getColumn();
@@ -168,7 +172,7 @@ public class ShowOrdersScreenController {
 				}
 				System.out.println("end");
 
-				//nullify values for accept
+				// nullify values for accept
 				editedOrderNumber = 0;
 				editedNewValue = null;
 				editedColumn = 0;
@@ -185,9 +189,10 @@ public class ShowOrdersScreenController {
 				editedOrderNumber = event.getRowValue().getOrderNumber();
 				editedNewValue = event.getNewValue();
 				editedColumn = event.getTablePosition().getColumn();
+				System.out.println("editedColumn is: " + editedColumn);
 
 				try {
-					ClientUI.chat.accept("cellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
+					ClientUI.chat.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
 							+ editedColumn);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -203,13 +208,10 @@ public class ShowOrdersScreenController {
 		colorCol.setOnEditCommit(new CellHandler());
 		colorCol.setEditable(true);
 
-		/*
-		 * orderCreationDateCol.setCellValueFactory(new
-		 * PropertyValueFactory<>("orderCreationDate"));
-		 * orderCreationDateCol.setCellFactory(col -> new MyDateCell());
-		 * orderCreationDateCol.setOnEditCommit(new DateCellHandler());
-		 * orderCreationDateCol.setEditable(true);
-		 */
+		orderCreationDateCol.setCellValueFactory(new PropertyValueFactory<>("orderCreationDate"));
+		orderCreationDateCol.setCellFactory(col -> new MyDateCell());
+		orderCreationDateCol.setOnEditCommit(new DateCellHandler());
+		orderCreationDateCol.setEditable(true);
 
 		orderCreationTimeCol.setCellValueFactory(new PropertyValueFactory<>("orderCreationTime"));
 		orderCreationTimeCol.setCellFactory(col -> new EditTimeCell());

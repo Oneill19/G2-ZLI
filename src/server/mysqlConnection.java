@@ -148,17 +148,16 @@ public class mysqlConnection {
 			default:// debugging
 				System.out.println("Command doesn't exist");
 			}// end SWITCH
-			System.out.println("Order Updated");
-			return true;
 		} catch (SQLException e) {
 			System.out.println("CellUpdateQuery failed");
 			e.printStackTrace();
-			return false;
+			System.exit(-1);
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.exit(-1);
 			}
-		return false;
+		System.out.println("Order Updated");
+		return true;
 			
 	}
 

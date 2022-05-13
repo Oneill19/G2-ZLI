@@ -18,11 +18,17 @@ public class MyDateCell extends TableCell<Order, LocalDate> {
     
     private final DateTimeFormatter formatter ;
     private final DatePicker datePicker ;
+    private String oldVal=null;
     
     public MyDateCell() {
-        
+    		
         formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT) ;
         datePicker = new DatePicker() ;
+       
+        //Saves previous date
+        datePicker.addEventFilter(MouseEvent.MOUSE_CLICKED, event ->{
+        	oldVal = (datePicker.getEditor().getText());    	
+        });
         
         datePicker.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
             if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.TAB) {
@@ -30,6 +36,7 @@ public class MyDateCell extends TableCell<Order, LocalDate> {
                 commitEdit(LocalDate.from(datePicker.getValue()));
             }
             if (event.getCode() == KeyCode.ESCAPE) {
+            	datePicker.getEditor().setText(oldVal);
                 cancelEdit();
             }
         });
@@ -49,9 +56,25 @@ public class MyDateCell extends TableCell<Order, LocalDate> {
                     commitEdit(LocalDate.from(datePicker.getValue()));
                 }
             });
+            cell.addEventFilter(KeyEvent.KEY_PRESSED,(KeyEvent event) -> {
+                if (event.getCode() == KeyCode.ESCAPE) {
+                	datePicker.getEditor().setText(oldVal.toString());
+                    cancelEdit();
+                }
+            });
             return cell ;
         });
-
+        
+         
+        //Update value when focus gets lost
+        datePicker.focusedProperty().addListener((src, ov, nv) -> {
+            if (!nv) {
+                datePicker.getEditor().setText(datePicker.getConverter().toString(datePicker.getValue()));
+                commitEdit(LocalDate.from(datePicker.getValue()));
+            }
+        });
+		
+        
         contentDisplayProperty().bind(Bindings.when(editingProperty())
                 .then(ContentDisplay.GRAPHIC_ONLY)
                 .otherwise(ContentDisplay.TEXT_ONLY));
