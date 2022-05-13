@@ -18,8 +18,8 @@ public class mysqlConnection {
 	private static final int COLOR = 4;
 	private static final int ORDERDESC = 5;
 	private static final int storeName = 16;
-	private static final int ORDERDATE = 7;
-	private static final int ORDERTIME = 8;
+	private static final int Order_Creation_Date = 6;
+	private static final int Order_Creation_Time = 7;
 	private static final int CUSTOMERID = 9;
 	private static final int PAYMENTMETHOD = 10;
 	private static final int ORDERSTATUS = 11;
@@ -43,7 +43,7 @@ public class mysqlConnection {
 			if (rs.next())
 				orderDetails = (rs.getInt(ORDERNUMBER) + " " + rs.getString(TOTALPRICE) + " "
 						+ rs.getString(GREETINGCARD) + " " + rs.getString(COLOR) + " " + rs.getString(ORDERDESC) + " "
-						+ rs.getString(storeName) + " " + rs.getString(ORDERDATE) + " " + rs.getString(ORDERTIME) + " "
+						+ rs.getString(storeName) + " " + rs.getString(Order_Creation_Date) + " " + rs.getString(Order_Creation_Time) + " "
 						+ rs.getString(CUSTOMERID) + " " + rs.getString(PAYMENTMETHOD) + " " + rs.getString(ORDERSTATUS)
 						+ " " + rs.getString(CONFIRMEDDATE) + " " + rs.getString(COMPLETEDATE) + " "
 						+ rs.getString(DELIVERYMETHOD) + " " + rs.getString(EXPECTEDDATEINSTORE) + " "
@@ -131,15 +131,15 @@ public class mysqlConnection {
 				ps.executeUpdate();
 				ps.close();
 				break;
-			case ORDERDATE:
-				sql = "UPDATE zli.orders SET ORDERDATE=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
+			case Order_Creation_Date:
+				sql = "UPDATE zli.orders SET orderCreationDate=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, newValue.toString());
 				ps.executeUpdate();
 				ps.close();
 				break;
-			case ORDERTIME:
-				sql = "UPDATE zli.orders SET ORDERTIME=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
+			case Order_Creation_Time:
+				sql = "UPDATE zli.orders SET orderCreationTime=? WHERE orderNumber=" + Integer.parseInt(orderNumber) + ";";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, newValue.toString());
 				ps.executeUpdate();
