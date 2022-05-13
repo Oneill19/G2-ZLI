@@ -22,7 +22,9 @@ public class EditTimeCell extends TableCell<Order, LocalTime> {
 	public static final String DefaultFormat = "HH:mm";
 	private boolean enterflag=false;
 
+	@SuppressWarnings("unused")
 	private DateTimeFormatter formatter;
+	@SuppressWarnings("unused")
 	private ObjectProperty<LocalDateTime> dateTimeValue = new SimpleObjectProperty<>(LocalDateTime.now());
 	private ObjectProperty<String> format = new SimpleObjectProperty<String>() {
 		public void set(String newValue) {
@@ -37,27 +39,6 @@ public class EditTimeCell extends TableCell<Order, LocalTime> {
 	public EditTimeCell() {
 		format.set(DefaultFormat);
 
-		/*
-		itemProperty().addListener((obx, oldItem, newItem) -> {			
-			if (newItem == null) {
-				String text = oldItem.format(formatter);
-				setText(text);
-				textField.setText(text);
-			} else {
-				if (dateTimeValue.get() == null) {
-					String text = LocalTime.now().format(formatter);
-					setText(text);
-					textField.setText(text);
-				} else {
-					LocalTime time = dateTimeValue.get().toLocalTime();
-					String text = time.format(formatter);
-					setText(text);
-					textField.setText(text);
-				}
-			}
-		});
-		*/
-		
         itemProperty().addListener((obx, oldItem, newItem) -> {
             if (newItem == null) {
                 setText(null);
@@ -70,7 +51,7 @@ public class EditTimeCell extends TableCell<Order, LocalTime> {
 
 		
 		textField.setOnAction(evt -> {
-			//flag is because this commitEdit is triggered and also the loose focus is triggred
+			//flag is because this commitEdit is triggered and also the loose focus is triggered
 			//and result is 2 commitEdit instead of 1.
 			//so flag is fix
 			enterflag=true;
@@ -80,11 +61,7 @@ public class EditTimeCell extends TableCell<Order, LocalTime> {
 		
 		
 		textField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-			if (enterflag)
-			{
-				
-			}
-			else if (!isNowFocused) {
+			if (!enterflag && !isNowFocused) {
 				commitEdit(LocalTime.parse(textField.getText()));
 			}
 		});

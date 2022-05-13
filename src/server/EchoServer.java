@@ -88,7 +88,6 @@ public class EchoServer extends AbstractServer {
 	 */
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		String[] clientMsg = ((String) msg).split("\t");
-		String orderDetalis = null;
 		String ipAddress = null;
 		ArrayList<Order> orders;
 		switch (clientMsg[0]) {
