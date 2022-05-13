@@ -106,6 +106,7 @@ public class EchoServer extends AbstractServer {
 
 		case "Load":
 			orders = mysqlConnection.loadOrders(conn);
+			System.out.println("here1");
 			if (orders != null) {
 				System.out.println("Server Found");
 				try {

@@ -130,16 +130,16 @@ CREATE TABLE `orders` (
   `color` varchar(45) DEFAULT NULL,
   `orderDesc` varchar(45) DEFAULT NULL,
   `fromStore` int NOT NULL,
-  `orderDate` varchar(45) DEFAULT NULL,
-  `orderTime` varchar(45) NOT NULL,
+  `orderCreationDate` varchar(45) DEFAULT NULL,
+  `orderCreationTime` varchar(45) NOT NULL,
   `cutomerID` int NOT NULL,
   `paymentMethod` varchar(45) NOT NULL,
   `orderStatus` varchar(45) NOT NULL,
   `confirmedDate` varchar(45) DEFAULT NULL,
   `completeDate` varchar(45) DEFAULT NULL,
   `deliveryMethod` varchar(45) NOT NULL,
-  `ExpectedDateInStore` varchar(45) DEFAULT NULL,
-  `ExpectedTimeIneStore` varchar(45) DEFAULT NULL,
+  `supplyDate` varchar(45) DEFAULT NULL,
+  `supplyTime` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`orderNumber`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -150,6 +150,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (1,50.52,'Thanks','White','Wedding',1,'2022-05-12','22:22',316397983,'Credit','In Progress',NULL,NULL,'Store',NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -293,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-11 22:39:07
+-- Dump completed on 2022-05-12 22:26:35

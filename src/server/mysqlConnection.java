@@ -17,7 +17,7 @@ public class mysqlConnection {
 	private static final int GREETINGCARD = 3;
 	private static final int COLOR = 4;
 	private static final int ORDERDESC = 5;
-	private static final int FROMSTORE = 6;
+	private static final int storeName = 16;
 	private static final int ORDERDATE = 7;
 	private static final int ORDERTIME = 8;
 	private static final int CUSTOMERID = 9;
@@ -43,7 +43,7 @@ public class mysqlConnection {
 			if (rs.next())
 				orderDetails = (rs.getInt(ORDERNUMBER) + " " + rs.getString(TOTALPRICE) + " "
 						+ rs.getString(GREETINGCARD) + " " + rs.getString(COLOR) + " " + rs.getString(ORDERDESC) + " "
-						+ rs.getString(FROMSTORE) + " " + rs.getString(ORDERDATE) + " " + rs.getString(ORDERTIME) + " "
+						+ rs.getString(storeName) + " " + rs.getString(ORDERDATE) + " " + rs.getString(ORDERTIME) + " "
 						+ rs.getString(CUSTOMERID) + " " + rs.getString(PAYMENTMETHOD) + " " + rs.getString(ORDERSTATUS)
 						+ " " + rs.getString(CONFIRMEDDATE) + " " + rs.getString(COMPLETEDATE) + " "
 						+ rs.getString(DELIVERYMETHOD) + " " + rs.getString(EXPECTEDDATEINSTORE) + " "
@@ -61,7 +61,7 @@ public class mysqlConnection {
 		}
 	}
 
-	//sets orders' parameters from DB and returns an initialed order array list.
+	// sets orders' parameters from DB and returns an initialed order array list.
 	public static ArrayList<Order> loadOrders(Connection con) {
 		Statement stmt = null;
 		int orderNumber = 0, customerID = 0;
@@ -72,39 +72,54 @@ public class mysqlConnection {
 		LocalTime orderTime = null, expectedTimeInStore = null;
 		try {
 			stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM zli.orders");
+			stmt.executeUpdate("CREATE TEMPORARY TABLE temp_order_store AS SELECT * FROM orders o INNER JOIN shop s ON o.fromStore=s.storeID;");
+			stmt.executeUpdate("ALTER TABLE temp_order_store DROP storeID, DROP fromStore, DROP storeAddress, DROP storePhone;");
+			ResultSet rs = stmt.executeQuery("select * from temp_order_store;");
 			ArrayList<Order> orders = new ArrayList<>();
 			while (rs.next()) {
-				orderNumber = rs.getInt(ORDERNUMBER);
-				totalPrice = rs.getDouble(TOTALPRICE);
-				greetingCard = rs.getString(GREETINGCARD);
-				color = rs.getString(COLOR);
-				orderDesc = rs.getString(ORDERDESC);
-				fromStore = rs.getString(FROMSTORE);
-				orderDate = LocalDate.parse(rs.getString(ORDERDATE));
-				orderTime = LocalTime.parse(rs.getString(ORDERTIME));
-				customerID = rs.getInt(CUSTOMERID);
-				paymentMethos = rs.getString(PAYMENTMETHOD);
-				orderStatus = rs.getString(ORDERSTATUS);
-				confirmedDate = rs.getString(CONFIRMEDDATE);
-				completeDate = rs.getString(COMPLETEDATE);
-				deliveryMethod = rs.getString(DELIVERYMETHOD);
-				expectedDateInStore = LocalDate.parse(rs.getString(EXPECTEDDATEINSTORE));
-				expectedTimeInStore = LocalTime.parse(rs.getString(EXPECTEDTIMEINSTORE));
-
+				orderNumber = rs.getInt(1);
+				totalPrice = rs.getDouble(2);
+				greetingCard = rs.getString(3);
+				color = rs.getString(4);
+				orderDesc = rs.getString(5);
+				fromStore = rs.getString(16);
+				orderDate = LocalDate.parse(rs.getString(6));
+				orderTime = LocalTime.parse(rs.getString(7));
+				customerID = rs.getInt(8);
+				paymentMethos = rs.getString(9);
+				orderStatus = rs.getString(10);
+				confirmedDate = rs.getString(11);
+				completeDate = rs.getString(12);
+				deliveryMethod = rs.getString(13);
+				String checkNotNull = rs.getString(14);
+				if (checkNotNull!=null)
+					expectedDateInStore = LocalDate.parse(rs.getString(14));
+				else
+					expectedDateInStore=LocalDate.parse("2012-12-12");
+				checkNotNull = rs.getString(15);
+				if (checkNotNull!=null)
+					expectedTimeInStore = LocalTime.parse(rs.getString(15));
+				else
+					expectedTimeInStore=LocalTime.parse("12:12");;				
 				Order order = new Order(orderNumber, totalPrice, greetingCard, color, orderDesc, fromStore, orderDate,
 						orderTime, customerID, paymentMethos, orderStatus, confirmedDate, completeDate, deliveryMethod,
 						expectedDateInStore, expectedTimeInStore);
 				orders.add(order);
 			}
+			try {
+				stmt.executeUpdate("DROP TEMPORARY TABLE temp_order_store;");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			return orders;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("here5");
 		}
 		return null;
 	}
 
-	//Recognizes the edited column and updates changes in DB.
+	// Recognizes the edited column and updates changes in DB.
 	public static boolean cellUpdate(Connection con, String orderNumber, Object newValue, int column) {
 		PreparedStatement ps;
 		String sql;
