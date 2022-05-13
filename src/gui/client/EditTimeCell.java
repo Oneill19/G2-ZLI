@@ -152,7 +152,6 @@ public class EditTimeCell extends TableCell<Order, LocalTime> {
 		}
 
 		super.commitEdit(item);
-		System.out.println("yay");
 		setContentDisplay(ContentDisplay.TEXT_ONLY);
 	}
 }

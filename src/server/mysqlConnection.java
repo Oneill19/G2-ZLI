@@ -122,7 +122,6 @@ public class mysqlConnection {
 	public static boolean cellUpdate(Connection con, String orderNumber, Object newValue, int column) {
 		PreparedStatement ps;
 		String sql;
-		System.out.println("column:" + column);
 		try {
 			switch (column) {// start SWITCH
 			case 3:

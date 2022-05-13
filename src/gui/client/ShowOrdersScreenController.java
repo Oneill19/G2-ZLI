@@ -23,6 +23,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/*
+ * IMPORTANT - Writer: Dorin
+ * This is a prototype class for all screens which have a tableview object.
+ * It is important to know that TimeCellHandler and DateCellHandler
+ * have to know which column is being edited
+ * in order to decide which order.field is being get\set.
+ * please notice these, and change the methods' where BEWARE is written
+ * 
+ */
 public class ShowOrdersScreenController {
 
 	ObservableList<Order> observableList;
@@ -136,16 +145,19 @@ public class ShowOrdersScreenController {
 			@Override
 			public void handle(CellEditEvent<Order, LocalTime> event) {
 				ordersTable.setFocusTraversable(true);
-				editedColumn = event.getTablePosition().getColumn();
-				System.out.println(editedColumn);
 				
-				((Order) event.getTableView().getItems().get(event.getTablePosition().getRow()))
-						.setOrderCreationTime(((event.getNewValue())));
+				// BEWARE
+				editedColumn = event.getTablePosition().getColumn();
+				if (editedColumn == 7)
+					((Order) event.getTableView().getItems().get(event.getTablePosition().getRow()))
+							.setOrderCreationTime(((event.getNewValue())));
+				// meanwhile - no else
+				
+				//initials values for accept
 				editedOrderNumber = event.getRowValue().getOrderNumber();
 				editedNewValue = event.getNewValue();
 				editedColumn = event.getTablePosition().getColumn();
 
-				/*
 				try {
 					String toAccept = "CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue.toString() + "\t"
 							+ editedColumn;
@@ -155,8 +167,8 @@ public class ShowOrdersScreenController {
 					e.printStackTrace();
 				}
 				System.out.println("end");
-				 */
-				
+
+				//nullify values for accept
 				editedOrderNumber = 0;
 				editedNewValue = null;
 				editedColumn = 0;
@@ -192,18 +204,17 @@ public class ShowOrdersScreenController {
 		colorCol.setEditable(true);
 
 		/*
-		orderCreationDateCol.setCellValueFactory(new PropertyValueFactory<>("orderCreationDate"));
-		orderCreationDateCol.setCellFactory(col -> new MyDateCell());
-		orderCreationDateCol.setOnEditCommit(new DateCellHandler());
-		orderCreationDateCol.setEditable(true);
-		*/
+		 * orderCreationDateCol.setCellValueFactory(new
+		 * PropertyValueFactory<>("orderCreationDate"));
+		 * orderCreationDateCol.setCellFactory(col -> new MyDateCell());
+		 * orderCreationDateCol.setOnEditCommit(new DateCellHandler());
+		 * orderCreationDateCol.setEditable(true);
+		 */
 
-		
 		orderCreationTimeCol.setCellValueFactory(new PropertyValueFactory<>("orderCreationTime"));
 		orderCreationTimeCol.setCellFactory(col -> new EditTimeCell());
 		orderCreationTimeCol.setOnEditCommit(new TimeCellHandler());
 		orderCreationTimeCol.setEditable(true);
-		
 
 		// Bind other columns
 		observableList = FXCollections.observableArrayList(ChatClient.orders);
@@ -212,13 +223,13 @@ public class ShowOrdersScreenController {
 		priceCol.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
 		greetingCardCol.setCellValueFactory(new PropertyValueFactory<>("greetingCard"));
 		DOrderCol.setCellValueFactory(new PropertyValueFactory<>("orderDesc"));
-		shopCol.setCellValueFactory(new PropertyValueFactory<>("fromStore"));	
+		shopCol.setCellValueFactory(new PropertyValueFactory<>("fromStore"));
 		completeDateCol.setCellValueFactory(new PropertyValueFactory<>("completeDate"));
 		confirmedDateCol.setCellValueFactory(new PropertyValueFactory<>("confirmedDate"));
 		customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
 		deliveryMethidCol.setCellValueFactory(new PropertyValueFactory<>("deliveryMethod"));
 		orderStatusCol.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
-		paymentMethodCol.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));	
+		paymentMethodCol.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
 		supplyDateCol.setCellValueFactory(new PropertyValueFactory<>("supplyDate"));
 		supplyTimeCol.setCellValueFactory(new PropertyValueFactory<>("supplyTime"));
 
