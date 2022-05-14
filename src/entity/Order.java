@@ -39,7 +39,7 @@ public class Order implements Serializable {
 	//These columns need to be checked if null or not
 	//They are not initialed from the start
 	public Order(int orderNumber, double totalPrice, String greetingCard, String color, String orderDesc,
-			String fromStore, LocalDate orderCreationDate, LocalTime orderCreationTime, int customerID, String paymentMethos,
+			String fromStore, LocalDate orderCreationDate, LocalTime orderCreationTime, int customerID, String paymentMethod,
 			String orderStatus, String confirmedDate, String completeDate, String deliveryMethod) {
 		super();
 		this.orderNumber = orderNumber;
@@ -49,7 +49,7 @@ public class Order implements Serializable {
 		this.color = color;
 		this.orderDesc = orderDesc;
 		this.fromStore = fromStore;
-		this.paymentMethod = paymentMethos;
+		this.paymentMethod = paymentMethod;
 		this.orderStatus = orderStatus;
 		this.confirmedDate = confirmedDate;
 		this.completeDate = completeDate;
@@ -115,12 +115,12 @@ public class Order implements Serializable {
 		this.fromStore = fromStore;
 	}
 
-	public String getPaymentMethos() {
+	public String getPaymentMethod() {
 		return paymentMethod;
 	}
 
-	public void setPaymentMethos(String paymentMethos) {
-		this.paymentMethod = paymentMethos;
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
 	}
 
 	public String getOrderStatus() {
