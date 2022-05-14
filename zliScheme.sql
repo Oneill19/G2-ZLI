@@ -140,7 +140,9 @@ CREATE TABLE `orders` (
   `deliveryMethod` varchar(45) NOT NULL,
   `supplyDate` varchar(45) DEFAULT NULL,
   `supplyTime` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`orderNumber`)
+  PRIMARY KEY (`orderNumber`),
+  KEY `fk_order_store` (`fromStore`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`fromStore`) REFERENCES `store` (`storeName`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -150,7 +152,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,50.52,'Thanks','OffWhite','Wedding','1','2022-11-23','18:18','316397983','Credit','In Progress',NULL,NULL,'Store',NULL,NULL);
+INSERT INTO `orders` VALUES (1,50.52,'Thanks','OffWhite','Wedding','Karmiel','2022-11-23','18:18','316397983','Credit','In Progress',NULL,NULL,'Store',NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,29 +185,28 @@ LOCK TABLES `product` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `shop`
+-- Table structure for table `store`
 --
 
-DROP TABLE IF EXISTS `shop`;
+DROP TABLE IF EXISTS `store`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `shop` (
-  `storeID` int NOT NULL,
-  `storeName` varchar(45) NOT NULL,
+CREATE TABLE `store` (
+  `storeName` varchar(20) NOT NULL,
   `storeAddress` varchar(45) NOT NULL,
   `storePhone` varchar(45) NOT NULL,
-  PRIMARY KEY (`storeID`)
+  PRIMARY KEY (`storeName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `shop`
+-- Dumping data for table `store`
 --
 
-LOCK TABLES `shop` WRITE;
-/*!40000 ALTER TABLE `shop` DISABLE KEYS */;
-INSERT INTO `shop` VALUES (1,'Karmiel','Karmiel','0545344778');
-/*!40000 ALTER TABLE `shop` ENABLE KEYS */;
+LOCK TABLES `store` WRITE;
+/*!40000 ALTER TABLE `store` DISABLE KEYS */;
+INSERT INTO `store` VALUES ('Karmiel','Karmiel','04-877-1234');
+/*!40000 ALTER TABLE `store` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -283,7 +284,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer',1,0);
+INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer',1,0),(111222333,'Dorin','Beery','123456789','0545344778','dorin@zli','cats','Customer',0,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -296,4 +297,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-14 18:54:46
+-- Dump completed on 2022-05-14 20:30:43
