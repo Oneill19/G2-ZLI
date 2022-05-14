@@ -88,26 +88,12 @@ public class EchoServer extends AbstractServer {
 	 */
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		String[] clientMsg = ((String) msg).split("\t");
-		String orderDetalis = null;
 		String ipAddress = null;
 		ArrayList<Order> orders;
 		switch (clientMsg[0]) {
-		case "Search":
-			orderDetalis = mysqlConnection.showOrder(conn, clientMsg[1]);
-			if (orderDetalis != null) {
-				System.out.println("Server Found");
-				try {
-					client.sendToClient(orderDetalis);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			break;
-
 		case "Load":
 			orders = mysqlConnection.loadOrders(conn);
 			if (orders != null) {
-				System.out.println("Server Found");
 				try {
 					client.sendToClient(orders);
 				} catch (IOException e) {
@@ -145,22 +131,21 @@ public class EchoServer extends AbstractServer {
 		// clientMsg[2]= editedNewValue
 		// clientMsg[3]= editedColumn
 		case "CellUpdate":
-			if (mysqlConnection.cellUpdate(conn, clientMsg[1], (clientMsg[2]), Integer.parseInt(clientMsg[3]))) {
-				try {
-					client.sendToClient("Order Updated");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			} else {
+			mysqlConnection.cellUpdate(conn, clientMsg[1], clientMsg[2], clientMsg[3]);
+			try {
+				client.sendToClient("Order Updated");
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			break;
-			default:
-				System.out.println("No Command Found");
-				System.exit(-1);
-				break;
-			
+		default:
+			System.out.println("No Command Found");
+			System.exit(-1);
+			break;
+
 		}
 	}
+
 
 	private int searchClientByIp(String ip) {
 		int position = 0;
