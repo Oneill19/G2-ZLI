@@ -21,11 +21,8 @@ public class mysqlConnection {
 		LocalTime supplyTime = null;
 		try {
 			stmt = con.createStatement();
-			stmt.executeUpdate(// Create temporary table to exclude unnecessary columns from it
-					"CREATE TEMPORARY TABLE temp_order_store AS SELECT * FROM orders o INNER JOIN shop s ON o.fromStore=s.storeID;");
-			stmt.executeUpdate(// Remove the unnecessary columns
-					"ALTER TABLE temp_order_store DROP storeID, DROP fromStore, DROP storeAddress, DROP storePhone;");
-			ResultSet rs = stmt.executeQuery("select * from temp_order_store;");
+			ResultSet rs = stmt.executeQuery("select * from orders;");
+			
 			ArrayList<Order> orders = new ArrayList<>();
 			while (rs.next()) {
 				Order order = new Order(rs.getInt(1), // orderNumber
@@ -33,15 +30,15 @@ public class mysqlConnection {
 						rs.getString(3), // greetingCard
 						rs.getString(4), // color
 						rs.getString(5), // orderDesc
-						rs.getString(16), // fromStore
-						LocalDate.parse(rs.getString(6)), // orderCreationDate
-						LocalTime.parse(rs.getString(7)), // orderCreationTime
-						rs.getInt(8), // customerID
-						rs.getString(9), // paymentMethos
-						rs.getString(10), // orderStatus
-						rs.getString(11), // confirmedDate
-						rs.getString(12), // completeDate
-						rs.getString(13) // deliveryMethod
+						rs.getString(6), // fromStore
+						LocalDate.parse(rs.getString(7)), // orderCreationDate
+						LocalTime.parse(rs.getString(8)), // orderCreationTime
+						rs.getInt(9), // customerID
+						rs.getString(10),	// paymentMethod
+						rs.getString(11),	// orderStatus
+						rs.getString(12),	// confirmedDate
+						rs.getString(13),	// completeDate
+						rs.getString(14)	// deliveryMethod
 				);
 
 				// For now, this can't be null
@@ -73,7 +70,6 @@ public class mysqlConnection {
 		return null;
 	}
 
-
 	// Updates relevant column in DB.
 	public static void cellUpdate(Connection con, String orderNumber, String newValue, String column) {
 		PreparedStatement ps;
@@ -86,6 +82,6 @@ public class mysqlConnection {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Order "+ orderNumber +" was updated successfuly");
+		System.out.println("Order " + orderNumber + " was updated successfuly");
 	}
 }
