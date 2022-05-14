@@ -74,7 +74,7 @@ public class EnterIPClientController {
 			((Node) event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			new FXMLLoader();
-			Pane root = FXMLLoader.<Pane>load(getClass().getResource("OptionsScreen.fxml"));
+			Pane root = FXMLLoader.<Pane>load(getClass().getResource("LoginScreen.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("Zer-Li Client");
 			primaryStage.setScene(scene);

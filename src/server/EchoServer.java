@@ -138,6 +138,36 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
+
+		// case for get a user from the database
+		case "GetUser":
+			try {
+				// send the user back to client
+				client.sendToClient(AuthQuery.getUser(conn, clientMsg[1], clientMsg[2]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+
+		// case for updating logging a user
+		case "LogUser":
+			try {
+				// send a successful message back
+				client.sendToClient(AuthQuery.loginUser(conn, clientMsg[1]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+
+		// case for updating logging out a user
+		case "LogoutUser":
+			try {
+				// send a successful message back
+				client.sendToClient(AuthQuery.logutUser(conn, clientMsg[1]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		default:
 			System.out.println("No Command Found");
 			System.exit(-1);
@@ -145,7 +175,6 @@ public class EchoServer extends AbstractServer {
 
 		}
 	}
-
 
 	private int searchClientByIp(String ip) {
 		int position = 0;
