@@ -21,7 +21,7 @@ public class mysqlConnection {
 		LocalTime supplyTime = null;
 		try {
 			stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from orders;");
+			ResultSet rs = stmt.executeQuery("select * from orders;"); //Get all Orders from DB
 			
 			ArrayList<Order> orders = new ArrayList<>();
 			while (rs.next()) {
