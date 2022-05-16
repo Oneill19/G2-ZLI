@@ -45,7 +45,6 @@ public class AuthQuery {
 				boolean isLogged = rs.getInt(10) == 0 ? false : true;
 				if (rs.getString(8).equals("Customer")) {
 					double balance = getCustomerBalance(con, userId);
-					System.out.println("Server Balance: " + balance);
 					user = new Customer(userId,firstName, lastName, creditCard, phone, email, userPassword, userRole, status, isLogged, balance);
 				}
 				else if (rs.getString(8).equals("StoreWorker") || rs.getString(8).equals("StoreManager")) {

@@ -38,12 +38,10 @@ public class ChatClient extends AbstractClient {
 		if (msg instanceof ArrayList) {
 			orders = (ArrayList<Order>) msg;
 		}
-		System.out.println(msg);
 		if (msg instanceof ReturnCommand) {
 			ReturnCommand rc = (ReturnCommand)msg;
 			switch (rc.getCommand()) {
 			case "GetUser":
-				System.out.println((User)rc.getReturnValue());
 				user = ((User)rc.getReturnValue());
 				break;
 				
