@@ -102,6 +102,7 @@ public class LoginScreenController {
     	case "Customer":
     		if (ChatClient.user.getStatus().equals("CONFIRMED")) {
     			root = FXMLLoader.<Pane>load(getClass().getResource("Catalog.fxml"));
+    			System.out.println(((Customer)ChatClient.user).getBalance());
     		}
     		else {
     			root = FXMLLoader.<Pane>load(getClass().getResource("ReadOnlyCatalog.fxml"));

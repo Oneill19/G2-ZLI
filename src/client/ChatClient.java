@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import common.ChatIF;
+import common.ReturnCommand;
 import entity.Customer;
 import entity.Order;
 import entity.StoreWorker;
@@ -37,47 +38,67 @@ public class ChatClient extends AbstractClient {
 		if (msg instanceof ArrayList) {
 			orders = (ArrayList<Order>) msg;
 		}
-		else if (msg instanceof String) {
-			// split the msg by space
-			String[] splits = ((String)msg).split(";");
-			switch (splits[0]) {
-			// case for convert the message from the server the a User object
+		System.out.println(msg);
+		if (msg instanceof ReturnCommand) {
+			ReturnCommand rc = (ReturnCommand)msg;
+			switch (rc.getCommand()) {
 			case "GetUser":
-				int userId = Integer.parseInt(splits[1]);
-				String firstName = splits[2];
-				String lastName = splits[3];
-				String creditCard = splits[4];
-				String phone = splits[5];
-				String email = splits[6];
-				String password = splits[7];
-				String userRole = splits[8];
-				String status = splits[9];
-				boolean isLogged = splits[10].equals("0") ? false : true;
-				if (userRole.equals("Customer")) {
-					double balance = Double.parseDouble(splits[11]);
-					user = new Customer(userId,firstName, lastName, creditCard, phone, email, password, userRole, status, isLogged, balance);
-				}
-				else if (userRole.equals("StoreWorker") || userRole.equals("StoreManager")) {
-					String storeName = splits[11];
-					user = new StoreWorker(userId,firstName, lastName, creditCard, phone, email, password, userRole, status, isLogged, storeName);
-				}
-				else {
-					user = new User(userId, firstName, lastName, creditCard, phone, email, password, userRole, status, isLogged);
-				}
+				System.out.println((User)rc.getReturnValue());
+				user = ((User)rc.getReturnValue());
 				break;
-			
-			// case to show message that a user got logged
+				
 			case "LogUser":
 				System.out.println("User Logged");
 				break;
 			
-			// case to show message that a user got logged out
 			case "LogoutUser":
 				user = null;
 				System.out.println("User Logged out");
 				break;
-			}	
+			}
+			
 		}
+//		else if (msg instanceof String) {
+//			// split the msg by space
+//			String[] splits = ((String)msg).split(";");
+//			switch (splits[0]) {
+//			// case for convert the message from the server the a User object
+//			case "GetUser":
+//				int userId = Integer.parseInt(splits[1]);
+//				String firstName = splits[2];
+//				String lastName = splits[3];
+//				String creditCard = splits[4];
+//				String phone = splits[5];
+//				String email = splits[6];
+//				String password = splits[7];
+//				String userRole = splits[8];
+//				String status = splits[9];
+//				boolean isLogged = splits[10].equals("0") ? false : true;
+//				if (userRole.equals("Customer")) {
+//					double balance = Double.parseDouble(splits[11]);
+//					user = new Customer(userId,firstName, lastName, creditCard, phone, email, password, userRole, status, isLogged, balance);
+//				}
+//				else if (userRole.equals("StoreWorker") || userRole.equals("StoreManager")) {
+//					String storeName = splits[11];
+//					user = new StoreWorker(userId,firstName, lastName, creditCard, phone, email, password, userRole, status, isLogged, storeName);
+//				}
+//				else {
+//					user = new User(userId, firstName, lastName, creditCard, phone, email, password, userRole, status, isLogged);
+//				}
+//				break;
+//			
+//			// case to show message that a user got logged
+//			case "LogUser":
+//				System.out.println("User Logged");
+//				break;
+//			
+//			// case to show message that a user got logged out
+//			case "LogoutUser":
+//				user = null;
+//				System.out.println("User Logged out");
+//				break;
+//			}	
+//		}
 	}
 
 	public void handleMessageFromClientUI(String msg) {

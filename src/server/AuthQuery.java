@@ -5,6 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import common.ReturnCommand;
+import entity.Customer;
+import entity.StoreWorker;
+import entity.User;
+
 /**
  * @AUTHOR ONEILL PANKER
  *
@@ -19,35 +24,39 @@ public class AuthQuery {
 	 * @param password
 	 * @return string
 	 */
-	public static String getUser(Connection con, String mail, String password) {
+	public static ReturnCommand getUser(Connection con, String mail, String password) {
 		Statement stmt;
 		String sqlQuery = "SELECT * From zli.users WHERE Email='" + mail + "' AND Password='" + password + "';";
-		String userDetail = null;
+		User user = null;
 		ResultSet rs = null;
 		try {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sqlQuery);
 			if (rs.next()) {
-				userDetail = 
-						rs.getInt(1) + ";" +		// id
-						rs.getString(2) + ";" + 	// first name
-						rs.getString(3) + ";" + 	// last name
-						rs.getString(4) + ";" + 	// credit card
-						rs.getString(5) + ";" +		// phone
-						rs.getString(6) + ";" + 	// email
-						rs.getString(7) + ";" + 	// password
-						rs.getString(8) + ";" + 	// user role
-						rs.getString(9) + ";" + 	// status
-						rs.getInt(10);				// is logged
+				int userId = rs.getInt(1);
+				String firstName = rs.getString(2);
+				String lastName = rs.getString(3);
+				String creditCard = rs.getString(4);
+				String phone = rs.getString(5);
+				String email = rs.getString(6);
+				String userPassword = rs.getString(7);
+				String userRole = rs.getString(8);
+				String status = rs.getString(9);
+				boolean isLogged = rs.getInt(10) == 0 ? false : true;
 				if (rs.getString(8).equals("Customer")) {
-					userDetail += ";" + getCustomerBalance(con, rs.getInt(1));	// balance
+					double balance = getCustomerBalance(con, userId);
+					System.out.println("Server Balance: " + balance);
+					user = new Customer(userId,firstName, lastName, creditCard, phone, email, userPassword, userRole, status, isLogged, balance);
 				}
 				else if (rs.getString(8).equals("StoreWorker") || rs.getString(8).equals("StoreManager")) {
-					userDetail += ";" + getStoreWorkerStore(con, rs.getInt(1));	// store name
+					String storeName = getStoreWorkerStore(con, userId);
+					user = new StoreWorker(userId,firstName, lastName, creditCard, phone, email, userPassword, userRole, status, isLogged, storeName);
 				}
-				return "GetUser" + ";" + userDetail; 
+				else {
+					user = new User(userId, firstName, lastName, creditCard, phone, email, userPassword, userRole, status, isLogged);
+				}
 			}
- 			return null;
+ 			return new ReturnCommand("GetUser", user);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -62,13 +71,13 @@ public class AuthQuery {
 	 * @param mail
 	 * @return string
 	 */
-	public static String loginUser(Connection con, String mail) {
+	public static ReturnCommand loginUser(Connection con, String mail) {
 		Statement stmt;
 		String sqlQuery = "UPDATE zli.users SET IsLogged='1' WHERE Email='" + mail + "';";
 		try {
 			stmt = con.createStatement();
 			stmt.executeUpdate(sqlQuery);
-			return "LogUser";
+			return new ReturnCommand("LogUser", null);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -84,13 +93,13 @@ public class AuthQuery {
 	 * @param mail
 	 * @return string
 	 */
-	public static String logoutUser(Connection con, String mail) {
+	public static ReturnCommand logoutUser(Connection con, String mail) {
 		Statement stmt;
 		String sqlQuery = "UPDATE zli.users SET IsLogged='0' WHERE Email='" + mail + "';";
 		try {
 			stmt = con.createStatement();
 			stmt.executeUpdate(sqlQuery);
-			return "LogoutUser";
+			return new ReturnCommand("LogoutUser", null);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
