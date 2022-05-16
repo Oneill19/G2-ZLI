@@ -2,6 +2,10 @@ package entity;
 
 import java.io.Serializable;
 
+/**
+ * @AUTHOR ONEILL PANKER
+ *
+ */
 @SuppressWarnings("serial")
 public class User implements Serializable{
 	private int userID;
@@ -12,7 +16,7 @@ public class User implements Serializable{
 	private String email;
 	private String password;
 	private String userRole;
-	private boolean isConfirmed;
+	private String status;
 	private boolean isLogged;
 	
 	/**
@@ -24,11 +28,11 @@ public class User implements Serializable{
 	 * @param email
 	 * @param password
 	 * @param userRole
-	 * @param isConfirmed
+	 * @param status
 	 * @param isLogged
 	 */
 	public User(int userID, String firstName, String lastName, String creditCard, String phone, String email,
-			String password, String userRole, boolean isConfirmed, boolean isLogged) {
+			String password, String userRole, String status, boolean isLogged) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
@@ -38,7 +42,7 @@ public class User implements Serializable{
 		this.email = email;
 		this.password = password;
 		this.userRole = userRole;
-		this.isConfirmed = isConfirmed;
+		this.status = status;
 		this.isLogged = isLogged;
 	}
 
@@ -155,17 +159,17 @@ public class User implements Serializable{
 	}
 
 	/**
-	 * @return the isConfirmed
+	 * @return the status
 	 */
-	public boolean isConfirmed() {
-		return isConfirmed;
+	public String getStatus() {
+		return status;
 	}
 
 	/**
-	 * @param isConfirmed the isConfirmed to set
+	 * @param status the status to set
 	 */
-	public void setConfirmed(boolean isConfirmed) {
-		this.isConfirmed = isConfirmed;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	/**

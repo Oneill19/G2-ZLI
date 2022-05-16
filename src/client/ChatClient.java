@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import common.ChatIF;
+import entity.Customer;
 import entity.Order;
+import entity.StoreWorker;
 import entity.User;
 import ocsf.client.AbstractClient;
 
@@ -37,7 +39,7 @@ public class ChatClient extends AbstractClient {
 		}
 		else if (msg instanceof String) {
 			// split the msg by space
-			String[] splits = ((String)msg).split(" ");
+			String[] splits = ((String)msg).split(";");
 			switch (splits[0]) {
 			// case for convert the message from the server the a User object
 			case "GetUser":
@@ -49,9 +51,19 @@ public class ChatClient extends AbstractClient {
 				String email = splits[6];
 				String password = splits[7];
 				String userRole = splits[8];
-				boolean isConfirmed = splits[9].equals("0") ? false : true;
+				String status = splits[9];
 				boolean isLogged = splits[10].equals("0") ? false : true;
-				user = new User(userId, firstName, lastName, creditCard, phone, email, password, userRole, isConfirmed, isLogged);
+				if (userRole.equals("Customer")) {
+					double balance = Double.parseDouble(splits[11]);
+					user = new Customer(userId,firstName, lastName, creditCard, phone, email, password, userRole, status, isLogged, balance);
+				}
+				else if (userRole.equals("StoreWorker") || userRole.equals("StoreManager")) {
+					String storeName = splits[11];
+					user = new StoreWorker(userId,firstName, lastName, creditCard, phone, email, password, userRole, status, isLogged, storeName);
+				}
+				else {
+					user = new User(userId, firstName, lastName, creditCard, phone, email, password, userRole, status, isLogged);
+				}
 				break;
 			
 			// case to show message that a user got logged

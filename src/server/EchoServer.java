@@ -163,10 +163,11 @@ public class EchoServer extends AbstractServer {
 		case "LogoutUser":
 			try {
 				// send a successful message back
-				client.sendToClient(AuthQuery.logutUser(conn, clientMsg[1]));
+				client.sendToClient(AuthQuery.logoutUser(conn, clientMsg[1]));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			break;
 			
 		default:
 			System.out.println("No Command Found");
