@@ -13,16 +13,24 @@ import entity.Order;
 
 public class mysqlConnection {
 
-	// Sets orders' parameters from DB and returns an initialed order array list.
-	// Triggered by clicking on Show Orders button at OptionsScreen.fxml
+	/*
+	 * Returns ArrayList<Order> of orders to be loaded into [tableview]. Triggered
+	 * by clicking on Show Orders button at OptionsScreen.fxml
+	 * 
+	 * @param con is the connection for the DB
+	 * 
+	 * @return ArrayList<Order> array of orders to be loaded into tableview.
+	 * 
+	 * @author Dorin Beery
+	 */
 	public static ArrayList<Order> loadOrders(Connection con) {
 		Statement stmt = null;
 		LocalDate supplyDate = null;
 		LocalTime supplyTime = null;
 		try {
 			stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from orders;"); //Get all Orders from DB
-			
+			ResultSet rs = stmt.executeQuery("select * from orders;"); // Get all Orders from DB
+
 			ArrayList<Order> orders = new ArrayList<>();
 			while (rs.next()) {
 				Order order = new Order(rs.getInt(1), // orderNumber
@@ -34,11 +42,11 @@ public class mysqlConnection {
 						LocalDate.parse(rs.getString(7)), // orderCreationDate
 						LocalTime.parse(rs.getString(8)), // orderCreationTime
 						rs.getInt(9), // customerID
-						rs.getString(10),	// paymentMethod
-						rs.getString(11),	// orderStatus
-						rs.getString(12),	// confirmedDate
-						rs.getString(13),	// completeDate
-						rs.getString(14)	// deliveryMethod
+						rs.getString(10), // paymentMethod
+						rs.getString(11), // orderStatus
+						rs.getString(12), // confirmedDate
+						rs.getString(13), // completeDate
+						rs.getString(14) // deliveryMethod
 				);
 
 				// For now, this can't be null
@@ -60,20 +68,24 @@ public class mysqlConnection {
 			return orders;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {// DROP the temporary table that was created at the beginning of the function
-				stmt.executeUpdate("DROP TEMPORARY TABLE temp_order_store;");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		return null;
 	}
 
-	// Updates relevant column in DB.
-	public static void cellUpdate(Connection con, String orderNumber, String newValue, String column) {
+	/*
+	 * Updates the table: orders in DB at [columnName] with [newValue]
+	 * 
+	 * @param con The connection to the DB
+	 * 
+	 * @param orderNumber The key of orders table in DB
+	 * 
+	 * @param newValue New value inserted by the user
+	 * 
+	 * @param columnName Name of column that was edited
+	 */
+	public static void cellUpdate(Connection con, String orderNumber, String newValue, String columnName) {
 		PreparedStatement ps;
-		String sql = "UPDATE zli.orders SET " + column + " =? WHERE orderNumber = " + orderNumber + ";";
+		String sql = "UPDATE zli.orders SET " + columnName + " =? WHERE orderNumber = " + orderNumber + ";";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, newValue.toString());

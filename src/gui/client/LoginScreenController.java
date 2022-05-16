@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 
 
 /**
- * @author oneil
+ * @AUTHOR ONEILL PANKER
  */
 public class LoginScreenController {
 

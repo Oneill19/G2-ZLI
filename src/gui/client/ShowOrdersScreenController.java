@@ -24,7 +24,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /*
- * IMPORTANT - Writer: Dorin
+ * @AUTHOR DORIN BEERY
+ * IMPORTANT
  * This is a prototype class for all screens which have a tableview object.
  * It is important to know that TimeCellHandler and DateCellHandler
  * have to know which column is being edited
@@ -96,6 +97,11 @@ public class ShowOrdersScreenController {
 	// ******************
 	// *****ActionEvent**
 	// ******************
+
+	/**
+	 * @param event of clicking on Back button
+	 * @throws Exception
+	 */
 	@FXML
 	public void onBack(ActionEvent event) throws Exception {
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -108,6 +114,10 @@ public class ShowOrdersScreenController {
 		primaryStage.show();
 	}
 
+	/**
+	 * @param event of clicking on exit button
+	 * @throws Exception
+	 */
 	@FXML
 	public void onExit(ActionEvent event) throws Exception {
 		ClientUI.chat.accept("Disconnect");
@@ -122,44 +132,47 @@ public class ShowOrdersScreenController {
 			@Override
 			public void handle(CellEditEvent<Order, String> event) {
 				ordersTable.setFocusTraversable(true);
-				
-				//Set the new value of the cell
+
+				// Set the new value of the cell
 				((Order) event.getTableView().getItems().get(event.getTablePosition().getRow()))
 						.setColor((event.getNewValue()));
-				
-				//initial values for accept
+
+				// initial values for accept
 				editedOrderNumber = event.getRowValue().getOrderNumber();
 				editedNewValue = event.getNewValue().toString();
 				editedColumn = event.getTableColumn().getId();
-				
+
 				try {
-					ClientUI.chat.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue + "\t"
-							+ editedColumn);
+					ClientUI.chat
+							.accept("CellUpdate\t" + editedOrderNumber + "\t" + editedNewValue + "\t" + editedColumn);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
-				//nullify values
+				// nullify values
 				editedOrderNumber = 0;
 				editedNewValue = null;
 				editedColumn = null;
 			}
 		}
 
-		// Set handler on Time column
+		/**
+		 * @author Dorin Set handler on Time column
+		 *
+		 */
 		class TimeCellHandler implements EventHandler<CellEditEvent<Order, LocalTime>> {
 			@Override
 			public void handle(CellEditEvent<Order, LocalTime> event) {
 				ordersTable.setFocusTraversable(true);
-				
-				//initial values for accept
+
+				// initial values for accept
 				editedColumn = event.getTableColumn().getId();
 				editedOrderNumber = event.getRowValue().getOrderNumber();
 				editedNewValue = event.getNewValue().toString();
 				String toAccept = "CellUpdate" + "\t" + editedOrderNumber + "\t" + editedNewValue + "\t" + editedColumn;
 
 				// BEWARE
-				//set the new value of the cell
+				// set the new value of the cell
 				if (editedColumn.equals("orderCreationTime"))
 					((Order) event.getTableView().getItems().get(event.getTablePosition().getRow()))
 							.setOrderCreationTime(((event.getNewValue())));
@@ -178,7 +191,9 @@ public class ShowOrdersScreenController {
 			}
 		}
 
-		// Set handler on date column double click to trigger DatePicker
+		/**
+		 * @author Dorin Set handler on date column double click to trigger DatePicker
+		 */
 		class DateCellHandler implements EventHandler<CellEditEvent<Order, LocalDate>> {
 			@Override
 			public void handle(CellEditEvent<Order, LocalDate> event) {
