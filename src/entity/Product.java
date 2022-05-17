@@ -22,6 +22,7 @@ public class Product extends AbstractProduct {
 	 * @param other
 	 * @param madeFrom
 	 */
+	//test comment
 	public Product(String serialNumber, 
 					String name, 
 					double price, 
