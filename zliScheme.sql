@@ -53,9 +53,8 @@ CREATE TABLE `item` (
   `itemPrice` double NOT NULL,
   `itemType` varchar(45) NOT NULL,
   `itemImage` longblob,
-  `ItemAmount` int NOT NULL,
   `isSoldAlone` int NOT NULL,
-  PRIMARY KEY (`itemSerial`,`ItemAmount`)
+  PRIMARY KEY (`itemSerial`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -174,7 +173,6 @@ CREATE TABLE `product` (
   `productPrice` double NOT NULL,
   `productType` varchar(45) NOT NULL,
   `productImage` longblob,
-  `productAmount` int NOT NULL,
   `other` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`productSerial`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -306,4 +304,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-17 10:21:46
+-- Dump completed on 2022-05-17 10:51:53
