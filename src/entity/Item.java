@@ -16,17 +16,15 @@ public class Item extends AbstractProduct {
 	 * @param price
 	 * @param type
 	 * @param image
-	 * @param amount
 	 * @param isSoldAlone
 	 */
 	public Item(String serialNumber, 
 				String name, 
 				double price, 
 				String type, 
-				Image image, 
-				int amount,
+				Image image,
 				boolean isSoldAlone) {
-		super(serialNumber, name, price, type, image, amount);
+		super(serialNumber, name, price, type, image);
 		this.isSoldAlone = isSoldAlone;
 	}
 	

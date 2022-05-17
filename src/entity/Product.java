@@ -19,7 +19,6 @@ public class Product extends AbstractProduct {
 	 * @param price
 	 * @param type
 	 * @param image
-	 * @param amount
 	 * @param other
 	 * @param madeFrom
 	 */
@@ -28,10 +27,9 @@ public class Product extends AbstractProduct {
 					double price, 
 					String type, 
 					Image image, 
-					int amount,
 					String other,
 					ArrayList<Item> madeFrom) {
-		super(serialNumber, name, price, type, image, amount);
+		super(serialNumber, name, price, type, image);
 		this.other = other;
 		this.madeFrom = madeFrom;
 	}

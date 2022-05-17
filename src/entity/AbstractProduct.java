@@ -9,7 +9,6 @@ public abstract class AbstractProduct {
 	private double price;
 	private String type;
 	private Image image;
-	private int amount;
 	
 	/**
 	 * @param serialNumber
@@ -17,16 +16,14 @@ public abstract class AbstractProduct {
 	 * @param price
 	 * @param type
 	 * @param image
-	 * @param amount
 	 */
-	public AbstractProduct(String serialNumber, String name, double price, String type, Image image, int amount) {
+	public AbstractProduct(String serialNumber, String name, double price, String type, Image image) {
 		super();
 		this.serialNumber = serialNumber;
 		this.name = name;
 		this.price = price;
 		this.type = type;
 		this.image = image;
-		this.amount = amount;
 	}
 	
 	/**
@@ -97,19 +94,5 @@ public abstract class AbstractProduct {
 	 */
 	public void setImage(Image image) {
 		this.image = image;
-	}
-
-	/**
-	 * @return the amount
-	 */
-	public int getAmount() {
-		return amount;
-	}
-
-	/**
-	 * @param amount the amount to set
-	 */
-	public void setAmount(int amount) {
-		this.amount = amount;
 	}
 }
