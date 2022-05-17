@@ -65,13 +65,13 @@ public class StoreManagerQuery {
 					Statement stmt;
 					String sqlQuery = "SELECT * From zli.orders WHERE status='WaitingForConfirmation' OR status='WaitingForCancelation +';";
 					ResultSet rs = null;
-					ArrayList<Order> orders = new ArrayList<>();
+					ArrayList<Order> NotAprroveorders = new ArrayList<>();
 					
 							try {
 								stmt = con.createStatement();
 								rs = stmt.executeQuery(sqlQuery);
 								while(rs.next()) {
-									orders.add( new Order(rs.getInt(1), // orderNumber
+									NotAprroveorders.add( new Order(rs.getInt(1), // orderNumber
 											rs.getDouble(2), // total price
 											rs.getString(3), // greetingCard
 											rs.getString(4), // color
@@ -87,7 +87,7 @@ public class StoreManagerQuery {
 											rs.getString(14) // deliveryMethod
 									));
 								}
-					 			return new ReturnCommand("GetPendingOrders", orders);
+					 			return new ReturnCommand("GetPendingOrders", NotAprroveorders);
 							} catch (SQLException e) {
 								e.printStackTrace();
 								return null;

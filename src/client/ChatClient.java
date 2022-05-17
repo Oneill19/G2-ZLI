@@ -13,6 +13,7 @@ public class ChatClient extends AbstractClient {
 
 	ChatIF clientUI;
 	public static ArrayList<Order> orders;
+	public static ArrayList<Order> NotAprroveorders;
 
 	public static User user = null;
 	public static ArrayList<User> NotApprovedUsers;
