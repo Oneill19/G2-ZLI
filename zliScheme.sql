@@ -26,7 +26,8 @@ CREATE TABLE `canceled_orders` (
   `orderNumber` int NOT NULL,
   `compensationAmount` double NOT NULL,
   `DateTimeCanceled` varchar(45) NOT NULL,
-  PRIMARY KEY (`orderNumber`)
+  PRIMARY KEY (`orderNumber`),
+  CONSTRAINT `canceled_orders_ibfk_1` FOREIGN KEY (`orderNumber`) REFERENCES `orders` (`orderNumber`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -77,7 +78,10 @@ DROP TABLE IF EXISTS `item_in_product`;
 CREATE TABLE `item_in_product` (
   `productSerial` varchar(45) NOT NULL,
   `itemSerial` varchar(45) NOT NULL,
-  PRIMARY KEY (`productSerial`,`itemSerial`)
+  PRIMARY KEY (`productSerial`,`itemSerial`),
+  KEY `fk_item_in_product_item` (`itemSerial`),
+  CONSTRAINT `item_in_product_ibfk_1` FOREIGN KEY (`productSerial`) REFERENCES `product` (`productSerial`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `item_in_product_ibfk_2` FOREIGN KEY (`itemSerial`) REFERENCES `item` (`itemSerial`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -220,7 +224,8 @@ DROP TABLE IF EXISTS `user_customer`;
 CREATE TABLE `user_customer` (
   `userID` int NOT NULL,
   `balance` double NOT NULL,
-  PRIMARY KEY (`userID`)
+  PRIMARY KEY (`userID`),
+  CONSTRAINT `user_customer_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -244,7 +249,10 @@ DROP TABLE IF EXISTS `user_store_worker`;
 CREATE TABLE `user_store_worker` (
   `userID` int NOT NULL,
   `storeName` varchar(45) NOT NULL,
-  PRIMARY KEY (`userID`,`storeName`)
+  PRIMARY KEY (`userID`),
+  KEY `fk_store_worker_store` (`storeName`),
+  CONSTRAINT `user_store_worker_ibfk_1` FOREIGN KEY (`storeName`) REFERENCES `store` (`storeName`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `user_store_worker_ibfk_3` FOREIGN KEY (`userID`) REFERENCES `users` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -298,4 +306,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-16 18:33:46
+-- Dump completed on 2022-05-17 10:21:46
