@@ -26,7 +26,6 @@ public class OptionsScreenController {
 	@FXML
 	public void onShowOrders(ActionEvent event) throws Exception {
 		ClientUI.chat.accept("Load");
-		System.out.println("here");
 		((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		new FXMLLoader();
