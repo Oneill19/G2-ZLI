@@ -124,6 +124,7 @@ public class ShowOrdersScreenController {
 		System.exit(0);
 	}
 
+	
 	public void initialize() {
 		ordersTable.setEditable(true);
 

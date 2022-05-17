@@ -11,8 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18">
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.CartController">
    <children>
       <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #FCFCFE;">
          <children>
@@ -21,12 +20,11 @@
                   <Image url="@Zli_logo.png" />
                </image>
             </ImageView>
-            <TableView fx:id="cartTable" editable="true" layoutX="225.0" layoutY="234.0" prefHeight="401.0" prefWidth="750.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px; -fx-text-alignment: center;">
+            <TableView fx:id="cartTable" editable="true" layoutX="225.0" layoutY="234.0" prefHeight="401.0" prefWidth="750.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@css/newCascadeStyleSheet.css">
                <columns>
                   <TableColumn fx:id="colImage" prefWidth="274.0" text="Image" />
                   <TableColumn fx:id="colName" minWidth="0.0" prefWidth="227.0" text="Name" />
                   <TableColumn fx:id="colPrice" prefWidth="119.0" text="Price x1" />
-                  <TableColumn fx:id="colAmount" minWidth="0.0" prefWidth="60.0" text="Amount" />
                   <TableColumn fx:id="colDelete" prefWidth="54.0" text="Delete" />
                </columns>
             </TableView>
@@ -51,7 +49,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="userOptBtn" layoutX="87.0" layoutY="32.0" mnemonicParsing="false" onAction="#onUserOptions" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
+      <Button fx:id="userOptBtn" layoutX="87.0" layoutY="32.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
          <font>
             <Font size="15.0" />
          </font>

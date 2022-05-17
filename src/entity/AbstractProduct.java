@@ -1,31 +1,37 @@
 package entity;
 
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+/**
+ * @author Dorin
+ *
+ */
 public abstract class AbstractProduct {
-	
+
 	private String serialNumber;
 	private String name;
 	private double price;
+	private ImageView image;
 	private String type;
-	private Image image;
-	
+	private boolean isItem; // new
+
 	/**
-	 * @param serialNumber
+	 * @param serialNumber - primary key of the product/item
 	 * @param name
 	 * @param price
-	 * @param type
 	 * @param image
+	 * @param isItem       -true for Item, false for Product
 	 */
-	public AbstractProduct(String serialNumber, String name, double price, String type, Image image) {
+	public AbstractProduct(String serialNumber, String name, double price, ImageView image, boolean isItem, String type) {
 		super();
 		this.serialNumber = serialNumber;
 		this.name = name;
 		this.price = price;
-		this.type = type;
 		this.image = image;
+		this.isItem = isItem;
+		this.type = type;
 	}
-	
+
 	/**
 	 * @return the serialNumber
 	 */
@@ -69,30 +75,44 @@ public abstract class AbstractProduct {
 	}
 
 	/**
-	 * @return the type
-	 */
-	public String getType() {
-		return type;
-	}
-
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	/**
 	 * @return the image
 	 */
-	public Image getImage() {
+	public ImageView getImage() {
 		return image;
 	}
 
 	/**
 	 * @param image the image to set
 	 */
-	public void setImage(Image image) {
+	public void setImage(ImageView image) {
 		this.image = image;
 	}
+
+	public boolean isItem() {
+		return isItem;
+	}
+
+	public void setItem(boolean isItem) {
+		this.isItem = isItem;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		System.out.println("serialNumber = " + serialNumber);
+		System.out.println(" name = " + name);
+		System.out.println(" price = "+price);
+		System.out.println(" type = " + type);
+		System.out.println(" isItem = "+isItem);
+		System.out.println(" ");
+		return " ";
+	}
+
 }

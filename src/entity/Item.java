@@ -1,13 +1,13 @@
 package entity;
 
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * @AUTHOR ONEILL PANKER
  *
  */
 public class Item extends AbstractProduct {
-	
+
 	private boolean isSoldAlone;
 
 	/**
@@ -19,15 +19,17 @@ public class Item extends AbstractProduct {
 	 * @param isSoldAlone
 	 */
 	public Item(String serialNumber, 
-				String name, 
-				double price, 
-				String type, 
-				Image image,
-				boolean isSoldAlone) {
-		super(serialNumber, name, price, type, image);
+			String name, 
+			double price, 
+			ImageView image, 
+			String type,
+			boolean isSoldAlone 
+			) 
+	{
+		super(serialNumber, name, price, image, true, type);
 		this.isSoldAlone = isSoldAlone;
 	}
-	
+
 	/**
 	 * @return the isSoldAlone
 	 */
@@ -41,5 +43,4 @@ public class Item extends AbstractProduct {
 	public void setSoldAlone(boolean isSoldAlone) {
 		this.isSoldAlone = isSoldAlone;
 	}
-	
 }

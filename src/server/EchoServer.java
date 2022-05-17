@@ -186,6 +186,11 @@ public class EchoServer extends AbstractServer {
 		}
 		return -1;
 	}
+	
+	//TODO
+	public Connection getConnection() {
+		return conn;
+	}
 
 }
 //End of EchoServer class

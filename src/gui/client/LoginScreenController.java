@@ -2,7 +2,6 @@ package gui.client;
 
 import client.ChatClient;
 import client.ClientUI;
-import entity.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

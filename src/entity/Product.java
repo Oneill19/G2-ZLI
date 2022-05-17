@@ -2,7 +2,7 @@ package entity;
 
 import java.util.ArrayList;
 
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * @AUTHOR ONEILL PANKER
@@ -26,12 +26,20 @@ public class Product extends AbstractProduct {
 					String name, 
 					double price, 
 					String type, 
-					Image image, 
+					ImageView image, 
 					String other,
 					ArrayList<Item> madeFrom) {
-		super(serialNumber, name, price, type, image);
+		super(serialNumber, name, price, image, false, type);
 		this.other = other;
 		this.madeFrom = madeFrom;
+	}
+	
+	@Override
+	public double getPrice() {
+		double sum=0;
+		for(Item item : madeFrom)
+			sum+=item.getPrice();
+		return sum;
 	}
 	
 	/**

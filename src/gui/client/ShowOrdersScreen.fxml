@@ -14,7 +14,7 @@
             <Image url="@Zli_logo.png" />
          </image>
       </ImageView>
-      <TableView fx:id="ordersTable" editable="true" layoutX="29.0" layoutY="175.0" prefHeight="401.0" prefWidth="1065.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px; -fx-text-alignment: center;">
+      <TableView fx:id="ordersTable" editable="true" layoutX="29.0" layoutY="175.0" prefHeight="401.0" prefWidth="1065.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;">
          <columns>
             <TableColumn fx:id="orderNumberCol" prefWidth="54.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Order&#10;Number" />
             <TableColumn fx:id="priceCol" minWidth="5.0" prefWidth="45.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center; -fx: true;" text="Total&#10;Price" />
