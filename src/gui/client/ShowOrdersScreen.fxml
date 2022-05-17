@@ -7,14 +7,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1232.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.ShowOrdersScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1122.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.ShowOrdersScreenController">
    <children>
-      <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="406.0" layoutY="48.0">
+      <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="454.0" layoutY="50.0">
          <image>
             <Image url="@Zli_logo.png" />
          </image>
       </ImageView>
-      <TableView fx:id="ordersTable" editable="true" layoutX="20.0" layoutY="188.0" prefHeight="401.0" prefWidth="1192.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px; -fx-text-alignment: center;">
+      <TableView fx:id="ordersTable" editable="true" layoutX="29.0" layoutY="175.0" prefHeight="401.0" prefWidth="1065.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px; -fx-text-alignment: center;">
          <columns>
             <TableColumn fx:id="orderNumberCol" prefWidth="54.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Order&#10;Number" />
             <TableColumn fx:id="priceCol" minWidth="5.0" prefWidth="45.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center; -fx: true;" text="Total&#10;Price" />
@@ -39,14 +39,9 @@
             <TableColumn fx:id="confirmedDateCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Confirmed&#10;Date" />
             <TableColumn fx:id="completeDateCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Complete&#10;Date" />
             <TableColumn fx:id="deliveryMethidCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Delivery&#10;Method" />
-            <TableColumn prefWidth="105.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;">
-               <graphic>
-                  <Button mnemonicParsing="false" text="Button" />
-               </graphic>
-            </TableColumn>
          </columns>
       </TableView>
-      <Button fx:id="onBack" alignment="CENTER" layoutX="420.0" layoutY="612.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Back" textFill="#fcfcfe" />
-      <Button fx:id="exitClient" alignment="CENTER" layoutX="420.0" layoutY="666.0" mnemonicParsing="false" onAction="#onExit" prefHeight="43.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Exit" textFill="#fcfcfe" />
+      <Button fx:id="onBack" alignment="CENTER" layoutX="468.0" layoutY="601.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Back" textFill="#fcfcfe" />
+      <Button fx:id="exitClient" alignment="CENTER" layoutX="468.0" layoutY="667.0" mnemonicParsing="false" onAction="#onExit" prefHeight="43.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Exit" textFill="#fcfcfe" />
    </children>
 </Pane>
