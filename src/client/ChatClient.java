@@ -5,9 +5,7 @@ import java.util.ArrayList;
 
 import common.ChatIF;
 import common.ReturnCommand;
-import entity.Customer;
 import entity.Order;
-import entity.StoreWorker;
 import entity.User;
 import ocsf.client.AbstractClient;
 
@@ -15,9 +13,10 @@ public class ChatClient extends AbstractClient {
 
 	ChatIF clientUI;
 	public static ArrayList<Order> orders;
-	
+
 	public static User user = null;
-	
+	public static ArrayList<User> NotApprovedUsers;
+
 	public static boolean awaitResponse = false;
 
 	public ChatClient(String host, int port, ChatIF clientUI) throws IOException {
@@ -52,6 +51,15 @@ public class ChatClient extends AbstractClient {
 			case "LogoutUser":
 				user = null;
 				System.out.println("User Logged out");
+				break;
+			case "GetPendingOrders":
+				System.out.println("Pending Orders gets");
+				break;
+			case "GetNotApprovedUsers":
+				System.out.println("Not Approved Users gets");
+				break;
+			case "ChangeOrderStatus":
+				System.out.println("Order Status Updated");
 				break;
 			}
 			

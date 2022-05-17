@@ -168,7 +168,33 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
-			
+			//case to get Users awaiting registration from the database
+		case "GetNotApprovedUsers":
+			try {
+				// send a successful message back
+				client.sendToClient(StoreManagerQuery.getUsersRegsiter(conn));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			//case to get Pending Orders from the database
+
+		case "GetPendingOrders":
+			try {
+				// send a successful message back
+				client.sendToClient(StoreManagerQuery.getPendingOrders(conn));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "ChangeOrderStatus":
+			try {
+				// send a successful message back
+				client.sendToClient(StoreManagerQuery.UpdateStatusOrders(conn,clientMsg[1],clientMsg[2]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 		default:
 			System.out.println("No Command Found");
 			System.exit(-1);
