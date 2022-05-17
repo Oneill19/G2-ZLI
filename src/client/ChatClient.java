@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import common.ChatIF;
+import common.ReturnCommand;
+import entity.Customer;
 import entity.Order;
+import entity.StoreWorker;
 import entity.User;
 import ocsf.client.AbstractClient;
 
@@ -35,36 +38,23 @@ public class ChatClient extends AbstractClient {
 		if (msg instanceof ArrayList) {
 			orders = (ArrayList<Order>) msg;
 		}
-		else if (msg instanceof String) {
-			// split the msg by space
-			String[] splits = ((String)msg).split(" ");
-			switch (splits[0]) {
-			// case for convert the message from the server the a User object
+		if (msg instanceof ReturnCommand) {
+			ReturnCommand rc = (ReturnCommand)msg;
+			switch (rc.getCommand()) {
 			case "GetUser":
-				int userId = Integer.parseInt(splits[1]);
-				String firstName = splits[2];
-				String lastName = splits[3];
-				String creditCard = splits[4];
-				String phone = splits[5];
-				String email = splits[6];
-				String password = splits[7];
-				String userRole = splits[8];
-				boolean isConfirmed = splits[9].equals("0") ? false : true;
-				boolean isLogged = splits[10].equals("0") ? false : true;
-				user = new User(userId, firstName, lastName, creditCard, phone, email, password, userRole, isConfirmed, isLogged);
+				user = ((User)rc.getReturnValue());
 				break;
-			
-			// case to show message that a user got logged
+				
 			case "LogUser":
 				System.out.println("User Logged");
 				break;
 			
-			// case to show message that a user got logged out
 			case "LogoutUser":
 				user = null;
 				System.out.println("User Logged out");
 				break;
-			}	
+			}
+			
 		}
 	}
 

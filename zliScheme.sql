@@ -48,12 +48,13 @@ DROP TABLE IF EXISTS `item`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `item` (
   `itemSerial` varchar(45) NOT NULL,
-  `itemType` varchar(45) NOT NULL,
-  `itemPrice` double NOT NULL,
-  `isSoldAlone` int NOT NULL,
   `itemName` varchar(45) NOT NULL,
+  `itemPrice` double NOT NULL,
+  `itemType` varchar(45) NOT NULL,
   `itemImage` longblob,
-  PRIMARY KEY (`itemSerial`)
+  `ItemAmount` int NOT NULL,
+  `isSoldAlone` int NOT NULL,
+  PRIMARY KEY (`itemSerial`,`ItemAmount`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -165,12 +166,12 @@ DROP TABLE IF EXISTS `product`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
   `productSerial` varchar(45) NOT NULL,
-  `productType` varchar(45) NOT NULL,
-  `productPrice` double NOT NULL,
   `productName` varchar(45) NOT NULL,
-  `other` varchar(45) DEFAULT NULL,
+  `productPrice` double NOT NULL,
+  `productType` varchar(45) NOT NULL,
   `productImage` longblob,
   `productAmount` int NOT NULL,
+  `other` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`productSerial`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -229,6 +230,7 @@ CREATE TABLE `user_customer` (
 
 LOCK TABLES `user_customer` WRITE;
 /*!40000 ALTER TABLE `user_customer` DISABLE KEYS */;
+INSERT INTO `user_customer` VALUES (1,0),(111222333,0);
 /*!40000 ALTER TABLE `user_customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,9 +243,8 @@ DROP TABLE IF EXISTS `user_store_worker`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_store_worker` (
   `userID` int NOT NULL,
-  `userRole` varchar(45) NOT NULL,
-  `storeID` int NOT NULL,
-  PRIMARY KEY (`userID`,`storeID`)
+  `storeName` varchar(45) NOT NULL,
+  PRIMARY KEY (`userID`,`storeName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -272,7 +273,7 @@ CREATE TABLE `users` (
   `Email` varchar(45) NOT NULL,
   `Password` varchar(45) NOT NULL,
   `UserRole` varchar(45) NOT NULL,
-  `IsConfirmed` int NOT NULL,
+  `Status` varchar(45) NOT NULL,
   `IsLogged` int NOT NULL,
   PRIMARY KEY (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -284,7 +285,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer',1,0),(111222333,'Dorin','Beery','123456789','0545344778','dorin@zli','cats','Customer',0,0);
+INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(111222333,'Dorin','Beery','123456789','0545344778','dorin@zli','cats','Customer','NOT_CONFIRMED',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -297,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-14 20:39:25
+-- Dump completed on 2022-05-16 18:33:46

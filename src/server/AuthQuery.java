@@ -5,15 +5,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import common.ReturnCommand;
+import entity.Customer;
+import entity.StoreWorker;
+import entity.User;
+
 /**
- * @author oneil
- */
-/**
- * @author oneil
+ * @AUTHOR ONEILL PANKER
  *
  */
 public class AuthQuery {
-	
 
 	/**
 	 * method to execute sql query and return a user as a string
@@ -23,22 +24,38 @@ public class AuthQuery {
 	 * @param password
 	 * @return string
 	 */
-	public static String getUser(Connection con, String mail, String password) {
+	public static ReturnCommand getUser(Connection con, String mail, String password) {
 		Statement stmt;
 		String sqlQuery = "SELECT * From zli.users WHERE Email='" + mail + "' AND Password='" + password + "';";
-		String userDetail = null;
+		User user = null;
 		ResultSet rs = null;
 		try {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sqlQuery);
 			if (rs.next()) {
-				userDetail = rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) +
-								" " + rs.getString(4) + " " + rs.getString(5) + " " +
-								rs.getString(6) + " " + rs.getString(7) + 
-								" " + rs.getString(8) + " " + rs.getInt(9) + " " + rs.getInt(10);
-				return "GetUser " + userDetail; 
+				int userId = rs.getInt(1);
+				String firstName = rs.getString(2);
+				String lastName = rs.getString(3);
+				String creditCard = rs.getString(4);
+				String phone = rs.getString(5);
+				String email = rs.getString(6);
+				String userPassword = rs.getString(7);
+				String userRole = rs.getString(8);
+				String status = rs.getString(9);
+				boolean isLogged = rs.getInt(10) == 0 ? false : true;
+				if (rs.getString(8).equals("Customer")) {
+					double balance = getCustomerBalance(con, userId);
+					user = new Customer(userId,firstName, lastName, creditCard, phone, email, userPassword, userRole, status, isLogged, balance);
+				}
+				else if (rs.getString(8).equals("StoreWorker") || rs.getString(8).equals("StoreManager")) {
+					String storeName = getStoreWorkerStore(con, userId);
+					user = new StoreWorker(userId,firstName, lastName, creditCard, phone, email, userPassword, userRole, status, isLogged, storeName);
+				}
+				else {
+					user = new User(userId, firstName, lastName, creditCard, phone, email, userPassword, userRole, status, isLogged);
+				}
 			}
- 			return null;
+ 			return new ReturnCommand("GetUser", user);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -53,13 +70,13 @@ public class AuthQuery {
 	 * @param mail
 	 * @return string
 	 */
-	public static String loginUser(Connection con, String mail) {
+	public static ReturnCommand loginUser(Connection con, String mail) {
 		Statement stmt;
 		String sqlQuery = "UPDATE zli.users SET IsLogged='1' WHERE Email='" + mail + "';";
 		try {
 			stmt = con.createStatement();
 			stmt.executeUpdate(sqlQuery);
-			return "LogUser";
+			return new ReturnCommand("LogUser", null);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -75,13 +92,48 @@ public class AuthQuery {
 	 * @param mail
 	 * @return string
 	 */
-	public static String logutUser(Connection con, String mail) {
+	public static ReturnCommand logoutUser(Connection con, String mail) {
 		Statement stmt;
 		String sqlQuery = "UPDATE zli.users SET IsLogged='0' WHERE Email='" + mail + "';";
 		try {
 			stmt = con.createStatement();
 			stmt.executeUpdate(sqlQuery);
-			return "LogoutUser";
+			return new ReturnCommand("LogoutUser", null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	public static double getCustomerBalance(Connection con, int id) {
+		Statement stmt;
+		String sqlQuery = "SELECT balance From zli.user_customer WHERE userID=" + id;
+		ResultSet rs = null;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sqlQuery);
+			if (rs.next()) {
+				return rs.getDouble(1); 
+			}
+ 			return 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public static String getStoreWorkerStore(Connection con, int id) {
+		Statement stmt;
+		String sqlQuery = "SELECT storeName From zli.user_store_worker WHERE userID=" + id;
+		ResultSet rs = null;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sqlQuery);
+			if (rs.next()) {
+				return rs.getString(1); 
+			}
+ 			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
