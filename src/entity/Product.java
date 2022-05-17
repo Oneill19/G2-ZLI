@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
  *
  */
 public class Product extends AbstractProduct {
-	
+
 	private String other;
 	private ArrayList<Item> madeFrom;
 
@@ -22,6 +22,7 @@ public class Product extends AbstractProduct {
 	 * @param other
 	 * @param madeFrom
 	 */
+
 	public Product(String serialNumber, 
 					String name, 
 					double price, 
@@ -55,7 +56,7 @@ public class Product extends AbstractProduct {
 	public void setOther(String other) {
 		this.other = other;
 	}
-	
+
 	/**
 	 * @return the madeFrom
 	 */
