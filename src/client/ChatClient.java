@@ -14,10 +14,11 @@ public class ChatClient extends AbstractClient {
 	ChatIF clientUI;
 	public static ArrayList<Order> orders;
 	public static ArrayList<Order> NotAprroveorders;
-
-	public static User user = null;
+	public static ArrayList<User> ApprovedUserToPer;
 	public static ArrayList<User> NotApprovedUsers;
 
+	public static User user = null;
+	
 	public static boolean awaitResponse = false;
 
 	public ChatClient(String host, int port, ChatIF clientUI) throws IOException {
@@ -53,15 +54,22 @@ public class ChatClient extends AbstractClient {
 				user = null;
 				System.out.println("User Logged out");
 				break;
+
 			case "GetPendingOrders":
-				System.out.println("Pending Orders gets");
+				NotAprroveorders=(ArrayList<Order>)rc.getReturnValue();				
 				break;
 			case "GetNotApprovedUsers":
-				System.out.println("Not Approved Users gets");
+				NotApprovedUsers=(ArrayList<User>)rc.getReturnValue();	
 				break;
-			case "ChangeOrderStatus":
+			case "UpdateStatusOrders":
 				System.out.println("Order Status Updated");
 				break;
+			case "GetApprovedUsers":
+				ApprovedUserToPer=(ArrayList<User>)rc.getReturnValue();		
+			case "ChangeUserStatus":
+				System.out.println("User Status Updated");
+				break;
+
 			}
 			
 		}

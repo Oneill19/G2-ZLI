@@ -46,7 +46,7 @@ public class StoreManagerQuery {
 								rs.getString(7), // Password
 								rs.getString(8), // UserRole
 								rs.getString(9), // Status
-							rs.getBoolean(10) //ask if we can like this !! IsLogged
+								rs.getBoolean(10) //ask if we can like this !! IsLogged
 								));	}
 					return new ReturnCommand("GetNotApprovedUsers", NotApprovedUsers);
 				} catch (SQLException e) {
@@ -98,11 +98,11 @@ public class StoreManagerQuery {
 				/**
 				 * @param con
 				 * method to execute sql query that update order status to confirm or cancelled 
-				 * @param OrderNumber
-				 * @param OrderStatus
-				 * @return String
+				 * @param String OrderNumber
+				 * @param String OrderStatus
+				 * @return ReturnCommand
 				 */
-				public static String UpdateStatusOrders(Connection con,String OrderNumber,String OrderStatus) {
+				public static ReturnCommand UpdateStatusOrders(Connection con,String OrderNumber,String OrderStatus) {
 					Statement stmt;
 					String sql="";
 					if(OrderStatus.equals("WaitingForConfirmation")){
@@ -114,13 +114,67 @@ public class StoreManagerQuery {
 					try {
 						stmt = con.createStatement();
 						stmt.executeUpdate(sql);
-						return "Status Order Updated";
+						return new ReturnCommand("UpdateStatusOrders", null); 
 					} catch (SQLException e) {
 						e.printStackTrace();
 						return null;
 					}
 				}
 					
+				
+				/**
+				 * ] method to execute sql query that update User status  
+
+				 * @param con
+				 * @return ReturnCommand
+				 */
+				public static ReturnCommand GetApprovedUsers(Connection con) {
+					Statement stmt;
+					String sqlQuery = "SELECT * From zli.users WHERE status='CONFIRMED' OR status='FROZEN';";
+					ResultSet rs = null;
+					ArrayList<User> ApprovedUserToPer = new ArrayList<>();
+					
+							try {
+								stmt = con.createStatement();
+								rs = stmt.executeQuery(sqlQuery);
+								while(rs.next()) {
+									ApprovedUserToPer.add( new User(rs.getInt(1), // UserID
+											rs.getString(2), // FirstName
+											rs.getString(3), // LastName
+											rs.getString(4), // CreditCard
+											rs.getString(5), // Phone
+											rs.getString(6), // Email
+											rs.getString(7), // Password
+											rs.getString(8), // UserRole
+											rs.getString(9), // Status
+											rs.getBoolean(10) //ask if we can like this !! IsLogged
+											));	}
+								return new ReturnCommand("GetApprovedUsers", ApprovedUserToPer);
+							} catch (SQLException e) {
+								e.printStackTrace();
+								return null;
+							}
+									}
+				
+				public static ReturnCommand UpdateUserStatus(Connection con,String NewStatus,String IDUser) {
+					Statement stmt;
+					String sql="";
+					if(NewStatus.equals("FROZEN")){
+					 sql = "UPDATE zli.users SET Status='FROZEN' WHERE UserID=' " + IDUser + "';" ;
 				}
-	
+				else {
+				 sql = "UPDATE zli.orders SET Status='CONFIRMED' WHERE UserID ='  " + IDUser + "';";
+					}
+					try {
+						stmt = con.createStatement();
+						stmt.executeUpdate(sql);
+						return new ReturnCommand("ChangeUserStatus", null); 
+					} catch (SQLException e) {
+						e.printStackTrace();
+						return null;
+					}
+				}
+				}
+							
+				
 

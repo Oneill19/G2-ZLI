@@ -87,8 +87,8 @@ public class OrderManagementScreenController {
     	else {
     		OrderNumber =Selectedorder.getOrderNumber();
     		StatusOrder=Selectedorder.getOrderStatus();
-        	ClientUI.chat.accept("ChangeOrderStatus" + "\t" + OrderNumber + "\t" + StatusOrder );
-        	ordersTable.getItems().removeAll(Selectedorder) ;
+        	ClientUI.chat.accept("UpdateStatusOrders" + "\t" + OrderNumber + "\t" + StatusOrder );
+        	ordersTable.getItems().remove(Selectedorder) ;
         	}
      	// initialize error message
     	ErrorMsg.setText("");
@@ -150,7 +150,7 @@ public class OrderManagementScreenController {
     //get the pending orders from DB to order TableView
     void initialize() throws Exception {
     	ClientUI.chat.accept("GetPendingOrders");
-    	observableList=FXCollections.observableArrayList(ChatClient.orders);
+    	observableList=FXCollections.observableArrayList(ChatClient.NotAprroveorders);
     	ordersTable.getItems().clear();
     	orderNumberCol.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
     	dOrderCol.setCellValueFactory(new PropertyValueFactory<>("orderDesc"));

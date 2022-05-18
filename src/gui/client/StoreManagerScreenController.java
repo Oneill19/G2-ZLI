@@ -88,7 +88,7 @@ public class StoreManagerScreenController {
      * @throws Exception
      */
     @FXML
-    void onPermissionmanagement(ActionEvent event) throws Exception {
+    void onPermissionmanagement(ActionEvent event) throws Exception {  
     	((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		new FXMLLoader();
