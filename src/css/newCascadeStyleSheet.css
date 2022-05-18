@@ -1,0 +1,9 @@
+.table-view .column-header .label{
+    -fx-alignment: CENTER;
+}
+
+/*
+#my-table .table-column{
+	 -fx-alignment: CENTER;
+}
+*/

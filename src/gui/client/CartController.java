@@ -28,41 +28,25 @@ import server.EchoServer;
  *
  */
 public class CartController {
-
 	ObservableList<AbstractProduct> observableList;
+	
+	//******
+	//*FXML*
+	//******
+	@FXML private TableView<AbstractProduct> cartTable;
+	@FXML private TableColumn<?, ?> colDelete;
+	@FXML private TableColumn<AbstractProduct, Image> colImage;
+	@FXML private TableColumn<AbstractProduct, String> colName;
+	@FXML private TableColumn<AbstractProduct, Double> colPrice;
+	@FXML private Button exit;
+	@FXML private Button exitClient;
+	@FXML private Button logoutBtn;
+	@FXML private Button onBack;
+	@FXML private Button userOptBtn;
 
-	@FXML
-	private TableView<AbstractProduct> cartTable;
-
-	@FXML
-	private TableColumn<?, ?> colDelete;
-
-	@FXML
-	private TableColumn<AbstractProduct, Image> colImage;
-
-	@FXML
-	private TableColumn<AbstractProduct, String> colName;
-
-	@FXML
-	private TableColumn<AbstractProduct, Double> colPrice;
-
-	@FXML
-	private Button exit;
-
-	@FXML
-	private Button exitClient;
-
-	@FXML
-	private Button logoutBtn;
-
-	@FXML
-	private Button onBack;
-
-	@FXML
-	private Button userOptBtn;
-
-	@FXML
-	void onBack(ActionEvent event) {
+	
+	
+	@FXML void onBack(ActionEvent event) {
 
 	}
 
@@ -85,16 +69,13 @@ public class CartController {
 		bypassCatalog();
 
 		colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
-		
 		colName.setCellValueFactory(new PropertyValueFactory<>("name"));
 		colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+		cartTable.setId("my-table");
 
 		cartTable.getItems().clear();
 		cartTable.setItems(observableList);
 	}
-	
-	
-	
 
 	/*
 	 * bypass Catalog Screen
@@ -105,7 +86,7 @@ public class CartController {
 		Connection conn = echoServer.getConnection();
 		ArrayList<AbstractProduct> list = new ArrayList<AbstractProduct>();
 		ImageView im;
-		
+
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.item";
 		try {
@@ -124,13 +105,12 @@ public class CartController {
 				im.setPreserveRatio(true);
 				list.add(item);
 			}
-			
 
 			for (AbstractProduct item : list)
 				System.out.println(item);
-			
+
 			observableList = FXCollections.observableArrayList(list);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

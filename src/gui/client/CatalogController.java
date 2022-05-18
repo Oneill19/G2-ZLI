@@ -85,6 +85,7 @@ public class CatalogController {
     	new FXMLLoader();
     	Pane root = FXMLLoader.<Pane>load(getClass().getResource("Cart.fxml"));
     	Scene scene = new Scene(root);
+    	scene.getStylesheets().add("css/newCascadeStyleSheet.css");
 		primaryStage.setTitle("Zer-Li Cart");
 		primaryStage.setScene(scene);
 		primaryStage.show();
