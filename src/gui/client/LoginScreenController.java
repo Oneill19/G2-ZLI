@@ -33,6 +33,9 @@ import server.EchoServer;
 public class LoginScreenController {
 
     @FXML
+    private Button dorinConfirmedCustomer;
+    
+    @FXML
     private Text errorLabel;
 
     @FXML
@@ -53,11 +56,19 @@ public class LoginScreenController {
     @FXML
     private Button disconnectUsers;
     
+    //TODO
+    //Delete when not usable
+    @FXML
+    void ondorinConfirmedCustomer(ActionEvent event) throws Exception{
+    	mail.setText("dorin@zli");
+    	password.setText("cats");
+    }
+    
+    
     //TODO 
     //delete this function when not usable anymore
     @FXML
     void onDisconnectUsers(ActionEvent event)	throws Exception {
-    	System.out.println("here");
     	EchoServer echoServer = new EchoServer("localhost", 5555, "root", "Aa123456", "zli");
 		echoServer.connectToDB();
 		Connection conn = echoServer.getConnection();
