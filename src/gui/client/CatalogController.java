@@ -1,7 +1,16 @@
 package gui.client;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import client.ChatClient;
 import client.ClientUI;
+import entity.MyFile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -87,6 +97,7 @@ public class CatalogController {
     	Scene scene = new Scene(root);
     	scene.getStylesheets().add("css/newCascadeStyleSheet.css");
 		primaryStage.setTitle("Zer-Li Cart");
+		//primaryStage.getIcons().add(icon);
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
