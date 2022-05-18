@@ -5,9 +5,7 @@ import java.util.ArrayList;
 
 import common.ChatIF;
 import common.ReturnCommand;
-import entity.Customer;
 import entity.Order;
-import entity.StoreWorker;
 import entity.User;
 import ocsf.client.AbstractClient;
 

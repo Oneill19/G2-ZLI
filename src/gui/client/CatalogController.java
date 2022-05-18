@@ -79,6 +79,15 @@ public class CatalogController {
     @FXML
     void onGoToCart(MouseEvent event) throws Exception {
     	System.out.println("On Go To Cart");
+    	
+    	((Node) event.getSource()).getScene().getWindow().hide();
+    	Stage primaryStage = new Stage();
+    	new FXMLLoader();
+    	Pane root = FXMLLoader.<Pane>load(getClass().getResource("Cart.fxml"));
+    	Scene scene = new Scene(root);
+		primaryStage.setTitle("Zer-Li Cart");
+		primaryStage.setScene(scene);
+		primaryStage.show();
     }
 
     /**
@@ -93,6 +102,7 @@ public class CatalogController {
 		new FXMLLoader();
 		Pane root = FXMLLoader.<Pane>load(getClass().getResource("LoginScreen.fxml"));
 		Scene scene = new Scene(root);
+		scene.getStylesheets().add("css/newCascadeStyleSheet.css");
 		primaryStage.setTitle("Zer-Li Client");
 		primaryStage.setScene(scene);
 		primaryStage.show();
