@@ -80,6 +80,7 @@ public class CartController {
 	/*
 	 * bypass Catalog Screen
 	 */
+	@SuppressWarnings("static-access")
 	public void bypassCatalog() {
 		EchoServer echoServer = new EchoServer("localhost", 5555, "root", "Aa123456", "zli");
 		echoServer.connectToDB();
