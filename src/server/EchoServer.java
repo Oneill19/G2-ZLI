@@ -168,7 +168,50 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
-			
+		// case to get Users awaiting registration from the database
+		case "GetNotApprovedUsers":
+			try {
+				// send a successful message back
+				client.sendToClient(StoreManagerQuery.getUsersRegsiter(conn));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		// case to get Pending Orders from the database
+
+		case "GetPendingOrders":
+			try {
+				// send a successful message back
+				client.sendToClient(StoreManagerQuery.getPendingOrders(conn));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "UpdateStatusOrders":
+			try {
+				// send a successful message back
+				client.sendToClient(StoreManagerQuery.UpdateStatusOrders(conn, clientMsg[1], clientMsg[2]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "GetApprovedUsers":
+			try {
+				// send a successful message back
+				client.sendToClient(StoreManagerQuery.GetApprovedUsers(conn));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "ChangeUserStatus":
+			try {
+				// send a successful message back
+				client.sendToClient(StoreManagerQuery.UpdateUserStatus(conn, clientMsg[1], clientMsg[2]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+
 		default:
 			System.out.println("No Command Found");
 			System.exit(-1);
@@ -186,8 +229,8 @@ public class EchoServer extends AbstractServer {
 		}
 		return -1;
 	}
-	
-	//TODO
+
+	// TODO
 	public Connection getConnection() {
 		return conn;
 	}
