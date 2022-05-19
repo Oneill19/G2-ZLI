@@ -104,28 +104,27 @@ public class CartController {
 						setGraphic(null);
 						setText(null);
 					} else {
+						Button deleteButton;
 						try {
-							deleteIconFile = new File("C:\\Users\\Dorin\\eclipse-workspace\\Git\\G2-ZLI\\src\\gui\\client\\delete.png");
-							fisDeleteIcon = new FileInputStream(deleteIconFile);
+							deleteButton = new Button("", new ImageView(new Image(getClass().getResourceAsStream("delete.png"))));
+							deleteButton.setOnMouseClicked((MouseEvent event) -> {
+								try {
+									AbstractProduct product = cartTable.getSelectionModel().getSelectedItem(); //get focused row
+									System.out.println("Removing "+ product.getName()); //print focused row product name
+									cartTable.getItems().remove(product); //remove focused product from list of product
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								}
+								HBox managebtn = new HBox(deleteButton);
+								managebtn.setStyle("-fx-alignment:center");
+								HBox.setMargin(deleteButton, new Insets(2, 2, 0, 3));
+								setGraphic(managebtn);
+								setText(null);
+							});
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-						Button deleteButton = new Button("", new ImageView(new Image(fisDeleteIcon)));
-						deleteButton.setOnMouseClicked((MouseEvent event) -> {
-							try {
-								AbstractProduct product = cartTable.getSelectionModel().getSelectedItem(); //get focused row
-								System.out.println("Removing "+ product.getName()); //print focused row product name
-								cartTable.getItems().remove(product); //remove focused product from list of product
-							} catch (Exception ex) {
-								ex.printStackTrace();
-							}
-						});
 
-						HBox managebtn = new HBox(deleteButton);
-						managebtn.setStyle("-fx-alignment:center");
-						HBox.setMargin(deleteButton, new Insets(2, 2, 0, 3));
-						setGraphic(managebtn);
-						setText(null);
 					}
 				}
 			};
