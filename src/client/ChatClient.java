@@ -13,6 +13,9 @@ public class ChatClient extends AbstractClient {
 
 	ChatIF clientUI;
 	public static ArrayList<Order> orders;
+	public static ArrayList<Order> NotAprroveorders;
+	public static ArrayList<User> ApprovedUserToPer;
+	public static ArrayList<User> NotApprovedUsers;
 	
 	public static User user = null;
 	
@@ -50,6 +53,21 @@ public class ChatClient extends AbstractClient {
 			case "LogoutUser":
 				user = null;
 				System.out.println("User Logged out");
+				break;
+				
+			case "GetPendingOrders":
+				NotAprroveorders=(ArrayList<Order>)rc.getReturnValue();				
+				break;
+			case "GetNotApprovedUsers":
+				NotApprovedUsers=(ArrayList<User>)rc.getReturnValue();	
+				break;
+			case "UpdateStatusOrders":
+				System.out.println("Order Status Updated");
+				break;
+			case "GetApprovedUsers":
+				ApprovedUserToPer=(ArrayList<User>)rc.getReturnValue();		
+			case "ChangeUserStatus":
+				System.out.println("User Status Updated");
 				break;
 			}
 			

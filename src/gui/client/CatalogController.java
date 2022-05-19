@@ -10,7 +10,6 @@ import java.io.IOException;
 
 import client.ChatClient;
 import client.ClientUI;
-import entity.MyFile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
