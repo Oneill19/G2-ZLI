@@ -1,5 +1,7 @@
 package gui.client;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,12 +14,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.util.Callback;
 import server.EchoServer;
 
 /**
@@ -29,24 +36,35 @@ import server.EchoServer;
  */
 public class CartController {
 	ObservableList<AbstractProduct> observableList;
-	
-	//******
-	//*FXML*
-	//******
-	@FXML private TableView<AbstractProduct> cartTable;
-	@FXML private TableColumn<?, ?> colDelete;
-	@FXML private TableColumn<AbstractProduct, Image> colImage;
-	@FXML private TableColumn<AbstractProduct, String> colName;
-	@FXML private TableColumn<AbstractProduct, Double> colPrice;
-	@FXML private Button exit;
-	@FXML private Button exitClient;
-	@FXML private Button logoutBtn;
-	@FXML private Button onBack;
-	@FXML private Button userOptBtn;
+	ArrayList<AbstractProduct> productsInCatalog = null;
 
-	
-	
-	@FXML void onBack(ActionEvent event) {
+	// ******
+	// *FXML*
+	// ******
+	@FXML
+	private TableView<AbstractProduct> cartTable;
+	@FXML
+	private TableColumn<AbstractProduct, String> colDelete;
+	@FXML
+	private TableColumn<AbstractProduct, Image> colImage;
+	@FXML
+	private TableColumn<AbstractProduct, String> colName;
+	@FXML
+	private TableColumn<AbstractProduct, Double> colPrice;
+	@FXML
+	private Button exit;
+	@FXML
+	private Button exitClient;
+	@FXML
+	private Button logoutBtn;
+	@FXML
+	private Button onBack;
+	@FXML
+	private Button userOptBtn;
+	private boolean flag=false;
+
+	@FXML
+	void onBack(ActionEvent event) {
 
 	}
 
@@ -61,25 +79,73 @@ public class CartController {
 	}
 
 	void initData(ArrayList<AbstractProduct> data) {
-		observableList = FXCollections.observableArrayList(data);
+		productsInCatalog = data;
+		observableList = FXCollections.observableArrayList(productsInCatalog);
 	}
 
 	public void initialize() {
 
-		bypassCatalog();
+		if (flag==false)
+			bypassCatalog();
 
+		// add cell of button delete
+		Callback<TableColumn<AbstractProduct, String>, TableCell<AbstractProduct, String>> cellFoctory = (
+				TableColumn<AbstractProduct, String> param) -> {
+			// make cell containing buttons
+			final TableCell<AbstractProduct, String> cell = new TableCell<AbstractProduct, String>() {
+				@Override
+				public void updateItem(String item, boolean empty) {
+					File deleteIconFile=null;
+					FileInputStream fisDeleteIcon=null;
+					super.updateItem(item, empty);
+					
+					// that cell created only on non-empty rows
+					if (empty) {
+						setGraphic(null);
+						setText(null);
+					} else {
+						try {
+							deleteIconFile = new File("C:\\Users\\Dorin\\eclipse-workspace\\Git\\G2-ZLI\\src\\gui\\client\\delete.png");
+							fisDeleteIcon = new FileInputStream(deleteIconFile);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						Button deleteButton = new Button("", new ImageView(new Image(fisDeleteIcon)));
+						deleteButton.setOnMouseClicked((MouseEvent event) -> {
+							try {
+								AbstractProduct product = cartTable.getSelectionModel().getSelectedItem(); //get focused row
+								System.out.println("Removing "+ product.getName()); //print focused row product name
+								cartTable.getItems().remove(product); //remove focused product from list of product
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
+						});
+
+						HBox managebtn = new HBox(deleteButton);
+						managebtn.setStyle("-fx-alignment:center");
+						HBox.setMargin(deleteButton, new Insets(2, 2, 0, 3));
+						setGraphic(managebtn);
+						setText(null);
+					}
+				}
+			};
+			return cell;
+		};
+
+		colDelete.setCellFactory(cellFoctory);
 		colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
 		colName.setCellValueFactory(new PropertyValueFactory<>("name"));
 		colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 		cartTable.setId("my-table");
 
 		cartTable.getItems().clear();
-		cartTable.setItems(observableList);
+		cartTable.setItems(FXCollections.observableArrayList(productsInCatalog));
 	}
 
 	/*
 	 * bypass Catalog Screen
 	 */
+	@SuppressWarnings("static-access")
 	public void bypassCatalog() {
 		EchoServer echoServer = new EchoServer("localhost", 5555, "root", "Aa123456", "zli");
 		echoServer.connectToDB();
@@ -105,11 +171,9 @@ public class CartController {
 				im.setPreserveRatio(true);
 				list.add(item);
 			}
-
-			for (AbstractProduct item : list)
-				System.out.println(item);
-
-			observableList = FXCollections.observableArrayList(list);
+			productsInCatalog = list;
+			observableList = FXCollections.observableArrayList(productsInCatalog);
+			flag=true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();

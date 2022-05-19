@@ -1,5 +1,9 @@
 package gui.client;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import client.ChatClient;
 import client.ClientUI;
 import javafx.event.ActionEvent;
@@ -13,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import server.EchoServer;
 
 
 /**
@@ -20,6 +25,9 @@ import javafx.stage.Stage;
  */
 public class LoginScreenController {
 
+    @FXML
+    private Button dorinConfirmedCustomer;
+    
     @FXML
     private Text errorLabel;
 
@@ -38,6 +46,34 @@ public class LoginScreenController {
     @FXML
     private PasswordField password;
     
+    @FXML
+    private Button disconnectUsers;
+    
+    //TODO
+    //Delete when not usable
+    @FXML
+    void ondorinConfirmedCustomer(ActionEvent event) throws Exception{
+    	mail.setText("dorin@zli");
+    	password.setText("cats");
+    }
+    
+    
+    //TODO 
+    //delete this function when not usable anymore
+    @SuppressWarnings("static-access")
+	@FXML
+    void onDisconnectUsers(ActionEvent event)	throws Exception {
+    	EchoServer echoServer = new EchoServer("localhost", 5555, "root", "Aa123456", "zli");
+		echoServer.connectToDB();
+		Connection conn = echoServer.getConnection();
+		try {
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("UPDATE `zli`.`users` SET IsLogged=0 WHERE IsLogged=1;");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Users were forced to log out");
+    }
     
     /**
      * method to disconnect from the client and exit the application
