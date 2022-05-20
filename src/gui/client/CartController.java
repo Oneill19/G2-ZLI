@@ -1,7 +1,5 @@
 package gui.client;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -95,8 +93,6 @@ public class CartController {
 			final TableCell<AbstractProduct, String> cell = new TableCell<AbstractProduct, String>() {
 				@Override
 				public void updateItem(String item, boolean empty) {
-					File deleteIconFile=null;
-					FileInputStream fisDeleteIcon=null;
 					super.updateItem(item, empty);
 					
 					// that cell created only on non-empty rows

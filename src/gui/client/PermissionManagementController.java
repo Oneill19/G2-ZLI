@@ -1,18 +1,13 @@
 package gui.client;
 
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.beans.EventHandler;
 import java.io.IOException;
 
-import com.sun.glass.events.MouseEvent;
-
-import entity.Order;
-import entity.User;
 import client.ChatClient;
 import client.ClientUI;
+import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -21,7 +16,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -125,10 +122,9 @@ public class PermissionManagementController {
 
     @FXML
     void onSave(ActionEvent event) throws Exception {
-    	User SelectedUser= userTable.getSelectionModel().getSelectedItem();
 		String newStatus = StatusComboBox.getValue().toString();
     	String userId = String.valueOf(IDtxt.getText());
-    	if (IDtxt.equals("")) {
+    	if (IDtxt.getText().equals("")) {
     		Errormsg.setText("Please choose one user to edit!");
     	}
     	else if(newStatus.equals("")) {
