@@ -74,6 +74,7 @@ public class CatalogController {
     }
 
     /**
+     * loads cart screen
      * @param event
      */
     @FXML
@@ -85,7 +86,6 @@ public class CatalogController {
     	Scene scene = new Scene(root);
     	scene.getStylesheets().add("css/newCascadeStyleSheet.css");
 		primaryStage.setTitle("Zer-Li Cart");
-		//primaryStage.getIcons().add(icon);
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
