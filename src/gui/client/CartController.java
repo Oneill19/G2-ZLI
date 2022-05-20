@@ -2,6 +2,7 @@ package gui.client;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,16 +15,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import server.EchoServer;
 
@@ -51,6 +58,7 @@ public class CartController {
 	private TableColumn<AbstractProduct, String> colName;
 	@FXML
 	private TableColumn<AbstractProduct, Double> colPrice;
+    @FXML private TextField textFieldPrice;
 	@FXML
 	private Button exit;
 	@FXML
@@ -63,9 +71,17 @@ public class CartController {
 	private Button userOptBtn;
 	private boolean flag=false;
 
+	
 	@FXML
-	void onBack(ActionEvent event) {
-
+	void onBack(ActionEvent event) throws IOException {
+    	((Node) event.getSource()).getScene().getWindow().hide();
+    	Stage primaryStage = new Stage();
+    	new FXMLLoader();
+    	Pane root = FXMLLoader.<Pane>load(getClass().getResource("Catalog.fxml"));
+    	Scene scene = new Scene(root);
+		primaryStage.setTitle("Zer-Li Catalog");
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 
 	@FXML
@@ -114,8 +130,11 @@ public class CartController {
 						deleteButton.setOnMouseClicked((MouseEvent event) -> {
 							try {
 								AbstractProduct product = cartTable.getSelectionModel().getSelectedItem(); //get focused row
-								System.out.println("Removing "+ product.getName()); //print focused row product name
 								cartTable.getItems().remove(product); //remove focused product from list of product
+								Double sumOfProducts= new Double(0);	
+								for (AbstractProduct ai : cartTable.getItems())
+									sumOfProducts += ai.getPrice(); 	
+								textFieldPrice.setText(sumOfProducts.toString());
 							} catch (Exception ex) {
 								ex.printStackTrace();
 							}
@@ -140,6 +159,13 @@ public class CartController {
 
 		cartTable.getItems().clear();
 		cartTable.setItems(FXCollections.observableArrayList(productsInCatalog));
+		
+		
+		Double sumOfProducts= new Double(0);	
+		for (AbstractProduct ai : cartTable.getItems())
+			sumOfProducts += ai.getPrice(); 	
+		textFieldPrice.setText(sumOfProducts.toString());
+		
 	}
 
 	/*

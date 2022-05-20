@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -22,7 +23,7 @@
                   <Image url="@Zli_logo.png" />
                </image>
             </ImageView>
-            <TableView fx:id="cartTable" editable="true" layoutX="225.0" layoutY="234.0" prefHeight="401.0" prefWidth="750.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@css/newCascadeStyleSheet.css">
+            <TableView fx:id="cartTable" editable="true" layoutX="225.0" layoutY="234.0" prefHeight="342.0" prefWidth="750.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@css/newCascadeStyleSheet.css">
                <columns>
                   <TableColumn fx:id="colImage" minWidth="81.0" prefWidth="362.0" text="Image" />
                   <TableColumn fx:id="colName" minWidth="0.0" prefWidth="155.0" text="Name" />
@@ -84,6 +85,12 @@
                   </Label>
                </children>
             </HBox>
+            <Label layoutX="471.0" layoutY="605.0" style="-fx-background-color: white;" text="Total Price:" textFill="#a297d5">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textFieldPrice" layoutX="594.0" layoutY="605.0" prefHeight="26.0" prefWidth="100.0" />
          </children>
       </Pane>
       <Button fx:id="logoutBtn" layoutX="26.0" layoutY="31.0" mnemonicParsing="false" onAction="#onLogout" style="-fx-background-color: transparent;" text="Logout | " textFill="#2b0548">
