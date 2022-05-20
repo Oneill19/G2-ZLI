@@ -157,7 +157,6 @@ public class CartController {
 			}
 		}
 
-		// new
 		// Adding the Button to the cell
 		colDelete.setCellFactory(
 				new Callback<TableColumn<AbstractProduct, String>, TableCell<AbstractProduct, String>>() {
@@ -168,42 +167,6 @@ public class CartController {
 					}
 
 				});
-
-		/*
-		 * // add cell of button delete Callback<TableColumn<AbstractProduct, String>,
-		 * TableCell<AbstractProduct, String>> cellFoctory = (
-		 * TableColumn<AbstractProduct, String> param) -> { // make cell containing
-		 * buttons final TableCell<AbstractProduct, String> cell = new
-		 * TableCell<AbstractProduct, String>() {
-		 * 
-		 * @Override public void updateItem(String item, boolean empty) { File
-		 * deleteIconFile = null; FileInputStream fisDeleteIcon = null;
-		 * super.updateItem(item, empty);
-		 * 
-		 * // that cell created only on non-empty rows if (empty) { setGraphic(null);
-		 * setText(null); } else { try { deleteIconFile = new File(
-		 * "C:\\Users\\Dorin\\eclipse-workspace\\Git\\G2-ZLI\\src\\gui\\client\\delete.png"
-		 * ); fisDeleteIcon = new FileInputStream(deleteIconFile); } catch (Exception e)
-		 * { e.printStackTrace(); } Button deleteButton = new Button("", new
-		 * ImageView(new Image(fisDeleteIcon)));
-		 * deleteButton.setId((incrementalNumber++).toString());
-		 * deleteButton.setOnMouseClicked((MouseEvent event) -> { try { //
-		 * System.out.println(cartTable.getSelectionModel().getSelectedIndex()); //
-		 * //prints -1 System.out.println(event.getPickResult()); AbstractProduct
-		 * product = cartTable.getSelectionModel().getSelectedItem(); // get
-		 * 
-		 * // row cartTable.getItems().remove(product); // remove focused product from
-		 * list of product Double sumOfProducts = new Double(0); for (AbstractProduct ai
-		 * : cartTable.getItems()) sumOfProducts += ai.getPrice();
-		 * textFieldPrice.setText(sumOfProducts.toString()); } catch (Exception ex) {
-		 * ex.printStackTrace(); } });
-		 * 
-		 * HBox managebtn = new HBox(deleteButton);
-		 * managebtn.setStyle("-fx-alignment:center"); HBox.setMargin(deleteButton, new
-		 * Insets(2, 2, 0, 3)); setGraphic(managebtn); setText(null);
-		 * 
-		 * } } }; return cell; };
-		 */
 
 		// colDelete.setCellFactory(cellFoctory);
 		colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
@@ -218,6 +181,7 @@ public class CartController {
 		for (AbstractProduct ai : cartTable.getItems())
 			sumOfProducts += ai.getPrice();
 		textFieldPrice.setText(sumOfProducts.toString());
+		
 
 	}
 
