@@ -1,13 +1,5 @@
 package gui.client;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import client.ChatClient;
 import client.ClientUI;
 import javafx.event.ActionEvent;
@@ -17,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -87,8 +78,6 @@ public class CatalogController {
      */
     @FXML
     void onGoToCart(MouseEvent event) throws Exception {
-    	System.out.println("On Go To Cart");
-    	
     	((Node) event.getSource()).getScene().getWindow().hide();
     	Stage primaryStage = new Stage();
     	new FXMLLoader();
