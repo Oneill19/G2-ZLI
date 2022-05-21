@@ -20,6 +20,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<User> ApprovedUserToPer;
 	public static ArrayList<User> NotApprovedUsers;
 	public static ArrayList<AbstractProduct> products = new ArrayList<>();
+	public static ArrayList<AbstractProduct> cart = new ArrayList<>();
 	
 	public static User user = null;
 	

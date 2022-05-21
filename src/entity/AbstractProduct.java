@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javafx.scene.image.ImageView;
 
 /**
- * @author Dorin
+ * @author Oneill, Dorin
  *
  */
 @SuppressWarnings("serial")

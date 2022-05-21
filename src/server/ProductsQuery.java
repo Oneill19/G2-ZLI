@@ -6,13 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import client.ChatClient;
 import common.ReturnCommand;
 import entity.AbstractProduct;
 import entity.Product;
 import entity.Item;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  * @author oneill
@@ -69,7 +66,7 @@ public class ProductsQuery {
 				String itemType = rs.getString(4);
 				String itemImage = rs.getString(5);
 				boolean isSoldAlone = rs.getInt(6) == 0 ? false : true;
-				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone));
+				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone, 0));
 			}
  			return new ReturnCommand("GetAllItems", items);
 		} catch (SQLException e) {
@@ -98,9 +95,34 @@ public class ProductsQuery {
 				String itemType = rs.getString(4);
 				String itemImage = rs.getString(5);
 				boolean isSoldAlone = rs.getInt(6) == 0 ? false : true;
-				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone));
+				int amountInProduct = (int)(getAmountInProduct(con, productSerial, itemSerial).getReturnValue());
+				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone, amountInProduct));
 			}
  			return new ReturnCommand("GetItemsInProduct", items);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * @param con
+	 * @param productSerial
+	 * @param itemSerial
+	 * @return ReturnCommand object with the amount of item in certein product
+	 */
+	public static ReturnCommand getAmountInProduct(Connection con, String productSerial, String itemSerial) {
+		Statement stmt;
+		String sqlQuery = "SELECT amount FROM zli.item_in_product WHERE productSerial=" + productSerial + " AND itemSerial=" + itemSerial + ";";
+		ResultSet rs = null;
+		int amount = 0;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sqlQuery);
+			if (rs.next()) {
+				amount = rs.getInt(1);
+			}
+ 			return new ReturnCommand("GetAmountInProduct", amount);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

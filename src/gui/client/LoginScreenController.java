@@ -54,7 +54,7 @@ public class LoginScreenController {
     @FXML
     void ondorinConfirmedCustomer(ActionEvent event) throws Exception{
     	mail.setText("dorin@zli");
-    	password.setText("cats");
+    	password.setText("1");
     }
     
     
@@ -137,7 +137,6 @@ public class LoginScreenController {
     	case "Customer":
     		ClientUI.chat.accept("GetAllProducts");
     		ClientUI.chat.accept("GetAllItems");
-    		System.out.println(ChatClient.products.size());
     		if (ChatClient.user.getStatus().equals("CONFIRMED")) {
     			root = FXMLLoader.<Pane>load(getClass().getResource("Catalog.fxml"));
     		}
