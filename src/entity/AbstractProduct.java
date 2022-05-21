@@ -1,12 +1,15 @@
 package entity;
 
+import java.io.Serializable;
+
 import javafx.scene.image.ImageView;
 
 /**
  * @author Dorin
  *
  */
-public abstract class AbstractProduct {
+@SuppressWarnings("serial")
+public abstract class AbstractProduct implements Serializable {
 
 	private String serialNumber;
 	private String name;

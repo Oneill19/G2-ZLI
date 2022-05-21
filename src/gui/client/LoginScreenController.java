@@ -135,6 +135,8 @@ public class LoginScreenController {
     	// switch to redirect to the appropriate screen
     	switch (ChatClient.user.getUserRole()) {
     	case "Customer":
+    		ClientUI.chat.accept("GetAllProducts");
+    		ClientUI.chat.accept("GetAllItems");
     		if (ChatClient.user.getStatus().equals("CONFIRMED")) {
     			root = FXMLLoader.<Pane>load(getClass().getResource("Catalog.fxml"));
     		}
