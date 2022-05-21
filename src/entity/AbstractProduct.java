@@ -1,17 +1,20 @@
 package entity;
 
+import java.io.Serializable;
+
 import javafx.scene.image.ImageView;
 
 /**
- * @author Dorin
+ * @author Oneill, Dorin
  *
  */
-public abstract class AbstractProduct {
+@SuppressWarnings("serial")
+public abstract class AbstractProduct implements Serializable {
 
 	private String serialNumber;
 	private String name;
 	private double price;
-	private ImageView image;
+	private String image;
 	private String type;
 	private boolean isItem; // new
 
@@ -49,7 +52,7 @@ public abstract class AbstractProduct {
 	 * @param image
 	 * @param isItem       -true for Item, false for Product
 	 */
-	public AbstractProduct(String serialNumber, String name, double price, ImageView image, boolean isItem, String type) {
+	public AbstractProduct(String serialNumber, String name, double price, String image, boolean isItem, String type) {
 		super();
 		this.serialNumber = serialNumber;
 		this.name = name;
@@ -104,14 +107,14 @@ public abstract class AbstractProduct {
 	/**
 	 * @return the image
 	 */
-	public ImageView getImage() {
+	public String getImage() {
 		return image;
 	}
 
 	/**
 	 * @param image the image to set
 	 */
-	public void setImage(ImageView image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 

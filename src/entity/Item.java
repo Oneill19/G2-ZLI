@@ -1,14 +1,14 @@
 package entity;
 
-import javafx.scene.image.ImageView;
-
 /**
  * @AUTHOR ONEILL PANKER
  *
  */
+@SuppressWarnings("serial")
 public class Item extends AbstractProduct {
 
 	private boolean isSoldAlone;
+	private int amountInProduct;
 
 	/**
 	 * @param serialNumber
@@ -21,13 +21,15 @@ public class Item extends AbstractProduct {
 	public Item(String serialNumber, 
 			String name, 
 			double price, 
-			ImageView image, 
+			String image, 
 			String type,
-			boolean isSoldAlone 
+			boolean isSoldAlone,
+			int amountInProduct
 			) 
 	{
 		super(serialNumber, name, price, image, true, type);
 		this.isSoldAlone = isSoldAlone;
+		this.amountInProduct = amountInProduct;
 	}
 
 	/**
@@ -42,5 +44,19 @@ public class Item extends AbstractProduct {
 	 */
 	public void setSoldAlone(boolean isSoldAlone) {
 		this.isSoldAlone = isSoldAlone;
+	}
+	
+	/**
+	 * @return the amountInProduct
+	 */
+	public int getAmountInProduct() {
+		return amountInProduct;
+	}
+
+	/**
+	 * @param amountInProduct the amountInProduct to set
+	 */
+	public void setAmountInProduct(int amountInProduct) {
+		this.amountInProduct = amountInProduct;
 	}
 }

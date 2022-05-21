@@ -211,10 +211,28 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
+			
+		case "GetAllProducts":
+			try {
+				// get all the premade products
+				client.sendToClient(ProductsQuery.getAllProducts(conn));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			
+		case "GetAllItems":
+			try {
+				// get all the sold alone items
+				client.sendToClient(ProductsQuery.getAllItems(conn));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 
 		default:
 			System.out.println("No Command Found");
-			System.exit(-1);
+//			System.exit(-1);
 			break;
 
 		}

@@ -2,12 +2,11 @@ package entity;
 
 import java.util.ArrayList;
 
-import javafx.scene.image.ImageView;
-
 /**
  * @AUTHOR ONEILL PANKER
  *
  */
+@SuppressWarnings("serial")
 public class Product extends AbstractProduct {
 
 	private String other;
@@ -23,26 +22,21 @@ public class Product extends AbstractProduct {
 	 * @param madeFrom
 	 */
 
-	public Product(String serialNumber, 
-					String name, 
-					double price, 
-					String type, 
-					ImageView image, 
-					String other,
-					ArrayList<Item> madeFrom) {
+	public Product(String serialNumber, String name, double price, String type, String image, String other,
+			ArrayList<Item> madeFrom) {
 		super(serialNumber, name, price, image, false, type);
 		this.other = other;
 		this.madeFrom = madeFrom;
 	}
-	
+
 	@Override
 	public double getPrice() {
-		double sum=0;
-		for(Item item : madeFrom)
-			sum+=item.getPrice();
+		double sum = 0;
+		for (Item item : madeFrom)
+			sum += item.getPrice() * item.getAmountInProduct();
 		return sum;
 	}
-	
+
 	/**
 	 * @return the other
 	 */

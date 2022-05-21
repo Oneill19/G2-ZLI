@@ -5,7 +5,10 @@ import java.util.ArrayList;
 
 import common.ChatIF;
 import common.ReturnCommand;
+import entity.AbstractProduct;
+import entity.Item;
 import entity.Order;
+import entity.Product;
 import entity.User;
 import ocsf.client.AbstractClient;
 
@@ -16,6 +19,8 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Order> NotAprroveorders;
 	public static ArrayList<User> ApprovedUserToPer;
 	public static ArrayList<User> NotApprovedUsers;
+	public static ArrayList<AbstractProduct> products = new ArrayList<>();
+	public static ArrayList<AbstractProduct> cart = new ArrayList<>();
 	
 	public static User user = null;
 	
@@ -69,7 +74,16 @@ public class ChatClient extends AbstractClient {
 			case "ChangeUserStatus":
 				System.out.println("User Status Updated");
 				break;
+				
+			case "GetAllProducts":
+				ChatClient.products.addAll((ArrayList<Product>)rc.getReturnValue());
+				break;
+				
+			case "GetAllItems":
+				ChatClient.products.addAll((ArrayList<Item>)rc.getReturnValue());
+				break;
 			}
+			
 			
 		}
 	}
