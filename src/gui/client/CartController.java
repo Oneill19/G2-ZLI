@@ -105,8 +105,8 @@ public class CartController {
 
 	public void initialize() {
 
-		if (flag == false)
-			bypassCatalog();
+//		if (flag == false)
+//			bypassCatalog();
 
 		//Sets colDelete behavior
 		colDelete.setCellValueFactory(
@@ -188,39 +188,39 @@ public class CartController {
 	/*
 	 * bypass Catalog Screen
 	 */
-	@SuppressWarnings("static-access")
-	public void bypassCatalog() {
-		EchoServer echoServer = new EchoServer("localhost", 5555, "root", "Aa123456", "zli");
-		echoServer.connectToDB();
-		Connection conn = echoServer.getConnection();
-		ArrayList<AbstractProduct> list = new ArrayList<AbstractProduct>();
-		ImageView im;
-
-		Statement stmt;
-		String sqlQuery = "SELECT * FROM zli.item";
-		try {
-			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sqlQuery);
-			while (rs.next()) {
-				Item item = new Item(rs.getString(1), // itemSerial
-						rs.getString(2), // itemName
-						rs.getDouble(3), // itemPrice
-						im = new ImageView(new Image(rs.getBlob(5).getBinaryStream())), // itemImage
-						rs.getString(4), // itemType
-						rs.getBoolean(6) // isSoldAlone
-
-				);
-				im.setFitHeight(150);
-				im.setPreserveRatio(true);
-				list.add(item);
-			}
-			productsInCatalog = list;
-			observableList = FXCollections.observableArrayList(productsInCatalog);
-			flag = true;
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
+//	@SuppressWarnings("static-access")
+//	public void bypassCatalog() {
+//		EchoServer echoServer = new EchoServer("localhost", 5555, "root", "Aa123456", "zli");
+//		echoServer.connectToDB();
+//		Connection conn = echoServer.getConnection();
+//		ArrayList<AbstractProduct> list = new ArrayList<AbstractProduct>();
+//		ImageView im;
+//
+//		Statement stmt;
+//		String sqlQuery = "SELECT * FROM zli.item";
+//		try {
+//			stmt = conn.createStatement();
+//			ResultSet rs = stmt.executeQuery(sqlQuery);
+//			while (rs.next()) {
+//				Item item = new Item(rs.getString(1), // itemSerial
+//						rs.getString(2), // itemName
+//						rs.getDouble(3), // itemPrice
+//						im = new ImageView(new Image(rs.getBlob(5).getBinaryStream())), // itemImage
+//						rs.getString(4), // itemType
+//						rs.getBoolean(6) // isSoldAlone
+//
+//				);
+//				im.setFitHeight(150);
+//				im.setPreserveRatio(true);
+//				list.add(item);
+//			}
+//			productsInCatalog = list;
+//			observableList = FXCollections.observableArrayList(productsInCatalog);
+//			flag = true;
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
 }

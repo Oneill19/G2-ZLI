@@ -214,7 +214,6 @@ public class EchoServer extends AbstractServer {
 			
 		case "GetAllProducts":
 			try {
-				System.out.println("Made To Here");
 				// send a successful message back
 				client.sendToClient(ProductsQuery.getAllProducts(conn));
 			} catch (Exception e) {

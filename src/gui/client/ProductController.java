@@ -35,6 +35,6 @@ public class ProductController {
         this.myListener = myListener;
         nameLabel.setText(product.getName());
         priceLable.setText(product.getPrice() + "$");
-        img = product.getImage();
+        img.setImage(new Image(getClass().getResourceAsStream(product.getImage())));
     }
 }

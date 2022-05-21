@@ -21,7 +21,7 @@ public class Item extends AbstractProduct {
 	public Item(String serialNumber, 
 			String name, 
 			double price, 
-			ImageView image, 
+			String image, 
 			String type,
 			boolean isSoldAlone 
 			) 

@@ -27,7 +27,7 @@ public class Product extends AbstractProduct {
 					String name, 
 					double price, 
 					String type, 
-					ImageView image, 
+					String image, 
 					String other,
 					ArrayList<Item> madeFrom) {
 		super(serialNumber, name, price, image, false, type);

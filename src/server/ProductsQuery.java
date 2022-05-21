@@ -37,7 +37,7 @@ public class ProductsQuery {
 				String productSerial = rs.getString(1);
 				String productName = rs.getString(2);
 				double productPrice = rs.getDouble(3);
-				ImageView productImage = new ImageView(new Image(rs.getBlob(4).getBinaryStream()));
+				String productImage = rs.getString(4);
 				String other = rs.getString(5);
 				String productType = rs.getString(6);
 				ArrayList<Item> madeFrom = (ArrayList<Item>)getAllItemsInProduct(con, productSerial).getReturnValue();
@@ -67,7 +67,7 @@ public class ProductsQuery {
 				String itemName = rs.getString(2);
 				double itemPrice = rs.getDouble(3);
 				String itemType = rs.getString(4);
-				ImageView itemImage = new ImageView(new Image(rs.getBlob(5).getBinaryStream()));
+				String itemImage = rs.getString(5);
 				boolean isSoldAlone = rs.getInt(6) == 0 ? false : true;
 				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone));
 			}
@@ -96,7 +96,7 @@ public class ProductsQuery {
 				String itemName = rs.getString(2);
 				double itemPrice = rs.getDouble(3);
 				String itemType = rs.getString(4);
-				ImageView itemImage = new ImageView(new Image(rs.getBlob(5).getBinaryStream()));
+				String itemImage = rs.getString(5);
 				boolean isSoldAlone = rs.getInt(6) == 0 ? false : true;
 				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone));
 			}

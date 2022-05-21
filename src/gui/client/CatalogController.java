@@ -151,11 +151,11 @@ public class CatalogController {
         int row = 1;
         try {
             for (int i = 0; i < products.size(); i++) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("Product.fxml"));
-                AnchorPane anchorPane = fxmlLoader.load();
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("Product.fxml"));
+                AnchorPane anchorPane = loader.load();
 
-                ProductController productController = fxmlLoader.getController();
+                ProductController productController = loader.getController();
                 productController.setData(products.get(i), myListener);
 
                 if (column == 3) {
