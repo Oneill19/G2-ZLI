@@ -1,18 +1,12 @@
 package gui.client;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 
+import client.ChatClient;
 import entity.AbstractProduct;
-import entity.Item;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -30,18 +24,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import server.EchoServer;
 
 /**
- * Receives from CatalogController.java [ArrayList<AbstractProduct>] containing
- * all products and items that the user chose to add to his cart.
  * 
  * @author Dorin
  *
  */
 public class CartController {
-	ObservableList<AbstractProduct> observableList;
-	ArrayList<AbstractProduct> productsInCatalog = null;
+	//ObservableList<AbstractProduct> observableList;
 
 	// ******
 	// *FXML*
@@ -51,7 +41,7 @@ public class CartController {
 	@FXML
 	private TableColumn<AbstractProduct, String> colDelete;
 	@FXML
-	private TableColumn<AbstractProduct, Image> colImage;
+	private TableColumn<AbstractProduct, String> colImage;
 	@FXML
 	private TableColumn<AbstractProduct, String> colName;
 	@FXML
@@ -68,7 +58,6 @@ public class CartController {
 	private Button onBack;
 	@FXML
 	private Button userOptBtn;
-	private boolean flag = false;
 
 	@FXML
 	void onBack(ActionEvent event) throws IOException {
@@ -92,23 +81,12 @@ public class CartController {
 
 	}
 
-	/**
-	 * [data] is received from Catalog if Catalog is not ready then method
-	 * "bypassCatalog" is used.
-	 * 
-	 * @param data includes list of products selected by user from catalog.
-	 */
-	void initData(ArrayList<AbstractProduct> data) {
-		productsInCatalog = data;
-		observableList = FXCollections.observableArrayList(productsInCatalog);
-	}
-
 	public void initialize() {
+		//set image view of each product in cart
+		for (AbstractProduct ap : ChatClient.cart)
+			ap.setImageimage(ap.getImage());
 
-//		if (flag == false)
-//			bypassCatalog();
-
-		//Sets colDelete behavior
+		// Sets colDelete behavior
 		colDelete.setCellValueFactory(
 				new Callback<TableColumn.CellDataFeatures<AbstractProduct, String>, ObservableValue<String>>() {
 
@@ -118,8 +96,7 @@ public class CartController {
 					}
 				});
 
-
-		//create class DeleteButton
+		// create class DeleteButton
 		class DeleteButton extends TableCell<AbstractProduct, String> {
 			private Button deleteButton = null;
 
@@ -134,10 +111,16 @@ public class CartController {
 						// get Selected Item
 						AbstractProduct currentAbstractProduct = (AbstractProduct) DeleteButton.this.getTableView()
 								.getItems().get(DeleteButton.this.getIndex());
-						// remove selected item from the table list
-						observableList.remove(currentAbstractProduct);
+						//remove the product from cart
+						ChatClient.cart.remove(currentAbstractProduct);
+						
+						//refresh tableview
+						cartTable.getItems().clear();
+						cartTable.setItems(FXCollections.observableArrayList(ChatClient.cart));
+						
+						//update the new totalPrice
 						Double totalPrice = new Double(0);
-						for (AbstractProduct ap : observableList)
+						for (AbstractProduct ap : ChatClient.cart)
 							totalPrice += ap.getPrice();
 						textFieldPrice.setText(totalPrice.toString());
 					}
@@ -168,59 +151,17 @@ public class CartController {
 
 				});
 
-		// colDelete.setCellFactory(cellFoctory);
-		colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
-		colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+		colName.setCellValueFactory(new PropertyValueFactory<>("name"));colImage.setCellValueFactory(new PropertyValueFactory<>("imageimage"));
 		colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 		cartTable.setId("my-table");
 
 		cartTable.getItems().clear();
-		cartTable.setItems(observableList);
+		cartTable.setItems(FXCollections.observableArrayList(ChatClient.cart));
 
 		Double sumOfProducts = new Double(0);
 		for (AbstractProduct ai : cartTable.getItems())
 			sumOfProducts += ai.getPrice();
 		textFieldPrice.setText(sumOfProducts.toString());
-		
-
 	}
-
-	/*
-	 * bypass Catalog Screen
-	 */
-//	@SuppressWarnings("static-access")
-//	public void bypassCatalog() {
-//		EchoServer echoServer = new EchoServer("localhost", 5555, "root", "Aa123456", "zli");
-//		echoServer.connectToDB();
-//		Connection conn = echoServer.getConnection();
-//		ArrayList<AbstractProduct> list = new ArrayList<AbstractProduct>();
-//		ImageView im;
-//
-//		Statement stmt;
-//		String sqlQuery = "SELECT * FROM zli.item";
-//		try {
-//			stmt = conn.createStatement();
-//			ResultSet rs = stmt.executeQuery(sqlQuery);
-//			while (rs.next()) {
-//				Item item = new Item(rs.getString(1), // itemSerial
-//						rs.getString(2), // itemName
-//						rs.getDouble(3), // itemPrice
-//						im = new ImageView(new Image(rs.getBlob(5).getBinaryStream())), // itemImage
-//						rs.getString(4), // itemType
-//						rs.getBoolean(6) // isSoldAlone
-//
-//				);
-//				im.setFitHeight(150);
-//				im.setPreserveRatio(true);
-//				list.add(item);
-//			}
-//			productsInCatalog = list;
-//			observableList = FXCollections.observableArrayList(productsInCatalog);
-//			flag = true;
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
 }
