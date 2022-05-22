@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -14,11 +15,11 @@ public abstract class AbstractProduct implements Serializable {
 	private String serialNumber;
 	private String name;
 	private double price;
-	private String image;
+	private String imagePath;
 	private String type;
 	private boolean isItem; // new
+	private ImageView imageView;
 
-	
 	
 	@Override
 	public int hashCode() {
@@ -57,10 +58,11 @@ public abstract class AbstractProduct implements Serializable {
 		this.serialNumber = serialNumber;
 		this.name = name;
 		this.price = price;
-		this.image = image;
+		this.imagePath = image;
 		this.isItem = isItem;
 		this.type = type;
 	}
+	
 
 	/**
 	 * @return the serialNumber
@@ -108,14 +110,14 @@ public abstract class AbstractProduct implements Serializable {
 	 * @return the image
 	 */
 	public String getImage() {
-		return image;
+		return imagePath;
 	}
 
 	/**
 	 * @param image the image to set
 	 */
 	public void setImage(String image) {
-		this.image = image;
+		this.imagePath = image;
 	}
 
 	public boolean isItem() {
@@ -144,5 +146,15 @@ public abstract class AbstractProduct implements Serializable {
 		System.out.println(" ");
 		return " ";
 	}
+	
+	public ImageView getImageimage() {
+		return imageView;
+	}
+
+	//for the use of TableViews
+	public void setImageimage(String imagePath) {
+		this.imageView = new ImageView(new Image(getClass().getResourceAsStream(imagePath),100,100,false,false));
+	}
+
 
 }
