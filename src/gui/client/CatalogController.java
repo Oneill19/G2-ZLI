@@ -84,7 +84,10 @@ public class CatalogController {
     	cartCounter.setText(++counter + "");
     	
     	// add the selected product to the cart
-    	ChatClient.cart.add(selectedProduct);
+    	if (selectedProduct instanceof Product)
+    		ChatClient.cart.add(new Product((Product)selectedProduct));
+    	else
+    		ChatClient.cart.add(new Item((Item)selectedProduct));
     }
 
     /**
@@ -157,9 +160,9 @@ public class CatalogController {
     	selectedProduct = product;
     	
     	// set the image, name, price and description of the selected product
-    	productImg.setImage(new Image(getClass().getResourceAsStream(product.getImage()), 200, 200, false, false));
+    	productImg.setImage(new Image(getClass().getResourceAsStream(product.getImagePath()), 200, 200, false, false));
     	productName.setText(product.getName());
-    	productPrice.setText(product.getPrice() + "£");
+    	productPrice.setText(product.getPrice() + "$");
     	String description = "";
     	if (product instanceof Product) {
     		description += "Premade Product\n"
@@ -180,6 +183,7 @@ public class CatalogController {
      * initialize the screen
      */
     public void initialize() {
+		
     	// set the user button to show the name
     	userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
     	
@@ -193,9 +197,9 @@ public class CatalogController {
     	for (AbstractProduct product : products) {
     		// create the container
     		HBox box = new HBox();
-    		ImageView img = new ImageView(new Image(getClass().getResourceAsStream(product.getImage()), 100, 100, false, false));
+    		ImageView img = new ImageView(new Image(getClass().getResourceAsStream(product.getImagePath()), 100, 100, false, false));
     		Label nameLabel = new Label(product.getName());
-    		Label priceLabel = new Label(product.getPrice() + "£");
+    		Label priceLabel = new Label(product.getPrice() + "$");
     		Label typeLabel = new Label((product instanceof Product) ? "Premade Product": "Sold Alone");
     		Button viewButton = new Button();
     		

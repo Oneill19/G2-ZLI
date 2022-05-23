@@ -16,35 +16,9 @@ public abstract class AbstractProduct implements Serializable {
 	private String name;
 	private double price;
 	private String imagePath;
-	private String type;
+	private String type;	//for Item - single roses etc, for Product - for wedding etc
 	private boolean isItem; // new
 	private ImageView imageView;
-
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AbstractProduct other = (AbstractProduct) obj;
-		if (serialNumber == null) {
-			if (other.serialNumber != null)
-				return false;
-		} else if (!serialNumber.equals(other.serialNumber))
-			return false;
-		return true;
-	}
 
 	/**
 	 * @param serialNumber - primary key of the product/item
@@ -62,7 +36,19 @@ public abstract class AbstractProduct implements Serializable {
 		this.isItem = isItem;
 		this.type = type;
 	}
-	
+
+	/**
+	 * @param ap  the AbstractProduct to initial fields from
+	 */
+	public AbstractProduct(AbstractProduct ap) {
+		super();
+		this.serialNumber = ap.getSerialNumber();
+		this.name = ap.getName();
+		this.price = ap.getPrice();
+		this.imagePath = ap.getImagePath();
+		this.isItem = ap.isItem;
+		this.type = ap.getType();
+	}
 
 	/**
 	 * @return the serialNumber
@@ -109,17 +95,22 @@ public abstract class AbstractProduct implements Serializable {
 	/**
 	 * @return the image
 	 */
-	public String getImage() {
+	public String getImagePath() {
 		return imagePath;
 	}
 
 	/**
 	 * @param image the image to set
 	 */
-	public void setImage(String image) {
+	public void setImagePath(String image) {
 		this.imagePath = image;
 	}
 
+	/**
+	 * GetItem()
+	 * 
+	 * @return boolean isItem
+	 */
 	public boolean isItem() {
 		return isItem;
 	}
@@ -136,25 +127,44 @@ public abstract class AbstractProduct implements Serializable {
 		this.type = type;
 	}
 
+	public ImageView getImageView() {
+		return imageView;
+	}
+
+	public void setImageView() {
+		imageView = new ImageView(new Image(getClass().getResourceAsStream(this.imagePath), 100, 100, false, false));
+	}
+
+	@Override
+	public int hashCode() {
+		return serialNumber.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AbstractProduct other = (AbstractProduct) obj;
+		if (serialNumber == null) {
+			if (other.serialNumber != null)
+				return false;
+		}
+		return serialNumber.equals(other.serialNumber);
+	}
+	
 	@Override
 	public String toString() {
 		System.out.println("serialNumber = " + serialNumber);
 		System.out.println(" name = " + name);
-		System.out.println(" price = "+price);
+		System.out.println(" price = " + price);
 		System.out.println(" type = " + type);
-		System.out.println(" isItem = "+isItem);
+		System.out.println(" isItem = " + isItem);
 		System.out.println(" ");
 		return " ";
 	}
-	
-	public ImageView getImageimage() {
-		return imageView;
-	}
-
-	//for the use of TableViews
-	public void setImageimage(String imagePath) {
-		this.imageView = new ImageView(new Image(getClass().getResourceAsStream(imagePath),100,100,false,false));
-	}
-
 
 }

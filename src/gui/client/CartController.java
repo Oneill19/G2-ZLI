@@ -41,7 +41,7 @@ public class CartController {
 	@FXML
 	private TableColumn<AbstractProduct, String> colDelete;
 	@FXML
-	private TableColumn<AbstractProduct, String> colImage;
+	private TableColumn<AbstractProduct, ImageView> colImage;
 	@FXML
 	private TableColumn<AbstractProduct, String> colName;
 	@FXML
@@ -83,8 +83,10 @@ public class CartController {
 
 	public void initialize() {
 		//set image view of each product in cart
-		for (AbstractProduct ap : ChatClient.cart)
-			ap.setImageimage(ap.getImage());
+		for (AbstractProduct ap : ChatClient.cart) {
+			System.out.println(ap.getName());
+			ap.setImageView();
+		}
 
 		// Sets colDelete behavior
 		colDelete.setCellValueFactory(
@@ -152,7 +154,9 @@ public class CartController {
 				});
 
 
-		colName.setCellValueFactory(new PropertyValueFactory<>("name"));colImage.setCellValueFactory(new PropertyValueFactory<>("imageimage"));
+		colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+		colImage.setPrefWidth(100);
+		colImage.setCellValueFactory(new PropertyValueFactory<>("imageView"));
 		colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 		cartTable.setId("my-table");
 
@@ -160,7 +164,7 @@ public class CartController {
 		cartTable.setItems(FXCollections.observableArrayList(ChatClient.cart));
 
 		Double sumOfProducts = new Double(0);
-		for (AbstractProduct ai : cartTable.getItems())
+		for (AbstractProduct ai : ChatClient.cart)
 			sumOfProducts += ai.getPrice();
 		textFieldPrice.setText(sumOfProducts.toString());
 	}

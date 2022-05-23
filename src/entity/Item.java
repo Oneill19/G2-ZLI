@@ -31,6 +31,12 @@ public class Item extends AbstractProduct {
 		this.isSoldAlone = isSoldAlone;
 		this.amountInProduct = amountInProduct;
 	}
+	
+	public Item(Item item) {
+		super(item);
+		this.isSoldAlone = item.isSoldAlone;
+		this.amountInProduct = item.amountInProduct;
+	}
 
 	/**
 	 * @return the isSoldAlone

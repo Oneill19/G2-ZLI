@@ -28,6 +28,12 @@ public class Product extends AbstractProduct {
 		this.other = other;
 		this.madeFrom = madeFrom;
 	}
+	
+	public Product(Product ap) {
+		super(ap);
+		this.other=  ap.getOther();
+		this.madeFrom = ap.getMadeFrom();
+	}
 
 	@Override
 	public double getPrice() {
