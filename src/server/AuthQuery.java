@@ -22,7 +22,7 @@ public class AuthQuery {
 	 * @param con
 	 * @param mail
 	 * @param password
-	 * @return string
+	 * @return ReturnCommand
 	 */
 	public static ReturnCommand getUser(Connection con, String mail, String password) {
 		Statement stmt;
@@ -68,7 +68,7 @@ public class AuthQuery {
 	 * 
 	 * @param con
 	 * @param mail
-	 * @return string
+	 * @return ReturnCommand
 	 */
 	public static ReturnCommand loginUser(Connection con, String mail) {
 		Statement stmt;
@@ -90,7 +90,7 @@ public class AuthQuery {
 	 * 
 	 * @param con
 	 * @param mail
-	 * @return string
+	 * @return ReturnCommand
 	 */
 	public static ReturnCommand logoutUser(Connection con, String mail) {
 		Statement stmt;

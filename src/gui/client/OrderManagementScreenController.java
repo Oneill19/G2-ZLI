@@ -1,5 +1,6 @@
 package gui.client;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -146,8 +147,10 @@ public class OrderManagementScreenController {
     void onUser(ActionEvent event) {
 
     }
+    
     //get the pending orders from DB to order TableView
-    void initialize() throws Exception {
+    @FXML
+    void initialize() throws IOException {
     	ClientUI.chat.accept("GetPendingOrders");
     	observableList=FXCollections.observableArrayList(ChatClient.NotAprroveorders);
     	ordersTable.getItems().clear();
@@ -155,8 +158,6 @@ public class OrderManagementScreenController {
     	dOrderCol.setCellValueFactory(new PropertyValueFactory<>("orderDesc"));
 		Price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
 		Status.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
-    	supplyDateCol.setCellValueFactory(new PropertyValueFactory<>("supplyDate"));
-		supplyTimeCol.setCellValueFactory(new PropertyValueFactory<>("supplyTime"));
 		orderDateCol.setCellValueFactory(new PropertyValueFactory<>("orderCreationDate"));
 		orderTimeCol.setCellValueFactory(new PropertyValueFactory<>("orderCreationTime"));
 		ordersTable.setItems(observableList);

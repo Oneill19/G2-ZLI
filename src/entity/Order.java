@@ -57,6 +57,29 @@ public class Order implements Serializable {
 		this.orderCreationDate = orderCreationDate;
 		this.orderCreationTime = orderCreationTime;
 	}
+	
+	// added constructor with supply date and time for places we need them in future
+	public Order(int orderNumber, double totalPrice, String greetingCard, String color, String orderDesc,
+			String fromStore, LocalDate orderCreationDate, LocalTime orderCreationTime, int customerID, String paymentMethod,
+			String orderStatus, String confirmedDate, String completeDate, String deliveryMethod, LocalDate supplyDate, LocalTime supplyTime) {
+		super();
+		this.orderNumber = orderNumber;
+		this.customerID = customerID;
+		this.totalPrice = totalPrice;
+		this.greetingCard = greetingCard;
+		this.color = color;
+		this.orderDesc = orderDesc;
+		this.fromStore = fromStore;
+		this.paymentMethod = paymentMethod;
+		this.orderStatus = orderStatus;
+		this.confirmedDate = confirmedDate;
+		this.completeDate = completeDate;
+		this.deliveryMethod = deliveryMethod;
+		this.orderCreationDate = orderCreationDate;
+		this.orderCreationTime = orderCreationTime;
+		this.supplyDate = supplyDate;
+		this.supplyTime = supplyTime;
+	}
 
 
 	public int getOrderNumber() {
