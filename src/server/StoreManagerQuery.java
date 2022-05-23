@@ -26,7 +26,7 @@ public class StoreManagerQuery {
 	 */
 	public static ReturnCommand getUsersRegsiter(Connection con) {
 		Statement stmt;
-		String sqlQuery = "SELECT * From zli.users WHERE status='' OR status='WaitingForCancelation';";
+		String sqlQuery = "SELECT * From zli.users WHERE status='' OR status='WAITING_FOR_CANCELATION';";
 		ResultSet rs = null;
 		ArrayList<User> NotApprovedUsers = new ArrayList<>();
 
