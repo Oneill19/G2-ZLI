@@ -1,5 +1,9 @@
 .table-view .column-header .label{
     -fx-alignment: CENTER;
+    -fx-radius:50;
+    /*
+    -fx-background-colur: #FCFCFE;
+    */
 }
 
 /*

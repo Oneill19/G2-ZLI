@@ -58,6 +58,8 @@ public class CartController {
 	private Button onBack;
 	@FXML
 	private Button userOptBtn;
+    @FXML
+    private Button nextBtn;
 
 	@FXML
 	void onBack(ActionEvent event) throws IOException {
