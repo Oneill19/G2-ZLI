@@ -41,6 +41,41 @@ LOCK TABLES `canceled_orders` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `complaint`
+--
+
+DROP TABLE IF EXISTS `complaint`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `complaint` (
+  `complaintID` int NOT NULL AUTO_INCREMENT,
+  `complaintdeatils` varchar(3005) DEFAULT NULL,
+  `OrderNumber` int NOT NULL,
+  `Recivedate` datetime NOT NULL,
+  `complaintStatus` varchar(3500) DEFAULT NULL,
+  `complaintcol` varchar(45) DEFAULT NULL,
+  `IsRemindrd` int NOT NULL,
+  `refund` int DEFAULT NULL,
+  `refunddeatils` varchar(4500) DEFAULT NULL,
+  `UserID` int NOT NULL,
+  PRIMARY KEY (`complaintID`),
+  KEY `OrderNumber_idx` (`OrderNumber`),
+  KEY `UserID_idx` (`UserID`),
+  CONSTRAINT `OrderNumber` FOREIGN KEY (`OrderNumber`) REFERENCES `orders` (`orderNumber`),
+  CONSTRAINT `UserID` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `complaint`
+--
+
+LOCK TABLES `complaint` WRITE;
+/*!40000 ALTER TABLE `complaint` DISABLE KEYS */;
+/*!40000 ALTER TABLE `complaint` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `item`
 --
 
@@ -159,7 +194,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,50.52,'Thanks','OffWhite','Wedding','Tel Aviv','2022-11-23','18:18','316397983','Credit','In Progress',NULL,NULL,'Store',NULL,NULL);
+INSERT INTO `orders` VALUES (1,50.52,'Thanks','OffWhite','Wedding','Tel Aviv','2022-11-23','18:18','316397983','Credit','CONFIRMED',NULL,NULL,'Store',NULL,NULL),(2,110,NULL,'White','Wedding','Karmiel','2022-05-23','20:26','1','Credit','CANCELED',NULL,NULL,'Store',NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,6 +227,56 @@ INSERT INTO `product` VALUES ('1','Red and White Bouquet',110,'/common/Assets/Re
 UNLOCK TABLES;
 
 --
+-- Table structure for table `reports`
+--
+
+DROP TABLE IF EXISTS `reports`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reports` (
+  `reportID` int NOT NULL AUTO_INCREMENT,
+  `storeName` int DEFAULT NULL,
+  `reportType` varchar(45) NOT NULL,
+  `reportDate` datetime NOT NULL,
+  PRIMARY KEY (`reportID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reports`
+--
+
+LOCK TABLES `reports` WRITE;
+/*!40000 ALTER TABLE `reports` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reports` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sale`
+--
+
+DROP TABLE IF EXISTS `sale`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sale` (
+  `idSale` int NOT NULL,
+  `saleName` varchar(45) NOT NULL,
+  `saleDate` varchar(45) NOT NULL,
+  `discountAmount` int NOT NULL,
+  PRIMARY KEY (`idSale`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sale`
+--
+
+LOCK TABLES `sale` WRITE;
+/*!40000 ALTER TABLE `sale` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sale` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `store`
 --
 
@@ -214,6 +299,61 @@ LOCK TABLES `store` WRITE;
 /*!40000 ALTER TABLE `store` DISABLE KEYS */;
 INSERT INTO `store` VALUES ('Karmiel','Karmiel','04-877-1234'),('Tel Aviv','Tel Aviv','00-111-222');
 /*!40000 ALTER TABLE `store` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `surver_reports`
+--
+
+DROP TABLE IF EXISTS `surver_reports`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `surver_reports` (
+  `SurveyID` int NOT NULL,
+  `FileName` varchar(100) NOT NULL,
+  `DateUploaded` varchar(45) NOT NULL,
+  `PDFFile` longblob NOT NULL,
+  PRIMARY KEY (`SurveyID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `surver_reports`
+--
+
+LOCK TABLES `surver_reports` WRITE;
+/*!40000 ALTER TABLE `surver_reports` DISABLE KEYS */;
+/*!40000 ALTER TABLE `surver_reports` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `survey`
+--
+
+DROP TABLE IF EXISTS `survey`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `survey` (
+  `SurveyID` int NOT NULL,
+  `UserID` int NOT NULL,
+  `Answer1` int NOT NULL,
+  `Answer2` int NOT NULL,
+  `Answer3` int NOT NULL,
+  `Answer4` int NOT NULL,
+  `Answer5` int NOT NULL,
+  `Answer6` int NOT NULL,
+  PRIMARY KEY (`SurveyID`,`UserID`),
+  KEY `UserID_idx` (`UserID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `survey`
+--
+
+LOCK TABLES `survey` WRITE;
+/*!40000 ALTER TABLE `survey` DISABLE KEYS */;
+/*!40000 ALTER TABLE `survey` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -264,6 +404,7 @@ CREATE TABLE `user_store_worker` (
 
 LOCK TABLES `user_store_worker` WRITE;
 /*!40000 ALTER TABLE `user_store_worker` DISABLE KEYS */;
+INSERT INTO `user_store_worker` VALUES (2,'Karmiel');
 /*!40000 ALTER TABLE `user_store_worker` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,7 +436,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(111222333,'Dorin','Beery','123456789','0545344778','dorin@zli','1','Customer','CONFIRMED',0);
+INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(111222333,'Dorin','Beery','123456789','0545344778','dorin@zli','1','Customer','CONFIRMED',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -308,4 +449,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-21 18:10:55
+-- Dump completed on 2022-05-23 23:16:15
