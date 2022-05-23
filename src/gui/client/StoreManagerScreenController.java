@@ -90,7 +90,7 @@ public class StoreManagerScreenController {
     	((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		new FXMLLoader();
-		Pane root = FXMLLoader.<Pane>load(getClass().getResource("/gui/client/PermissionManagementScreen.fxml"));
+		Pane root = FXMLLoader.<Pane>load(getClass().getResource("PermissionManagement.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li->Option Screen->Permission Management");
 		primaryStage.setScene(scene);
@@ -135,6 +135,10 @@ public class StoreManagerScreenController {
 		primaryStage.setTitle("Zer-Li->Option Screen->View Monthly Report");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+    }
+    
+    public void initialize() {
+    	User.setText("Hello, " + ChatClient.user.getFirstName());
     }
 
 }

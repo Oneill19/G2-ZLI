@@ -91,7 +91,6 @@ public class UserRegistrationPageController {
 		primaryStage.setTitle("Zer-Li");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-
     }
 
    // @FXML
