@@ -115,24 +115,6 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="-1.0" layoutY="195.0" prefHeight="446.0" prefWidth="1110.0">
-               <children>
-                  <TableView fx:id="cartTable" editable="true" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-slider-background-color: #FCFCFE;" stylesheets="@css/newCascadeStyleSheet.css">
-                     <columns>
-                        <TableColumn fx:id="colImage" minWidth="81.0" prefWidth="178.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Image" />
-                        <TableColumn fx:id="colName" minWidth="0.0" prefWidth="105.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Name" />
-                        <TableColumn fx:id="colPrice" minWidth="40.0" prefWidth="63.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Price x1" />
-                        <TableColumn fx:id="colDelete" minWidth="42.0" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Action" />
-                     </columns>
-                     <padding>
-                        <Insets left="10.0" right="10.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </HBox.margin>
-                  </TableView>
-               </children>
-            </HBox>
             <HBox alignment="CENTER" layoutX="5.0" layoutY="657.0" prefHeight="52.0" prefWidth="1104.0">
                <children>
                   <Label style="-fx-background-color: white;" text="Total Price:" textFill="#a297d5">
@@ -143,6 +125,14 @@
                   <TextField fx:id="textFieldPrice" editable="false" prefHeight="26.0" prefWidth="100.0" />
                </children>
             </HBox>
+            <TableView fx:id="cartTable" editable="true" layoutX="350.0" layoutY="188.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="446.0" prefWidth="377.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@css/newCascadeStyleSheet.css">
+               <columns>
+                  <TableColumn fx:id="colImage" minWidth="81.0" prefWidth="135.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Image" />
+                  <TableColumn fx:id="colName" minWidth="0.0" prefWidth="141.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Name" />
+                  <TableColumn fx:id="colPrice" minWidth="0.0" prefWidth="56.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Price x1" />
+                  <TableColumn fx:id="colDelete" minWidth="26.0" prefWidth="65.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Action" />
+               </columns>
+            </TableView>
          </children>
       </Pane>
       <Button fx:id="nextBtn" alignment="CENTER" layoutX="824.0" layoutY="739.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: Green; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="Next" textAlignment="CENTER" textFill="#fcfcfe" />

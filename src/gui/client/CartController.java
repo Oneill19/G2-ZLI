@@ -163,6 +163,7 @@ public class CartController {
 		cartTable.setId("my-table");
 
 		cartTable.getItems().clear();
+		cartTable.autosize();
 		cartTable.setItems(FXCollections.observableArrayList(ChatClient.cart));
 
 		Double sumOfProducts = new Double(0);
