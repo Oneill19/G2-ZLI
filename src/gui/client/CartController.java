@@ -58,6 +58,8 @@ public class CartController {
 	private Button onBack;
 	@FXML
 	private Button userOptBtn;
+    @FXML
+    private Button nextBtn;
 
 	@FXML
 	void onBack(ActionEvent event) throws IOException {
@@ -161,6 +163,7 @@ public class CartController {
 		cartTable.setId("my-table");
 
 		cartTable.getItems().clear();
+		cartTable.autosize();
 		cartTable.setItems(FXCollections.observableArrayList(ChatClient.cart));
 
 		Double sumOfProducts = new Double(0);
