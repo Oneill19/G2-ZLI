@@ -1,3 +1,4 @@
+
 package gui.client;
 
 import java.io.IOException;
@@ -65,7 +66,7 @@ public class CartController {
 	void onBack(ActionEvent event) throws IOException {
 		((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
-		new FXMLLoader();
+		//new FXMLLoader();
 		Pane root = FXMLLoader.<Pane>load(getClass().getResource("Catalog.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li Catalog");

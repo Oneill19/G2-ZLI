@@ -104,6 +104,7 @@ public class CatalogController {
 		
 		// disconnect from the server and exit
     	ClientUI.chat.accept("Disconnect");
+    	ChatClient.cart.clear();
 		System.exit(0);
     }
 
@@ -132,6 +133,7 @@ public class CatalogController {
     void onLogout(ActionEvent event) throws Exception {
     	ClientUI.chat.accept("LogoutUser" + "\t" + ChatClient.user.getEmail());
     	ChatClient.user = null;
+    	ChatClient.cart.clear();
     	((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		new FXMLLoader();
@@ -184,6 +186,9 @@ public class CatalogController {
      */
     public void initialize() {
 		
+    	//initialize cart size
+    	cartCounter.setText(ChatClient.cart.size() + "");
+    	
     	// set the user button to show the name
     	userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
     	
