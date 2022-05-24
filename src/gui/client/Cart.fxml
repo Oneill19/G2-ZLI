@@ -20,6 +20,31 @@
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1110.0" style="-fx-background-color: #FCFCFE;">
          <children>
+            <HBox alignment="TOP_CENTER" layoutX="4.0" layoutY="40.0" spacing="870.0" style="-fx-alignment: center;">
+               <children>
+                  <HBox alignment="CENTER" maxHeight="-Infinity">
+                     <children>
+                        <Button fx:id="logoutBtn" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#onLogout" style="-fx-background-color: transparent;" text="Logout | " textFill="#2b0548">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="userOptBtn" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </HBox>
+                  <Button fx:id="exit" alignment="CENTER" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
             <Button fx:id="onBack" alignment="CENTER" layoutX="69.0" layoutY="743.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
             <HBox alignment="TOP_CENTER" layoutX="4.0" layoutY="132.0" prefHeight="30.0" prefWidth="1100.0" style="-fx-alignment: center;">
                <children>
@@ -72,32 +97,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="TOP_CENTER" layoutX="4.0" layoutY="40.0" spacing="870.0" style="-fx-alignment: center;">
-               <children>
-                  <HBox alignment="CENTER" maxHeight="-Infinity">
-                     <children>
-                        <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#onLogout" style="-fx-background-color: transparent;" text="Logout | " textFill="#2b0548">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="userOptBtn" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </HBox>
-                  <Button fx:id="exit" alignment="CENTER" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </HBox>
-            <HBox alignment="TOP_CENTER" layoutX="1.0" layoutY="10.0" prefHeight="100.0" prefWidth="1110.0">
+            <HBox alignment="TOP_CENTER" layoutX="149.0" layoutY="10.0" prefHeight="118.0" prefWidth="794.0">
                <children>
                   <VBox alignment="CENTER" fillWidth="false" style="-fx-alignment: center;">
                      <children>
