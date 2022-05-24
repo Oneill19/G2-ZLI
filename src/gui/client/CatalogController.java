@@ -3,27 +3,21 @@ package gui.client;
 import java.util.ArrayList;
 
 import client.ChatClient;
-import client.ClientUI;
 import entity.AbstractProduct;
 import entity.Item;
 import entity.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
-import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
 /**
  * @AUTHOR ONEILL PANKER
@@ -70,6 +64,8 @@ public class CatalogController {
     private ArrayList<AbstractProduct> products = ChatClient.products;
     
     private AbstractProduct selectedProduct;
+    
+    private CommonController cc = new CommonController();
 
     /**
      * @param event
@@ -96,15 +92,7 @@ public class CatalogController {
      */
     @FXML
     void onExit(ActionEvent event) throws Exception {
-    	// send a logout request
-    	ClientUI.chat.accept("LogoutUser" + "\t" + ChatClient.user.getEmail());
-    	
-    	// remove the user in program
-		ChatClient.user = null;
-		
-		// disconnect from the server and exit
-    	ClientUI.chat.accept("Disconnect");
-		System.exit(0);
+    	cc.OnExit();
     }
 
     /**
@@ -113,15 +101,8 @@ public class CatalogController {
      */
     @FXML
     void onGoToCart(MouseEvent event) throws Exception {
-    	((Node) event.getSource()).getScene().getWindow().hide();
-    	Stage primaryStage = new Stage();
-    	new FXMLLoader();
-    	Pane root = FXMLLoader.<Pane>load(getClass().getResource("Cart.fxml"));
-    	Scene scene = new Scene(root);
-    	scene.getStylesheets().add("css/newCascadeStyleSheet.css");
-		primaryStage.setTitle("Zer-Li Cart");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+    	//go to cart screen
+		cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart", "css/newCascadeStyleSheet.css");
     }
 
     /**
@@ -130,17 +111,7 @@ public class CatalogController {
      */
     @FXML
     void onLogout(ActionEvent event) throws Exception {
-    	ClientUI.chat.accept("LogoutUser" + "\t" + ChatClient.user.getEmail());
-    	ChatClient.user = null;
-    	((Node) event.getSource()).getScene().getWindow().hide();
-		Stage primaryStage = new Stage();
-		new FXMLLoader();
-		Pane root = FXMLLoader.<Pane>load(getClass().getResource("LoginScreen.fxml"));
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add("css/newCascadeStyleSheet.css");
-		primaryStage.setTitle("Zer-Li Client");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+    	cc.onLogout(event);
     }
 
     /**

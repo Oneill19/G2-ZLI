@@ -10,9 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -21,8 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
@@ -60,29 +55,24 @@ public class CartController {
 	private Button userOptBtn;
     @FXML
     private Button nextBtn;
+    
+    private CommonController cc = new CommonController();
 
 	@FXML
-	void onBack(ActionEvent event) throws IOException {
-		((Node) event.getSource()).getScene().getWindow().hide();
-		Stage primaryStage = new Stage();
-		new FXMLLoader();
-		Pane root = FXMLLoader.<Pane>load(getClass().getResource("Catalog.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("Zer-Li Catalog");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+	void onBack(ActionEvent event) throws IOException {		
+		cc.changeFXML(event, "Catalog.fxml", "Zer-Li Catalog",null);
 	}
 
 	@FXML
-	void onExit(ActionEvent event) {
-
+	void onExit(ActionEvent event) throws Exception {
+		cc.OnExit();
 	}
 
 	@FXML
-	void onLogout(ActionEvent event) {
-
+	void onLogout(ActionEvent event) throws Exception {
+		cc.onLogout(event);
 	}
-
+	
 	public void initialize() {
 		//set image view of each product in cart
 		for (AbstractProduct ap : ChatClient.cart) {
