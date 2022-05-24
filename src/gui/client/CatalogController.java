@@ -155,6 +155,9 @@ public class CatalogController {
      */
     public void initialize() {
 		
+    	//initialize cart size
+    	cartCounter.setText(ChatClient.cart.size() + "");
+    	
     	// set the user button to show the name
     	userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
     	
