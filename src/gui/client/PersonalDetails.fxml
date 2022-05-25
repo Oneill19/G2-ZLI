@@ -116,7 +116,7 @@
                   </VBox>
                </children>
             </HBox>
-            <VBox layoutX="19.0" layoutY="205.0" prefHeight="249.0" prefWidth="695.0" spacing="5.0">
+            <VBox layoutX="289.0" layoutY="199.0" prefHeight="481.0" prefWidth="614.0" spacing="15.0">
                <children>
                   <HBox prefHeight="30.0" prefWidth="219.0" style="-fx-font-size: 20;">
                      <children>
@@ -158,9 +158,9 @@
                         <TextField fx:id="fieldBlessing" onAction="#onBlessing" prefHeight="34.0" prefWidth="348.0" promptText="Hey Raj!!!! Happy Birthday from Claire &lt;3" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="43.0" prefWidth="675.0" spacing="20.0" style="-fx-font-size: 20;">
+                  <HBox prefHeight="43.0" prefWidth="675.0" spacing="10.0" style="-fx-font-size: 20;">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="291.0" style="-fx-font-size: 20;" text="Choose Suuply Date and Time: ">
+                        <Label prefHeight="30.0" prefWidth="204.0" style="-fx-font-size: 20;" text="Suuply Date and Time: ">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -191,10 +191,6 @@
                         </RadioButton>
                      </children>
                   </HBox>
-               </children>
-            </VBox>
-            <VBox layoutX="422.0" layoutY="417.0" prefHeight="222.0" prefWidth="425.0">
-               <children>
                   <HBox prefHeight="38.0" prefWidth="413.0" style="-fx-font-size: 20;">
                      <children>
                         <Label prefHeight="30.0" prefWidth="256.0" style="-fx-font-size: 20;" text="Choose destination store: ">
@@ -205,26 +201,30 @@
                         <ComboBox fx:id="comboStore" onAction="#onStore" prefWidth="150.0" style="-fx-font-size: 20; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: #a297d5;" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="166.0" prefWidth="365.0" spacing="10.0" style="-fx-font-size: 20;">
+                  <VBox prefHeight="222.0" prefWidth="425.0" spacing="5.0">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="195.0" style="-fx-font-size: 20;" text="Destination address: ">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Label>
-                        <VBox prefHeight="200.0" prefWidth="141.0" spacing="10.0">
+                        <HBox prefHeight="166.0" prefWidth="365.0" spacing="10.0" style="-fx-font-size: 20;">
                            <children>
-                              <TextField fx:id="fieldCity" onAction="#onCity" prefHeight="26.0" prefWidth="118.0" promptText="City" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
-                              <TextField fx:id="fieldSt" onAction="#onSt" prefHeight="26.0" prefWidth="138.0" promptText="St." style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
-                              <TextField fx:id="fieldAptNumber" onAction="#onAptNumber" promptText="Apt. number" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
-                              <TextField fx:id="fieldPostal" onAction="#onPostal" promptText="Postal Code" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                              <Label prefHeight="30.0" prefWidth="195.0" style="-fx-font-size: 20;" text="Destination address: ">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <VBox prefHeight="200.0" prefWidth="141.0" spacing="10.0">
+                                 <children>
+                                    <TextField fx:id="fieldCity" onAction="#onCity" prefHeight="26.0" prefWidth="118.0" promptText="City" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                                    <TextField fx:id="fieldSt" onAction="#onSt" prefHeight="26.0" prefWidth="138.0" promptText="St." style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                                    <TextField fx:id="fieldAptNumber" onAction="#onAptNumber" promptText="Apt. number" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                                    <TextField fx:id="fieldPostal" onAction="#onPostal" promptText="Postal Code" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                                 </children>
+                              </VBox>
                            </children>
-                        </VBox>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
                      </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
+                  </VBox>
                </children>
             </VBox>
          </children>
