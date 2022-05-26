@@ -74,6 +74,11 @@ public class CartController {
 		cc.onLogout(event);
 	}
 	
+    @FXML
+    void onNext(ActionEvent event) throws IOException {
+    	cc.changeFXML(event, "PersonalDetails.fxml", "Zer-Li Personal Details",null);
+    }
+	
 	public void initialize() {
 		//set image view of each product in cart
 		for (AbstractProduct ap : ChatClient.cart) {
