@@ -229,6 +229,22 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
+			
+		case "GetSurveysWithReports":
+			try {
+				client.sendToClient(SurveyQuery.getSurveysWithReports(conn));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			
+		case "GetSurveyReport":
+			try {
+				client.sendToClient(SurveyQuery.getSurveyReport(conn, Integer.parseInt(clientMsg[1])));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 
 		default:
 			System.out.println("No Command Found");
