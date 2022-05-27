@@ -229,6 +229,14 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
+			
+		case "GetAllStores":
+			try {
+				client.sendToClient(StoreQuery.getAllStores(conn));
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			break;
 
 		default:
 			System.out.println("No Command Found");
