@@ -9,6 +9,7 @@ import entity.AbstractProduct;
 import entity.Item;
 import entity.Order;
 import entity.Product;
+import entity.Store;
 import entity.User;
 import ocsf.client.AbstractClient;
 
@@ -21,9 +22,10 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<User> NotApprovedUsers;
 	public static ArrayList<AbstractProduct> products = new ArrayList<>();
 	public static ArrayList<AbstractProduct> cart = new ArrayList<>();
-	
+	public static ArrayList<Store> stores = new ArrayList<>();
+
 	public static User user = null;
-	
+
 	public static boolean awaitResponse = false;
 
 	public ChatClient(String host, int port, ChatIF clientUI) throws IOException {
@@ -32,9 +34,9 @@ public class ChatClient extends AbstractClient {
 	}
 
 	/**
-	 *	method to handle the messages from the server
+	 * method to handle the messages from the server
 	 *
-	 *	@param msg
+	 * @param msg
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -45,46 +47,43 @@ public class ChatClient extends AbstractClient {
 			orders = (ArrayList<Order>) msg;
 		}
 		if (msg instanceof ReturnCommand) {
-			ReturnCommand rc = (ReturnCommand)msg;
+			ReturnCommand rc = (ReturnCommand) msg;
 			switch (rc.getCommand()) {
 			case "GetUser":
-				user = ((User)rc.getReturnValue());
+				user = ((User) rc.getReturnValue());
 				break;
-				
 			case "LogUser":
 				System.out.println("User Logged");
 				break;
-			
 			case "LogoutUser":
 				user = null;
 				System.out.println("User Logged out");
 				break;
-				
 			case "GetPendingOrders":
-				NotAprroveorders=(ArrayList<Order>)rc.getReturnValue();				
+				NotAprroveorders = (ArrayList<Order>) rc.getReturnValue();
 				break;
 			case "GetNotApprovedUsers":
-				NotApprovedUsers=(ArrayList<User>)rc.getReturnValue();	
+				NotApprovedUsers = (ArrayList<User>) rc.getReturnValue();
 				break;
 			case "UpdateStatusOrders":
 				System.out.println("Order Status Updated");
 				break;
 			case "GetApprovedUsers":
-				ApprovedUserToPer=(ArrayList<User>)rc.getReturnValue();		
+				ApprovedUserToPer = (ArrayList<User>) rc.getReturnValue();
 			case "ChangeUserStatus":
 				System.out.println("User Status Updated");
 				break;
-				
 			case "GetAllProducts":
-				ChatClient.products.addAll((ArrayList<Product>)rc.getReturnValue());
+				ChatClient.products.addAll((ArrayList<Product>) rc.getReturnValue());
 				break;
-				
 			case "GetAllItems":
-				ChatClient.products.addAll((ArrayList<Item>)rc.getReturnValue());
+				ChatClient.products.addAll((ArrayList<Item>) rc.getReturnValue());
 				break;
-			}
-			
-			
+			case "GetAllStores":
+				ChatClient.stores.addAll((ArrayList<Store>) rc.getReturnValue());
+				break;
+			}	
+
 		}
 	}
 

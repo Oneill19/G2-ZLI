@@ -191,9 +191,9 @@
                         </RadioButton>
                      </children>
                   </HBox>
-                  <HBox prefHeight="38.0" prefWidth="413.0" style="-fx-font-size: 20;">
+                  <HBox fx:id="HBoxstore" prefHeight="38.0" prefWidth="413.0" style="-fx-font-size: 20;">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="256.0" style="-fx-font-size: 20;" text="Choose destination store: ">
+                        <Label fx:id="labelStore" prefHeight="30.0" prefWidth="256.0" style="-fx-font-size: 20;" text="Choose destination store: ">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -203,9 +203,9 @@
                   </HBox>
                   <VBox prefHeight="222.0" prefWidth="425.0" spacing="5.0">
                      <children>
-                        <HBox prefHeight="166.0" prefWidth="365.0" spacing="10.0" style="-fx-font-size: 20;">
+                        <HBox fx:id="HBoxAddress" prefHeight="166.0" prefWidth="365.0" spacing="10.0" style="-fx-font-size: 20;">
                            <children>
-                              <Label prefHeight="30.0" prefWidth="195.0" style="-fx-font-size: 20;" text="Destination address: ">
+                              <Label fx:id="labelDestination" prefHeight="30.0" prefWidth="195.0" style="-fx-font-size: 20;" text="Destination address: ">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>

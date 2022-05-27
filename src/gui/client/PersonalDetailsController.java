@@ -1,20 +1,27 @@
 package gui.client;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import client.ChatClient;
+import client.ClientUI;
+import entity.Store;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
 
 public class PersonalDetailsController {
 
@@ -25,7 +32,7 @@ public class PersonalDetailsController {
 	private RadioButton DeliveryRadio;
 
 	@FXML
-	private ComboBox<?> comboStore;
+	private ComboBox<Store> comboStore;
 
 	@FXML
 	private DatePicker datePicker;
@@ -71,6 +78,19 @@ public class PersonalDetailsController {
 
 	@FXML
 	private Button userOptBtn;
+
+    @FXML
+    private Label labelDestination;
+
+    @FXML
+    private Label labelStore;
+
+    @FXML
+    private HBox HBoxAddress;
+
+    @FXML
+    private HBox HBoxstore;
+
 
 	// ******************
 	// Order variables*
@@ -124,7 +144,7 @@ public class PersonalDetailsController {
 
 	@FXML
 	void onDelivery(ActionEvent event) {
-
+		
 	}
 
 	@FXML
@@ -154,7 +174,9 @@ public class PersonalDetailsController {
 
 	@FXML
 	void onPickUp(ActionEvent event) {
-
+		HBoxAddress.setVisible(false);
+		HBoxstore.setVisible(true);
+		
 	}
 
 	@FXML
@@ -177,10 +199,13 @@ public class PersonalDetailsController {
 
 	}
 
-	public void initialize() {
+	public void initialize() throws Exception {
 		fieldEmail.setText(ChatClient.user.getEmail());
+		fieldEmail.setDisable(true);
 		fieldFirst.setText(ChatClient.user.getFirstName());
+		fieldFirst.setDisable(true);
 		fieldLast.setText(ChatClient.user.getLastName());
+		fieldLast.setDisable(true);
 		datePicker = new DateTimePicker();
 		format.set(DefaultFormat);
 		timePicker.setOnAction(evnt -> {
@@ -195,5 +220,20 @@ public class PersonalDetailsController {
 				timePicker.home();
 			}
 		});
+//		labelStore.setVisible(false);
+//		labelDestination.setVisible(false);
+//		comboStore.setVisible(false);
+		
+		HBoxAddress.setVisible(false);
+		HBoxstore.setVisible(false);
+		initComboBox();
+		
+		
+	}
+	
+	private void initComboBox() throws Exception{
+		ClientUI.chat.accept("GetAllStores");
+		System.out.println("is: "+ChatClient.stores);
+		comboStore.setItems(FXCollections.observableArrayList(ChatClient.stores));
 	}
 }
