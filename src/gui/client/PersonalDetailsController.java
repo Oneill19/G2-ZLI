@@ -72,6 +72,17 @@ public class PersonalDetailsController {
 	@FXML
 	private Button userOptBtn;
 
+	// ******************
+	// Order variables*
+	// ****************
+	private int orderNumber, customerID;
+	private double totalPrice;
+	private String greetingCard, color, orderDesc, fromStore, paymentMethod, orderStatus, confirmedDate, completeDate,
+			deliveryMethod;
+	private LocalDate orderCreationDate, supplyDate;
+	private LocalTime orderCreationTime, supplyTime;
+	private String[] adress = new String[4];
+
 	private final String DefaultFormat = "HH:mm";
 	@SuppressWarnings("unused")
 	private DateTimeFormatter formatter;
@@ -84,9 +95,9 @@ public class PersonalDetailsController {
 		}
 	};
 
-	@FXML
+@FXML
 	void onAptNumber(ActionEvent event) {
-
+		adress[2] = fieldAptNumber.getText();
 	}
 
 	@FXML
@@ -96,13 +107,15 @@ public class PersonalDetailsController {
 
 	@FXML
 	void onBlessing(ActionEvent event) {
+		greetingCard = fieldBlessing.getText();
 
 	}
 
 	@FXML
 	void onCity(ActionEvent event) {
-
+		adress[0] = fieldCity.getText();
 	}
+
 
 	@FXML
 	void onDatePicker(ActionEvent event) {
@@ -146,7 +159,7 @@ public class PersonalDetailsController {
 
 	@FXML
 	void onPostal(ActionEvent event) {
-
+		adress[3] = fieldPostal.getText();
 	}
 
 	@FXML
