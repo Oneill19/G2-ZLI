@@ -30,6 +30,9 @@ public class CatalogController {
 
     @FXML
     private ImageView cartBtn;
+    
+    @FXML
+    private Button goToCartBtn2;
 
     @FXML
     private Text cartCounter;
@@ -104,6 +107,13 @@ public class CatalogController {
     	//go to cart screen
 		cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart", "css/newCascadeStyleSheet.css");
     }
+    
+    @FXML 
+    void onGoToCart2(ActionEvent event) throws Exception {
+    	//go to cart screen
+    	cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart", "css/newCascadeStyleSheet.css");
+    }
+    
 
     /**
      * @param event
