@@ -1,5 +1,7 @@
 package gui.client;
 
+import java.io.IOException;
+
 import client.ChatClient;
 import client.ClientUI;
 import javafx.event.ActionEvent;
@@ -27,10 +29,12 @@ public class CustomerServiceWorkerScreenController {
 
     /**
      * @param event
+     * @throws Exception 
      */
     @FXML
-    void onAddSurveyAnswers(ActionEvent event) {
-    	System.out.println("Not implements yet");
+    void onAddSurveyAnswers(ActionEvent event) throws Exception{
+    	ClientUI.chat.accept("GetAllSurveys");
+    	cc.changeFXML(event, "AddSurveyAnswer.fxml", "Zer-Li Add Survey Answer", null);
     }
 
     /**

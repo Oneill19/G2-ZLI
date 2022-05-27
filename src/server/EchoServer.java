@@ -211,7 +211,7 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
-			
+
 		case "GetAllProducts":
 			try {
 				// get all the premade products
@@ -220,7 +220,7 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
-			
+
 		case "GetAllItems":
 			try {
 				// get all the sold alone items
@@ -229,7 +229,7 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
-			
+
 		case "GetSurveysWithReports":
 			try {
 				client.sendToClient(SurveyQuery.getSurveysWithReports(conn));
@@ -237,10 +237,34 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
-			
+
 		case "GetSurveyReport":
 			try {
 				client.sendToClient(SurveyQuery.getSurveyReport(conn, Integer.parseInt(clientMsg[1])));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			
+		case "GetAllSurveys":
+			try {
+				client.sendToClient(SurveyQuery.getAllSurveys(conn));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+
+		case "AddSurveyAnswer":
+			try {
+				client.sendToClient(SurveyQuery.addSurveyAnswer(conn, 
+						Integer.parseInt(clientMsg[1]),	// surveyId
+						clientMsg[2],	// userMail
+						Integer.parseInt(clientMsg[3]), // answer1
+						Integer.parseInt(clientMsg[4]), // answer2
+						Integer.parseInt(clientMsg[5]),	// answer3
+						Integer.parseInt(clientMsg[6]), // answer4
+						Integer.parseInt(clientMsg[7]),	// answer5
+						Integer.parseInt(clientMsg[8])));	// answer6
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

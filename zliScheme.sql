@@ -302,31 +302,6 @@ INSERT INTO `store` VALUES ('Karmiel','Karmiel','04-877-1234'),('Tel Aviv','Tel 
 UNLOCK TABLES;
 
 --
--- Table structure for table `surver_reports`
---
-
-DROP TABLE IF EXISTS `surver_reports`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `surver_reports` (
-  `SurveyID` int NOT NULL,
-  `FileName` varchar(100) NOT NULL,
-  `DateUploaded` varchar(45) NOT NULL,
-  `PDFFile` longblob NOT NULL,
-  PRIMARY KEY (`SurveyID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `surver_reports`
---
-
-LOCK TABLES `surver_reports` WRITE;
-/*!40000 ALTER TABLE `surver_reports` DISABLE KEYS */;
-/*!40000 ALTER TABLE `surver_reports` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `survey`
 --
 
@@ -335,15 +310,14 @@ DROP TABLE IF EXISTS `survey`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `survey` (
   `SurveyID` int NOT NULL,
-  `UserID` int NOT NULL,
-  `Answer1` int NOT NULL,
-  `Answer2` int NOT NULL,
-  `Answer3` int NOT NULL,
-  `Answer4` int NOT NULL,
-  `Answer5` int NOT NULL,
-  `Answer6` int NOT NULL,
-  PRIMARY KEY (`SurveyID`,`UserID`),
-  KEY `UserID_idx` (`UserID`)
+  `SurveyName` varchar(45) NOT NULL,
+  `Question1` varchar(45) NOT NULL,
+  `Question2` varchar(45) NOT NULL,
+  `Question3` varchar(45) NOT NULL,
+  `Question4` varchar(45) NOT NULL,
+  `Question5` varchar(45) NOT NULL,
+  `Question6` varchar(45) NOT NULL,
+  PRIMARY KEY (`SurveyID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -353,7 +327,65 @@ CREATE TABLE `survey` (
 
 LOCK TABLES `survey` WRITE;
 /*!40000 ALTER TABLE `survey` DISABLE KEYS */;
+INSERT INTO `survey` VALUES (1,'Shopping Survey 2022','Did you enjoy?','Did It Was Expensive?','You spent a lot of money?','There is enough stuff?','Store manager is good?','Rate the last buy'),(2,'Color Survey 2022','How much you like blue flowers?','How much you like red flowers?','How much you like yellow flowers?','How much you like white flowers?','How much you like green flowers?','How much you like pink flowers?');
 /*!40000 ALTER TABLE `survey` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `survey_answers`
+--
+
+DROP TABLE IF EXISTS `survey_answers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `survey_answers` (
+  `SurveyID` int NOT NULL,
+  `UserEmail` varchar(45) NOT NULL,
+  `Answer1` int NOT NULL,
+  `Answer2` int NOT NULL,
+  `Answer3` int NOT NULL,
+  `Answer4` int NOT NULL,
+  `Answer5` int NOT NULL,
+  `Answer6` int NOT NULL,
+  PRIMARY KEY (`SurveyID`,`UserEmail`),
+  KEY `UserID_idx` (`UserEmail`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `survey_answers`
+--
+
+LOCK TABLES `survey_answers` WRITE;
+/*!40000 ALTER TABLE `survey_answers` DISABLE KEYS */;
+INSERT INTO `survey_answers` VALUES (1,'dorin@zli',6,6,6,6,6,6),(1,'oneill@zli',1,1,1,1,1,1),(2,'dorin@zli',6,5,4,3,2,1),(2,'oneill@zli',1,2,3,4,5,6);
+/*!40000 ALTER TABLE `survey_answers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `survey_reports`
+--
+
+DROP TABLE IF EXISTS `survey_reports`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `survey_reports` (
+  `SurveyID` int NOT NULL,
+  `FileName` varchar(100) NOT NULL,
+  `DateUploaded` varchar(45) DEFAULT NULL,
+  `PDFFile` longblob,
+  PRIMARY KEY (`SurveyID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `survey_reports`
+--
+
+LOCK TABLES `survey_reports` WRITE;
+/*!40000 ALTER TABLE `survey_reports` DISABLE KEYS */;
+INSERT INTO `survey_reports` VALUES (1,'Survey #1',NULL,NULL),(2,'Survey #2',NULL,NULL);
+/*!40000 ALTER TABLE `survey_reports` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -436,7 +468,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(111222333,'Dorin','Beery','123456789','0545344778','dorin@zli','1','Customer','CONFIRMED',0);
+INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(4,'Adir','Miller','99999','053-3333','adir@zli','1','CustomerServiceWorker','CONFIRMED',0),(111222333,'Dorin','Beery','123456789','0545344778','dorin@zli','1','Customer','CONFIRMED',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -449,4 +481,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-23 23:16:15
+-- Dump completed on 2022-05-28  1:15:13

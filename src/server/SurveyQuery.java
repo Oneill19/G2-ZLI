@@ -1,6 +1,7 @@
 package server;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -141,6 +142,28 @@ public class SurveyQuery {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static ReturnCommand addSurveyAnswer(Connection con, int surveyId, String userMail, int answer1, int answer2, int answer3, int answer4, int answer5, int answer6) {
+		PreparedStatement ps;
+		String sqlQuery = "INSERT INTO zli.survey_answers (SurveyID, UserEmail, Answer1, Answer2, Answer3, Answer4, Answer5, Answer6) VALUES (?,?,?,?,?,?,?,?);";
+		try {
+			ps = con.prepareStatement(sqlQuery);
+			ps.setInt(1, surveyId);
+			ps.setString(2, userMail);
+			ps.setInt(3, answer1);
+			ps.setInt(4, answer2);
+			ps.setInt(5, answer3);
+			ps.setInt(6, answer4);
+			ps.setInt(7, answer5);
+			ps.setInt(8, answer6);
+			ps.executeUpdate();
+			ps.close();
+			return new ReturnCommand("AddSurveyAnswer", true);
+		} catch (Exception e) {
+//			e.printStackTrace();
 			return null;
 		}
 	}

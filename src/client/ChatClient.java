@@ -24,10 +24,13 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<AbstractProduct> products = new ArrayList<>();
 	public static ArrayList<AbstractProduct> cart = new ArrayList<>();
 	public static ArrayList<Survey> surveysWithReports = new ArrayList<>();
+	public static ArrayList<Survey> allSurveys = new ArrayList<>();
 	
 	public static User user = null;
 	
 	public static SurveyReport selectedSurveyReport = null;
+	
+	public static boolean requestSucceed = false;
 	
 	public static boolean awaitResponse = false;
 
@@ -95,7 +98,16 @@ public class ChatClient extends AbstractClient {
 			case "GetSurveyReport":
 				selectedSurveyReport = (SurveyReport)rc.getReturnValue();
 				break;
+				
+			case "GetAllSurveys":
+				allSurveys.addAll((ArrayList<Survey>)rc.getReturnValue());
+				break;
+				
+			case "AddSurveyAnswer":
+				requestSucceed = rc == null ? false : true;
+				break;
 			}
+			
 			
 			
 		}
