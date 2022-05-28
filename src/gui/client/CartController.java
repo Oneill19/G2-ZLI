@@ -81,6 +81,8 @@ public class CartController {
 	
 	public void initialize() {
 		//set image view of each product in cart
+		userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
+		
 		for (AbstractProduct ap : ChatClient.cart) {
 			System.out.println(ap.getName());
 			ap.setImageView();
