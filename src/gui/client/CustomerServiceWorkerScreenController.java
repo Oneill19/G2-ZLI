@@ -1,7 +1,5 @@
 package gui.client;
 
-import java.io.IOException;
-
 import client.ChatClient;
 import client.ClientUI;
 import javafx.event.ActionEvent;

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import client.ChatClient;
 import client.ClientUI;
@@ -11,7 +12,6 @@ import entity.Store;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,86 +23,25 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 
+/**
+ * @author DORIN BEERY
+ *
+ */
 public class PersonalDetailsController {
 
-	@FXML
-	private ToggleGroup DeliveryMethod;
+	@FXML private ToggleGroup DeliveryMethod;
+	@FXML private RadioButton DeliveryRadio, pickUpRadio;
+	@FXML private ComboBox<Store> comboStore;
+	@FXML private DatePicker datePicker;
+	@FXML private Button exit, onBack, userOptBtn, nextBtn, logoutBtn;
+	@FXML private TextField fieldAptNumber,fieldBlessing,fieldCity,fieldEmail,fieldFirst,fieldLast,fieldPostal,fieldSt,timePicker, fieldDescribtion; 
+    @FXML private Label labelDestination, labelStore;
+    @FXML private HBox HBoxAddress, HBoxstore;
+	
+	//Non FXML fields
+	private CommonController cc = new CommonController();
 
-	@FXML
-	private RadioButton DeliveryRadio;
-
-	@FXML
-	private ComboBox<Store> comboStore;
-
-	@FXML
-	private DatePicker datePicker;
-
-	@FXML
-	private Button exit;
-
-	@FXML
-	private TextField fieldAptNumber;
-
-	@FXML
-	private TextField fieldBlessing;
-
-	@FXML
-	private TextField fieldCity;
-
-	@FXML
-	private TextField fieldEmail;
-
-	@FXML
-	private TextField fieldFirst;
-
-	@FXML
-	private TextField fieldLast;
-
-	@FXML
-	private TextField fieldPostal;
-
-	@FXML
-	private TextField fieldSt;
-
-	@FXML
-	private Button logoutBtn;
-
-	@FXML
-	private Button onBack;
-
-	@FXML
-	private RadioButton pickUpRadio;
-
-	@FXML
-	private TextField timePicker;
-
-	@FXML
-	private Button userOptBtn;
-
-    @FXML
-    private Label labelDestination;
-
-    @FXML
-    private Label labelStore;
-
-    @FXML
-    private HBox HBoxAddress;
-
-    @FXML
-    private HBox HBoxstore;
-
-
-	// ******************
-	// Order variables*
-	// ****************
-	private int orderNumber, customerID;
-	private double totalPrice;
-	private String greetingCard, color, orderDesc, fromStore, paymentMethod, orderStatus, confirmedDate, completeDate,
-			deliveryMethod;
-	private LocalDate orderCreationDate, supplyDate;
-	private LocalTime orderCreationTime, supplyTime;
-	private String[] adress = new String[4];
-
+	//settings for LocalTime and LocalDate
 	private final String DefaultFormat = "HH:mm";
 	@SuppressWarnings("unused")
 	private DateTimeFormatter formatter;
@@ -115,91 +54,55 @@ public class PersonalDetailsController {
 		}
 	};
 
-@FXML
-	void onAptNumber(ActionEvent event) {
-		adress[2] = fieldAptNumber.getText();
-	}
+	//set onBackButton function
+	@FXML void onBack(ActionEvent event) throws Exception{ 
+		comboStore.getItems().clear();
+		cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart",null); 
+		}
 
-	@FXML
-	void onBack(ActionEvent event) {
+	@FXML void onExit(ActionEvent event) throws Exception{ cc.OnExit(); }
 
-	}
-
-	@FXML
-	void onBlessing(ActionEvent event) {
-		greetingCard = fieldBlessing.getText();
-
-	}
-
-	@FXML
-	void onCity(ActionEvent event) {
-		adress[0] = fieldCity.getText();
-	}
-
-
-	@FXML
-	void onDatePicker(ActionEvent event) {
-
-	}
-
-	@FXML
-	void onDelivery(ActionEvent event) {
-		
-	}
-
-	@FXML
-	void onEmail(ActionEvent event) {
-
-	}
-
-	@FXML
-	void onExit(ActionEvent event) {
-
-	}
-
-	@FXML
-	void onFirst(ActionEvent event) {
-
-	}
-
-	@FXML
-	void onLast(ActionEvent event) {
-
-	}
-
-	@FXML
-	void onLogout(ActionEvent event) {
-
+	@FXML void onLogout(ActionEvent event) throws Exception { cc.onLogout(event); }
+	
+	@FXML void onDelivery(ActionEvent event) 
+	{
+		HBoxAddress.setVisible(true);
+		HBoxstore.setVisible(false);	
 	}
 
 	@FXML
 	void onPickUp(ActionEvent event) {
 		HBoxAddress.setVisible(false);
-		HBoxstore.setVisible(true);
-		
-	}
-
+		HBoxstore.setVisible(true);	
+	} 
+	
 	@FXML
-	void onPostal(ActionEvent event) {
-		adress[3] = fieldPostal.getText();
-	}
+	private void onNext(ActionEvent event){
+		//ChatClient.cartOtder.setOrderNumber //is autoIncremental from mySQL
+		ChatClient.cartOrder.setCustomerID(ChatClient.user.getUserID());
+		//ChatClient.cartOrder.setTotalPrice(); //is updated from CartController
+		ChatClient.cartOrder.setGreetingCard(fieldBlessing.getText());
+		//TODO - it is not clear what to do with field 'color'
+		//ChatClient.cartOrder.setColor(color);
+		ChatClient.cartOrder.setOrderDesc(fieldDescribtion.getText());
+		String address = fieldCity.getText()+" "+fieldSt.getText()+" "+ fieldAptNumber.getText()+" "+fieldPostal.getText();
+		ChatClient.cartOrder.setFromStore(pickUpRadio.isSelected() == false ? null : comboStore.getValue().getStoreName()); 
+		//ChatClient.cartOrder.setPaymentMethod(); is from Payment.fxml
+		ChatClient.cartOrder.setOrderStatus("WAITING_FOR_CONFIRMATION");
+		ChatClient.cartOrder.setConfirmedDate(null);
+		ChatClient.cartOrder.setCompleteDate(null);
+		ChatClient.cartOrder.setDeliveryMethod(pickUpRadio.isSelected() == true ? address : comboStore.getValue().getStoreName());
+		ChatClient.cartOrder.setOrderCreationDate(LocalDate.now());
+		ChatClient.cartOrder.setOrderCreationTime(LocalTime.now().truncatedTo(ChronoUnit.MINUTES));
+		ChatClient.cartOrder.setSupplyDate(datePicker.getValue());
+		ChatClient.cartOrder.setSuppplyTime(LocalTime.parse(timePicker.getText()));
 
-	@FXML
-	void onSt(ActionEvent event) {
-
-	}
-
-	@FXML
-	void onStore(ActionEvent event) {
-
-	}
-
-	@FXML
-	void onTimePicker(ActionEvent event) {
-
+		//debug
+		System.out.println(ChatClient.cartOrder);
 	}
 
 	public void initialize() throws Exception {
+		userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
 		fieldEmail.setText(ChatClient.user.getEmail());
 		fieldEmail.setDisable(true);
 		fieldFirst.setText(ChatClient.user.getFirstName());
@@ -220,20 +123,10 @@ public class PersonalDetailsController {
 				timePicker.home();
 			}
 		});
-//		labelStore.setVisible(false);
-//		labelDestination.setVisible(false);
-//		comboStore.setVisible(false);
 		
 		HBoxAddress.setVisible(false);
 		HBoxstore.setVisible(false);
-		initComboBox();
-		
-		
-	}
-	
-	private void initComboBox() throws Exception{
 		ClientUI.chat.accept("GetAllStores");
-		System.out.println("is: "+ChatClient.stores);
-		comboStore.setItems(FXCollections.observableArrayList(ChatClient.stores));
+		comboStore.setItems(FXCollections.observableArrayList(ChatClient.stores));		
 	}
 }

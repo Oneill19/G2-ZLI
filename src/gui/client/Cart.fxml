@@ -20,26 +20,13 @@
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1110.0" style="-fx-background-color: #FCFCFE;">
          <children>
-            <HBox alignment="TOP_CENTER" layoutX="4.0" layoutY="40.0" spacing="870.0" style="-fx-alignment: center;">
+            <HBox layoutX="4.0" layoutY="40.0" spacing="870.0">
                <children>
-                  <HBox alignment="CENTER" maxHeight="-Infinity">
-                     <children>
-                        <Button fx:id="logoutBtn" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#onLogout" style="-fx-background-color: transparent;" text="Logout | " textFill="#2b0548">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="userOptBtn" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                     </children>
+                  <HBox maxHeight="-Infinity">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </HBox>
-                  <Button fx:id="exit" alignment="CENTER" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -133,6 +120,17 @@
                   <TableColumn fx:id="colDelete" minWidth="26.0" prefWidth="65.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Action" />
                </columns>
             </TableView>
+            <Button fx:id="logoutBtn" defaultButton="true" layoutX="24.0" layoutY="48.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: transparent;" text="Logout |" textFill="#2b0548">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="userOptBtn" layoutX="94.0" layoutY="49.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="exit" alignment="CENTER" layoutX="1034.0" layoutY="24.0" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
          </children>
       </Pane>
       <Button fx:id="nextBtn" alignment="CENTER" layoutX="824.0" layoutY="739.0" mnemonicParsing="false" onAction="#onNext" prefHeight="44.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: Green; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="Next" textAlignment="CENTER" textFill="#fcfcfe" />
