@@ -34,28 +34,12 @@ public class CartController {
 	// ******
 	@FXML
 	private TableView<AbstractProduct> cartTable;
-	@FXML
-	private TableColumn<AbstractProduct, String> colDelete;
-	@FXML
-	private TableColumn<AbstractProduct, ImageView> colImage;
-	@FXML
-	private TableColumn<AbstractProduct, String> colName;
-	@FXML
-	private TableColumn<AbstractProduct, Double> colPrice;
-	@FXML
-	private TextField textFieldPrice;
-	@FXML
-	private Button exit;
-	@FXML
-	private Button exitClient;
-	@FXML
-	private Button logoutBtn;
-	@FXML
-	private Button onBack;
-	@FXML
-	private Button userOptBtn;
-    @FXML
-    private Button nextBtn;
+	@FXML private TableColumn<AbstractProduct, String> colDelete,colName;
+	@FXML private TableColumn<AbstractProduct, ImageView> colImage;
+	@FXML private TableColumn<AbstractProduct, Double> colPrice;
+	@FXML private TextField textFieldPrice;
+	@FXML private Button exit, exitClient, logoutBtn, onBack, userOptBtn, nextBtn; 
+	private Double totalPrice = new Double(0);
     
     private CommonController cc = new CommonController();
 
@@ -76,6 +60,7 @@ public class CartController {
 	
     @FXML
     void onNext(ActionEvent event) throws IOException {
+    	ChatClient.cartOrder.setTotalPrice(totalPrice);
     	cc.changeFXML(event, "PersonalDetails.fxml", "Zer-Li Personal Details",null);
     }
 	
@@ -120,8 +105,7 @@ public class CartController {
 						cartTable.getItems().clear();
 						cartTable.setItems(FXCollections.observableArrayList(ChatClient.cart));
 						
-						//update the new totalPrice
-						Double totalPrice = new Double(0);
+						//update the new totalPrice 
 						for (AbstractProduct ap : ChatClient.cart)
 							totalPrice += ap.getPrice();
 						textFieldPrice.setText(totalPrice.toString());
@@ -164,9 +148,8 @@ public class CartController {
 		cartTable.autosize();
 		cartTable.setItems(FXCollections.observableArrayList(ChatClient.cart));
 
-		Double sumOfProducts = new Double(0);
 		for (AbstractProduct ai : ChatClient.cart)
-			sumOfProducts += ai.getPrice();
-		textFieldPrice.setText(sumOfProducts.toString());
+			totalPrice += ai.getPrice();
+		textFieldPrice.setText(totalPrice.toString());
 	}
 }

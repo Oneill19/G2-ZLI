@@ -27,6 +27,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Store> stores = new ArrayList<>();
 	public static ArrayList<Survey> surveysWithReports = new ArrayList<>();
 	public static ArrayList<Survey> allSurveys = new ArrayList<>();
+	public static Order cartOrder = new Order();
 
 	public static User user = null;
 	

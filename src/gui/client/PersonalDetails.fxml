@@ -19,7 +19,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.PersonalDetailsController">
    <children>
-      <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1110.0" style="-fx-background-color: #FCFCFE;">
+      <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="1110.0" style="-fx-background-color: #FCFCFE;">
          <children>
             <HBox alignment="TOP_CENTER" layoutX="4.0" layoutY="40.0" spacing="870.0" style="-fx-alignment: center;">
                <children>
@@ -116,67 +116,73 @@
                   </VBox>
                </children>
             </HBox>
-            <VBox layoutX="289.0" layoutY="199.0" prefHeight="481.0" prefWidth="614.0" spacing="15.0">
+            <VBox layoutX="200.0" layoutY="199.0" spacing="15.0">
                <children>
-                  <HBox prefHeight="30.0" prefWidth="219.0" style="-fx-font-size: 20;">
+                  <HBox spacing="5.0" style="-fx-font-size: 20;">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="115.0" style="-fx-font-size: 20;" text="Email: ">
+                        <Label style="-fx-font-size: 20;" text="Email: ">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="fieldEmail" onAction="#onEmail" prefHeight="26.0" prefWidth="173.0" promptText="israelisraeli@zli" style="-fx-border-color: #a297d5;" />
+                        <TextField fx:id="fieldEmail" promptText="israelisraeli@zli" style="-fx-border-color: #a297d5;" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="34.0" prefWidth="280.0" style="-fx-font-size: 20;">
+                  <HBox spacing="5.0" style="-fx-font-size: 20;">
                      <children>
                         <Label prefHeight="30.0" prefWidth="115.0" style="-fx-font-size: 20;" text="First Name: ">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="fieldFirst" onAction="#onFirst" promptText="your first name" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                        <TextField fx:id="fieldFirst" promptText="your first name" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                        <HBox style="-fx-font-size: 20;">
+                           <children>
+                              <Label style="-fx-font-size: 20;" text="Last Name: ">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="fieldLast" promptText="your last name" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
-                  <HBox prefHeight="34.0" prefWidth="271.0" style="-fx-font-size: 20;">
-                     <children>
-                        <Label prefHeight="30.0" prefWidth="115.0" style="-fx-font-size: 20;" text="Last Name: ">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="fieldLast" onAction="#onLast" promptText="your last name" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="43.0" prefWidth="532.0" style="-fx-font-size: 20;">
+                  <HBox spacing="5.0" style="-fx-font-size: 20;">
                      <children>
                         <Label prefHeight="30.0" prefWidth="176.0" style="-fx-font-size: 20;" text="Attach a blessing: ">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="fieldBlessing" onAction="#onBlessing" prefHeight="34.0" prefWidth="348.0" promptText="Hey Raj!!!! Happy Birthday from Claire &lt;3" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                        <TextField fx:id="fieldBlessing" prefWidth="494.0" promptText="Hey Raj!!!! Happy Birthday from Claire &lt;3" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="43.0" prefWidth="675.0" spacing="10.0" style="-fx-font-size: 20;">
+                  <HBox spacing="5.0">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="204.0" style="-fx-font-size: 20;" text="Suuply Date and Time: ">
+                        <Label style="-fx-font-size: 20;" text="Order Describtion: " />
+                        <TextField fx:id="fieldDescribtion" prefHeight="34.0" prefWidth="506.0" promptText="Wedding" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="5.0" style="-fx-font-size: 20;">
+                     <children>
+                        <Label style="-fx-font-size: 20;" text="Suuply Date and Time: ">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="datePicker" onAction="#onDatePicker" style="-fx-font-size: 20;" />
-                        <TextField fx:id="timePicker" onAction="#onTimePicker" prefHeight="26.0" prefWidth="118.0" promptText="HH:MM" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                        <DatePicker fx:id="datePicker" prefHeight="34.0" prefWidth="161.0" style="-fx-font-size: 20;" />
+                        <TextField fx:id="timePicker" prefHeight="34.0" prefWidth="92.0" promptText="HH:MM" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="38.0" prefWidth="493.0" style="-fx-font-size: 20;">
+                  <HBox spacing="5.0" style="-fx-font-size: 20;">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="162.0" style="-fx-font-size: 20;" text="Delivery Method:">
+                        <Label prefWidth="162.0" style="-fx-font-size: 20;" text="Delivery Method:">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <RadioButton fx:id="pickUpRadio" graphicTextGap="2.0" mnemonicParsing="false" onAction="#onPickUp" style="-fx-font-size: 20;" text="Pickup" textAlignment="CENTER">
+                        <RadioButton fx:id="pickUpRadio" graphicTextGap="2.0" mnemonicParsing="false" onAction="#onPickUp" prefHeight="21.0" prefWidth="105.0" style="-fx-font-size: 20;" text="Pickup" textAlignment="CENTER">
                            <toggleGroup>
                               <ToggleGroup fx:id="DeliveryMethod" />
                            </toggleGroup>
@@ -184,50 +190,47 @@
                               <Font size="24.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="DeliveryRadio" mnemonicParsing="false" onAction="#onDelivery" style="-fx-font-size: 20;" text="Delivery" toggleGroup="$DeliveryMethod">
+                        <RadioButton fx:id="DeliveryRadio" mnemonicParsing="false" onAction="#onDelivery" prefHeight="22.0" prefWidth="114.0" style="-fx-font-size: 20;" text="Delivery" toggleGroup="$DeliveryMethod">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </RadioButton>
                      </children>
                   </HBox>
-                  <HBox fx:id="HBoxstore" prefHeight="38.0" prefWidth="413.0" style="-fx-font-size: 20;">
+               </children>
+            </VBox>
+            <HBox fx:id="HBoxAddress" layoutX="200.0" layoutY="557.0" prefHeight="166.0" prefWidth="365.0" spacing="10.0" style="-fx-font-size: 20;">
+               <children>
+                  <Label fx:id="labelDestination" prefHeight="30.0" prefWidth="195.0" style="-fx-font-size: 20;" text="Destination address: ">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <VBox prefHeight="200.0" prefWidth="141.0" spacing="10.0">
                      <children>
-                        <Label fx:id="labelStore" prefHeight="30.0" prefWidth="256.0" style="-fx-font-size: 20;" text="Choose destination store: ">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="comboStore" onAction="#onStore" prefWidth="150.0" style="-fx-font-size: 20; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: #a297d5;" />
-                     </children>
-                  </HBox>
-                  <VBox prefHeight="222.0" prefWidth="425.0" spacing="5.0">
-                     <children>
-                        <HBox fx:id="HBoxAddress" prefHeight="166.0" prefWidth="365.0" spacing="10.0" style="-fx-font-size: 20;">
-                           <children>
-                              <Label fx:id="labelDestination" prefHeight="30.0" prefWidth="195.0" style="-fx-font-size: 20;" text="Destination address: ">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <VBox prefHeight="200.0" prefWidth="141.0" spacing="10.0">
-                                 <children>
-                                    <TextField fx:id="fieldCity" onAction="#onCity" prefHeight="26.0" prefWidth="118.0" promptText="City" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
-                                    <TextField fx:id="fieldSt" onAction="#onSt" prefHeight="26.0" prefWidth="138.0" promptText="St." style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
-                                    <TextField fx:id="fieldAptNumber" onAction="#onAptNumber" promptText="Apt. number" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
-                                    <TextField fx:id="fieldPostal" onAction="#onPostal" promptText="Postal Code" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
-                                 </children>
-                              </VBox>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </HBox>
+                        <TextField fx:id="fieldCity" prefHeight="26.0" prefWidth="118.0" promptText="City" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                        <TextField fx:id="fieldSt" promptText="St." style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                        <TextField fx:id="fieldAptNumber" promptText="Apt. number" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                        <TextField fx:id="fieldPostal" promptText="Postal Code" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
                      </children>
                   </VBox>
                </children>
-            </VBox>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <HBox fx:id="HBoxstore" layoutX="200.0" layoutY="557.0" spacing="5.0" style="-fx-font-size: 20;">
+               <children>
+                  <Label fx:id="labelStore" style="-fx-font-size: 20;" text="Choose destination store: ">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="comboStore" prefWidth="150.0" style="-fx-font-size: 20; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: #a297d5;" />
+               </children>
+            </HBox>
          </children>
       </Pane>
+      <Button fx:id="nextBtn" alignment="CENTER" layoutX="834.0" layoutY="749.0" mnemonicParsing="false" onAction="#onNext" prefHeight="44.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: Green; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="Next" textAlignment="CENTER" textFill="#fcfcfe" />
    </children>
 </AnchorPane>
