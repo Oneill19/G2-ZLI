@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.PaymentController">
+   <children>
+      <Pane layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="1110.0" style="-fx-background-color: #FCFCFE;">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="367.0" layoutX="253.0" layoutY="228.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-height: 50; -fx-arc-width: 50; -fx-stroke: transparent; -fx-smooth: true;" width="586.0">
+               <fill>
+                  <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.78961580991745" green="0.7528021335601807" blue="0.9736841917037964" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.0511744966442953">
+                           <color>
+                              <Color red="0.78961580991745" green="0.7528021335601807" blue="0.9736841917037964" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.348993288590604">
+                           <color>
+                              <Color red="0.6352941393852234" green="0.5921568870544434" blue="0.8352941274642944" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.6942216402029792">
+                           <color>
+                              <Color red="0.6352941393852234" green="0.5921568870544434" blue="0.8352941274642944" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.8765432238578796" green="0.8518518805503845" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <HBox alignment="TOP_CENTER" layoutX="4.0" layoutY="40.0" spacing="870.0" style="-fx-alignment: center;">
+               <children>
+                  <HBox alignment="CENTER" maxHeight="-Infinity">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <Button fx:id="onBack" alignment="CENTER" layoutX="69.0" layoutY="743.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
+            <HBox alignment="TOP_CENTER" layoutX="4.0" layoutY="132.0" prefHeight="30.0" prefWidth="1100.0" style="-fx-alignment: center;">
+               <children>
+                  <Label style="-fx-background-color: white;" text="Cart" textFill="#bcbcbc">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Line endX="40.0" startX="-66.0" stroke="#bcbcbc">
+                     <HBox.margin>
+                        <Insets top="15.0" />
+                     </HBox.margin>
+                  </Line>
+                  <Label style="-fx-background-color: white;" text="Insert Personal Data" textFill="#bcbcbc">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Line endX="40.0" startX="-66.0" stroke="#bcbcbc">
+                     <HBox.margin>
+                        <Insets top="15.0" />
+                     </HBox.margin>
+                  </Line>
+                  <Label style="-fx-background-color: white;" text="Payment" textFill="#a297d5">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Line endX="40.0" startX="-66.0" stroke="#bcbcbc">
+                     <HBox.margin>
+                        <Insets top="15.0" />
+                     </HBox.margin>
+                  </Line>
+                  <Label style="-fx-background-color: white;" text="Order Summary" textFill="#bcbcbc">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" layoutX="149.0" layoutY="10.0" prefHeight="118.0" prefWidth="794.0">
+               <children>
+                  <VBox alignment="CENTER" fillWidth="false" style="-fx-alignment: center;">
+                     <children>
+                        <ImageView fitHeight="72.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Zli_logo_cropped.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-background-color: white;" text="Payment" textAlignment="CENTER" textFill="#a297d5">
+                           <font>
+                              <Font name="System Bold" size="31.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <TextField fx:id="fullName" layoutX="299.0" layoutY="519.0" prefHeight="55.0" prefWidth="299.0" promptText="CARDHOLDER NAME" style="-fx-font-family: Averia Serif Libre; -fx-font-size: 30; -fx-background-color: transparent;">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+            <HBox layoutX="415.0" layoutY="370.0">
+               <children>
+                  <PasswordField fx:id="first4" prefHeight="61.0" prefWidth="90.0" promptText="0000" style="-fx-font-family: Averia Serif Libre; -fx-font-size: 25; -fx-background-color: transparent;" />
+                  <PasswordField fx:id="second4" prefHeight="61.0" prefWidth="90.0" promptText="0000" style="-fx-font-family: Averia Serif Libre; -fx-font-size: 25; -fx-background-color: transparent;" />
+                  <PasswordField fx:id="third4" prefHeight="61.0" prefWidth="90.0" promptText="0000" style="-fx-font-family: Averia Serif Libre; -fx-font-size: 25; -fx-background-color: transparent;" />
+                  <PasswordField fx:id="fourth4" prefHeight="61.0" prefWidth="90.0" promptText="0000" style="-fx-font-family: Averia Serif Libre; -fx-font-size: 25; -fx-background-color: transparent;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="460.0" layoutY="456.0">
+               <children>
+                  <Label style="-fx-font-family: Averia Serif Libre; -fx-font-weight: bold;" text="GOOD&#10;THRU">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="day" prefHeight="30.0" prefWidth="70.0" promptText="12" style="-fx-font-family: Averia Serif Libre; -fx-font-size: 25; -fx-background-color: transparent;">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </TextField>
+                  <Label style="-fx-font-family: Averia Serif Libre; -fx-font-weight: bold;" text="\\">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="month" prefHeight="30.0" prefWidth="70.0" promptText="12" style="-fx-font-family: Averia Serif Libre; -fx-font-size: 25; -fx-background-color: transparent;">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <Label layoutX="293.0" layoutY="466.0" style="-fx-font-family: Averia Serif Libre; -fx-font-weight: bold;" text="CVV">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="cvv" layoutX="326.0" layoutY="438.0" prefHeight="61.0" prefWidth="80.0" promptText="000" style="-fx-font-family: Averia Serif Libre; -fx-font-size: 25; -fx-background-color: transparent;" />
+            <ImageView fitHeight="72.0" fitWidth="84.0" layoutX="302.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@EMV-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="46.0" fitWidth="107.0" layoutX="707.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@VISA-symbol-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Button fx:id="nextBtn" alignment="CENTER" layoutX="844.0" layoutY="759.0" mnemonicParsing="false" onAction="#onNext" prefHeight="44.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: Green; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="Next" textAlignment="CENTER" textFill="#fcfcfe" />
+      <Button fx:id="exit" alignment="CENTER" layoutX="1054.0" layoutY="44.0" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+      <Button fx:id="logoutBtn" defaultButton="true" layoutX="44.0" layoutY="68.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: transparent;" text="Logout |" textFill="#2b0548">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="userOptBtn" layoutX="114.0" layoutY="69.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
