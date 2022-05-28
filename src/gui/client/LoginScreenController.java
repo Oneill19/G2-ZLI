@@ -152,7 +152,8 @@ public class LoginScreenController {
     		System.out.println("StoreWorker");
     		break;
     	case "CustomerServiceWorker":
-    		System.out.println("CustomerServiceWorker");
+//    		System.out.println("CustomerServiceWorker");
+    		root = FXMLLoader.<Pane>load(getClass().getResource("CustomerServiceWorkerScreen.fxml"));
     		break;
     	case "ServiceSpecialist":
     		System.out.println("ServiceSpecialist");

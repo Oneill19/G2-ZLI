@@ -10,6 +10,8 @@ import entity.Item;
 import entity.Order;
 import entity.Product;
 import entity.Store;
+import entity.Survey;
+import entity.SurveyReport;
 import entity.User;
 import ocsf.client.AbstractClient;
 
@@ -23,8 +25,14 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<AbstractProduct> products = new ArrayList<>();
 	public static ArrayList<AbstractProduct> cart = new ArrayList<>();
 	public static ArrayList<Store> stores = new ArrayList<>();
+	public static ArrayList<Survey> surveysWithReports = new ArrayList<>();
+	public static ArrayList<Survey> allSurveys = new ArrayList<>();
 
 	public static User user = null;
+	
+	public static SurveyReport selectedSurveyReport = null;
+	
+	public static boolean requestSucceed = false;
 
 	public static boolean awaitResponse = false;
 
@@ -81,6 +89,22 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "GetAllStores":
 				ChatClient.stores.addAll((ArrayList<Store>) rc.getReturnValue());
+				break;
+				
+			case "GetSurveysWithReports":
+				surveysWithReports.addAll((ArrayList<Survey>)rc.getReturnValue());
+				break;
+				
+			case "GetSurveyReport":
+				selectedSurveyReport = (SurveyReport)rc.getReturnValue();
+				break;
+				
+			case "GetAllSurveys":
+				allSurveys.addAll((ArrayList<Survey>)rc.getReturnValue());
+				break;
+				
+			case "AddSurveyAnswer":
+				requestSucceed = rc == null ? false : true;
 				break;
 			}	
 
