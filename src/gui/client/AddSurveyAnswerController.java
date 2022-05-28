@@ -67,7 +67,6 @@ public class AddSurveyAnswerController {
     void onBack(ActionEvent event) throws Exception {
     	// clear surveys list
     	ChatClient.allSurveys.clear();
-		ChatClient.allSurveys = null;
 		
 		// go to the previous screen
 		cc.changeFXML(event, "CustomerServiceWorkerScreen.fxml", "Zer-Li Customer Service Worker Screen", null);
@@ -95,6 +94,7 @@ public class AddSurveyAnswerController {
     	// clear the survey list
     	ChatClient.surveysWithReports.clear();
 		ChatClient.selectedSurveyReport = null;
+		ChatClient.allSurveys.clear();
 		
 		// logout and go to the login page
 		cc.onLogout(event);
