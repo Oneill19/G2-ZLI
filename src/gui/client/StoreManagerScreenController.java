@@ -114,7 +114,7 @@ public class StoreManagerScreenController {
     	((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		new FXMLLoader();
-		Pane root = FXMLLoader.<Pane>load(getClass().getResource("/gui/client/UserRegistrationPage.fxml"));
+		Pane root = FXMLLoader.<Pane>load(getClass().getResource("/gui/client/UserRegistrationTable.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li->Option Screen->User Registration");
 		primaryStage.setScene(scene);
@@ -130,7 +130,7 @@ public class StoreManagerScreenController {
     	((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		new FXMLLoader();
-		Pane root = FXMLLoader.<Pane>load(getClass().getResource("/gui/client/ViewMonthlyReportScreen.fxml"));
+		Pane root = FXMLLoader.<Pane>load(getClass().getResource("ViewMonthlyReportScreen.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li->Option Screen->View Monthly Report");
 		primaryStage.setScene(scene);

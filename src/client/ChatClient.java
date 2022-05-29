@@ -9,6 +9,7 @@ import entity.AbstractProduct;
 import entity.Item;
 import entity.Order;
 import entity.Product;
+import entity.StoreWorker;
 import entity.User;
 import ocsf.client.AbstractClient;
 
@@ -19,6 +20,8 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Order> NotAprroveorders;
 	public static ArrayList<User> ApprovedUserToPer;
 	public static ArrayList<User> NotApprovedUsers;
+	public static ArrayList<User> waitingUsers;
+
 	public static ArrayList<AbstractProduct> products = new ArrayList<>();
 	public static ArrayList<AbstractProduct> cart = new ArrayList<>();
 	
@@ -82,7 +85,14 @@ public class ChatClient extends AbstractClient {
 			case "GetAllItems":
 				ChatClient.products.addAll((ArrayList<Item>)rc.getReturnValue());
 				break;
+			case "GetRegistersUsers":
+				waitingUsers=(ArrayList<User>)rc.getReturnValue();
+				break;
+			case "ConfirmedUserUpdate":
+				System.out.println("User Updated");
+				break;
 			}
+			
 			
 			
 		}

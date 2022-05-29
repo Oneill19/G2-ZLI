@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import client.ChatClient;
 import client.ClientUI;
+import entity.StoreWorker;
 import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,6 +55,10 @@ public class PermissionManagementController {
 
 	@FXML
 	private Text Errormsg;
+	
+	@FXML
+	private TextField roleTxt;
+
 
 	@FXML
 	private TableView<User> userTable;
@@ -69,6 +74,9 @@ public class PermissionManagementController {
 
 	@FXML
 	private TableColumn<User, String> StatusCol;
+	
+	 @FXML
+	private TableColumn<User, String> role;
 
 	@FXML
 	private ComboBox<String> StatusComboBox;
@@ -152,6 +160,7 @@ public class PermissionManagementController {
 	void onUser(ActionEvent event) {
 
 	}
+	
 
 	@FXML
 	void onSelectedUser(MouseEvent event) {
@@ -162,6 +171,7 @@ public class PermissionManagementController {
 			IDtxt.setText(String.valueOf(selectedUser.getUserID()));
 			FirstNametxt.setText(selectedUser.getFirstName());
 			LastNametxt.setText(selectedUser.getLastName());
+			roleTxt.setText(selectedUser.getUserRole());
 		}
 		// initialize error message
 		Errormsg.setText("");
@@ -169,13 +179,14 @@ public class PermissionManagementController {
 
 	@FXML
 	void initialize() throws IOException {
-		ClientUI.chat.accept("GetApprovedUsers");
+		ClientUI.chat.accept("GetApprovedUsers" + "\t" +((StoreWorker)ChatClient.user).getStoreName());
 		observableList = FXCollections.observableArrayList(ChatClient.ApprovedUserToPer);
 		userTable.getItems().clear();
 		IDNumberCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
 		UserFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
 		UserLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
 		StatusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+		role.setCellValueFactory(new PropertyValueFactory<>("userRole"));
 		userTable.setItems(observableList);
 		Combolist = FXCollections.observableArrayList("CONFIRMED", "FREEZED");
 		StatusComboBox.setItems(Combolist);
