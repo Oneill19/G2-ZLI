@@ -87,6 +87,7 @@ public class PersonalDetailsController {
 		String address = fieldCity.getText()+" "+fieldSt.getText()+" "+ fieldAptNumber.getText() +" "+fieldPostal.getText();
 		
 		//initial global values with local values
+		ChatClient.cartOrder.setCustomerID(ChatClient.user.getUserID());
 		ChatClient.cartOrder.setGreetingCard(fieldBlessing.getText());;
 		//TODO - it is not clear what to do with field 'color'
 		//ChatClient.cartOrder.setColor(color);

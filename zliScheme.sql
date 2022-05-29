@@ -104,6 +104,32 @@ INSERT INTO `item` VALUES ('1','White Rose',5,'Single Roses','/common/Assets/Whi
 UNLOCK TABLES;
 
 --
+-- Table structure for table `item_in_order`
+--
+
+DROP TABLE IF EXISTS `item_in_order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `item_in_order` (
+  `itemSerial` varchar(45) NOT NULL,
+  `orderNumber` int NOT NULL,
+  PRIMARY KEY (`itemSerial`,`orderNumber`),
+  KEY `itemInOrder` (`orderNumber`),
+  CONSTRAINT `item_in_order_ibfk_1` FOREIGN KEY (`itemSerial`) REFERENCES `item` (`itemSerial`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `item_in_order_ibfk_2` FOREIGN KEY (`orderNumber`) REFERENCES `orders` (`orderNumber`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item_in_order`
+--
+
+LOCK TABLES `item_in_order` WRITE;
+/*!40000 ALTER TABLE `item_in_order` DISABLE KEYS */;
+/*!40000 ALTER TABLE `item_in_order` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `item_in_product`
 --
 
@@ -129,6 +155,32 @@ LOCK TABLES `item_in_product` WRITE;
 /*!40000 ALTER TABLE `item_in_product` DISABLE KEYS */;
 INSERT INTO `item_in_product` VALUES ('1','1',10),('1','2',10),('2','4',20);
 /*!40000 ALTER TABLE `item_in_product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `item_in_sale`
+--
+
+DROP TABLE IF EXISTS `item_in_sale`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `item_in_sale` (
+  `itemSerial` varchar(45) NOT NULL,
+  `idSale` int NOT NULL,
+  PRIMARY KEY (`itemSerial`,`idSale`),
+  KEY `itemSaleID` (`idSale`),
+  CONSTRAINT `item_in_sale_ibfk_1` FOREIGN KEY (`itemSerial`) REFERENCES `item` (`itemSerial`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `item_in_sale_ibfk_2` FOREIGN KEY (`idSale`) REFERENCES `sale` (`idSale`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item_in_sale`
+--
+
+LOCK TABLES `item_in_sale` WRITE;
+/*!40000 ALTER TABLE `item_in_sale` DISABLE KEYS */;
+/*!40000 ALTER TABLE `item_in_sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -224,6 +276,58 @@ LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
 INSERT INTO `product` VALUES ('1','Red and White Bouquet',110,'/common/Assets/RedWhiteBouquet.png',NULL,'Bouqute'),('2','Yellow Bouquet',140,'/common/Assets/YellowBouquet.png',NULL,'Bouqute');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product_in_order`
+--
+
+DROP TABLE IF EXISTS `product_in_order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `product_in_order` (
+  `productSerial` varchar(45) NOT NULL,
+  `orderNumber` int NOT NULL,
+  PRIMARY KEY (`productSerial`,`orderNumber`),
+  KEY `productInOrder` (`orderNumber`),
+  CONSTRAINT `product_in_order_ibfk_1` FOREIGN KEY (`productSerial`) REFERENCES `product` (`productSerial`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `product_in_order_ibfk_2` FOREIGN KEY (`orderNumber`) REFERENCES `orders` (`orderNumber`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product_in_order`
+--
+
+LOCK TABLES `product_in_order` WRITE;
+/*!40000 ALTER TABLE `product_in_order` DISABLE KEYS */;
+/*!40000 ALTER TABLE `product_in_order` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product_in_sale`
+--
+
+DROP TABLE IF EXISTS `product_in_sale`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `product_in_sale` (
+  `productSerial` varchar(45) NOT NULL,
+  `idSale` int NOT NULL,
+  PRIMARY KEY (`productSerial`,`idSale`),
+  KEY `productSaleID` (`idSale`),
+  CONSTRAINT `product_in_sale_ibfk_1` FOREIGN KEY (`productSerial`) REFERENCES `product` (`productSerial`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `product_in_sale_ibfk_2` FOREIGN KEY (`idSale`) REFERENCES `sale` (`idSale`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product_in_sale`
+--
+
+LOCK TABLES `product_in_sale` WRITE;
+/*!40000 ALTER TABLE `product_in_sale` DISABLE KEYS */;
+/*!40000 ALTER TABLE `product_in_sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -506,4 +610,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-29  0:46:25
+-- Dump completed on 2022-05-29 23:16:00
