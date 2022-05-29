@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE; -fx-border-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.PermissionManagementController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.PermissionManagementController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="406.0" layoutY="48.0">
          <image>
@@ -59,26 +59,33 @@
       </Text>
       <TextField fx:id="FirstNametxt" layoutX="129.0" layoutY="298.0" prefHeight="32.0" prefWidth="206.0" />
       <TextField fx:id="LastNametxt" layoutX="129.0" layoutY="375.0" prefHeight="32.0" prefWidth="206.0" />
-      <Text fill="#31134a" layoutX="134.0" layoutY="439.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status">
+      <Text fill="#31134a" layoutX="129.0" layoutY="507.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Button fx:id="Save" alignment="CENTER" layoutX="153.0" layoutY="514.0" mnemonicParsing="false" onAction="#onSave" prefHeight="44.0" prefWidth="158.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: green; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Save" textFill="#fcfcfe" />
+      <Button fx:id="Save" alignment="CENTER" layoutX="143.0" layoutY="566.0" mnemonicParsing="false" onAction="#onSave" prefHeight="44.0" prefWidth="158.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: green; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Save" textFill="#fcfcfe" />
       <Text fx:id="Errormsg" fill="RED" layoutX="287.0" layoutY="635.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="358.0000102519989" />
-      <TableView fx:id="userTable" editable="true" layoutX="449.0" layoutY="208.0" onMouseClicked="#onSelectedUser" prefHeight="409.0" prefWidth="488.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px;" tableMenuButtonVisible="true">
+      <TableView fx:id="userTable" editable="true" layoutX="406.0" layoutY="213.0" onMouseClicked="#onSelectedUser" prefHeight="409.0" prefWidth="552.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px;" tableMenuButtonVisible="true">
          <columns>
             <TableColumn fx:id="IDNumberCol" prefWidth="129.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center;" text="ID" />
             <TableColumn fx:id="UserFirstNameCol" prefWidth="153.0" style="-fx-background-color: #FCFCFE;" text="First Name" />
             <TableColumn fx:id="UserLastNameCol" prefWidth="101.0" style="-fx-background-color: #FCFCFE;" text="Last Name" />
             <TableColumn fx:id="StatusCol" prefWidth="93.0" style="-fx-background-color: #FCFCFE;" text="Status" />
+            <TableColumn fx:id="role" prefWidth="75.0" style="-fx-background-color: #FCFCFE;" text="Role" />
          </columns>
       </TableView>
-      <ComboBox fx:id="StatusComboBox" editable="true" layoutX="130.0" layoutY="447.0" prefHeight="30.0" prefWidth="206.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #31134a;" />
-      <ImageView fitHeight="46.0" fitWidth="42.0" layoutX="576.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+      <ComboBox fx:id="StatusComboBox" editable="true" layoutX="130.0" layoutY="513.0" prefHeight="30.0" prefWidth="206.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #31134a;" />
+      <ImageView fitHeight="46.0" fitWidth="42.0" layoutX="600.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@הורדה.png" />
+            <Image url="@Premission%20icon.png" />
          </image>
       </ImageView>
+      <Text fill="#31134a" layoutX="129.0" layoutY="440.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="roleTxt" layoutX="130.0" layoutY="446.0" prefHeight="32.0" prefWidth="206.0" />
    </children>
 </Pane>

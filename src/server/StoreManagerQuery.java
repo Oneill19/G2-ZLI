@@ -9,7 +9,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import common.ReturnCommand;
+import entity.Customer;
 import entity.Order;
+import entity.StoreWorker;
 import entity.User;
 
 /**
@@ -18,6 +20,7 @@ import entity.User;
  */
 public class StoreManagerQuery {
 
+	 public static AuthQuery query=new AuthQuery();
 	/**
 	 * method to execute sql query and return a list of not approved users
 	 * 
@@ -125,27 +128,36 @@ public class StoreManagerQuery {
 	 * @param con
 	 * @return ReturnCommand
 	 */
-	public static ReturnCommand GetApprovedUsers(Connection con) {
+	public static ReturnCommand GetApprovedUsers(Connection con,String storeName) {
 		Statement stmt;
-		String sqlQuery = "SELECT * From zli.users WHERE status='CONFIRMED' OR status='FREEZED';";
+		String sqlQuery = "SELECT * From zli.users WHERE status='CONFIRMED' OR status='FREEZED' ;";
 		ResultSet rs = null;
 		ArrayList<User> ApprovedUserToPer = new ArrayList<>();
-
+		String storeNameWorker;
 		try {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sqlQuery);
 			while (rs.next()) {
-				ApprovedUserToPer.add(new User(rs.getInt(1), // UserID
-						rs.getString(2), // FirstName
-						rs.getString(3), // LastName
-						rs.getString(4), // CreditCard
-						rs.getString(5), // Phone
-						rs.getString(6), // Email
-						rs.getString(7), // Password
-						rs.getString(8), // UserRole
-						rs.getString(9), // Status
-						rs.getBoolean(10) // ask if we can like this !! IsLogged
-				));
+				int userId = rs.getInt(1);
+				String firstName = rs.getString(2);
+				String lastName = rs.getString(3);
+				String creditCard = rs.getString(4);
+				String phone = rs.getString(5);
+				String email = rs.getString(6);
+				String userPassword = rs.getString(7);
+				String userRole = rs.getString(8);
+				String status = rs.getString(9);
+				boolean isLogged = rs.getInt(10) == 0 ? false : true;
+				if (rs.getString(8).equals("Customer")) {
+					double balance = query.getCustomerBalance(con, userId);
+					ApprovedUserToPer.add(new Customer(userId,firstName, lastName, creditCard, phone, email, userPassword, userRole, status, isLogged, balance));
+				}
+				else if (rs.getString(8).equals("StoreWorker")) {
+					 storeNameWorker= query.getStoreWorkerStore(con, userId);
+					 if(storeNameWorker.equals(storeName))
+				ApprovedUserToPer.add(new StoreWorker(userId,firstName, lastName, creditCard, phone, email, userPassword, userRole, status, isLogged, storeName)); 
+				}
+				
 			}
 			return new ReturnCommand("GetApprovedUsers", ApprovedUserToPer);
 		} catch (SQLException e) {
@@ -167,4 +179,52 @@ public class StoreManagerQuery {
 			return null;
 		}
 	}
-}
+	
+	public static ReturnCommand getAllWaitingRegistersUsers(Connection con) {
+		Statement stmt;
+		String sqlQuery ="SELECT * From zli.users WHERE status='NOT_CONFIRMED';";
+		ResultSet rs = null;
+		ArrayList<User> waitingUsers = new ArrayList<>();
+		
+				try {
+					stmt = con.createStatement();
+					rs = stmt.executeQuery(sqlQuery);
+					while(rs.next()) {
+						waitingUsers.add( new User(rs.getInt(1), // UserID
+								rs.getString(2), // FirstName
+								rs.getString(3), // LastName
+								rs.getString(4), // CreditCard
+								rs.getString(5), // Phone
+								rs.getString(6), // Email
+								rs.getString(7), // Password
+								rs.getString(8), // UserRole
+								rs.getString(9), // Status
+								rs.getBoolean(10) //! IsLogged
+								));	}
+					return new ReturnCommand("GetRegistersUsers", waitingUsers);
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+	
+	
+	
+	public static ReturnCommand ConfirmedUserUpdate(Connection con,String idUser,String cardNum) {
+		Statement stmt;
+		String sql1 = "";
+		String sql2 = "";
+		sql1 = "UPDATE zli.users SET Status='CONFIRMED' WHERE UserID='" + idUser + "';";
+		sql2="UPDATE zli.users SET CreditCard='" + cardNum + "' WHERE UserID='" + idUser + "';";
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sql1);
+			stmt.executeUpdate(sql2);
+			return new ReturnCommand("ConfirmedUserUpdate", null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	}
+

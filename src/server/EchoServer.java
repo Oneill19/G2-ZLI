@@ -198,7 +198,7 @@ public class EchoServer extends AbstractServer {
 		case "GetApprovedUsers":
 			try {
 				// send a successful message back
-				client.sendToClient(StoreManagerQuery.GetApprovedUsers(conn));
+				client.sendToClient(StoreManagerQuery.GetApprovedUsers(conn,clientMsg[1]));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -272,6 +272,23 @@ public class EchoServer extends AbstractServer {
 						Integer.parseInt(clientMsg[6]), // answer4
 						Integer.parseInt(clientMsg[7]), // answer5
 						Integer.parseInt(clientMsg[8]))); // answer6
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			
+		case "GetRegistersUsers":
+			try {
+
+				client.sendToClient(StoreManagerQuery.getAllWaitingRegistersUsers(conn));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "ConfirmedUserUpdate":
+			try {
+
+				client.sendToClient(StoreManagerQuery.ConfirmedUserUpdate(conn, clientMsg[1], clientMsg[2]));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

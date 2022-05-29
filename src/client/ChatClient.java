@@ -22,6 +22,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Order> NotAprroveorders;
 	public static ArrayList<User> ApprovedUserToPer;
 	public static ArrayList<User> NotApprovedUsers;
+	public static ArrayList<User> waitingUsers;
 	public static ArrayList<AbstractProduct> products = new ArrayList<>();
 	public static ArrayList<AbstractProduct> cart = new ArrayList<>();
 	public static ArrayList<Store> stores = new ArrayList<>();
@@ -90,24 +91,26 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "GetAllStores":
 				ChatClient.stores.addAll((ArrayList<Store>) rc.getReturnValue());
-				break;
-				
+				break;	
 			case "GetSurveysWithReports":
 				surveysWithReports.addAll((ArrayList<Survey>)rc.getReturnValue());
-				break;
-				
+				break;	
 			case "GetSurveyReport":
 				selectedSurveyReport = (SurveyReport)rc.getReturnValue();
-				break;
-				
+				break;	
 			case "GetAllSurveys":
 				allSurveys.addAll((ArrayList<Survey>)rc.getReturnValue());
 				break;
-				
 			case "AddSurveyAnswer":
 				requestSucceed = rc == null ? false : true;
 				break;
-			}	
+			case "GetRegistersUsers":
+				waitingUsers=(ArrayList<User>)rc.getReturnValue();
+				break;
+			case "ConfirmedUserUpdate":
+				System.out.println("User Updated");
+				break;
+			}
 
 		}
 	}
