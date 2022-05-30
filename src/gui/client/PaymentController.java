@@ -53,6 +53,8 @@ public class PaymentController {
     	Integer itemCounter=0;
     	ArrayList<String> cartProduct=new ArrayList<String>();
     	Integer productCounter=0;
+    	Double sumPrice=new Double(0);
+    	Integer totalAmount=0;
     	for(AbstractProduct ap : ChatClient.cart) {
     		if (ap instanceof Product) {
     			productCounter++;
@@ -62,10 +64,12 @@ public class PaymentController {
     			itemCounter++;
     			cartItems.add(ap.getName());
     		}
+    		sumPrice+=ap.getPrice();
+    		totalAmount++;
     	}
     	
     	try {
-			ClientUI.chat.accept("numberOfItemsInOrder\tItems\t"+itemCounter.toString()+"\tProducts\t"+productCounter.toString());
+			ClientUI.chat.accept("numberOfItemsInOrder\t"+productCounter.toString()+"\t"+itemCounter.toString()+"\t"+sumPrice.toString()+"\t"+totalAmount.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
