@@ -34,7 +34,10 @@ public class PaymentController {
 
     @FXML
     void onNext(ActionEvent event) {
-
+    	//saveOrderInDB()
+    	//send how much product, how many items, the sum price of all products and the price of all items
+    	//pop alert message that ordernumber ______ was accepted successfuly and waits to be approved within 3 hours, 
+    	//you can watch its' status in the user option button + image.
     }
     
     public void initialize() {
