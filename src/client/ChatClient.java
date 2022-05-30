@@ -29,7 +29,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Survey> surveysWithReports = new ArrayList<>();
 	public static ArrayList<Survey> allSurveys = new ArrayList<>();
 	public static Order cartOrder = new Order();
-
+	public static String reportTxt;
 	public static User user = null;
 	
 	public static SurveyReport selectedSurveyReport = null;
@@ -109,6 +109,9 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "ConfirmedUserUpdate":
 				System.out.println("User Updated");
+				break;
+			case "getReport":
+				reportTxt=(String)rc.getReturnValue();
 				break;
 			}
 
