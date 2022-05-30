@@ -65,4 +65,5 @@ public class Item extends AbstractProduct {
 	public void setAmountInProduct(int amountInProduct) {
 		this.amountInProduct = amountInProduct;
 	}
+	
 }

@@ -1,19 +1,27 @@
 package gui.client;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import client.ChatClient;
 import client.ClientUI;
 import entity.AbstractProduct;
 import entity.Item;
+import entity.Order;
 import entity.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+/**
+ * @author DORIN BEERY
+ *
+ */
 public class PaymentController {
 
     @FXML private PasswordField cvv, first4, fourth4, second4, third4; 
@@ -22,23 +30,49 @@ public class PaymentController {
     
     private CommonController cc = new CommonController();
     
+    /**
+     * Triggred by pressing the back button, executes CommonController.changeFXML()
+     * Replaces screen to PersonalDetails.fxml
+     * @param event
+     * @throws IOException
+     * @see CommonController#changeFXML
+     */
     @FXML
 	void onBack(ActionEvent event) throws IOException {		
 		cc.changeFXML(event, "PersonalDetails.fxml", "Zer-Li Personal Details",null);
 	}
 
+    /**
+     * Triggred by pressing the exit button, executes CommonController.OnExit()
+     * @see CommonController#OnExit() 
+     * @param event
+     * @throws Exception
+     */
     @FXML
 	void onExit(ActionEvent event) throws Exception {
 		cc.OnExit();
 	}
 
+    /**
+     * Triggred by pressing the logout button, executes CommonController.onLogout()
+     * @param event
+     * @throws IOException
+     * @see {@link CommonController#onLogout(ActionEvent)}
+     */
 	@FXML
 	void onLogout(ActionEvent event) throws Exception {
 		cc.onLogout(event);
 	}
 
+    /**
+     * Triggred by pressing the next button
+     * Responsible for adding the products and items to the db.
+     * also, send data to ChatClient.accept for managing of reports every 30 days.
+     * @param event
+     * @throws IOException
+     */
     @FXML
-    void onNext(ActionEvent event) {
+    void onNext(ActionEvent event) throws IOException {
     	//TODO - does payment method is always credit card?
     	ChatClient.cartOrder.setPaymentMethod("Credit Card");
     	
@@ -49,41 +83,61 @@ public class PaymentController {
 			e.printStackTrace();
 		}
     	
-    	ArrayList<String> cartItems=new ArrayList<String>();
-    	Integer itemCounter=0;
-    	ArrayList<String> cartProduct=new ArrayList<String>();
+    	//Send data for managing reports every 30 days.
+    	StringBuilder sbItems = new StringBuilder();
+    	Integer itemCounter= 0;
+    	StringBuilder sbProducts=new StringBuilder();
     	Integer productCounter=0;
     	Double sumPrice=new Double(0);
     	Integer totalAmount=0;
     	for(AbstractProduct ap : ChatClient.cart) {
     		if (ap instanceof Product) {
     			productCounter++;
-    			cartProduct.add(ap.getName());
+    			sbProducts.append("'").append(ap.getSerialNumber()).append("',");
     		}
     		if(ap instanceof Item) {
     			itemCounter++;
-    			cartItems.add(ap.getName());
+    			sbItems.append("'").append(ap.getSerialNumber()).append("',");
     		}
     		sumPrice+=ap.getPrice();
     		totalAmount++;
-    	}
-    	
+    	}    	
+    	sbItems.delete(sbItems.length()-1, sbItems.length());
+    	sbProducts.delete(sbProducts.length()-1, sbProducts.length());
     	try {
-			ClientUI.chat.accept("numberOfItemsInOrder\t"+productCounter.toString()+"\t"+itemCounter.toString()+"\t"+sumPrice.toString()+"\t"+totalAmount.toString());
+			ClientUI.chat.accept("numberOfItemsInOrder\t"+productCounter.toString()+"\t"+itemCounter.toString()+
+					"\t"+sumPrice.toString()+"\t"+totalAmount.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
     	
     	
-    		
+    	//Add products and items in the cart to the DB
+    	Integer orderNumber = ChatClient.cartOrder.getOrderNumber();
+    	try {
+    		ClientUI.chat.accept("addProductsAndItemsInOrderToDB\t"+orderNumber.toString()+"\t"
+    							+sbItems.toString()+"\t"+sbProducts.toString());
+    	}catch(Exception ex) {
+    		ex.printStackTrace();
+    	}
     	
+    	//show success message and go back to catalog
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Order reception completed SUCCESSFULY!");
+		alert.setHeaderText("You're order " + ChatClient.cartOrder.getOrderNumber() + " was set and is waiting"
+				+ " for confirmation within the next 3 hours.\nYou can check its' status at the Watch Orders option.");
+			alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("orderReception.png"))));
+		alert.showAndWait();
     	
-    	
-    	//TODO send how much product, how many items, the sum price of all products and the price of all items
-    	//TODO pop alert message that ordernumber ______ was accepted successfuly and waits to be approved within 3 hours, 
-    	//TODO you can watch its' status in the user option button + image.
+		ChatClient.cart.clear();
+		ChatClient.cartOrder = new Order();
+		cc.changeFXML(event, "Catalog.fxml", "Catalog", null);
+		
     }
     
+    /**
+     * Initials the comboBox
+     */
     public void initialize() {
     	fullName.setText(ChatClient.user.getFirstName()+" "+ChatClient.user.getLastName());
     	String[] creditCard = new String[4]; 

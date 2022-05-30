@@ -4,15 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
 
 import common.ReturnCommand;
-import entity.Customer;
-import entity.Order;
-import entity.StoreWorker;
-import entity.User;
 
 /**
  * @author Koral Biton,Topaz Eldori

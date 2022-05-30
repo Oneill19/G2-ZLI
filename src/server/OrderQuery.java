@@ -28,7 +28,7 @@ public class OrderQuery {
 			ps = con.prepareStatement(insertQuery);
 			ps.executeUpdate();
 			stmt=con.createStatement();
-			ResultSet rs = ps.executeQuery(selectQuery);
+			ResultSet rs = stmt.executeQuery(selectQuery);
 			rs.next();
 			return new ReturnCommand("AddOrderToDB", rs.getInt(1));
 		} catch (SQLException e) {
@@ -37,11 +37,32 @@ public class OrderQuery {
 		}
 	}
 	
-//	public static returnCommand saveOrderItemsToDB(Connection con) {
-//		PreparedStatement ps;
-//		String insertQuery = ""
-//	}
-	
-	
-
+	public static ReturnCommand addProductsAndItemsInOrderToDB(Connection con, String orderNumber, String item_in_order, String product_in_order) {
+		PreparedStatement ps;
+		String[] itemArray = item_in_order.split(",");
+		String[] productArray = product_in_order.split(",");
+		
+		for(String itemSerial : itemArray) {
+			String insertQuery = "INSERT INTO item_in_order(itemSerial, orderNumber) VALUES ("+itemSerial+","+orderNumber.toString()+")";
+			try {
+				ps = con.prepareStatement(insertQuery);
+				ps.executeUpdate();
+			}catch(Exception ex) {
+				System.out.println("Item: "+itemSerial);
+				ex.printStackTrace();
+			}
+		}
+		
+		for(String productSerial : itemArray) {
+			String insertQuery = "INSERT INTO product_in_order(productSerial, orderNumber) VALUES ("+productSerial+","+orderNumber.toString()+")";
+			try {
+				ps = con.prepareStatement(insertQuery);
+				ps.executeUpdate();
+			}catch(Exception ex) {
+				System.out.println("Item: "+productSerial);
+				ex.printStackTrace();
+			}
+		}
+		return new ReturnCommand("addProductsAndItemsInOrderToDB",null);
+	}
 }
