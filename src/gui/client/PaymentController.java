@@ -1,7 +1,6 @@
 package gui.client;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import client.ChatClient;
 import client.ClientUI;
@@ -11,10 +10,10 @@ import entity.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -54,30 +53,42 @@ public class PaymentController {
 		}
     	
     	//Send data for managing reports every 30 days.
-    	ArrayList<String> cartItems=new ArrayList<String>();
-    	Integer itemCounter=0;
-    	ArrayList<String> cartProduct=new ArrayList<String>();
+    	StringBuilder sbItems = new StringBuilder();
+    	Integer itemCounter= 0;
+    	StringBuilder sbProducts=new StringBuilder();
     	Integer productCounter=0;
     	Double sumPrice=new Double(0);
     	Integer totalAmount=0;
     	for(AbstractProduct ap : ChatClient.cart) {
     		if (ap instanceof Product) {
     			productCounter++;
-    			cartProduct.add(ap.getName());
+    			sbProducts.append("'").append(ap.getSerialNumber()).append("',");
     		}
     		if(ap instanceof Item) {
     			itemCounter++;
-    			cartItems.add(ap.getName());
+    			sbItems.append("'").append(ap.getSerialNumber()).append("',");
     		}
     		sumPrice+=ap.getPrice();
     		totalAmount++;
     	}    	
+    	sbItems.delete(sbItems.length()-1, sbItems.length());
+    	sbProducts.delete(sbProducts.length()-1, sbProducts.length());
     	try {
 			ClientUI.chat.accept("numberOfItemsInOrder\t"+productCounter.toString()+"\t"+itemCounter.toString()+
 					"\t"+sumPrice.toString()+"\t"+totalAmount.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+    	
+    	//TODO insert to item_in_Order and product_in_order table
+    	Integer orderNumber = ChatClient.cartOrder.getOrderNumber();
+    	try {
+    		ClientUI.chat.accept("addProductsAndItemsInOrderToDB\t"+orderNumber.toString()+"\t"
+    							+sbItems.toString()+"\t"+sbProducts.toString());
+    	}catch(Exception ex) {
+    		ex.printStackTrace();
+    	}
+    	
     	
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Order reception completed SUCCESSFULY!");
@@ -86,10 +97,7 @@ public class PaymentController {
 			alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("orderReception.png"))));
 		alert.showAndWait();
     	
-    		
-    	
-    	//TODO check if date is before
-		//TODO check if time is before
+
 		//TODO show next options
     }
     
