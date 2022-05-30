@@ -214,10 +214,35 @@ public class Order implements Serializable {
 	public String toString() {
 		return "Order [orderNumber=" + orderNumber + ", customerID=" + customerID + ", totalPrice=" + totalPrice
 				+ ", greetingCard=" + greetingCard + ", color=" + color + ", orderDesc=" + orderDesc + ", fromStore="
-				+ fromStore + ", paymentMethos=" + paymentMethod + ", orderStatus=" + orderStatus + ", confirmedDate="
+				+ fromStore + ", paymentMethod=" + paymentMethod + ", orderStatus=" + orderStatus + ", confirmedDate="
 				+ confirmedDate + ", completeDate=" + completeDate + ", deliveryMethod=" + deliveryMethod
 				+ ", orderDate=" + orderCreationDate + ", expectedDateInStore=" + supplyDate + ", orderTime="
 				+ orderCreationTime + ", expectedTimeInStore=" + supplyTime + "]";
 	}
+	
+	/**
+	 * @return String values of Order, by the order they present in DB.
+	 */
+	public String DBToString() {
+		StringBuilder sb = new StringBuilder();
+		//orderNumber is incremental
+		sb.append(totalPrice).append(",");
+		sb.append("'").append(greetingCard).append("'").append(",");
+		sb.append(color).append(",");
+		sb.append("'").append(orderDesc).append("'").append(",");
+		sb.append("'").append(fromStore).append("'").append(",");
+		sb.append("'").append(orderCreationDate).append("'").append(",");
+		sb.append("'").append(orderCreationTime).append("'").append(",");
+		sb.append(customerID).append(",");
+		sb.append("'").append(paymentMethod).append("'").append(",");
+		sb.append("'").append(orderStatus).append("'").append(",");
+		sb.append(confirmedDate).append(",");
+		sb.append(completeDate).append(",");
+		sb.append("'").append(deliveryMethod).append("'").append(",");
+		sb.append(supplyDate).append(",");
+		sb.append("'").append(supplyTime).append("'");	
+		return sb.toString();	
+	}
 
 }
+;

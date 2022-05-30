@@ -9,7 +9,6 @@ import entity.AbstractProduct;
 import entity.Item;
 import entity.Order;
 import entity.Product;
-import entity.Store;
 import entity.Survey;
 import entity.SurveyReport;
 import entity.User;
@@ -25,7 +24,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<User> waitingUsers;
 	public static ArrayList<AbstractProduct> products = new ArrayList<>();
 	public static ArrayList<AbstractProduct> cart = new ArrayList<>();
-	public static ArrayList<Store> stores = new ArrayList<>();
+	public static ArrayList<String> stores = new ArrayList<>();
 	public static ArrayList<Survey> surveysWithReports = new ArrayList<>();
 	public static ArrayList<Survey> allSurveys = new ArrayList<>();
 	public static Order cartOrder = new Order();
@@ -90,8 +89,8 @@ public class ChatClient extends AbstractClient {
 				ChatClient.products.addAll((ArrayList<Item>) rc.getReturnValue());
 				break;
 			case "GetAllStores":
-				ChatClient.stores.addAll((ArrayList<Store>) rc.getReturnValue());
-				break;	
+				ChatClient.stores.addAll((ArrayList<String>) rc.getReturnValue());
+				break;
 			case "GetSurveysWithReports":
 				surveysWithReports.addAll((ArrayList<Survey>)rc.getReturnValue());
 				break;	
@@ -104,6 +103,10 @@ public class ChatClient extends AbstractClient {
 			case "AddSurveyAnswer":
 				requestSucceed = rc == null ? false : true;
 				break;
+			case "AddOrderToDB":
+				ChatClient.cartOrder.setOrderNumber((int)rc.getReturnValue());
+				System.out.println("Order number " + (int)rc.getReturnValue() + " was added");
+				break;
 			case "GetRegistersUsers":
 				waitingUsers=(ArrayList<User>)rc.getReturnValue();
 				break;
@@ -114,7 +117,6 @@ public class ChatClient extends AbstractClient {
 				reportTxt=(String)rc.getReturnValue();
 				break;
 			}
-
 		}
 	}
 

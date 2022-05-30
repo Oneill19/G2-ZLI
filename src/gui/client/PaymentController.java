@@ -1,8 +1,13 @@
 package gui.client;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import client.ChatClient;
+import client.ClientUI;
+import entity.AbstractProduct;
+import entity.Item;
+import entity.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -34,10 +39,49 @@ public class PaymentController {
 
     @FXML
     void onNext(ActionEvent event) {
-    	//saveOrderInDB()
-    	//send how much product, how many items, the sum price of all products and the price of all items
-    	//pop alert message that ordernumber ______ was accepted successfuly and waits to be approved within 3 hours, 
-    	//you can watch its' status in the user option button + image.
+    	//TODO - does payment method is always credit card?
+    	ChatClient.cartOrder.setPaymentMethod("Credit Card");
+    	
+    	//Add Order to DB
+    	try {
+    		ClientUI.chat.accept("AddOrderToDB\t"+ChatClient.cartOrder.DBToString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    	ArrayList<String> cartItems=new ArrayList<String>();
+    	Integer itemCounter=0;
+    	ArrayList<String> cartProduct=new ArrayList<String>();
+    	Integer productCounter=0;
+    	Double sumPrice=new Double(0);
+    	Integer totalAmount=0;
+    	for(AbstractProduct ap : ChatClient.cart) {
+    		if (ap instanceof Product) {
+    			productCounter++;
+    			cartProduct.add(ap.getName());
+    		}
+    		if(ap instanceof Item) {
+    			itemCounter++;
+    			cartItems.add(ap.getName());
+    		}
+    		sumPrice+=ap.getPrice();
+    		totalAmount++;
+    	}
+    	
+    	try {
+			ClientUI.chat.accept("numberOfItemsInOrder\t"+productCounter.toString()+"\t"+itemCounter.toString()+"\t"+sumPrice.toString()+"\t"+totalAmount.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    	
+    		
+    	
+    	
+    	
+    	//TODO send how much product, how many items, the sum price of all products and the price of all items
+    	//TODO pop alert message that ordernumber ______ was accepted successfuly and waits to be approved within 3 hours, 
+    	//TODO you can watch its' status in the user option button + image.
     }
     
     public void initialize() {
@@ -55,7 +99,6 @@ public class PaymentController {
     	second4.setText(creditCard[1]);
     	third4.setText(creditCard[2]);
     	fourth4.setText(creditCard[3]);
-    	System.out.println("hi");
     }
 
 }
