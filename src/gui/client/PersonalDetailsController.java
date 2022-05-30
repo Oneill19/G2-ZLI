@@ -108,10 +108,18 @@ public class PersonalDetailsController {
 			ChatClient.cartOrder.setDeliveryMethod("address");
 		}
 		
+		LocalDate today = LocalDate.now();
 		if (datePicker.getValue() == null ) {
 			setAlert("Select a date from the date picker", null).showAndWait();
 			return;
+		}else if(datePicker.getValue().compareTo(today) < 0) {
+			setAlert("Please select future date", null).showAndWait();
+			
+			datePicker.setValue(today);
+			datePicker.setStyle("-fx-border-color : red;");
+			return;
 		}else {
+			datePicker.setStyle("-fx-border-color : green;");
 			ChatClient.cartOrder.setSupplyDate(datePicker.getValue());
 		}
 		
@@ -120,6 +128,7 @@ public class PersonalDetailsController {
 			return;
 		}
 		else {
+			timePicker.setStyle("-fx-border-color : green;");
 			ChatClient.cartOrder.setSuppplyTime(LocalTime.parse(timePicker.getText()));
 		}
 					

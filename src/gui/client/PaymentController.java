@@ -10,9 +10,13 @@ import entity.Item;
 import entity.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class PaymentController {
 
@@ -49,6 +53,7 @@ public class PaymentController {
 			e.printStackTrace();
 		}
     	
+    	//Send data for managing reports every 30 days.
     	ArrayList<String> cartItems=new ArrayList<String>();
     	Integer itemCounter=0;
     	ArrayList<String> cartProduct=new ArrayList<String>();
@@ -66,22 +71,26 @@ public class PaymentController {
     		}
     		sumPrice+=ap.getPrice();
     		totalAmount++;
-    	}
-    	
+    	}    	
     	try {
-			ClientUI.chat.accept("numberOfItemsInOrder\t"+productCounter.toString()+"\t"+itemCounter.toString()+"\t"+sumPrice.toString()+"\t"+totalAmount.toString());
+			ClientUI.chat.accept("numberOfItemsInOrder\t"+productCounter.toString()+"\t"+itemCounter.toString()+
+					"\t"+sumPrice.toString()+"\t"+totalAmount.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
     	
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Order reception completed SUCCESSFULY!");
+		alert.setHeaderText("You're order " + ChatClient.cartOrder.getOrderNumber() + " was set and is waiting"
+				+ " for confirmation within the next 3 hours.\nYou can check its' status at the Watch Orders option.");
+			alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("orderReception.png"))));
+		alert.showAndWait();
     	
     		
     	
-    	
-    	
-    	//TODO send how much product, how many items, the sum price of all products and the price of all items
-    	//TODO pop alert message that ordernumber ______ was accepted successfuly and waits to be approved within 3 hours, 
-    	//TODO you can watch its' status in the user option button + image.
+    	//TODO check if date is before
+		//TODO check if time is before
+		//TODO show next options
     }
     
     public void initialize() {
