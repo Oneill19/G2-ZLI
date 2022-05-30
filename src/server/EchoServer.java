@@ -294,6 +294,15 @@ public class EchoServer extends AbstractServer {
 			}
 			break;
 
+			case "getReport":
+			try {
+
+				client.sendToClient(ReportQuery.getReport(conn, clientMsg[1], clientMsg[2],clientMsg[3],clientMsg[4]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			
 		default:
 			System.out.println("No Command Found");
 //			System.exit(-1);
