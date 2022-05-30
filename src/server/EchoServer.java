@@ -276,7 +276,6 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
-<<<<<<< HEAD
 		case "AddOrderToDB":
 			try {
 				//clientMsg[1] has the order in cart
@@ -290,12 +289,8 @@ public class EchoServer extends AbstractServer {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-=======
-			
 		case "GetRegistersUsers":
 			try {
->>>>>>> 755a3407de75ad3a00d4f5f95dc518c0d10b705d
-
 				client.sendToClient(StoreManagerQuery.getAllWaitingRegistersUsers(conn));
 			} catch (Exception e) {
 				e.printStackTrace();

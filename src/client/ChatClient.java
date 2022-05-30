@@ -89,14 +89,8 @@ public class ChatClient extends AbstractClient {
 				ChatClient.products.addAll((ArrayList<Item>) rc.getReturnValue());
 				break;
 			case "GetAllStores":
-<<<<<<< HEAD
 				ChatClient.stores.addAll((ArrayList<String>) rc.getReturnValue());
 				break;
-				
-=======
-				ChatClient.stores.addAll((ArrayList<Store>) rc.getReturnValue());
-				break;	
->>>>>>> 755a3407de75ad3a00d4f5f95dc518c0d10b705d
 			case "GetSurveysWithReports":
 				surveysWithReports.addAll((ArrayList<Survey>)rc.getReturnValue());
 				break;	
@@ -109,16 +103,10 @@ public class ChatClient extends AbstractClient {
 			case "AddSurveyAnswer":
 				requestSucceed = rc == null ? false : true;
 				break;
-<<<<<<< HEAD
-				
 			case "AddOrderToDB":
 				ChatClient.cartOrder.setOrderNumber((int)rc.getReturnValue());
 				System.out.println("Order number " + (int)rc.getReturnValue() + " was added");
-			}	
-			
-			
-				
-=======
+				break;
 			case "GetRegistersUsers":
 				waitingUsers=(ArrayList<User>)rc.getReturnValue();
 				break;
@@ -129,8 +117,6 @@ public class ChatClient extends AbstractClient {
 				reportTxt=(String)rc.getReturnValue();
 				break;
 			}
->>>>>>> 755a3407de75ad3a00d4f5f95dc518c0d10b705d
-
 		}
 	}
 
