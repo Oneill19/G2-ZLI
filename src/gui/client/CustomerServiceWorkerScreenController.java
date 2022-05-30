@@ -23,6 +23,12 @@ public class CustomerServiceWorkerScreenController {
     @FXML
     private Button showReports;
     
+    @FXML
+    private Button addComplaint;
+    
+    @FXML
+    private Button watchComplaints;
+    
     private CommonController cc = new CommonController();
 
     /**
@@ -61,6 +67,24 @@ public class CustomerServiceWorkerScreenController {
     void onShowReports(ActionEvent event) throws Exception {
     	ClientUI.chat.accept("GetSurveysWithReports");
     	cc.changeFXML(event, "SurveyReports.fxml", "Zer-Li Survey Reports", null);
+    }
+    
+    /**
+     * @param event
+     * @throws Exception
+     */
+    @FXML
+    void onAddComplaint(ActionEvent event) throws Exception {
+    	cc.changeFXML(event, "AddComplaint.fxml", "Zer-Li Add Complaint", null);
+    }
+    
+    /**
+     * @param event
+     * @throws Exception
+     */
+    @FXML
+    void onWatchComplaints(ActionEvent event) throws Exception {
+    	System.out.println("On Watch Complaints");
     }
 
     /**
