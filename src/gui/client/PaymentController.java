@@ -6,6 +6,7 @@ import client.ChatClient;
 import client.ClientUI;
 import entity.AbstractProduct;
 import entity.Item;
+import entity.Order;
 import entity.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * @author DORIN BEERY
+ *
+ */
 public class PaymentController {
 
     @FXML private PasswordField cvv, first4, fourth4, second4, third4; 
@@ -25,23 +30,49 @@ public class PaymentController {
     
     private CommonController cc = new CommonController();
     
+    /**
+     * Triggred by pressing the back button, executes CommonController.changeFXML()
+     * Replaces screen to PersonalDetails.fxml
+     * @param event
+     * @throws IOException
+     * @see CommonController#changeFXML
+     */
     @FXML
 	void onBack(ActionEvent event) throws IOException {		
 		cc.changeFXML(event, "PersonalDetails.fxml", "Zer-Li Personal Details",null);
 	}
 
+    /**
+     * Triggred by pressing the exit button, executes CommonController.OnExit()
+     * @see CommonController#OnExit() 
+     * @param event
+     * @throws Exception
+     */
     @FXML
 	void onExit(ActionEvent event) throws Exception {
 		cc.OnExit();
 	}
 
+    /**
+     * Triggred by pressing the logout button, executes CommonController.onLogout()
+     * @param event
+     * @throws IOException
+     * @see {@link CommonController#onLogout(ActionEvent)}
+     */
 	@FXML
 	void onLogout(ActionEvent event) throws Exception {
 		cc.onLogout(event);
 	}
 
+    /**
+     * Triggred by pressing the next button
+     * Responsible for adding the products and items to the db.
+     * also, send data to ChatClient.accept for managing of reports every 30 days.
+     * @param event
+     * @throws IOException
+     */
     @FXML
-    void onNext(ActionEvent event) {
+    void onNext(ActionEvent event) throws IOException {
     	//TODO - does payment method is always credit card?
     	ChatClient.cartOrder.setPaymentMethod("Credit Card");
     	
@@ -80,7 +111,8 @@ public class PaymentController {
 			e.printStackTrace();
 		}
     	
-    	//TODO insert to item_in_Order and product_in_order table
+    	
+    	//Add products and items in the cart to the DB
     	Integer orderNumber = ChatClient.cartOrder.getOrderNumber();
     	try {
     		ClientUI.chat.accept("addProductsAndItemsInOrderToDB\t"+orderNumber.toString()+"\t"
@@ -89,7 +121,7 @@ public class PaymentController {
     		ex.printStackTrace();
     	}
     	
-    	
+    	//show success message and go back to catalog
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Order reception completed SUCCESSFULY!");
 		alert.setHeaderText("You're order " + ChatClient.cartOrder.getOrderNumber() + " was set and is waiting"
@@ -97,10 +129,15 @@ public class PaymentController {
 			alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("orderReception.png"))));
 		alert.showAndWait();
     	
-
-		//TODO show next options
+		ChatClient.cart.clear();
+		ChatClient.cartOrder = new Order();
+		cc.changeFXML(event, "Catalog.fxml", "Catalog", null);
+		
     }
     
+    /**
+     * Initials the comboBox
+     */
     public void initialize() {
     	fullName.setText(ChatClient.user.getFirstName()+" "+ChatClient.user.getLastName());
     	String[] creditCard = new String[4]; 
