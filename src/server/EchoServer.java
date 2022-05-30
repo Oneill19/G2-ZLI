@@ -281,7 +281,13 @@ public class EchoServer extends AbstractServer {
 				//clientMsg[1] has the order in cart
 				client.sendToClient(OrderQuery.saveOrderToDB(conn, clientMsg[1]));
 			}catch(Exception e) {
-				
+				e.printStackTrace();
+			}
+		case "numberOfItemsInOrder":
+			try {
+				client.sendToClient(clientMsg);
+			}catch(Exception e){
+				e.printStackTrace();
 			}
 
 		default:

@@ -16,26 +16,32 @@ public class OrderQuery {
 	 * @return ReturnCommand
 	 */
 	public static ReturnCommand saveOrderToDB(Connection con, String orderString) {
-		PreparedStatement stmt;
-		Statement stmt2;
-		String sqlQuery = "INSERT INTO zli.orders (totalPrice, greetingCard, color, orderDesc,"
+		PreparedStatement ps;
+		Statement stmt;
+		String insertQuery = "INSERT INTO zli.orders (totalPrice, greetingCard, color, orderDesc,"
 				+ "fromStore, orderCreationDate, orderCreationTime, cutomerID, paymentMethod, "
 				+ "orderStatus, confirmedDate, completeDate, deliveryMethod, supplyDate, supplyTime) VALUES"
 				+ "(" + orderString + ");";
-		String sqlQuery2 = "select orderNumber from orders where orderNumber=(SELECT LAST_INSERT_ID());";
+		String selectQuery = "SELECT orderNumber from orders where orderNumber=(SELECT LAST_INSERT_ID());";
 		
 		try {
-			stmt = con.prepareStatement(sqlQuery);
-			stmt.executeUpdate();
-			stmt2=con.createStatement();
-			ResultSet rs = stmt.executeQuery(sqlQuery2);
+			ps = con.prepareStatement(insertQuery);
+			ps.executeUpdate();
+			stmt=con.createStatement();
+			ResultSet rs = ps.executeQuery(selectQuery);
 			rs.next();
 			return new ReturnCommand("AddOrderToDB", rs.getInt(1));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		
 	}
+	
+//	public static returnCommand saveOrderItemsToDB(Connection con) {
+//		PreparedStatement ps;
+//		String insertQuery = ""
+//	}
+	
+	
 
 }
