@@ -28,7 +28,7 @@ public class OrderQuery {
 			ps = con.prepareStatement(insertQuery);
 			ps.executeUpdate();
 			stmt=con.createStatement();
-			ResultSet rs = ps.executeQuery(selectQuery);
+			ResultSet rs = stmt.executeQuery(selectQuery);
 			rs.next();
 			return new ReturnCommand("AddOrderToDB", rs.getInt(1));
 		} catch (SQLException e) {
