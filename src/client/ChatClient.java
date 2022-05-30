@@ -106,7 +106,14 @@ public class ChatClient extends AbstractClient {
 			case "AddSurveyAnswer":
 				requestSucceed = rc == null ? false : true;
 				break;
+				
+			case "AddOrderToDB":
+				ChatClient.cartOrder.setOrderNumber((int)rc.getReturnValue());
+				System.out.println("Order number " + (int)rc.getReturnValue() + " was added");
 			}	
+			
+			
+				
 
 		}
 	}
