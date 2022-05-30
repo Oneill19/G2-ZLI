@@ -9,7 +9,6 @@ import entity.AbstractProduct;
 import entity.Item;
 import entity.Order;
 import entity.Product;
-import entity.Store;
 import entity.Survey;
 import entity.SurveyReport;
 import entity.User;
@@ -24,7 +23,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<User> NotApprovedUsers;
 	public static ArrayList<AbstractProduct> products = new ArrayList<>();
 	public static ArrayList<AbstractProduct> cart = new ArrayList<>();
-	public static ArrayList<Store> stores = new ArrayList<>();
+	public static ArrayList<String> stores = new ArrayList<>();
 	public static ArrayList<Survey> surveysWithReports = new ArrayList<>();
 	public static ArrayList<Survey> allSurveys = new ArrayList<>();
 	public static Order cartOrder = new Order();
@@ -89,7 +88,7 @@ public class ChatClient extends AbstractClient {
 				ChatClient.products.addAll((ArrayList<Item>) rc.getReturnValue());
 				break;
 			case "GetAllStores":
-				ChatClient.stores.addAll((ArrayList<Store>) rc.getReturnValue());
+				ChatClient.stores.addAll((ArrayList<String>) rc.getReturnValue());
 				break;
 				
 			case "GetSurveysWithReports":

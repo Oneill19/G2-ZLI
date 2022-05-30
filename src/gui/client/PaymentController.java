@@ -3,6 +3,7 @@ package gui.client;
 import java.io.IOException;
 
 import client.ChatClient;
+import client.ClientUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -34,7 +35,13 @@ public class PaymentController {
 
     @FXML
     void onNext(ActionEvent event) {
-    	//saveOrderInDB()
+    	//TODO - does payment method is always credit card?
+    	ChatClient.cartOrder.setPaymentMethod("Credit Card");
+    	try {
+    		ClientUI.chat.accept("AddOrderToDB\t"+ChatClient.cartOrder.DBToString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     	//send how much product, how many items, the sum price of all products and the price of all items
     	//pop alert message that ordernumber ______ was accepted successfuly and waits to be approved within 3 hours, 
     	//you can watch its' status in the user option button + image.
@@ -55,7 +62,6 @@ public class PaymentController {
     	second4.setText(creditCard[1]);
     	third4.setText(creditCard[2]);
     	fourth4.setText(creditCard[3]);
-    	System.out.println("hi");
     }
 
 }

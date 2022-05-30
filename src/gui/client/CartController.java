@@ -32,8 +32,7 @@ public class CartController {
 	// ******
 	// *FXML*
 	// ******
-	@FXML
-	private TableView<AbstractProduct> cartTable;
+	@FXML private TableView<AbstractProduct> cartTable;
 	@FXML private TableColumn<AbstractProduct, String> colDelete,colName;
 	@FXML private TableColumn<AbstractProduct, ImageView> colImage;
 	@FXML private TableColumn<AbstractProduct, Double> colPrice;

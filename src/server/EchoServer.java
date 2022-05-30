@@ -276,6 +276,13 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
+		case "AddOrderToDB":
+			try {
+				//clientMsg[1] has the order in cart
+				client.sendToClient(OrderQuery.saveOrderToDB(conn, clientMsg[1]));
+			}catch(Exception e) {
+				
+			}
 
 		default:
 			System.out.println("No Command Found");

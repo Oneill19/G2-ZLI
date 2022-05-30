@@ -8,12 +8,13 @@ import java.time.temporal.ChronoUnit;
 
 import client.ChatClient;
 import client.ClientUI;
-import entity.Store;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -21,6 +22,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
@@ -31,7 +34,7 @@ public class PersonalDetailsController {
 
 	@FXML private ToggleGroup DeliveryMethod;
 	@FXML private RadioButton DeliveryRadio, pickUpRadio;
-	@FXML private ComboBox<Store> comboStore;
+	@FXML private ComboBox<String> comboStore;
 	@FXML private DatePicker datePicker;
 	@FXML private Button exit, onBack, userOptBtn, nextBtn, logoutBtn;
 	@FXML private TextField fieldAptNumber,fieldBlessing,fieldCity,fieldEmail,fieldFirst,fieldLast,fieldPostal,fieldSt,timePicker, fieldDescribtion; 
@@ -54,8 +57,6 @@ public class PersonalDetailsController {
 		}
 	};
 	
-	 String fromStore;
-	 Store selectedStore;
 
 	//set onBackButton function
 	@FXML void onBack(ActionEvent event) throws Exception{ 
@@ -81,32 +82,70 @@ public class PersonalDetailsController {
 	
 	@FXML
 	private void onNext(ActionEvent event) throws Exception{
-		fromStore = pickUpRadio.isSelected() == false ? null : comboStore.getValue().getStoreName();
-		if(!fromStore.equals(null))
-			selectedStore = comboStore.getValue();
-		String address = fieldCity.getText()+" "+fieldSt.getText()+" "+ fieldAptNumber.getText() +" "+fieldPostal.getText();
+		String address=null;
 		
-		//initial global values with local values
+		if (DeliveryMethod.getSelectedToggle() == null) {
+			setAlert("Please select delivery method",null).showAndWait();
+			return;
+		}
+
+		if (pickUpRadio.isSelected()) {
+			String store = comboStore.getValue();
+			if (store == null) {
+				setAlert("Click on the purple box:\nThen, select a store", "Error_ChooseDestinationStore.png").showAndWait();
+				return;
+			}
+			ChatClient.cartOrder.setDeliveryMethod("Self Pickup");
+			ChatClient.cartOrder.setFromStore(comboStore.getValue());
+		}
+		else {
+			if (fieldCity.getText() == null || fieldSt.getText() == null || fieldAptNumber.getText() == null) {
+				setAlert("Please fill all address fields", null).showAndWait();
+				return;
+			}
+			ChatClient.cartOrder.setFromStore(null);
+			address = fieldCity.getText()+" "+fieldSt.getText()+" "+ fieldAptNumber.getText() +" "+fieldPostal.getText();
+			ChatClient.cartOrder.setDeliveryMethod("address");
+		}
+		
+		if (datePicker.getValue() == null ) {
+			setAlert("Select a date from the date picker", null).showAndWait();
+			return;
+		}else {
+			ChatClient.cartOrder.setSupplyDate(datePicker.getValue());
+		}
+		
+		if(timePicker.getText().equals("")) {
+			setAlert("Inset time of order to be supplied",null).showAndWait();
+			return;
+		}
+		else {
+			ChatClient.cartOrder.setSuppplyTime(LocalTime.parse(timePicker.getText()));
+		}
+					
 		ChatClient.cartOrder.setCustomerID(ChatClient.user.getUserID());
 		ChatClient.cartOrder.setGreetingCard(fieldBlessing.getText());;
 		//TODO - it is not clear what to do with field 'color'
 		//ChatClient.cartOrder.setColor(color);
 		ChatClient.cartOrder.setOrderDesc(fieldDescribtion.getText());
-		ChatClient.cartOrder.setFromStore(fromStore); 
-		//ChatClient.cartOrder.setPaymentMethod(); is from Payment.fxml
 		ChatClient.cartOrder.setOrderStatus("WAITING_FOR_CONFIRMATION");
 		ChatClient.cartOrder.setConfirmedDate(null);
 		ChatClient.cartOrder.setCompleteDate(null);
-		ChatClient.cartOrder.setDeliveryMethod(pickUpRadio.isSelected() == true ? address : comboStore.getValue().getStoreName());
 		ChatClient.cartOrder.setOrderCreationDate(LocalDate.now());
 		ChatClient.cartOrder.setOrderCreationTime( LocalTime.now().truncatedTo(ChronoUnit.MINUTES));
-		ChatClient.cartOrder.setSupplyDate(datePicker.getValue());
-		ChatClient.cartOrder.setSuppplyTime(LocalTime.parse(timePicker.getText()));
 
-		//debug
-		System.out.println(ChatClient.cartOrder);
 		comboStore.getItems().clear();
 		cc.changeFXML(event, "Payment.fxml", "Zer-Li Payment",null);
+		
+	}
+	
+	public Alert setAlert(String errDesc, String imagePath) {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Error");
+		alert.setHeaderText(errDesc);
+		if(imagePath != null) 
+			alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream(imagePath))));
+		return alert;
 	}
 
 	public void initialize() throws Exception {
@@ -117,7 +156,6 @@ public class PersonalDetailsController {
 		fieldFirst.setDisable(true);
 		fieldLast.setText(ChatClient.user.getLastName());
 		fieldLast.setDisable(true);
-		datePicker = new DateTimePicker();
 		format.set(DefaultFormat);
 		timePicker.setOnAction(evnt -> {
 			try {
@@ -136,13 +174,15 @@ public class PersonalDetailsController {
 		HBoxstore.setVisible(false);
 		ClientUI.chat.accept("GetAllStores");
 		comboStore.setItems(FXCollections.observableArrayList(ChatClient.stores));
+		
 		//if back button was pressed from forward screens
-		String hi = ChatClient.cartOrder.getDeliveryMethod();
-		if ( hi != null ) {
+		if ( ChatClient.cartOrder.getDeliveryMethod() != null) {
+			
 			fieldBlessing.setText(ChatClient.cartOrder.getGreetingCard());
 			fieldDescribtion.setText(ChatClient.cartOrder.getOrderDesc());
 			datePicker.setValue(ChatClient.cartOrder.getSupplyDate());
 			timePicker.setText(ChatClient.cartOrder.getSupplyTime().toString());
+			
 			if (ChatClient.cartOrder.getFromStore().equals(null)) {
 				DeliveryRadio.setSelected(true);
 				HBoxAddress.setVisible(true);
@@ -157,8 +197,8 @@ public class PersonalDetailsController {
 				pickUpRadio.setSelected(true);
 				HBoxAddress.setVisible(false);
 				HBoxstore.setVisible(true);
-				//TODO needs to be an object of type Store
-				comboStore.setValue(selectedStore);
+				System.out.println(ChatClient.cartOrder.getFromStore());
+				comboStore.setValue(ChatClient.cartOrder.getFromStore());
 			}
 			
 		}
