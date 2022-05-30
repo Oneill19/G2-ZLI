@@ -37,7 +37,7 @@ public class PersonalDetailsController {
 	@FXML private ComboBox<String> comboStore;
 	@FXML private DatePicker datePicker;
 	@FXML private Button exit, onBack, userOptBtn, nextBtn, logoutBtn;
-	@FXML private TextField fieldAptNumber,fieldBlessing,fieldCity,fieldEmail,fieldFirst,fieldLast,fieldPostal,fieldSt,timePicker, fieldDescribtion; 
+	@FXML private TextField fieldAptNumber,fieldBlessing,fieldCity,fieldEmail,fieldFirst,fieldLast,fieldPostal,fieldSt,hourPicker,minutesPicker, fieldDescribtion; 
     @FXML private Label labelDestination, labelStore;
     @FXML private HBox HBoxAddress, HBoxstore;
 	
@@ -105,31 +105,39 @@ public class PersonalDetailsController {
 			}
 			ChatClient.cartOrder.setFromStore(null);
 			address = fieldCity.getText()+" "+fieldSt.getText()+" "+ fieldAptNumber.getText() +" "+fieldPostal.getText();
-			ChatClient.cartOrder.setDeliveryMethod("address");
+			ChatClient.cartOrder.setDeliveryMethod(address);
 		}
 		
 		LocalDate today = LocalDate.now();
+		datePicker.setFocusTraversable(true);
+		datePicker.requestFocus();
 		if (datePicker.getValue() == null ) {
 			setAlert("Select a date from the date picker", null).showAndWait();
 			return;
 		}else if(datePicker.getValue().compareTo(today) < 0) {
 			setAlert("Please select future date", null).showAndWait();
-			
 			datePicker.setValue(today);
 			datePicker.setStyle("-fx-border-color : red;");
 			return;
 		}else {
+			datePicker.setStyle("-fx-text-color: green;");
 			datePicker.setStyle("-fx-border-color : green;");
 			ChatClient.cartOrder.setSupplyDate(datePicker.getValue());
 		}
 		
-		if(timePicker.getText().equals("")) {
-			setAlert("Inset time of order to be supplied",null).showAndWait();
+		
+		if(hourPicker.getText().equals("") || minutesPicker.getText().equals("")) {
+			setAlert("Insert time of order to be supplied",null).showAndWait();
 			return;
 		}
 		else {
-			timePicker.setStyle("-fx-border-color : green;");
-			ChatClient.cartOrder.setSuppplyTime(LocalTime.parse(timePicker.getText()));
+			LocalTime selectedSupplyTime = LocalTime.parse(hourPicker.getText()+":"+minutesPicker.getText());
+			try {
+				ChatClient.cartOrder.setSuppplyTime(selectedSupplyTime);
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		
 		}
 					
 		ChatClient.cartOrder.setCustomerID(ChatClient.user.getUserID());
@@ -166,16 +174,45 @@ public class PersonalDetailsController {
 		fieldLast.setText(ChatClient.user.getLastName());
 		fieldLast.setDisable(true);
 		format.set(DefaultFormat);
-		timePicker.setOnAction(evnt -> {
+		
+		@SuppressWarnings("serial")		
+		class timeBoundaryException extends Exception{
+		}
+		
+		hourPicker.setOnAction(evnt -> {
+				String hour = hourPicker.getText();
+				try {
+					Integer inthour = Integer.parseInt(hour);
+					if(inthour > 24 || inthour < 0) { throw new timeBoundaryException(); }
+						hourPicker.setStyle("-fx-text-inner-color: green;" + "-fx-focus-color: green;");
+				}catch(NumberFormatException ex) {
+					setAlert("Insert only numbers", null);
+					hourPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;");
+				}catch(timeBoundaryException ex) {
+					setAlert("hours can be only between 0 to 24", null);
+					hourPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;");	
+				}catch(Exception ex) {
+					ex.printStackTrace();
+					hourPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;");
+				}
+			}
+		);
+		
+		minutesPicker.setOnAction(evnt -> {
+			String minutes = minutesPicker.getText();
 			try {
-				timePicker.setText((LocalTime.parse(timePicker.getText())).toString());
-				timePicker.setStyle("-fx-text-inner-color: black;"
-						+ "-fx-focus-color: green;");
-			} catch (Exception ex) {
-				timePicker.clear();
-				timePicker.setStyle("-fx-text-inner-color: red;"
-						+ "-fx-focus-color:red;");
-				timePicker.home();
+				Integer intminutes = Integer.parseInt(minutes);
+				if(intminutes > 60 || intminutes < 0) { throw new timeBoundaryException(); }
+				minutesPicker.setStyle("-fx-text-inner-color: green;" + "-fx-focus-color: green;");
+			}catch(NumberFormatException ex) {
+				setAlert("Insert only numbers", null);
+				minutesPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;");
+			}catch(timeBoundaryException ex) {
+				setAlert("minutes can be only between 0 to 60", null);
+				minutesPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;");
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				minutesPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;");
 			}
 		});
 		
@@ -190,7 +227,7 @@ public class PersonalDetailsController {
 			fieldBlessing.setText(ChatClient.cartOrder.getGreetingCard());
 			fieldDescribtion.setText(ChatClient.cartOrder.getOrderDesc());
 			datePicker.setValue(ChatClient.cartOrder.getSupplyDate());
-			timePicker.setText(ChatClient.cartOrder.getSupplyTime().toString());
+			//timePicker.setText(ChatClient.cartOrder.getSupplyTime().toString());
 			
 			if (ChatClient.cartOrder.getFromStore().equals(null)) {
 				DeliveryRadio.setSelected(true);
