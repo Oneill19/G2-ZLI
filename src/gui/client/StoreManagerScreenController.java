@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 public class StoreManagerScreenController {
 
     @FXML
@@ -114,7 +113,7 @@ public class StoreManagerScreenController {
     	((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		new FXMLLoader();
-		Pane root = FXMLLoader.<Pane>load(getClass().getResource("/gui/client/UserRegistrationPage.fxml"));
+		Pane root = FXMLLoader.<Pane>load(getClass().getResource("/gui/client/UserRegistrationTable.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li->Option Screen->User Registration");
 		primaryStage.setScene(scene);
@@ -130,7 +129,7 @@ public class StoreManagerScreenController {
     	((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		new FXMLLoader();
-		Pane root = FXMLLoader.<Pane>load(getClass().getResource("/gui/client/ViewMonthlyReportScreen.fxml"));
+		Pane root = FXMLLoader.<Pane>load(getClass().getResource("ViewMonthlyReportStoreManager.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Zer-Li->Option Screen->View Monthly Report");
 		primaryStage.setScene(scene);

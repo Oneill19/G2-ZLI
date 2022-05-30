@@ -21,13 +21,14 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Order> NotAprroveorders;
 	public static ArrayList<User> ApprovedUserToPer;
 	public static ArrayList<User> NotApprovedUsers;
+	public static ArrayList<User> waitingUsers;
 	public static ArrayList<AbstractProduct> products = new ArrayList<>();
 	public static ArrayList<AbstractProduct> cart = new ArrayList<>();
 	public static ArrayList<String> stores = new ArrayList<>();
 	public static ArrayList<Survey> surveysWithReports = new ArrayList<>();
 	public static ArrayList<Survey> allSurveys = new ArrayList<>();
 	public static Order cartOrder = new Order();
-
+	public static String reportTxt;
 	public static User user = null;
 	
 	public static SurveyReport selectedSurveyReport = null;
@@ -88,24 +89,27 @@ public class ChatClient extends AbstractClient {
 				ChatClient.products.addAll((ArrayList<Item>) rc.getReturnValue());
 				break;
 			case "GetAllStores":
+<<<<<<< HEAD
 				ChatClient.stores.addAll((ArrayList<String>) rc.getReturnValue());
 				break;
 				
+=======
+				ChatClient.stores.addAll((ArrayList<Store>) rc.getReturnValue());
+				break;	
+>>>>>>> 755a3407de75ad3a00d4f5f95dc518c0d10b705d
 			case "GetSurveysWithReports":
 				surveysWithReports.addAll((ArrayList<Survey>)rc.getReturnValue());
-				break;
-				
+				break;	
 			case "GetSurveyReport":
 				selectedSurveyReport = (SurveyReport)rc.getReturnValue();
-				break;
-				
+				break;	
 			case "GetAllSurveys":
 				allSurveys.addAll((ArrayList<Survey>)rc.getReturnValue());
 				break;
-				
 			case "AddSurveyAnswer":
 				requestSucceed = rc == null ? false : true;
 				break;
+<<<<<<< HEAD
 				
 			case "AddOrderToDB":
 				ChatClient.cartOrder.setOrderNumber((int)rc.getReturnValue());
@@ -114,6 +118,18 @@ public class ChatClient extends AbstractClient {
 			
 			
 				
+=======
+			case "GetRegistersUsers":
+				waitingUsers=(ArrayList<User>)rc.getReturnValue();
+				break;
+			case "ConfirmedUserUpdate":
+				System.out.println("User Updated");
+				break;
+			case "getReport":
+				reportTxt=(String)rc.getReturnValue();
+				break;
+			}
+>>>>>>> 755a3407de75ad3a00d4f5f95dc518c0d10b705d
 
 		}
 	}
