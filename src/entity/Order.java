@@ -239,7 +239,7 @@ public class Order implements Serializable {
 		sb.append(confirmedDate).append(",");
 		sb.append(completeDate).append(",");
 		sb.append("'").append(deliveryMethod).append("'").append(",");
-		sb.append(supplyDate).append(",");
+		sb.append("'").append(supplyDate).append("'").append(",");
 		sb.append("'").append(supplyTime).append("'");	
 		return sb.toString();	
 	}
