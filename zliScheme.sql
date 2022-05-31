@@ -48,22 +48,25 @@ DROP TABLE IF EXISTS `complaint`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `complaint` (
-  `complaintID` int NOT NULL AUTO_INCREMENT,
-  `complaintdeatils` varchar(3005) DEFAULT NULL,
+  `ComplaintID` int NOT NULL AUTO_INCREMENT,
   `OrderNumber` int NOT NULL,
-  `Recivedate` datetime NOT NULL,
-  `complaintStatus` varchar(3500) DEFAULT NULL,
-  `complaintcol` varchar(45) DEFAULT NULL,
-  `IsRemindrd` int NOT NULL,
-  `refund` int DEFAULT NULL,
-  `refunddeatils` varchar(4500) DEFAULT NULL,
-  `UserID` int NOT NULL,
-  PRIMARY KEY (`complaintID`),
+  `CustomerID` int NOT NULL,
+  `WorkerID` int NOT NULL,
+  `ComplaintDetails` varchar(3000) DEFAULT NULL,
+  `RecieveDate` varchar(45) NOT NULL,
+  `RecieveTime` varchar(45) NOT NULL,
+  `Status` varchar(3500) NOT NULL,
+  `IsReminded` int NOT NULL,
+  `Refund` float DEFAULT NULL,
+  `RefundDetails` varchar(4500) DEFAULT NULL,
+  PRIMARY KEY (`ComplaintID`),
   KEY `OrderNumber_idx` (`OrderNumber`),
-  KEY `UserID_idx` (`UserID`),
+  KEY `UserID_idx` (`CustomerID`),
+  KEY `WorkerID_idx` (`WorkerID`),
+  CONSTRAINT `CustomerID` FOREIGN KEY (`CustomerID`) REFERENCES `users` (`UserID`),
   CONSTRAINT `OrderNumber` FOREIGN KEY (`OrderNumber`) REFERENCES `orders` (`orderNumber`),
-  CONSTRAINT `UserID` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `WorkerID` FOREIGN KEY (`WorkerID`) REFERENCES `users` (`UserID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,6 +75,7 @@ CREATE TABLE `complaint` (
 
 LOCK TABLES `complaint` WRITE;
 /*!40000 ALTER TABLE `complaint` DISABLE KEYS */;
+INSERT INTO `complaint` VALUES (2,2,1,4,'test','2022-05-31','00:12','OPEN',0,NULL,NULL);
 /*!40000 ALTER TABLE `complaint` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,10 +227,10 @@ CREATE TABLE `orders` (
   `greetingCard` varchar(3000) DEFAULT NULL,
   `color` varchar(45) DEFAULT NULL,
   `orderDesc` varchar(45) DEFAULT NULL,
-  `fromStore` varchar(20) NOT NULL,
+  `fromStore` varchar(20) DEFAULT NULL,
   `orderCreationDate` varchar(45) NOT NULL,
   `orderCreationTime` varchar(45) NOT NULL,
-  `cutomerID` varchar(20) NOT NULL,
+  `customerID` varchar(20) NOT NULL,
   `paymentMethod` varchar(45) NOT NULL,
   `orderStatus` varchar(45) NOT NULL,
   `confirmedDate` varchar(45) DEFAULT NULL,
@@ -237,7 +241,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`orderNumber`),
   KEY `fk_order_store` (`fromStore`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`fromStore`) REFERENCES `store` (`storeName`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -602,7 +606,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',1),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(4,'Adir','Miller','99999','053-3333','adir@zli','1','CustomerServiceWorker','CONFIRMED',0),(111222333,'Dorin','Beery','1111111111111111','0545344778','dorin@zli','1','Customer','CONFIRMED',0);
+INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(4,'Adir','Miller','99999','053-3333','adir@zli','1','CustomerServiceWorker','CONFIRMED',0),(111222333,'Dorin','Beery','1111111111111111','0545344778','dorin@zli','1','Customer','CONFIRMED',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -615,4 +619,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-30 14:08:5
+-- Dump completed on 2022-05-31  0:13:23

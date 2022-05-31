@@ -33,13 +33,38 @@ public class Complaint implements Serializable {
 	 * @param reciveTime
 	 * @param status
 	 * @param isReminded
+	 */
+	public Complaint(int complaintId, int orderNumber, int customerId, int workerId, String complaintDetails,
+			LocalDate reciveDate, LocalTime reciveTime, String status, boolean isReminded) {
+		this.complaintId = complaintId;
+		this.orderNumber = orderNumber;
+		this.customerId = customerId;
+		this.workerId = workerId;
+		this.complaintDetails = complaintDetails;
+		this.reciveDate = reciveDate;
+		this.reciveTime = reciveTime;
+		this.status = status;
+		this.isReminded = isReminded;
+		this.refund = 0;
+		this.refundDetails = null;
+	}
+	
+	/**
+	 * @param complaintId
+	 * @param orderNumber
+	 * @param customerId
+	 * @param workerId
+	 * @param complaintDetails
+	 * @param reciveDate
+	 * @param reciveTime
+	 * @param status
+	 * @param isReminded
 	 * @param refund
 	 * @param refundDetails
 	 */
 	public Complaint(int complaintId, int orderNumber, int customerId, int workerId, String complaintDetails,
 			LocalDate reciveDate, LocalTime reciveTime, String status, boolean isReminded, float refund,
 			String refundDetails) {
-		super();
 		this.complaintId = complaintId;
 		this.orderNumber = orderNumber;
 		this.customerId = customerId;
@@ -158,8 +183,6 @@ public class Complaint implements Serializable {
 				reciveDate + "," +
 				reciveTime + "," +
 				status + "," +
-				getIsRemindedNumber() + "," +
-				refund + "," +
-				refundDetails;
+				getIsRemindedNumber();
 	}
 }

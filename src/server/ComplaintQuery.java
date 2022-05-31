@@ -19,7 +19,7 @@ public class ComplaintQuery {
 
 	public static ReturnCommand addComplaint(Connection con, String complaint) {
 		Statement stmt;
-		String sqlQuery = "INSERT INTO zli.complaint (ComplaintID,OrderNumber,CustomerId,WorkerID,ComplaintDetails,RecieveDate,RecieveTime,Status,IsReminded,Refund,RefundDetails) VALUES (" + complaint + ");";
+		String sqlQuery = "INSERT INTO zli.complaint (OrderNumber,CustomerId,WorkerID,ComplaintDetails,RecieveDate,RecieveTime,Status,IsReminded) VALUES (" + complaint + ");";
 		try {
 			stmt = con.createStatement();
 			stmt.executeUpdate(sqlQuery);
@@ -59,9 +59,9 @@ public class ComplaintQuery {
 		}
 	}
 	
-	public static ReturnCommand orderExist(Connection con, int orderNumber) {
+	public static ReturnCommand orderExist(Connection con, int orderNumber, int userId) {
 		Statement stmt;
-		String sqlQuery = ("SELECT orderNumber FROM zli.orders WHERE orderNumber=" + orderNumber + ";");
+		String sqlQuery = "SELECT orderNumber FROM zli.orders WHERE orderNumber=" + orderNumber + " AND customerID=" + userId + ";";
 		ResultSet rs;
 		try {
 			stmt = con.createStatement();

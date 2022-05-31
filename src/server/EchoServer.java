@@ -198,7 +198,7 @@ public class EchoServer extends AbstractServer {
 		case "GetApprovedUsers":
 			try {
 				// send a successful message back
-				client.sendToClient(StoreManagerQuery.GetApprovedUsers(conn,clientMsg[1]));
+				client.sendToClient(StoreManagerQuery.GetApprovedUsers(conn, clientMsg[1]));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -278,17 +278,19 @@ public class EchoServer extends AbstractServer {
 			break;
 		case "AddOrderToDB":
 			try {
-				//clientMsg[1] has the order in cart
+				// clientMsg[1] has the order in cart
 				client.sendToClient(OrderQuery.saveOrderToDB(conn, clientMsg[1]));
-			}catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			break;
 		case "numberOfItemsInOrder":
 			try {
 				client.sendToClient(clientMsg);
-			}catch(Exception e){
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			break;
 		case "GetRegistersUsers":
 			try {
 				client.sendToClient(StoreManagerQuery.getAllWaitingRegistersUsers(conn));
@@ -298,28 +300,45 @@ public class EchoServer extends AbstractServer {
 			break;
 		case "ConfirmedUserUpdate":
 			try {
-
 				client.sendToClient(StoreManagerQuery.ConfirmedUserUpdate(conn, clientMsg[1], clientMsg[2]));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			break;
 
-			case "getReport":
+		case "getReport":
 			try {
-
-				client.sendToClient(ReportQuery.getReport(conn, clientMsg[1], clientMsg[2],clientMsg[3],clientMsg[4]));
+				client.sendToClient(
+						ReportQuery.getReport(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4]));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			break;
-			case "addProductsAndItemsInOrderToDB":
+		case "addProductsAndItemsInOrderToDB":
 			try {
-				client.sendToClient(OrderQuery.addProductsAndItemsInOrderToDB(conn, clientMsg[1], clientMsg[2],clientMsg[3]));
+				client.sendToClient(
+						OrderQuery.addProductsAndItemsInOrderToDB(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+			break;
+
+		case "AddComplaint":
+			try {
+				client.sendToClient(ComplaintQuery.addComplaint(conn, clientMsg[1]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		
+		case "OrderExist":
+			try {
+				client.sendToClient(ComplaintQuery.orderExist(conn, Integer.parseInt(clientMsg[1]), Integer.parseInt(clientMsg[2])));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+
 		default:
 			System.out.println("No Command Found");
 //			System.exit(-1);

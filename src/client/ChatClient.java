@@ -116,6 +116,12 @@ public class ChatClient extends AbstractClient {
 			case "getReport":
 				reportTxt=(String)rc.getReturnValue();
 				break;
+			case "AddComplaint":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "OrderExist":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
 			}
 		}
 	}
