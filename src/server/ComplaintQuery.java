@@ -20,7 +20,8 @@ public class ComplaintQuery {
 
 	public static ReturnCommand addComplaint(Connection con, String complaint) {
 		Statement stmt;
-		String sqlQuery = "INSERT INTO zli.complaint (OrderNumber,CustomerId,WorkerID,ComplaintDetails,RecieveDate,RecieveTime,Status,IsReminded) VALUES (" + complaint + ");";
+		String sqlQuery = "INSERT INTO zli.complaint (OrderNumber,CustomerId,WorkerID,ComplaintDetails,RecieveDate,RecieveTime,Status,IsReminded) VALUES ("
+				+ complaint + ");";
 		try {
 			stmt = con.createStatement();
 			stmt.executeUpdate(sqlQuery);
@@ -30,7 +31,7 @@ public class ComplaintQuery {
 			return null;
 		}
 	}
-	
+
 	public static ReturnCommand getAllOpenComplaintsOfWorker(Connection con, int workerId) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.complaint WHERE WorkerID=" + workerId + " AND Status='OPEN'";
@@ -51,7 +52,8 @@ public class ComplaintQuery {
 				boolean isReminded = rs.getInt(9) == 0 ? false : true;
 				float refund = rs.getFloat(10);
 				String refundDetails = rs.getString(11);
-				complaints.add(new Complaint(complaintId, orderNumber, customerId, workerIdinDB, complaintDetails, reciveDate, reciveTime, status, isReminded, refund, refundDetails));
+				complaints.add(new Complaint(complaintId, orderNumber, customerId, workerIdinDB, complaintDetails,
+						reciveDate, reciveTime, status, isReminded, refund, refundDetails));
 			}
 			return new ReturnCommand("GetAllOpenComplaintsOfWorker", complaints);
 		} catch (SQLException e) {
@@ -59,18 +61,18 @@ public class ComplaintQuery {
 			return null;
 		}
 	}
-	
+
 	public static ReturnCommand orderExist(Connection con, int orderNumber, int userId) {
 		Statement stmt;
-		String sqlQuery = "SELECT orderNumber FROM zli.orders WHERE orderNumber=" + orderNumber + " AND customerID=" + userId + ";";
+		String sqlQuery = "SELECT orderNumber FROM zli.orders WHERE orderNumber=" + orderNumber + " AND customerID="
+				+ userId + ";";
 		ResultSet rs;
 		try {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sqlQuery);
 			if (rs.next()) {
 				return new ReturnCommand("OrderExist", true);
-			}
-			else {
+			} else {
 				return new ReturnCommand("OrderExist", false);
 			}
 		} catch (SQLException e) {
@@ -78,7 +80,7 @@ public class ComplaintQuery {
 			return new ReturnCommand("OrderExist", false);
 		}
 	}
-	
+
 	public static ReturnCommand reminded(Connection con, int complaintId) {
 		Statement stmt;
 		String sqlQuery = "UPDATE zli.complaint SET IsReminded=1 WHERE ComplaintId=" + complaintId + ";";
@@ -91,7 +93,7 @@ public class ComplaintQuery {
 			return new ReturnCommand("Reminded", false);
 		}
 	}
-	
+
 	public static ReturnCommand closeComplaint(Connection con, int complaintId) {
 		Statement stmt;
 		String sqlQuery = "UPDATE zli.complaint SET Status='CLOSED' WHERE ComplaintId=" + complaintId + ";";
@@ -104,13 +106,14 @@ public class ComplaintQuery {
 			return new ReturnCommand("CloseComplaint", false);
 		}
 	}
-	
-	public static ReturnCommand refundForComplaintFullAmount(Connection con, int complaintId, int customerId, int orderNumber, String refundDetails) {
+
+	public static ReturnCommand refundForComplaintFullAmount(Connection con, int complaintId, int customerId,
+			int orderNumber, String refundDetails) {
 		Statement stmt;
 		String sqlQuery;
 		ResultSet rs;
 		double refundAmount = 0;
-		
+
 		// get the amount to refund from the database
 		try {
 			sqlQuery = "SELECT totalPrice FROM zli.orders WHERE orderNumber=" + orderNumber + ";";
@@ -123,7 +126,7 @@ public class ComplaintQuery {
 			e.printStackTrace();
 			return new ReturnCommand("RefundForComplaintFullAmount", false);
 		}
-		
+
 		// add the refund to customer balance
 		try {
 			sqlQuery = "SELECT balance FROM zli.user_customer WHERE userID=" + customerId + ";";
@@ -132,7 +135,7 @@ public class ComplaintQuery {
 			if (rs.next()) {
 				refundAmount += rs.getFloat(1);
 			}
-			
+
 			sqlQuery = "UPDATE zli.user_customer SET balance=" + refundAmount + " WHERE userID=" + customerId + ";";
 			stmt = con.createStatement();
 			stmt.executeUpdate(sqlQuery);
@@ -140,45 +143,48 @@ public class ComplaintQuery {
 			e.printStackTrace();
 			return new ReturnCommand("RefundForComplaintFullAmount", false);
 		}
-		
+
 		// change complaint status to CLOSED
 		try {
-			sqlQuery = "UPDATE zli.complaint SET Status='CLOSED', RefundDetails='" + refundDetails + "',Refund=" + refundAmount + " WHERE ComplaintID=" + complaintId + ";";
+			sqlQuery = "UPDATE zli.complaint SET Status='CLOSED', RefundDetails='" + refundDetails + "',Refund="
+					+ refundAmount + " WHERE ComplaintID=" + complaintId + ";";
 			stmt = con.createStatement();
 			stmt.executeUpdate(sqlQuery);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return new ReturnCommand("RefundForComplaintFullAmount", false);
 		}
-		
+
 		return new ReturnCommand("RefundForComplaintFullAmount", true);
 	}
-	
-	public static ReturnCommand refundForComplaintNotFull(Connection con, int complaintId, int customerId, int orderNumber, float refundAmount, String refundDetails) {
+
+	public static ReturnCommand refundForComplaintNotFull(Connection con, int complaintId, int customerId,
+			int orderNumber, float refundAmount, String refundDetails) {
 		Statement stmt;
 		String sqlQuery;
 		ResultSet rs;
-		
-		// add the refund to customer balance
+
+		// change complaint status to CLOSED
 		try {
-			sqlQuery = "SELECT balance FROM zli.user_customer WHERE userID=" + customerId + ";";
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(sqlQuery);
-			if (rs.next()) {
-				refundAmount += rs.getFloat(1);
-			}
-			
-			sqlQuery = "UPDATE zli.user_customer SET balance=" + refundAmount + " WHERE userID=" + customerId + ";";
+			sqlQuery = "UPDATE zli.complaint SET Status='CLOSED', RefundDetails='" + refundDetails + "',Refund="
+					+ refundAmount + " WHERE ComplaintID=" + complaintId + ";";
 			stmt = con.createStatement();
 			stmt.executeUpdate(sqlQuery);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return new ReturnCommand("RefundForComplaintNotFull", false);
 		}
-		
-		// change complaint status to CLOSED
+
+		// add the refund to customer balance
 		try {
-			sqlQuery = "UPDATE zli.complaint SET Status='CLOSED', RefundDetails='" + refundDetails + "',Refund=" + refundAmount + " WHERE ComplaintID=" + complaintId + ";";
+			sqlQuery = "SELECT balance FROM zli.user_customer WHERE userID=" + customerId + ";";
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sqlQuery);
+			if (rs.next()) {
+				refundAmount += rs.getFloat(1);
+			}
+
+			sqlQuery = "UPDATE zli.user_customer SET balance=" + refundAmount + " WHERE userID=" + customerId + ";";
 			stmt = con.createStatement();
 			stmt.executeUpdate(sqlQuery);
 		} catch (SQLException e) {
@@ -187,7 +193,7 @@ public class ComplaintQuery {
 		}
 		return new ReturnCommand("RefundForComplaintNotFull", true);
 	}
-	
+
 	/**
 	 * @param con
 	 * @param orderNumber
@@ -210,7 +216,7 @@ public class ComplaintQuery {
 				String fromStore = rs.getString(6);
 				LocalDate orderCreationDate = LocalDate.parse(rs.getString(7));
 				LocalTime orderCreationTime = LocalTime.parse(rs.getString(8));
-				int customerId =  rs.getInt(9);
+				int customerId = rs.getInt(9);
 				String paymentMethod = rs.getString(10);
 				String orderStatus = rs.getString(11);
 				String confirmedDate = rs.getString(12);
@@ -218,7 +224,9 @@ public class ComplaintQuery {
 				String deliveryMethod = rs.getString(14);
 				LocalDate supplyDate = LocalDate.parse(rs.getString(15));
 				LocalTime supplyTime = LocalTime.parse(rs.getString(16));
-				order = new Order(orderId, totalPrice, greetingCard, color, orderDesc, fromStore, orderCreationDate, orderCreationTime, customerId, paymentMethod, orderStatus, confirmedDate, completeDate, deliveryMethod, supplyDate, supplyTime);
+				order = new Order(orderId, totalPrice, greetingCard, color, orderDesc, fromStore, orderCreationDate,
+						orderCreationTime, customerId, paymentMethod, orderStatus, confirmedDate, completeDate,
+						deliveryMethod, supplyDate, supplyTime);
 			}
 			return new ReturnCommand("GetOrderByNumber", order);
 		} catch (SQLException e) {
