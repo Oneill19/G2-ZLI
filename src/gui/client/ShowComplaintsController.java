@@ -79,6 +79,8 @@ public class ShowComplaintsController {
     private int getOrderNumber;
     
     /**
+     * go back to the user options screen
+     * 
      * @param event
      * @throws Exception
      */
@@ -90,6 +92,8 @@ public class ShowComplaintsController {
     }
     
     /**
+     * exit the program
+     * 
      * @param event
      * @throws Exception
      */
@@ -99,6 +103,8 @@ public class ShowComplaintsController {
     }
     
     /**
+     * log out from the user
+     * 
      * @param event
      * @throws Exception
      */
@@ -109,21 +115,28 @@ public class ShowComplaintsController {
     }
     
     /**
+     * handle a certain complaint from the table
+     * 
      * @param event
      * @throws Exception
      */
     @FXML
     void onHandleComplaint(ActionEvent event) throws Exception {
+    	// if not complaint selected from the database
     	if (complaints.getSelectionModel() == null || complaints.getSelectionModel().getSelectedItem() == null) {
     		messageLabel.setTextFill(Color.RED);
     		messageLabel.setText("Please choose a complaint");
     		return;
     	}
+    	
+    	// get the data from the table
     	messageLabel.setText("");
     	getComplaintId = complaints.getSelectionModel().getSelectedItem().getComplaintId();
     	getUserId = complaints.getSelectionModel().getSelectedItem().getCustomerId();
     	getOrderNumber = complaints.getSelectionModel().getSelectedItem().getOrderNumber();
     	selected = complaints.getSelectionModel().getSelectedItem();
+    	
+    	// set the button to be useable
     	closeComplaint.setDisable(false);
     	fullRefund.setDisable(false);
     	refundByAmountBtn.setDisable(false);
@@ -131,12 +144,17 @@ public class ShowComplaintsController {
     }
 
     /**
+     * close complaint
+     * 
      * @param event
      * @throws Exception
      */
     @FXML
     void onCloseComplaint(ActionEvent event) throws Exception {
+    	// close the complaint
     	ClientUI.chat.accept("CloseComplaint" + "\t" + getComplaintId);
+    	
+    	// if the task completed successfully
     	if (ChatClient.requestSucceed) {
     		messageLabel.setTextFill(Color.GREEN);
     		messageLabel.setText("Complaint closed");
@@ -145,22 +163,31 @@ public class ShowComplaintsController {
     		messageLabel.setTextFill(Color.RED);
     		messageLabel.setText("Could not close complaint");
     	}
+    	
+    	// update the table
     	observableList.remove(selected);
     	updateTable();
+    	
+    	// set the buttons to be not useable
     	closeComplaint.setDisable(true);
     	fullRefund.setDisable(true);
     	refundByAmountBtn.setDisable(true);
-    	amount.setText("");
+    	amount.clear();
     	amount.setEditable(false);
     }
 
     /**
+     * close complaint with full refund
+     * 
      * @param event
      * @throws Exception
      */
     @FXML
     void onFullRefund(ActionEvent event) throws Exception {
+    	// close and refund the complaint
     	ClientUI.chat.accept("RefundForComplaintFullAmount" + "\t" + getComplaintId + "\t" + getUserId + "\t" + getOrderNumber + "\t" + "Sorry for your inconvenience");
+    	
+    	// if the task completed successfully
     	if (ChatClient.requestSucceed) {
     		messageLabel.setTextFill(Color.GREEN);
     		messageLabel.setText("Order refunded");
@@ -169,26 +196,35 @@ public class ShowComplaintsController {
     		messageLabel.setTextFill(Color.RED);
     		messageLabel.setText("Could not refund order");
     	}
+    	
+    	// update the table
     	observableList.remove(selected);
     	updateTable();
+    	
+    	// set the buttons to be not useable
     	closeComplaint.setDisable(true);
     	fullRefund.setDisable(true);
     	refundByAmountBtn.setDisable(true);
-    	amount.setText("");
+    	amount.clear();
     	amount.setEditable(false);
     }
 
     /**
+     * close complaint with a refund
+     * 
      * @param event
      * @throws Exception
      */
     @FXML
     void onRefundByAmount(ActionEvent event) throws Exception {
+    	// if the amount to refund is empty
     	if (amount.getText().equals("")) {
     		messageLabel.setTextFill(Color.RED);
     		messageLabel.setText("Please enter amount to refund");
     		return;
     	}
+    	
+    	// if the amount is not a number
     	try {
     		Float.parseFloat(amount.getText());
     	} catch (Exception e) {
@@ -196,8 +232,12 @@ public class ShowComplaintsController {
     		messageLabel.setText("Please enter numbers");
     		return;
     	}
+    	
+    	// close and refund the complaint
     	messageLabel.setText("");
     	ClientUI.chat.accept("RefundForComplaintNotFull" + "\t" + getComplaintId + "\t" + getUserId + "\t" + getOrderNumber + "\t" + amount.getText() + "\t" + "Sorry for your inconvenience");
+    	
+    	// if the task completed successfully
     	if (ChatClient.requestSucceed) {
     		messageLabel.setTextFill(Color.GREEN);
     		messageLabel.setText("Order refunded");
@@ -206,12 +246,16 @@ public class ShowComplaintsController {
     		messageLabel.setTextFill(Color.RED);
     		messageLabel.setText("Could not refund order");
     	}
+    	
+    	// update the table
     	observableList.remove(selected);
     	updateTable();
+    	
+    	// set the buttons to be not useable
     	closeComplaint.setDisable(true);
     	fullRefund.setDisable(true);
     	refundByAmountBtn.setDisable(true);
-    	amount.setText("");
+    	amount.clear();
     	amount.setEditable(false);
     }
     
@@ -219,11 +263,19 @@ public class ShowComplaintsController {
      * initialize the screen
      */
     public void initialize() {
+    	// set the user name
     	userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
+    	
+    	// get the observable list
     	observableList = FXCollections.observableArrayList(ChatClient.allComplaints);
+    	
+    	// update table values
     	updateTable();
     }
     
+    /**
+     * update the table values
+     */
     private void updateTable() {
     	complaints.getItems().clear();
     	complaintId.setCellValueFactory(new PropertyValueFactory<>("complaintId"));

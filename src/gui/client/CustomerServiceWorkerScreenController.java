@@ -32,6 +32,8 @@ public class CustomerServiceWorkerScreenController {
     private CommonController cc = new CommonController();
 
     /**
+     * go to add a survey answer screen
+     * 
      * @param event
      * @throws Exception 
      */
@@ -42,6 +44,8 @@ public class CustomerServiceWorkerScreenController {
     }
 
     /**
+     * exit the program
+     * 
      * @param event
      * @throws Exception
      */
@@ -51,6 +55,8 @@ public class CustomerServiceWorkerScreenController {
     }
 
     /**
+     * log out from the user
+     * 
      * @param event
      * @throws Exception
      */
@@ -60,6 +66,8 @@ public class CustomerServiceWorkerScreenController {
     }
 
     /**
+     * go to show survey reports screen
+     * 
      * @param event
      * @throws Exception
      */
@@ -70,6 +78,8 @@ public class CustomerServiceWorkerScreenController {
     }
     
     /**
+     * go to add complaint screen 
+     *
      * @param event
      * @throws Exception
      */
@@ -79,6 +89,8 @@ public class CustomerServiceWorkerScreenController {
     }
     
     /**
+     * go to watch complaints screen
+     * 
      * @param event
      * @throws Exception
      */
