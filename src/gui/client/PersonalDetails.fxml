@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.PersonalDetailsController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.PersonalDetailsController">
    <children>
       <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="1110.0" style="-fx-background-color: #FCFCFE;">
          <children>
@@ -175,13 +175,13 @@
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin></DatePicker>
-                        <TextField fx:id="hourPicker" prefHeight="34.0" prefWidth="51.0" promptText="HH" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                        <TextField fx:id="hourPicker" prefHeight="34.0" prefWidth="63.0" promptText="HH" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
                         <Label style="-fx-background-color: white;" text=":">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="minutesPicker" prefHeight="34.0" prefWidth="61.0" promptText="MM" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                        <TextField fx:id="minutesPicker" prefHeight="34.0" prefWidth="63.0" promptText="MM" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
                      </children>
                   </HBox>
                   <HBox spacing="5.0" style="-fx-font-size: 20;">
