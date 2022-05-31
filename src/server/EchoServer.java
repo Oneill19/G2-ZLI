@@ -338,6 +338,38 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
+			
+		case "GetAllOpenComplaintsOfWorker":
+			try {
+				client.sendToClient(ComplaintQuery.getAllOpenComplaintsOfWorker(conn, Integer.parseInt(clientMsg[1])));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			
+		case "RefundForComplaintFullAmount":
+			try {
+				client.sendToClient(ComplaintQuery.refundForComplaintFullAmount(conn, Integer.parseInt(clientMsg[1]), Integer.parseInt(clientMsg[2]), Integer.parseInt(clientMsg[3]), clientMsg[4]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		
+		case "RefundForComplaintNotFull":
+			try {
+				client.sendToClient(ComplaintQuery.refundForComplaintNotFull(conn, Integer.parseInt(clientMsg[1]), Integer.parseInt(clientMsg[2]), Integer.parseInt(clientMsg[3]), Float.parseFloat(clientMsg[4]), clientMsg[5]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			
+		case "CloseComplaint":
+			try {
+				client.sendToClient(ComplaintQuery.closeComplaint(conn, Integer.parseInt(clientMsg[1])));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 
 		default:
 			System.out.println("No Command Found");

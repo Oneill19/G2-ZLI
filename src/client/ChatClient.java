@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import common.ChatIF;
 import common.ReturnCommand;
 import entity.AbstractProduct;
+import entity.Complaint;
 import entity.Item;
 import entity.Order;
 import entity.Product;
@@ -27,6 +28,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<String> stores = new ArrayList<>();
 	public static ArrayList<Survey> surveysWithReports = new ArrayList<>();
 	public static ArrayList<Survey> allSurveys = new ArrayList<>();
+	public static ArrayList<Complaint> allComplaints = new ArrayList<>();
 	public static Order cartOrder = new Order();
 	public static String reportTxt;
 	public static User user = null;
@@ -121,6 +123,18 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "OrderExist":
 				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "CloseComplaint":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "RefundForComplaintFullAmount":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "RefundForComplaintNotFull":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "GetAllOpenComplaintsOfWorker":
+				allComplaints.addAll((ArrayList<Complaint>)rc.getReturnValue());
 				break;
 			}
 		}

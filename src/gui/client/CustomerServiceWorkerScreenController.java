@@ -84,7 +84,8 @@ public class CustomerServiceWorkerScreenController {
      */
     @FXML
     void onWatchComplaints(ActionEvent event) throws Exception {
-    	System.out.println("On Watch Complaints");
+    	ClientUI.chat.accept("GetAllOpenComplaintsOfWorker" + "\t" + ChatClient.user.getUserID());
+    	cc.changeFXML(event, "ShowComplaints.fxml", "Zer-Li Complaints", null);
     }
 
     /**
