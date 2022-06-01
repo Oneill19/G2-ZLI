@@ -53,6 +53,7 @@ public abstract class AbstractProduct implements Serializable {
 		this.isItem = ap.isItem;
 		this.type = ap.getType();
 		this.sale=ap.getSale();
+		this.priceWithSale = ap.getPriceWithSale();
 	}
 
 	/**
@@ -173,6 +174,10 @@ public abstract class AbstractProduct implements Serializable {
 	 */
 	public void setSale(int sale) {
 		this.sale=sale;
+	}
+	
+	public double getPriceWithSale() {
+		return priceWithSale;
 	}
 	
 	@Override
