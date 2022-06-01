@@ -39,8 +39,7 @@ public class OrderQuery {
 	
 	public static ReturnCommand addProductsAndItemsInOrderToDB(Connection con, String orderNumber, String item_in_order, String product_in_order) {
 		PreparedStatement ps;
-		String[] itemArray = item_in_order.split(",");
-		String[] productArray = product_in_order.split(",");
+		String[] itemArray = item_in_order.split(","), productArray = product_in_order.split(",");
 		
 		for(String itemSerial : itemArray) {
 			String insertQuery = "INSERT INTO item_in_order(itemSerial, orderNumber) VALUES ("+itemSerial+","+orderNumber.toString()+")";
@@ -53,7 +52,7 @@ public class OrderQuery {
 			}
 		}
 		
-		for(String productSerial : itemArray) {
+		for(String productSerial : productArray) {
 			String insertQuery = "INSERT INTO product_in_order(productSerial, orderNumber) VALUES ("+productSerial+","+orderNumber.toString()+")";
 			try {
 				ps = con.prepareStatement(insertQuery);

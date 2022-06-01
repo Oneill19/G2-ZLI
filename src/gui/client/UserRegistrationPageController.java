@@ -126,7 +126,6 @@ public class UserRegistrationPageController {
 
 	@FXML
 	void onSave(ActionEvent event) throws Exception {
-		String newStatus = "";
 
 		String userId = Idtxt.getText();
 		String cardNum = CardNumtxt.getText();

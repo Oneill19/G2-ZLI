@@ -49,8 +49,6 @@ public class LoginScreenController {
     @FXML
     private Button disconnectUsers;
     
-    private boolean isInitialed=false;
-    
     //TODO
     //Delete when not usable
     @FXML

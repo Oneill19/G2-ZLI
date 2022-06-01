@@ -11,7 +11,6 @@ import entity.Item;
 import entity.Order;
 import entity.Product;
 import entity.Survey;
-import entity.Report;
 import entity.SurveyReport;
 import entity.User;
 import ocsf.client.AbstractClient;
