@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE; -fx-border-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.UserRegistrationPageController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.UserRegistrationPageController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="406.0" layoutY="48.0">
          <image>
@@ -120,10 +120,10 @@
       <TableView fx:id="userTable" editable="true" layoutX="377.0" layoutY="176.0" onMouseClicked="#onSelectedUser" prefHeight="510.0" prefWidth="600.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px;" tableMenuButtonVisible="true">
          <columns>
             <TableColumn fx:id="IDNumberCol" prefWidth="103.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center;" text="ID" />
-            <TableColumn fx:id="UserFirstNameCol" prefWidth="144.0" style="-fx-background-color: #FCFCFE;" text="First Name" />
-            <TableColumn fx:id="UserLastNameCol" prefWidth="118.0" style="-fx-background-color: #FCFCFE;" text="Last Name" />
-            <TableColumn fx:id="phoneNumberCol" prefWidth="116.0" style="-fx-background-color: #FCFCFE;" text="Phone Number" />
-            <TableColumn fx:id="emailNumberCol" prefWidth="133.0" style="-fx-background-color: #FCFCFE;" text="Email" />
+            <TableColumn fx:id="UserFirstNameCol" prefWidth="144.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="First Name" />
+            <TableColumn fx:id="UserLastNameCol" prefWidth="118.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Last Name" />
+            <TableColumn fx:id="phoneNumberCol" prefWidth="116.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Phone Number" />
+            <TableColumn fx:id="emailNumberCol" prefWidth="133.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Email" />
             <TableColumn prefWidth="75.0" text="Column X" />
          </columns>
       </TableView>

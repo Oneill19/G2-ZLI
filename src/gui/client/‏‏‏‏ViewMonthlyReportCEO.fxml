@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.CEOReportsController">
+   <children>
+      <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="406.0" layoutY="48.0">
+         <image>
+            <Image url="@Zli_logo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="User" layoutX="74.0" layoutY="21.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Hello User" textFill="#2b0548">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="LogOut" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#onLogOut" style="-fx-background-color: transparent;" text="Logout | " textFill="#2b0548">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="44.0" fitWidth="42.0" layoutX="173.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@User.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="Back" alignment="CENTER" layoutX="32.0" layoutY="674.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Back" textFill="#fcfcfe" />
+      <Button fx:id="Exit" alignment="CENTER" layoutX="918.0" layoutY="12.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #D2042D; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+      <Text fill="#31134a" layoutX="410.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Monthly Reports" wrappingWidth="180.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="reportName" layoutX="410.0" layoutY="223.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="261.0" style="-fx-background-color: transparent;" textFill="#2b0547" underline="true">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Button>
+      <AnchorPane layoutX="434.0" layoutY="267.0" prefHeight="270.0" prefWidth="480.0" style="-fx-border-color: #000000;">
+         <children>
+            <TextArea fx:id="reportText" layoutX="5.0" layoutY="3.0" prefHeight="260.0" prefWidth="512.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </TextArea>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="63.0" fitWidth="53.0" layoutX="590.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@report.jpg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="67.0" layoutY="193.0" prefHeight="386.0" prefWidth="333.0" style="-fx-background-color: #d6cae0; -fx-background-radius: 50px; -fx-border-radius: 50px;">
+         <children>
+            <Text fill="#31134a" layoutX="82.0" layoutY="96.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Report date: " wrappingWidth="180.33203125">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="YearC" layoutX="186.0" layoutY="119.0" prefHeight="25.0" prefWidth="130.0" promptText="Year" />
+            <ComboBox fx:id="Month" layoutX="20.0" layoutY="119.0" prefHeight="25.0" prefWidth="127.0" promptText="Month" />
+            <Text fill="#31134a" layoutX="82.0" layoutY="178.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Report Type: ">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="ReportType" layoutX="87.0" layoutY="190.0" prefHeight="25.0" prefWidth="165.0" promptText="Report Type" />
+            <Text fill="RED" layoutX="77.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fill="RED" layoutX="76.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fill="#31134a" layoutX="92.0" layoutY="253.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Store: ">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="storeCombo" layoutX="87.0" layoutY="258.0" prefHeight="25.0" prefWidth="165.0" promptText="Store Name" />
+            <Text fill="RED" layoutX="87.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Button fx:id="ViewReport" alignment="CENTER" layoutX="107.0" layoutY="307.0" mnemonicParsing="false" onAction="#onViewReport" prefHeight="24.0" prefWidth="106.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: green; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="View " textFill="#fcfcfe" />
+         </children>
+      </Pane>
+      <Text fx:id="errortxt" fill="RED" layoutX="86.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="281.13671875">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>

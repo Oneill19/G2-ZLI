@@ -66,13 +66,13 @@
       </Text>
       <Button fx:id="Save" alignment="CENTER" layoutX="143.0" layoutY="566.0" mnemonicParsing="false" onAction="#onSave" prefHeight="44.0" prefWidth="158.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: green; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Save" textFill="#fcfcfe" />
       <Text fx:id="Errormsg" fill="RED" layoutX="287.0" layoutY="635.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="358.0000102519989" />
-      <TableView fx:id="userTable" editable="true" layoutX="406.0" layoutY="213.0" onMouseClicked="#onSelectedUser" prefHeight="409.0" prefWidth="552.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px;" tableMenuButtonVisible="true">
+      <TableView fx:id="userTable" editable="true" layoutX="406.0" layoutY="213.0" onMouseClicked="#onSelectedUser" prefHeight="409.0" prefWidth="552.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" tableMenuButtonVisible="true">
          <columns>
             <TableColumn fx:id="IDNumberCol" prefWidth="129.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center;" text="ID" />
-            <TableColumn fx:id="UserFirstNameCol" prefWidth="153.0" style="-fx-background-color: #FCFCFE;" text="First Name" />
-            <TableColumn fx:id="UserLastNameCol" prefWidth="101.0" style="-fx-background-color: #FCFCFE;" text="Last Name" />
-            <TableColumn fx:id="StatusCol" prefWidth="93.0" style="-fx-background-color: #FCFCFE;" text="Status" />
-            <TableColumn fx:id="role" prefWidth="75.0" style="-fx-background-color: #FCFCFE;" text="Role" />
+            <TableColumn fx:id="UserFirstNameCol" prefWidth="153.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="First Name" />
+            <TableColumn fx:id="UserLastNameCol" prefWidth="101.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Last Name" />
+            <TableColumn fx:id="StatusCol" prefWidth="93.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Status" />
+            <TableColumn fx:id="role" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Role" />
          </columns>
       </TableView>
       <ComboBox fx:id="StatusComboBox" editable="true" layoutX="130.0" layoutY="513.0" prefHeight="30.0" prefWidth="206.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #31134a;" />

@@ -151,6 +151,8 @@ public class OrderManagementScreenController {
     //get the pending orders from DB to order TableView
     @FXML
     void initialize() throws IOException {
+    	User.setText("Hello, " + ChatClient.user.getFirstName());
+
     	ClientUI.chat.accept("GetPendingOrders");
     	observableList=FXCollections.observableArrayList(ChatClient.NotAprroveorders);
     	ordersTable.getItems().clear();
