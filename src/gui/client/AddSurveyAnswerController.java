@@ -151,8 +151,6 @@ public class AddSurveyAnswerController {
 			surveyName.getItems().add(survey.getSurveyName());
 		}
 		
-		
-		
 		// clear and add the answers to the combobox
 		answer1.getItems().clear();
 		answer2.getItems().clear();

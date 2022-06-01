@@ -49,6 +49,8 @@ public class AddComplaintController {
 	private CommonController cc = new CommonController();
 	
     /**
+     * go back to the options screen
+     * 
      * @param event
      * @throws Exception
      */
@@ -68,6 +70,8 @@ public class AddComplaintController {
     }
 
     /**
+     * log out from the user
+     * 
      * @param event
      * @throws Exception
      */
@@ -77,22 +81,29 @@ public class AddComplaintController {
     }
 
     /**
+     * save the complaint in the database
+     * 
      * @param event
      * @throws Exception
      */
     @FXML
     void onSave(ActionEvent event) throws Exception {
+    	// if some of the fields are empty
     	if (customerId.getText().equals("") || orderNumber.getText().equals("") || complaintDescriptionTxt.getText().equals("")) {
     		label.setTextFill(Color.RED);
     		label.setText("Please fill all fields");
     		return;
     	}
+    	
+    	// if the order and customer id are not match
     	ClientUI.chat.accept("OrderExist" + "\t" + orderNumber.getText() + "\t" + customerId.getText());
     	if (!ChatClient.requestSucceed) {
     		label.setTextFill(Color.RED);
     		label.setText("Order not exist");
     		return;
     	}
+    	
+    	// add the complaint
     	label.setText("");
     	ClientUI.chat.accept("AddComplaint" + "\t" 
     			+ orderNumber.getText() + ","
@@ -103,6 +114,8 @@ public class AddComplaintController {
     			+ "'" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")) + "',"
     			+ "'OPEN'" + ","
     			+ "0");
+    	
+    	// if the adding was a success show a successful message
     	if (ChatClient.requestSucceed) {
     		label.setTextFill(Color.GREEN);
     		label.setText("Complaint Submitted");
