@@ -27,6 +27,5 @@ public class StoreQuery {
 			e.printStackTrace();
 			return null;
 		}
-		
 	}
 }

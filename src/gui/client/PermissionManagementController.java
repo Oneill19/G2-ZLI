@@ -149,6 +149,10 @@ public class PermissionManagementController {
 			// SelectedUser.setStatus(StatusCol.getText());add convert
 			if (selectedUser != null) {
 				selectedUser.setStatus(newStatus);
+				userTable.getItems().clear();
+				observableList = FXCollections.observableArrayList(ChatClient.ApprovedUserToPer);
+				userTable.setItems(observableList);
+
 			}
 		}
 		// initialize error message
@@ -181,6 +185,8 @@ public class PermissionManagementController {
 
 	@FXML
 	void initialize() throws IOException {
+    	User.setText("Hello, " + ChatClient.user.getFirstName());
+
 		ClientUI.chat.accept("GetApprovedUsers" + "\t" +((StoreWorker)ChatClient.user).getStoreName());
 		observableList = FXCollections.observableArrayList(ChatClient.ApprovedUserToPer);
 		userTable.getItems().clear();

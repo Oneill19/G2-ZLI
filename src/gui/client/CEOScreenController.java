@@ -1,4 +1,6 @@
 package gui.client;
+
+
 import client.ChatClient;
 import client.ClientUI;
 import javafx.event.ActionEvent;
@@ -74,7 +76,7 @@ import javafx.stage.Stage;
 	    	((Node) event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			new FXMLLoader();
-			Pane root = FXMLLoader.<Pane>load(getClass().getResource("/gui/client/ViewMonthlyReportScreenCEO.fxml"));
+			Pane root = FXMLLoader.<Pane>load(getClass().getResource("‏‏‏‏ViewMonthlyReportCEO.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("Zer-Li->Option Screen->View Monthly Report");
 			primaryStage.setScene(scene);
