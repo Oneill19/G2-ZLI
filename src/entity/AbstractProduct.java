@@ -55,6 +55,7 @@ public abstract class AbstractProduct implements Serializable {
 		this.sale=ap.getSale();
 		this.priceWithSale = ap.getPriceWithSale();
 	}
+	
 
 	/**
 	 * @return the serialNumber

@@ -1,6 +1,5 @@
 package gui.client;
 
-import java.io.IOException;
 import java.time.Year;
 
 import client.ChatClient;
@@ -16,7 +15,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import entity.Store;
 
 /**
  * @author Koral Biton,Topaz Eldori

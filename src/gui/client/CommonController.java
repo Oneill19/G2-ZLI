@@ -53,7 +53,7 @@ public class CommonController {
      * @param event
      * @throws Exception
      */
-    void onLogout(ActionEvent event) throws Exception {
+    public void onLogout(ActionEvent event) throws Exception {
     	ClientUI.chat.accept("LogoutUser" + "\t" + ChatClient.user.getEmail());
     	ChatClient.user = null;
     	changeFXML(event, "LoginScreen.fxml", "Zer-Li Client", "css/newCascadeStyleSheet.css" );

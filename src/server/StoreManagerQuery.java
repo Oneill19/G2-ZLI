@@ -149,11 +149,11 @@ public class StoreManagerQuery {
 				String status = rs.getString(9);
 				boolean isLogged = rs.getInt(10) == 0 ? false : true;
 				if (rs.getString(8).equals("Customer")) {
-					double balance = query.getCustomerBalance(con, userId);
+					double balance = AuthQuery.getCustomerBalance(con, userId);
 					ApprovedUserToPer.add(new Customer(userId,firstName, lastName, creditCard, phone, email, userPassword, userRole, status, isLogged, balance));
 				}
 				else if (rs.getString(8).equals("StoreWorker")) {
-					 storeNameWorker= query.getStoreWorkerStore(con, userId);
+					 storeNameWorker= AuthQuery.getStoreWorkerStore(con, userId);
 					 if(storeNameWorker.equals(storeName))
 				ApprovedUserToPer.add(new StoreWorker(userId,firstName, lastName, creditCard, phone, email, userPassword, userRole, status, isLogged, storeName)); 
 				}
