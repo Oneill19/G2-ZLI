@@ -88,19 +88,19 @@ public class PaymentController {
     	Integer itemCounter= 0;
     	StringBuilder sbProducts=new StringBuilder();
     	Integer productCounter=0;
-    	Double sumPrice=new Double(0);
-    	Integer totalAmount=0;
+    	double productPriceSum = 0;
+    	double itemPriceSum = 0;
     	for(AbstractProduct ap : ChatClient.cart) {
     		if (ap instanceof Product) {
     			productCounter++;
+    			productPriceSum += ap.getPrice();
     			sbProducts.append("'").append(ap.getSerialNumber()).append("',");
     		}
     		if(ap instanceof Item) {
     			itemCounter++;
+    			itemPriceSum += ap.getPrice();
     			sbItems.append("'").append(ap.getSerialNumber()).append("',");
     		}
-    		sumPrice+=ap.getPrice();
-    		totalAmount++;
     	}
     	if (sbItems.length() > 0)
     		sbItems.delete(sbItems.length()-1, sbItems.length());
@@ -108,7 +108,7 @@ public class PaymentController {
     		sbProducts.delete(sbProducts.length()-1, sbProducts.length());
     	try {
 			ClientUI.chat.accept("numberOfItemsInOrder\t"+productCounter.toString()+"\t"+itemCounter.toString()+
-					"\t"+sumPrice.toString()+"\t"+totalAmount.toString()+'\t'+ChatClient.cartOrder.DBToString());
+					"\t"+ productPriceSum+"\t"+ itemPriceSum + '\t' + ChatClient.cartOrder.DBToString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
