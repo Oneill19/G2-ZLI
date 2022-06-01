@@ -1,11 +1,7 @@
 .table-view .column-header .label{
     -fx-alignment: CENTER;
     -fx-radius:50;
-    /*
-    -fx-background-colur: #FCFCFE;
-    */
 }
-
 
 #my-table .table-column{
 	 -fx-alignment: CENTER;

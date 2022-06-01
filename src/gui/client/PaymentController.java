@@ -101,9 +101,11 @@ public class PaymentController {
     		}
     		sumPrice+=ap.getPrice();
     		totalAmount++;
-    	}    	
-    	sbItems.delete(sbItems.length()-1, sbItems.length());
-    	sbProducts.delete(sbProducts.length()-1, sbProducts.length());
+    	}
+    	if (sbItems.length() > 0)
+    		sbItems.delete(sbItems.length()-1, sbItems.length());
+    	if (sbProducts.length() > 0)
+    		sbProducts.delete(sbProducts.length()-1, sbProducts.length());
     	try {
 			ClientUI.chat.accept("numberOfItemsInOrder\t"+productCounter.toString()+"\t"+itemCounter.toString()+
 					"\t"+sumPrice.toString()+"\t"+totalAmount.toString());

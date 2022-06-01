@@ -4,14 +4,18 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
 import client.ChatClient;
 import client.ClientUI;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -24,6 +28,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 
 /**
@@ -134,6 +140,10 @@ public class PersonalDetailsController {
 			LocalTime selectedSupplyTime = LocalTime.parse(hourPicker.getText()+":"+minutesPicker.getText());
 			try {
 				ChatClient.cartOrder.setSuppplyTime(selectedSupplyTime);
+			}catch(DateTimeParseException ex) {
+				setAlert("Please select valid time", null).showAndWait();
+				datePicker.setValue(today);
+				datePicker.setStyle("-fx-border-color : red;");
 			}catch(Exception ex) {
 				ex.printStackTrace();
 			}
@@ -156,6 +166,12 @@ public class PersonalDetailsController {
 		
 	}
 	
+	
+	/**
+	 * @param errDesc		error to show on the alert box
+	 * @param imagePath		an image to attach the alert
+	 * @return				Alert object
+	 */
 	public Alert setAlert(String errDesc, String imagePath) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Error");
@@ -175,46 +191,61 @@ public class PersonalDetailsController {
 		fieldLast.setDisable(true);
 		format.set(DefaultFormat);
 		
+		/**
+		 * Class for catching my special request for Exception.
+		 * Is intended for setAlert and setStyle
+		 */
 		@SuppressWarnings("serial")		
-		class timeBoundaryException extends Exception{
+		class TimeBoundaryException extends Exception{
 		}
 		
-		hourPicker.setOnAction(evnt -> {
-				String hour = hourPicker.getText();
-				try {
-					Integer inthour = Integer.parseInt(hour);
-					if(inthour > 24 || inthour < 0) { throw new timeBoundaryException(); }
+		//Occurs when TextField looses focus 
+		hourPicker.focusedProperty().addListener(new ChangeListener<Boolean>()
+		{
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
+				if(!arg2) { //if focus is lost
+					String hour = hourPicker.getText();
+					try {
+						Integer inthour = Integer.parseInt(hour); //throws exception when @hour is not a parsable number
+						if(inthour > 24 || inthour < 0) //throw exception if hour is out of range
+							throw new TimeBoundaryException(); 
 						hourPicker.setStyle("-fx-text-inner-color: green;" + "-fx-focus-color: green;");
-				}catch(NumberFormatException ex) {
-					setAlert("Insert only numbers", null);
-					hourPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;");
-				}catch(timeBoundaryException ex) {
-					setAlert("hours can be only between 0 to 24", null);
-					hourPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;");	
-				}catch(Exception ex) {
-					ex.printStackTrace();
-					hourPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;");
+					}catch(NumberFormatException ex) {
+						setAlert("Insert only numbers", null).showAndWait();
+						hourPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;" + "-fx-border-color:red;");
+					}catch(TimeBoundaryException ex) {
+						setAlert("hours can be only between 0 to 24", null).showAndWait();
+						hourPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;" + "-fx-border-color:red;");	
+					}catch(Exception ex) {
+						ex.printStackTrace();
+						hourPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;" + "-fx-border-color:red;");
+					}
 				}
-			}
-		);
-		
-		minutesPicker.setOnAction(evnt -> {
-			String minutes = minutesPicker.getText();
-			try {
-				Integer intminutes = Integer.parseInt(minutes);
-				if(intminutes > 60 || intminutes < 0) { throw new timeBoundaryException(); }
-				minutesPicker.setStyle("-fx-text-inner-color: green;" + "-fx-focus-color: green;");
-			}catch(NumberFormatException ex) {
-				setAlert("Insert only numbers", null);
-				minutesPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;");
-			}catch(timeBoundaryException ex) {
-				setAlert("minutes can be only between 0 to 60", null);
-				minutesPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;");
-			}catch(Exception ex) {
-				ex.printStackTrace();
-				minutesPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;");
-			}
-		});
+			}});
+
+		//Occurs when TextField looses focus 
+		minutesPicker.focusedProperty().addListener(new ChangeListener<Boolean>()
+		{
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
+				if(!arg2) {
+					String minutes = minutesPicker.getText();
+					try {
+						Integer intminutes = Integer.parseInt(minutes);
+						if(intminutes > 60 || intminutes < 0) { throw new TimeBoundaryException(); }
+						minutesPicker.setStyle("-fx-text-inner-color: green;" + "-fx-focus-color: green;");
+					}catch(NumberFormatException ex) {
+						setAlert("Insert only numbers", null).showAndWait();
+						minutesPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;" + "-fx-border-color:red;");
+					}catch(TimeBoundaryException ex) {
+						setAlert("minutes can be only between 0 to 60", null).showAndWait();
+						minutesPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;" + "-fx-border-color:red;");
+					}catch(Exception ex) {
+						ex.printStackTrace();
+						minutesPicker.setStyle("-fx-text-inner-color: red;"+"-fx-focus-color:red;" + "-fx-border-color:red;");
+					}
+			}}});
 		
 		HBoxAddress.setVisible(false);
 		HBoxstore.setVisible(false);

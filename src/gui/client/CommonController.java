@@ -28,10 +28,9 @@ public class CommonController {
 		new FXMLLoader();
 		Pane root = FXMLLoader.<Pane>load(getClass().getResource(fxmlPath));
 		Scene scene = new Scene(root);
-		if (cssPath != null)
-			scene.getStylesheets().add(cssPath);
 		primaryStage.setTitle(title);
 		primaryStage.setScene(scene);
+		if (cssPath != null) scene.getStylesheets().add(cssPath);
 		primaryStage.show();
 	}
 	

@@ -105,13 +105,13 @@ public class CatalogController {
     @FXML
     void onGoToCart(MouseEvent event) throws Exception {
     	//go to cart screen
-		cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart", "css/newCascadeStyleSheet.css");
+		cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart", "mycss.css");
     }
     
     @FXML 
     void onGoToCart2(ActionEvent event) throws Exception {
     	//go to cart screen
-    	cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart", "css/newCascadeStyleSheet.css");
+    	cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart", "mycss.css");
     }
     
 
