@@ -11,6 +11,8 @@ import entity.Order;
 import entity.Product;
 import entity.Store;
 import entity.Survey;
+import entity.Report;
+
 import entity.SurveyReport;
 import entity.User;
 import ocsf.client.AbstractClient;
@@ -31,6 +33,7 @@ public class ChatClient extends AbstractClient {
 	public static Order cartOrder = new Order();
 	public static String reportTxt;
 	public static User user = null;
+	
 	
 	public static SurveyReport selectedSurveyReport = null;
 	
@@ -113,7 +116,10 @@ public class ChatClient extends AbstractClient {
 			case "getReport":
 				reportTxt=(String)rc.getReturnValue();
 				break;
+			
+
 			}
+	
 
 		}
 	}
