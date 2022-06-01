@@ -6,3 +6,7 @@
 #my-table .table-column{
 	 -fx-alignment: CENTER;
 }
+
+#my-table .table-cell {
+    -fx-alignment: CENTER;
+}
