@@ -2,6 +2,7 @@
 package gui.client;
 
 import java.io.IOException;
+import java.util.Map;
 
 import client.ChatClient;
 import entity.AbstractProduct;
@@ -33,7 +34,7 @@ public class CartController {
 	// *FXML*
 	// ******
 	@FXML private TableView<AbstractProduct> cartTable;
-	@FXML private TableColumn<AbstractProduct, String> colDelete,colName;
+	@FXML private TableColumn<AbstractProduct, String> colDelete,colName,minusAmountCol,labelAmountCol,plusAmountCol;
 	@FXML private TableColumn<AbstractProduct, ImageView> colImage;
 	@FXML private TableColumn<AbstractProduct, Double> colPrice;
 	@FXML private TextField textFieldPrice;
@@ -67,10 +68,14 @@ public class CartController {
 		//set image view of each product in cart
 		userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
 		
-		for (AbstractProduct ap : ChatClient.cart) {
-			System.out.println(ap.getName());
-			ap.setImageView();
-		}
+//		for (AbstractProduct ap : ChatClient.customerCart) {
+//			System.out.println(ap.getName());
+//			ap.setImageView();
+//		}
+		
+		for (Map.Entry<AbstractProduct, Integer> ap : ChatClient.customerCart.entrySet()) {
+    		ap.getKey().setImageView();
+    	}
 
 		// Sets colDelete behavior
 		colDelete.setCellValueFactory(
@@ -98,16 +103,24 @@ public class CartController {
 						AbstractProduct currentAbstractProduct = (AbstractProduct) DeleteButton.this.getTableView()
 								.getItems().get(DeleteButton.this.getIndex());
 						//remove the product from cart
-						ChatClient.cart.remove(currentAbstractProduct);
+//						ChatClient.cart.remove(currentAbstractProduct);
+						ChatClient.customerCart.remove(currentAbstractProduct); //new due amount
 						
 						//refresh tableview
 						cartTable.getItems().clear();
-						cartTable.setItems(FXCollections.observableArrayList(ChatClient.cart));
+//						cartTable.setItems(FXCollections.observableArrayList(ChatClient.cart));
+						cartTable.setItems(FXCollections.observableArrayList(ChatClient.customerCart.keySet()));//new due amount
 						
 						//update the new totalPrice 
-						for (AbstractProduct ap : ChatClient.cart)
-							totalPrice += ap.getPrice();
-						textFieldPrice.setText(totalPrice.toString());
+//						for (AbstractProduct ap : ChatClient.cart)
+//							totalPrice += ap.getPrice();
+//						textFieldPrice.setText(totalPrice.toString());
+//						}
+						
+						//new due amount
+						for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
+							totalPrice += entry.getKey().getPrice()*entry.getValue();
+						}
 					}
 				});
 			}
@@ -145,10 +158,14 @@ public class CartController {
 
 		cartTable.getItems().clear();
 		cartTable.autosize();
-		cartTable.setItems(FXCollections.observableArrayList(ChatClient.cart));
+		cartTable.setItems(FXCollections.observableArrayList(ChatClient.customerCart.keySet()));
 
-		for (AbstractProduct ai : ChatClient.cart)
-			totalPrice += ai.getPrice();
+//		for (AbstractProduct ai : ChatClient.cart)
+//			totalPrice += ai.getPrice();
+		//new due amount
+		for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
+			totalPrice += entry.getKey().getPrice()*entry.getValue();
+		}
 		textFieldPrice.setText(totalPrice.toString());
 	}
 }

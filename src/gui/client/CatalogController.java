@@ -2,7 +2,6 @@ package gui.client;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import client.ChatClient;
 import entity.AbstractProduct;
