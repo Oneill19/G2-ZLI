@@ -23,8 +23,8 @@ public class Product extends AbstractProduct {
 	 */
 
 	public Product(String serialNumber, String name, double price, String type, String image, String other,
-			ArrayList<Item> madeFrom) {
-		super(serialNumber, name, price, image, false, type);
+			ArrayList<Item> madeFrom, int sale) {
+		super(serialNumber, name, price, image, false, type, sale);
 		this.other = other;
 		this.madeFrom = madeFrom;
 	}
@@ -33,14 +33,6 @@ public class Product extends AbstractProduct {
 		super(ap);
 		this.other=  ap.getOther();
 		this.madeFrom = ap.getMadeFrom();
-	}
-
-	@Override
-	public double getPrice() {
-		double sum = 0;
-		for (Item item : madeFrom)
-			sum += item.getPrice() * item.getAmountInProduct();
-		return sum;
 	}
 
 	/**

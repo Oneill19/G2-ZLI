@@ -19,6 +19,8 @@ public abstract class AbstractProduct implements Serializable {
 	private String type;	//for Item - single roses etc, for Product - for wedding etc
 	private boolean isItem; // new
 	private ImageView imageView;
+	private int sale;
+	private double priceWithSale;
 
 	/**
 	 * @param serialNumber - primary key of the product/item
@@ -27,7 +29,7 @@ public abstract class AbstractProduct implements Serializable {
 	 * @param image
 	 * @param isItem       -true for Item, false for Product
 	 */
-	public AbstractProduct(String serialNumber, String name, double price, String image, boolean isItem, String type) {
+	public AbstractProduct(String serialNumber, String name, double price, String image, boolean isItem, String type, int sale) {
 		super();
 		this.serialNumber = serialNumber;
 		this.name = name;
@@ -35,6 +37,8 @@ public abstract class AbstractProduct implements Serializable {
 		this.imagePath = image;
 		this.isItem = isItem;
 		this.type = type;
+		this.sale=sale;
+		priceWithSale=price-price*sale/100;
 	}
 
 	/**
@@ -48,6 +52,8 @@ public abstract class AbstractProduct implements Serializable {
 		this.imagePath = ap.getImagePath();
 		this.isItem = ap.isItem;
 		this.type = ap.getType();
+		this.sale=ap.getSale();
+		this.priceWithSale = ap.getPriceWithSale();
 	}
 
 	/**
@@ -154,6 +160,24 @@ public abstract class AbstractProduct implements Serializable {
 				return false;
 		}
 		return serialNumber.equals(other.serialNumber);
+	}
+	
+	/**
+	 * @return in percentages
+	 */
+	public int getSale(){
+		return sale;
+	}
+	
+	/**
+	 * @param sale in percentages
+	 */
+	public void setSale(int sale) {
+		this.sale=sale;
+	}
+	
+	public double getPriceWithSale() {
+		return priceWithSale;
 	}
 	
 	@Override

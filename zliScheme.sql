@@ -48,25 +48,22 @@ DROP TABLE IF EXISTS `complaint`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `complaint` (
-  `ComplaintID` int NOT NULL AUTO_INCREMENT,
+  `complaintID` int NOT NULL AUTO_INCREMENT,
+  `complaintdeatils` varchar(3005) DEFAULT NULL,
   `OrderNumber` int NOT NULL,
-  `CustomerID` int NOT NULL,
-  `WorkerID` int NOT NULL,
-  `ComplaintDetails` varchar(3000) DEFAULT NULL,
-  `RecieveDate` varchar(45) NOT NULL,
-  `RecieveTime` varchar(45) NOT NULL,
-  `Status` varchar(3500) NOT NULL,
-  `IsReminded` int NOT NULL,
-  `Refund` float DEFAULT NULL,
-  `RefundDetails` varchar(4500) DEFAULT NULL,
-  PRIMARY KEY (`ComplaintID`),
+  `Recivedate` datetime NOT NULL,
+  `complaintStatus` varchar(3500) DEFAULT NULL,
+  `complaintcol` varchar(45) DEFAULT NULL,
+  `IsRemindrd` int NOT NULL,
+  `refund` int DEFAULT NULL,
+  `refunddeatils` varchar(4500) DEFAULT NULL,
+  `UserID` int NOT NULL,
+  PRIMARY KEY (`complaintID`),
   KEY `OrderNumber_idx` (`OrderNumber`),
-  KEY `UserID_idx` (`CustomerID`),
-  KEY `WorkerID_idx` (`WorkerID`),
-  CONSTRAINT `CustomerID` FOREIGN KEY (`CustomerID`) REFERENCES `users` (`UserID`),
+  KEY `UserID_idx` (`UserID`),
   CONSTRAINT `OrderNumber` FOREIGN KEY (`OrderNumber`) REFERENCES `orders` (`orderNumber`),
-  CONSTRAINT `WorkerID` FOREIGN KEY (`WorkerID`) REFERENCES `users` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `UserID` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +72,6 @@ CREATE TABLE `complaint` (
 
 LOCK TABLES `complaint` WRITE;
 /*!40000 ALTER TABLE `complaint` DISABLE KEYS */;
-INSERT INTO `complaint` VALUES (2,2,1,4,'test','2022-05-31','00:12','OPEN',0,NULL,NULL);
 /*!40000 ALTER TABLE `complaint` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +89,10 @@ CREATE TABLE `item` (
   `itemType` varchar(45) NOT NULL,
   `itemImage` varchar(100) DEFAULT NULL,
   `isSoldAlone` tinyint NOT NULL,
-  PRIMARY KEY (`itemSerial`)
+  `idSale` int DEFAULT NULL,
+  PRIMARY KEY (`itemSerial`),
+  KEY `a_idx` (`idSale`),
+  CONSTRAINT `a` FOREIGN KEY (`idSale`) REFERENCES `sale` (`idSale`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -103,7 +102,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES ('1','White Rose',5,'Single Roses','/common/Assets/WhiteRose.png',1),('2','Red Rose',6,'Single Roses','/common/Assets/RedRose.png',1),('3','Blue Rose',7,'Single Roses','/common/Assets/BlueRose.png',1),('4','Yellow Rose',7,'Single Roses','/common/Assets/YellowRose.png',1),('5','Pink Rose',6,'Single Roses','/common/Assets/PinkRose.png',1);
+INSERT INTO `item` VALUES ('1','White Rose',5,'Single Roses','/common/Assets/WhiteRose.png',1,NULL),('2','Red Rose',6,'Single Roses','/common/Assets/RedRose.png',1,NULL),('3','Blue Rose',7,'Single Roses','/common/Assets/BlueRose.png',1,NULL),('4','Yellow Rose',7,'Single Roses','/common/Assets/YellowRose.png',1,NULL),('5','Pink Rose',6,'Single Roses','/common/Assets/PinkRose.png',1,NULL);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +229,7 @@ CREATE TABLE `orders` (
   `fromStore` varchar(20) DEFAULT NULL,
   `orderCreationDate` varchar(45) NOT NULL,
   `orderCreationTime` varchar(45) NOT NULL,
-  `customerID` varchar(20) NOT NULL,
+  `cutomerID` varchar(20) NOT NULL,
   `paymentMethod` varchar(45) NOT NULL,
   `orderStatus` varchar(45) NOT NULL,
   `confirmedDate` varchar(45) DEFAULT NULL,
@@ -239,9 +238,8 @@ CREATE TABLE `orders` (
   `supplyDate` varchar(45) DEFAULT NULL,
   `supplyTime` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`orderNumber`),
-  KEY `fk_order_store` (`fromStore`),
-  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`fromStore`) REFERENCES `store` (`storeName`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_order_store` (`fromStore`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -250,7 +248,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,50.52,'Thanks','OffWhite','Wedding','Tel Aviv','2022-11-23','18:18','316397983','Credit','CONFIRMED',NULL,NULL,'Store',NULL,NULL),(2,110,NULL,'White','Wedding','Karmiel','2022-05-23','20:26','1','Credit','CANCELED',NULL,NULL,'Store',NULL,NULL);
+INSERT INTO `orders` VALUES (1,50.52,'Thanks','OffWhite','Wedding','Tel Aviv','2022-11-23','18:18','316397983','Credit','CONFIRMED',NULL,NULL,'Store',NULL,NULL),(2,110,NULL,'White','Wedding','Karmiel','2022-05-23','20:26','1','Credit','CANCELED',NULL,NULL,'Store',NULL,NULL),(5,220,'hi',NULL,'hi','Karmiel','2022-05-31','21:28','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Self Pickup','2022-06-11','11:11'),(6,220,'hi',NULL,'hi','Karmiel','2022-05-31','21:28','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Self Pickup','2022-06-11','11:11'),(7,110,'a',NULL,'a','Karmiel','2022-05-31','22:24','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Self Pickup','2022-06-11','11:11');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +266,10 @@ CREATE TABLE `product` (
   `productImage` varchar(100) DEFAULT NULL,
   `other` varchar(45) DEFAULT NULL,
   `productType` varchar(45) NOT NULL,
-  PRIMARY KEY (`productSerial`)
+  `idSale` int DEFAULT NULL,
+  PRIMARY KEY (`productSerial`),
+  KEY `a_idx` (`idSale`),
+  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`idSale`) REFERENCES `sale` (`idSale`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -278,7 +279,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES ('1','Red and White Bouquet',110,'/common/Assets/RedWhiteBouquet.png',NULL,'Bouqute'),('2','Yellow Bouquet',140,'/common/Assets/YellowBouquet.png',NULL,'Bouqute');
+INSERT INTO `product` VALUES ('1','Red and White Bouquet',110,'/common/Assets/RedWhiteBouquet.png',NULL,'Bouqute',NULL),('2','Yellow Bouquet',140,'/common/Assets/YellowBouquet.png',NULL,'Bouqute',NULL);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -606,7 +607,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(4,'Adir','Miller','99999','053-3333','adir@zli','1','CustomerServiceWorker','CONFIRMED',0),(111222333,'Dorin','Beery','1111111111111111','0545344778','dorin@zli','1','Customer','CONFIRMED',0);
+INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(4,'Adir','Miller','99999','053-3333','adir@zli','1','CustomerServiceWorker','CONFIRMED',0),(111222333,'Dorin','Beery','1111111111111111','0545344778','dorin@zli','1','Customer','CONFIRMED',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -619,4 +620,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-31  0:13:23
+-- Dump completed on 2022-06-01 17:07:41
