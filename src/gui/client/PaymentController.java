@@ -31,7 +31,7 @@ public class PaymentController {
     private CommonController cc = new CommonController();
     
     /**
-     * Triggred by pressing the back button, executes CommonController.changeFXML()
+     * Triggered by pressing the back button, executes CommonController.changeFXML()
      * Replaces screen to PersonalDetails.fxml
      * @param event
      * @throws IOException
@@ -43,7 +43,7 @@ public class PaymentController {
 	}
 
     /**
-     * Triggred by pressing the exit button, executes CommonController.OnExit()
+     * Triggered by pressing the exit button, executes CommonController.OnExit()
      * @see CommonController#OnExit() 
      * @param event
      * @throws Exception
@@ -108,7 +108,7 @@ public class PaymentController {
     		sbProducts.delete(sbProducts.length()-1, sbProducts.length());
     	try {
 			ClientUI.chat.accept("numberOfItemsInOrder\t"+productCounter.toString()+"\t"+itemCounter.toString()+
-					"\t"+sumPrice.toString()+"\t"+totalAmount.toString());
+					"\t"+sumPrice.toString()+"\t"+totalAmount.toString()+'\t'+ChatClient.cartOrder.DBToString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

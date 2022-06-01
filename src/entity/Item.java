@@ -24,10 +24,11 @@ public class Item extends AbstractProduct {
 			String image, 
 			String type,
 			boolean isSoldAlone,
-			int amountInProduct
+			int amountInProduct,
+			int sale
 			) 
 	{
-		super(serialNumber, name, price, image, true, type);
+		super(serialNumber, name, price, image, true, type, sale);
 		this.isSoldAlone = isSoldAlone;
 		this.amountInProduct = amountInProduct;
 	}

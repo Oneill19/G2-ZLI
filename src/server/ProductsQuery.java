@@ -37,8 +37,9 @@ public class ProductsQuery {
 				String productImage = rs.getString(4);
 				String other = rs.getString(5);
 				String productType = rs.getString(6);
+				int sale = rs.getInt(7);
 				ArrayList<Item> madeFrom = (ArrayList<Item>)getAllItemsInProduct(con, productSerial).getReturnValue();
-				products.add(new Product(productSerial, productName, productPrice, productType, productImage, other, madeFrom));
+				products.add(new Product(productSerial, productName, productPrice, productType, productImage, other, madeFrom,sale));
 			}
  			return new ReturnCommand("GetAllProducts", products);
 		} catch (SQLException e) {
@@ -66,7 +67,8 @@ public class ProductsQuery {
 				String itemType = rs.getString(4);
 				String itemImage = rs.getString(5);
 				boolean isSoldAlone = rs.getInt(6) == 0 ? false : true;
-				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone, 0));
+				int sale = rs.getInt(7);
+				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone, 0,sale));
 			}
  			return new ReturnCommand("GetAllItems", items);
 		} catch (SQLException e) {
@@ -95,8 +97,9 @@ public class ProductsQuery {
 				String itemType = rs.getString(4);
 				String itemImage = rs.getString(5);
 				boolean isSoldAlone = rs.getInt(6) == 0 ? false : true;
+				int sale = rs.getInt(7);
 				int amountInProduct = (int)(getAmountInProduct(con, productSerial, itemSerial).getReturnValue());
-				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone, amountInProduct));
+				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone, amountInProduct,sale));
 			}
  			return new ReturnCommand("GetItemsInProduct", items);
 		} catch (SQLException e) {
