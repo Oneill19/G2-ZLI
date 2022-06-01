@@ -2,6 +2,7 @@ package client;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import common.ChatIF;
 import common.ReturnCommand;
@@ -24,7 +25,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<User> NotApprovedUsers;
 	public static ArrayList<User> waitingUsers;
 	public static ArrayList<AbstractProduct> products = new ArrayList<>();
-	public static ArrayList<AbstractProduct> cart = new ArrayList<>();
+	public static HashMap<AbstractProduct, Integer> customerCart = new HashMap<>();
 	public static ArrayList<String> stores = new ArrayList<>();
 	public static ArrayList<Survey> surveysWithReports = new ArrayList<>();
 	public static ArrayList<Survey> allSurveys = new ArrayList<>();

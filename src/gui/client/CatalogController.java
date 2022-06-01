@@ -1,6 +1,8 @@
 package gui.client;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import client.ChatClient;
 import entity.AbstractProduct;
@@ -82,11 +84,14 @@ public class CatalogController {
     	// set the new amount
     	cartCounter.setText(++counter + "");
     	
-    	// add the selected product to the cart
-    	if (selectedProduct instanceof Product)
-    		ChatClient.cart.add(new Product((Product)selectedProduct));
-    	else
-    		ChatClient.cart.add(new Item((Item)selectedProduct));
+    	if (ChatClient.customerCart.containsKey(selectedProduct)) {
+    		ChatClient.customerCart.put(selectedProduct, ChatClient.customerCart.get(selectedProduct) + 1);
+    	}
+    	else {
+    		ChatClient.customerCart.put(selectedProduct, 1);
+    	}
+    	System.out.println("Cart size:" + ChatClient.customerCart.size());
+    	System.out.println("Value: " + selectedProduct.getName() + ChatClient.customerCart.get(selectedProduct));
     }
 
     /**
@@ -166,7 +171,7 @@ public class CatalogController {
     public void initialize() {
 		
     	//initialize cart size
-    	cartCounter.setText(ChatClient.cart.size() + "");
+    	cartCounter.setText(getCartSize() + "");
     	
     	// set the user button to show the name
     	userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
@@ -222,6 +227,14 @@ public class CatalogController {
     		grid.setHgap(10);
     		grid.setVgap(10);
     	}
+    }
+    
+    private int getCartSize() {
+    	int counter = 0;
+    	for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
+    		counter += entry.getValue();
+    	}
+    	return counter;
     }
 
 }
