@@ -286,7 +286,7 @@ public class EchoServer extends AbstractServer {
 			break;
 		case "numberOfItemsInOrder":
 			try {
-				client.sendToClient(clientMsg);
+				//client.sendToClient(); // TODO - topaz and koral
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -386,6 +386,22 @@ public class EchoServer extends AbstractServer {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+		case "GetReportByQuarter1":
+			try {
+
+				client.sendToClient(ReportQuery.getReportByQuarterly1(conn, clientMsg[1], clientMsg[2],clientMsg[3]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "GetReportByQuarter2":
+			try {
+
+				client.sendToClient(ReportQuery.getReportByQuarterly2(conn, clientMsg[1], clientMsg[2],clientMsg[3]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 		default:
 			System.out.println("No Command Found");
 			break;

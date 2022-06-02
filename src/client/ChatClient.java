@@ -11,6 +11,7 @@ import entity.Complaint;
 import entity.Item;
 import entity.Order;
 import entity.Product;
+import entity.Report;
 import entity.Survey;
 import entity.SurveyReport;
 import entity.User;
@@ -30,6 +31,8 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Survey> surveysWithReports = new ArrayList<>();
 	public static ArrayList<Survey> allSurveys = new ArrayList<>();
 	public static ArrayList<Complaint> allComplaints = new ArrayList<>();
+	public static ArrayList<Report> reportsq1;
+	public static ArrayList<Report> reportsq2;
 	public static Order cartOrder = new Order();
 	public static String reportTxt;
 	public static User user = null;
@@ -92,6 +95,7 @@ public class ChatClient extends AbstractClient {
 				ChatClient.products.addAll((ArrayList<Item>) rc.getReturnValue());
 				break;
 			case "GetAllStores":
+				ChatClient.stores.clear();	// to fix adding duplicates
 				ChatClient.stores.addAll((ArrayList<String>) rc.getReturnValue());
 				break;
 			case "GetSurveysWithReports":
@@ -145,6 +149,16 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "addProductsInOrder":
 				System.out.println(rc.getReturnValue());
+				break;
+			case "generateReport":
+				System.out.println("Report Create");
+				break;
+
+			case "GetReportByQuarter1":
+				reportsq1=(ArrayList<Report>)rc.getReturnValue();
+				break;
+			case "GetReportByQuarter2":
+				reportsq2=(ArrayList<Report>)rc.getReturnValue();
 				break;
 			default:
 				//for debug - don't remove.

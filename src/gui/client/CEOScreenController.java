@@ -92,7 +92,7 @@ import javafx.stage.Stage;
 	     	((Node) event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			new FXMLLoader();
-			Pane root = FXMLLoader.<Pane>load(getClass().getResource("/gui/client/ViewQuarterlyReportCEO.fxml"));
+			Pane root = FXMLLoader.<Pane>load(getClass().getResource("CEORevenueQuertlyReport.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("Zer-Li->Option Screen->View Quarterly Report");
 			primaryStage.setScene(scene);

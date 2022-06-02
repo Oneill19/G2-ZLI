@@ -108,8 +108,8 @@ public class PaymentController {
     	if (sbProducts.length() > 0)
     		sbProducts.delete(sbProducts.length()-1, sbProducts.length());
     	try {
-			ClientUI.chat.accept("numberOfItemsInOrder\t"+productCounter.toString()+"\t"+itemCounter.toString()+
-					"\t"+ productPriceSum+"\t"+ itemPriceSum + '\t' + ChatClient.cartOrder.DBToString());
+			ClientUI.chat.accept("numberOfItemsInOrder\t" + productCounter.toString() + "\t" + itemCounter.toString()+
+					"\t" + productPriceSum +"\t" + itemPriceSum + '\t' + ChatClient.cartOrder.DBToString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
