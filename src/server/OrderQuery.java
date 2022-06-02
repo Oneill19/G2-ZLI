@@ -40,12 +40,12 @@ public class OrderQuery {
 	
 	public static ReturnCommand addItemsInOrder(Connection con, String orderNumber, String item_in_order) {
 		PreparedStatement ps;
-		String[] itemArray = item_in_order.split(",");
+		String[] itemArray = item_in_order.split(" ");
 		
 		//insert items to DB
 		if(item_in_order.length() != 0)
 			for(String itemSerial : itemArray) {
-				String insertQuery = "INSERT INTO item_in_order(itemSerial, orderNumber) VALUES ("+itemSerial+","+orderNumber.toString()+")";
+				String insertQuery = "INSERT INTO item_in_order(itemSerial, orderNumber,amount) VALUES ("+itemSerial+","+orderNumber.toString()+")";
 				System.out.println(insertQuery);
 				try {
 					ps = con.prepareStatement(insertQuery);

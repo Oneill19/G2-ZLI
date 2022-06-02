@@ -154,6 +154,7 @@ public class PersonalDetailsController {
 			
 			ChatClient.cartOrder.setFromStore(null);
 			
+			//build data for delivery
 			StringBuilder sb = new StringBuilder();
 			sb.append("'").append(nameOfReciever.getText()).append("', ");
 			sb.append("'").append(phoneOfReciever.getText()).append("', ");

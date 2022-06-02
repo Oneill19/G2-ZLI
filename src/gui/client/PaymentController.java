@@ -25,8 +25,7 @@ import javafx.scene.image.ImageView;
  */
 public class PaymentController {
 
-    @FXML private PasswordField cvv, first4, fourth4, second4, third4; 
-    @FXML private TextField day, fullName, month; 
+    @FXML private TextField day, fullName, month,cvv, first4, fourth4, second4, third4;
     @FXML private Button exit, logoutBtn, nextBtn, onBack, userOptBtn;
     private String deliveryAddress = new String();
     
@@ -75,6 +74,7 @@ public class PaymentController {
      */
     @FXML
     void onNext(ActionEvent event) throws IOException {
+    	   	
     	//TODO - does payment method is always credit card?
     	ChatClient.cartOrder.setPaymentMethod("Credit Card");
     	
@@ -95,11 +95,13 @@ public class PaymentController {
     			productCounter+=ap.getValue();
     			productPriceSum += ap.getKey().getPrice()*ap.getValue();
     			sbProducts.append("'").append(ap.getKey().getSerialNumber()).append("',");
+    			sbProducts.append("'").append(ap.getValue()).append("' ");
     		}
     		if(ap.getKey() instanceof Item) {
     			itemCounter++;
     			itemPriceSum += ap.getValue();
     			sbItems.append("'").append(ap.getKey().getSerialNumber()).append("',");
+    			sbItems.append("'").append(ap.getValue()).append("',");
     		}
     	}
     	if (sbItems.length() > 0) {

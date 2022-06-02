@@ -84,9 +84,7 @@ public class CartController {
 		for (Map.Entry<AbstractProduct, Integer> ap : ChatClient.customerCart.entrySet()) {
     		ap.getKey().setImageView();
     	}
-		
-		
-
+	
 		// create class DeleteButton
 		class DeleteButton extends TableCell<AbstractProduct, String> {
 			private Button deleteButton = null;
