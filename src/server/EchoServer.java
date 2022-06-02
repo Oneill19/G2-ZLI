@@ -314,11 +314,21 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
-		case "addProductsAndItemsInOrderToDB":
+		case "addItemsInOrder":
 			try {
+				System.out.println(msg.toString());
 				client.sendToClient(
-						OrderQuery.addProductsAndItemsInOrderToDB(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
-			} catch (IOException e) {
+						OrderQuery.addItemsInOrder(conn, clientMsg[1], clientMsg[2]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "addProductsInOrder":
+			try {
+				System.out.println(msg.toString());
+				client.sendToClient(
+						OrderQuery.addProductsInOrder(conn, clientMsg[1], clientMsg[2]));
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			break;
@@ -370,10 +380,14 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
-
+		case "addDeliveryOrder":
+			try {
+				client.sendToClient(OrderQuery.addDeliveryOrder(conn, clientMsg[1], clientMsg[2]));
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		default:
 			System.out.println("No Command Found");
-//			System.exit(-1);
 			break;
 
 		}

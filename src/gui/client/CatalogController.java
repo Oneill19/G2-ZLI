@@ -2,7 +2,6 @@ package gui.client;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import client.ChatClient;
 import entity.AbstractProduct;
@@ -110,13 +109,13 @@ public class CatalogController {
     @FXML
     void onGoToCart(MouseEvent event) throws Exception {
     	//go to cart screen
-		cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart", "mycss.css");
+		cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart", null);
     }
     
     @FXML 
     void onGoToCart2(ActionEvent event) throws Exception {
     	//go to cart screen
-    	cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart", "mycss.css");
+    	cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart", null);
     }
     
 

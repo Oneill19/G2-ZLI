@@ -1,6 +1,7 @@
 package gui.client;
 
 import java.io.IOException;
+import java.util.Map;
 
 import client.ChatClient;
 import client.ClientUI;
@@ -27,6 +28,7 @@ public class PaymentController {
     @FXML private PasswordField cvv, first4, fourth4, second4, third4; 
     @FXML private TextField day, fullName, month; 
     @FXML private Button exit, logoutBtn, nextBtn, onBack, userOptBtn;
+    private String deliveryAddress = new String();
     
     private CommonController cc = new CommonController();
     
@@ -66,7 +68,7 @@ public class PaymentController {
 
     /**
      * Triggred by pressing the next button
-     * Responsible for adding the products and items to the db.
+     * Responsible for adding the order, products, items and delivery address to the db.
      * also, send data to ChatClient.accept for managing of reports every 30 days.
      * @param event
      * @throws IOException
@@ -84,26 +86,25 @@ public class PaymentController {
 		}
     	
     	//Send data for managing reports every 30 days.
-    	StringBuilder sbItems = new StringBuilder();
-    	Integer itemCounter= 0;
-    	StringBuilder sbProducts=new StringBuilder();
-    	Integer productCounter=0;
-    	double productPriceSum = 0;
-    	double itemPriceSum = 0;
-    	for(AbstractProduct ap : ChatClient.cart) {
-    		if (ap instanceof Product) {
-    			productCounter++;
-    			productPriceSum += ap.getPrice();
-    			sbProducts.append("'").append(ap.getSerialNumber()).append("',");
+    	StringBuilder sbItems = new StringBuilder(), sbProducts=new StringBuilder();
+    	Integer itemCounter= 0, productCounter=0;
+    	double productPriceSum = 0, itemPriceSum = 0;
+   	
+    	for(Map.Entry<AbstractProduct, Integer> ap : ChatClient.customerCart.entrySet()) {
+    		if (ap.getKey() instanceof Product) {
+    			productCounter+=ap.getValue();
+    			productPriceSum += ap.getKey().getPrice()*ap.getValue();
+    			sbProducts.append("'").append(ap.getKey().getSerialNumber()).append("',");
     		}
-    		if(ap instanceof Item) {
+    		if(ap.getKey() instanceof Item) {
     			itemCounter++;
-    			itemPriceSum += ap.getPrice();
-    			sbItems.append("'").append(ap.getSerialNumber()).append("',");
+    			itemPriceSum += ap.getValue();
+    			sbItems.append("'").append(ap.getKey().getSerialNumber()).append("',");
     		}
     	}
-    	if (sbItems.length() > 0)
+    	if (sbItems.length() > 0) {
     		sbItems.delete(sbItems.length()-1, sbItems.length());
+    	}
     	if (sbProducts.length() > 0)
     		sbProducts.delete(sbProducts.length()-1, sbProducts.length());
     	try {
@@ -113,29 +114,50 @@ public class PaymentController {
 			e.printStackTrace();
 		}
     	
-    	
     	//Add products and items in the cart to the DB
     	Integer orderNumber = ChatClient.cartOrder.getOrderNumber();
-    	try {
-    		ClientUI.chat.accept("addProductsAndItemsInOrderToDB\t"+orderNumber.toString()+"\t"
-    							+sbItems.toString()+"\t"+sbProducts.toString());
-    	}catch(Exception ex) {
-    		ex.printStackTrace();
+    	if(sbItems.length()>0) {
+    	  	try {
+        		ClientUI.chat.accept("addItemsInOrder\t"+orderNumber.toString()+"\t"+sbItems.toString());
+        	}catch(Exception ex) {
+        		ex.printStackTrace();
+        	}
     	}
+    	if(sbProducts.length()>0) {
+        	try {
+        		ClientUI.chat.accept("addProductsInOrder\t"+orderNumber.toString()+"\t"+sbProducts.toString());
+        	}catch(Exception ex) {
+        		ex.printStackTrace();
+        	}
+    	}
+  	
+        	//If reception is by delivery than save receivers' name and phone
+    	if (ChatClient.cartOrder.getDeliveryMethod().equals("Delivery"))
+        	try {
+        		ClientUI.chat.accept("addDeliveryOrder\t"+orderNumber.toString()+"\t"+deliveryAddress);
+        	}catch(Exception ex) {
+        		ex.printStackTrace();
+        	}
     	
     	//show success message and go back to catalog
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Order reception completed SUCCESSFULY!");
-		alert.setHeaderText("You're order " + ChatClient.cartOrder.getOrderNumber() + " was set and is waiting"
-				+ " for confirmation within the next 3 hours.\nYou can check its' status at the Watch Orders option.");
-			alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("orderReception.png"))));
-		alert.showAndWait();
-    	
-		ChatClient.cart.clear();
-		ChatClient.cartOrder = new Order();
-		cc.changeFXML(event, "Catalog.fxml", "Catalog", null);
+    			Alert alert = new Alert(AlertType.CONFIRMATION);
+    			alert.setTitle("Order reception completed SUCCESSFULY!");
+    			alert.setHeaderText("You're order " + ChatClient.cartOrder.getOrderNumber() + " was set and is waiting"
+    					+ " for confirmation within the next 3 hours.\nYou can check its' status at the Watch Orders option.");
+    				alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("orderReception.png"))));
+    			alert.showAndWait();
+    	    	
+    			ChatClient.customerCart.clear();
+    			ChatClient.cartOrder = new Order();
+    			cc.changeFXML(event, "Catalog.fxml", "Catalog", null);
+    	}
 		
-    }
+    
+
+//private String recieverName, recieverPhone, deliveryAddress;
+	public void getData(String address) {
+		deliveryAddress = (address);
+	}
     
     /**
      * Initials the comboBox

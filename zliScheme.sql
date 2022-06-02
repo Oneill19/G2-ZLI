@@ -133,6 +133,7 @@ CREATE TABLE `item_in_order` (
 
 LOCK TABLES `item_in_order` WRITE;
 /*!40000 ALTER TABLE `item_in_order` DISABLE KEYS */;
+INSERT INTO `item_in_order` VALUES ('3',22),('3',24),('3',25),('3',26),('3',29),('3',30),('3',31),('3',32),('3',33),('3',34),('3',35),('3',37),('3',38),('3',40),('2',41),('3',41);
 /*!40000 ALTER TABLE `item_in_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,11 +200,9 @@ DROP TABLE IF EXISTS `orderbydelivery`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orderbydelivery` (
   `orderNumber` int NOT NULL,
-  `receptionAddress` varchar(45) NOT NULL,
   `nameOfReceiver` varchar(45) NOT NULL,
   `phoneOfReceiver` varchar(45) NOT NULL,
-  `deliveryPrice` double NOT NULL,
-  `expectedDate` varchar(45) NOT NULL,
+  `receptionAddress` varchar(45) NOT NULL,
   PRIMARY KEY (`orderNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -214,6 +213,7 @@ CREATE TABLE `orderbydelivery` (
 
 LOCK TABLES `orderbydelivery` WRITE;
 /*!40000 ALTER TABLE `orderbydelivery` DISABLE KEYS */;
+INSERT INTO `orderbydelivery` VALUES (41,'qq','q','qqqq');
 /*!40000 ALTER TABLE `orderbydelivery` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,7 +243,7 @@ CREATE TABLE `orders` (
   `supplyTime` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`orderNumber`),
   KEY `fk_order_store` (`fromStore`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,7 +252,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,50.52,'Thanks','OffWhite','Wedding','Tel Aviv','2022-11-23','18:18','316397983','Credit','CONFIRMED',NULL,NULL,'Store',NULL,NULL),(2,110,NULL,'White','Wedding','Karmiel','2022-05-23','20:26','1','Credit','CANCELED',NULL,NULL,'Store',NULL,NULL),(5,220,'hi',NULL,'hi','Karmiel','2022-05-31','21:28','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Self Pickup','2022-06-11','11:11'),(6,220,'hi',NULL,'hi','Karmiel','2022-05-31','21:28','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Self Pickup','2022-06-11','11:11'),(7,110,'a',NULL,'a','Karmiel','2022-05-31','22:24','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Self Pickup','2022-06-11','11:11');
+INSERT INTO `orders` VALUES (1,50.52,'Thanks','OffWhite','Wedding','Tel Aviv','2022-11-23','18:18','316397983','Credit','CONFIRMED',NULL,NULL,'Store',NULL,NULL),(2,110,NULL,'White','Wedding','Karmiel','2022-05-23','20:26','1','Credit','CANCELED',NULL,NULL,'Store',NULL,NULL),(5,220,'hi',NULL,'hi','Karmiel','2022-05-31','21:28','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Self Pickup','2022-06-11','11:11'),(6,220,'hi',NULL,'hi','Karmiel','2022-05-31','21:28','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Self Pickup','2022-06-11','11:11'),(7,110,'a',NULL,'a','Karmiel','2022-05-31','22:24','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Self Pickup','2022-06-11','11:11'),(8,110,'',NULL,'','null','2022-06-02','12:37','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-08-06','11:11'),(9,117,'',NULL,'','null','2022-06-02','12:39','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(10,117,'',NULL,'','null','2022-06-02','12:41','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(11,117,'',NULL,'','null','2022-06-02','12:42','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(12,110,'',NULL,'','null','2022-06-02','12:42','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(13,0,'',NULL,'','null','2022-06-02','12:45','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(14,117,'',NULL,'','null','2022-06-02','12:47','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(15,110,'',NULL,'','null','2022-06-02','12:49','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(16,116,'',NULL,'','null','2022-06-02','12:50','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(17,110,'',NULL,'','null','2022-06-02','12:51','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(18,117,'',NULL,'','null','2022-06-02','12:54','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(19,110,'',NULL,'','null','2022-06-02','12:56','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(20,110,'',NULL,'','null','2022-06-02','12:57','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(21,110,'',NULL,'','null','2022-06-02','12:58','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(22,117,'',NULL,'','null','2022-06-02','13:01','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(23,110,'',NULL,'','null','2022-06-02','13:03','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(24,117,'',NULL,'','null','2022-06-02','13:04','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(25,117,'',NULL,'','null','2022-06-02','13:06','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(26,117,'',NULL,'','null','2022-06-02','13:10','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(27,110,'',NULL,'','null','2022-06-02','13:10','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(28,110,'',NULL,'','null','2022-06-02','13:12','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(29,117,'',NULL,'','null','2022-06-02','13:13','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(30,117,'a',NULL,'a','null','2022-06-02','13:16','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(31,117,'',NULL,'','null','2022-06-02','13:17','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(32,117,'',NULL,'','null','2022-06-02','13:22','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(33,147,'',NULL,'','null','2022-06-02','13:23','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(34,117,'',NULL,'','null','2022-06-02','13:25','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(35,117,'',NULL,'','null','2022-06-02','13:26','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(36,110,'',NULL,'','null','2022-06-02','13:28','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(37,117,'',NULL,'','null','2022-06-02','13:30','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(38,117,'',NULL,'','null','2022-06-02','13:31','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(39,13,'',NULL,'','null','2022-06-02','13:34','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(40,117,'',NULL,'','null','2022-06-02','13:35','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11'),(41,153,'',NULL,'','null','2022-06-02','13:36','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-07-09','11:11');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -310,6 +310,7 @@ CREATE TABLE `product_in_order` (
 
 LOCK TABLES `product_in_order` WRITE;
 /*!40000 ALTER TABLE `product_in_order` DISABLE KEYS */;
+INSERT INTO `product_in_order` VALUES ('1',21),('1',22),('1',23),('1',24),('1',25),('1',26),('1',27),('1',28),('1',29),('1',30),('1',31),('1',32),('2',33),('1',34),('1',35),('1',36),('1',37),('1',38),('1',40),('2',41);
 /*!40000 ALTER TABLE `product_in_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -611,7 +612,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',1),(4,'Adir','Miller','99999','053-3333','adir@zli','1','CustomerServiceWorker','CONFIRMED',0),(111222333,'Dorin','Beery','1111111111111111','0545344778','dorin@zli','1','Customer','CONFIRMED',0);
+INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(4,'Adir','Miller','99999','053-3333','adir@zli','1','CustomerServiceWorker','CONFIRMED',0),(111222333,'Dorin','Beery','1111111111111111','0545344778','dorin@zli','1','Customer','CONFIRMED',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -624,4 +625,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-01 19:06:55
+-- Dump completed on 2022-06-02 13:37:05

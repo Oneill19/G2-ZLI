@@ -30,7 +30,8 @@ public class CommonController {
 		Scene scene = new Scene(root);
 		primaryStage.setTitle(title);
 		primaryStage.setScene(scene);
-		if (cssPath != null) scene.getStylesheets().add(cssPath);
+		if (cssPath != null) 
+			scene.getStylesheets().add(cssPath);
 		primaryStage.show();
 	}
 	

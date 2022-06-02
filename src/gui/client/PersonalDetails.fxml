@@ -208,7 +208,7 @@
                   </HBox>
                </children>
             </VBox>
-            <HBox fx:id="HBoxAddress" layoutX="200.0" layoutY="557.0" prefHeight="166.0" prefWidth="365.0" spacing="10.0" style="-fx-font-size: 20;">
+            <HBox fx:id="HBoxAddress" layoutX="200.0" layoutY="557.0" prefHeight="166.0" prefWidth="819.0" spacing="20.0" style="-fx-font-size: 20;">
                <children>
                   <Label fx:id="labelDestination" prefHeight="30.0" prefWidth="195.0" style="-fx-font-size: 20;" text="Destination address: ">
                      <font>
@@ -221,6 +221,30 @@
                         <TextField fx:id="fieldSt" promptText="St." style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
                         <TextField fx:id="fieldAptNumber" promptText="Apt. number" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
                         <TextField fx:id="fieldPostal" promptText="Postal Code" style="-fx-font-size: 20; -fx-border-color: #a297d5;" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="422.0">
+                     <children>
+                        <HBox spacing="5.0" style="-fx-font-size: 20;">
+                           <children>
+                              <Label style="-fx-font-size: 20;" text="Name of reciever:">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="nameOfReciever" promptText="israelisraeli@zli" style="-fx-border-color: #a297d5;" />
+                           </children>
+                        </HBox>
+                        <HBox spacing="5.0" style="-fx-font-size: 20;">
+                           <children>
+                              <Label style="-fx-font-size: 20;" text="Phone of reciever:">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="phoneOfReciever" promptText="israelisraeli@zli" style="-fx-border-color: #a297d5;" />
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </children>

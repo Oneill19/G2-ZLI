@@ -219,6 +219,7 @@ public class Order implements Serializable {
 				+ ", orderDate=" + orderCreationDate + ", expectedDateInStore=" + supplyDate + ", orderTime="
 				+ orderCreationTime + ", expectedTimeInStore=" + supplyTime + "]";
 	}
+
 	
 	/**
 	 * @return String values of Order, by the order they present in DB.
@@ -240,7 +241,7 @@ public class Order implements Serializable {
 		sb.append(completeDate).append(",");
 		sb.append("'").append(deliveryMethod).append("'").append(",");
 		sb.append("'").append(supplyDate).append("'").append(",");
-		sb.append("'").append(supplyTime).append("'");	
+		sb.append("'").append(supplyTime).append("'");
 		return sb.toString();	
 	}
 

@@ -21,6 +21,7 @@ public abstract class AbstractProduct implements Serializable {
 	private ImageView imageView;
 	private int sale;
 	private double priceWithSale;
+	private int amount;
 
 	/**
 	 * @param serialNumber - primary key of the product/item
@@ -180,6 +181,16 @@ public abstract class AbstractProduct implements Serializable {
 	public double getPriceWithSale() {
 		return priceWithSale;
 	}
+	
+	public int getAmount() {
+		return amount;
+	}
+	
+	public void setAmount(int amount) {
+		this.amount=amount;
+	}
+	
+	
 	
 	@Override
 	public String toString() {
