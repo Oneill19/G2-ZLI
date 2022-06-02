@@ -119,8 +119,8 @@ DROP TABLE IF EXISTS `item_in_order`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `item_in_order` (
   `itemSerial` varchar(45) NOT NULL,
-  `orderNumber` int NOT NULL,
   `amount` int NOT NULL,
+  `orderNumber` int NOT NULL,
   PRIMARY KEY (`itemSerial`,`orderNumber`),
   KEY `itemInOrder` (`orderNumber`),
   CONSTRAINT `item_in_order_ibfk_1` FOREIGN KEY (`itemSerial`) REFERENCES `item` (`itemSerial`) ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -134,7 +134,7 @@ CREATE TABLE `item_in_order` (
 
 LOCK TABLES `item_in_order` WRITE;
 /*!40000 ALTER TABLE `item_in_order` DISABLE KEYS */;
-INSERT INTO `item_in_order` VALUES ('2',41,0),('3',22,0),('3',24,0),('3',25,0),('3',26,0),('3',29,0),('3',30,0),('3',31,0),('3',32,0),('3',33,0),('3',34,0),('3',35,0),('3',37,0),('3',38,0),('3',40,0),('3',41,0),('3',42,0),('3',52,0),('3',55,0),('4',55,0),('5',55,0);
+INSERT INTO `item_in_order` VALUES ('2',0,41),('3',0,22),('3',0,24),('3',0,25),('3',0,26),('3',0,29),('3',0,30),('3',0,31),('3',0,32),('3',0,33),('3',0,34),('3',0,35),('3',0,37),('3',0,38),('3',0,40),('3',0,41),('3',0,42),('3',0,52),('3',0,55),('4',0,55),('5',0,55);
 /*!40000 ALTER TABLE `item_in_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,8 +297,8 @@ DROP TABLE IF EXISTS `product_in_order`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product_in_order` (
   `productSerial` varchar(45) NOT NULL,
-  `orderNumber` int NOT NULL,
   `amount` int NOT NULL,
+  `orderNumber` int NOT NULL,
   PRIMARY KEY (`productSerial`,`orderNumber`),
   KEY `productInOrder` (`orderNumber`),
   CONSTRAINT `product_in_order_ibfk_1` FOREIGN KEY (`productSerial`) REFERENCES `product` (`productSerial`) ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -312,7 +312,7 @@ CREATE TABLE `product_in_order` (
 
 LOCK TABLES `product_in_order` WRITE;
 /*!40000 ALTER TABLE `product_in_order` DISABLE KEYS */;
-INSERT INTO `product_in_order` VALUES ('1',21,0),('1',22,0),('1',23,0),('1',24,0),('1',25,0),('1',26,0),('1',27,0),('1',28,0),('1',29,0),('1',30,0),('1',31,0),('1',32,0),('1',34,0),('1',35,0),('1',36,0),('1',37,0),('1',38,0),('1',40,0),('1',42,0),('1',43,0),('1',44,0),('1',45,0),('1',46,0),('1',47,0),('1',48,0),('1',53,0),('1',54,0),('1',55,0),('1',56,0),('2',33,0),('2',41,0);
+INSERT INTO `product_in_order` VALUES ('1',0,21),('1',0,22),('1',0,23),('1',0,24),('1',0,25),('1',0,26),('1',0,27),('1',0,28),('1',0,29),('1',0,30),('1',0,31),('1',0,32),('1',0,34),('1',0,35),('1',0,36),('1',0,37),('1',0,38),('1',0,40),('1',0,42),('1',0,43),('1',0,44),('1',0,45),('1',0,46),('1',0,47),('1',0,48),('1',0,53),('1',0,54),('1',0,55),('1',0,56),('2',0,33),('2',0,41);
 /*!40000 ALTER TABLE `product_in_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -627,4 +627,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-03  0:13:14
+-- Dump completed on 2022-06-03  0:23:35
