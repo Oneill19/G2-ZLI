@@ -50,22 +50,7 @@ public class EditCell<S, T> extends TableCell<S, T> {
                 textField.setText(converter.toString(getItem()));
                 cancelEdit();
                 event.consume();
-            } 
-            /*
-            else if (event.getCode() == KeyCode.RIGHT) {
-                getTableView().getSelectionModel().selectRightCell();
-                event.consume();
-            } else if (event.getCode() == KeyCode.LEFT) {
-                getTableView().getSelectionModel().selectLeftCell();
-                event.consume();
-            } else if (event.getCode() == KeyCode.UP) {
-                getTableView().getSelectionModel().selectAboveCell();
-                event.consume();
-            } else if (event.getCode() == KeyCode.DOWN) {
-                getTableView().getSelectionModel().selectBelowCell();
-                event.consume();
             }
-            */
         });
     }
     

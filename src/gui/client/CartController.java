@@ -12,7 +12,6 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -21,8 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
 /**
@@ -37,9 +34,10 @@ public class CartController {
 	// *FXML*
 	// ******
 	@FXML private TableView<AbstractProduct> cartTable;
-	@FXML private TableColumn<AbstractProduct, String> colDelete,colName,minusAmountCol,labelAmountCol,plusAmountCol,amountCol;
+	@FXML private TableColumn<AbstractProduct, String> colDelete,colName,minusAmountCol,plusAmountCol,amountCol;
 	@FXML private TableColumn<AbstractProduct, ImageView> colImage;
 	@FXML private TableColumn<AbstractProduct, Double> colPrice;
+	@FXML private TableColumn<AbstractProduct, Integer> labelAmountCol;
 	@FXML private TextField textFieldPrice;
 	@FXML private Button exit, exitClient, logoutBtn, onBack, userOptBtn, nextBtn; 
 	private Double totalPrice = new Double(0);
@@ -92,12 +90,10 @@ public class CartController {
 						AbstractProduct currentAbstractProduct = (AbstractProduct) DeleteButton.this.getTableView()
 								.getItems().get(DeleteButton.this.getIndex());
 						//remove the product from cart
-//						ChatClient.cart.remove(currentAbstractProduct);
 						ChatClient.customerCart.remove(currentAbstractProduct); //new due amount
 						
 						//refresh tableview
 						cartTable.getItems().clear();
-//						cartTable.setItems(FXCollections.observableArrayList(ChatClient.cart));
 						cartTable.setItems(FXCollections.observableArrayList(ChatClient.customerCart.keySet()));//new due amount 
 						
 						//new due amount
@@ -145,13 +141,11 @@ public class CartController {
 				});
 		
 		
-		
-		
-		
+				
 		//******************
 		//***AmountColumn***
 		//******************		
-		// create class DeleteButton
+		// create class minusAmountButton
 				class minusAmountButton extends TableCell<AbstractProduct, String> {
 					private Button minusAmountButton = null;
 
@@ -174,9 +168,11 @@ public class CartController {
 								totalPrice=0.0;
 								for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
 									totalPrice += entry.getKey().getPrice()*entry.getValue();
+									entry.getKey().setAmount(entry.getValue());
 								}
 								textFieldPrice.setText( Double.toString(totalPrice-currentAbstractProduct.getPrice()));
 								textFieldPrice.setText(totalPrice.toString());
+								cartTable.refresh();
 							}
 						});
 					}
@@ -214,24 +210,106 @@ public class CartController {
 							}
 
 						});
-		
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				// create class plusAmountButton				
+				class PlusAmountButton extends TableCell<AbstractProduct, String> {
+					private Button plusAmountButton = null;
+
+					PlusAmountButton() {
+						plusAmountButton = new Button("", new ImageView(new Image(getClass().getResourceAsStream("plusAmount2.png"))));
+						plusAmountButton.setStyle("-fx-background-color:transparent;");
+
+						// Action when the button is pressed
+						plusAmountButton.setOnAction(new EventHandler<ActionEvent>() {
+
+							@Override
+							public void handle(ActionEvent t) {
+								// get Selected Item
+								AbstractProduct currentAbstractProduct = (AbstractProduct) PlusAmountButton.this.getTableView()
+										.getItems().get(PlusAmountButton.this.getIndex());
+								//remove one product from cart
+								ChatClient.customerCart.put(currentAbstractProduct, ChatClient.customerCart.get(currentAbstractProduct)+1);															
+								
+								//new due amount
+								totalPrice=0.0;
+								for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
+									totalPrice += entry.getKey().getPrice()*entry.getValue();
+									entry.getKey().setAmount(entry.getValue());
+								}
+								textFieldPrice.setText( Double.toString(totalPrice-currentAbstractProduct.getPrice()));
+								textFieldPrice.setText(totalPrice.toString());
+								cartTable.refresh();
+							}
+						});
+					}
+
+					// Display button if the row is not empty
+					@Override
+					public void updateItem(String t, boolean empty) {
+						super.updateItem(t, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						} else {
+							setGraphic(plusAmountButton);
+						}
+					}
+				}
+				
+				// Sets colDelete behavior
+				plusAmountCol.setCellValueFactory(
+						new Callback<TableColumn.CellDataFeatures<AbstractProduct, String>, ObservableValue<String>>() {
+
+							@Override
+							public ObservableValue<String> call(TableColumn.CellDataFeatures<AbstractProduct, String> p) {
+								return new SimpleStringProperty(p.getValue() != null, null);
+							}
+						});
+
+				// Adding the Button to the cell
+				plusAmountCol.setCellFactory(
+						new Callback<TableColumn<AbstractProduct, String>, TableCell<AbstractProduct, String>>() {
+
+							@Override
+							public TableCell<AbstractProduct, String> call(TableColumn<AbstractProduct, String> p) {
+								return new PlusAmountButton();
+							}
+						});
+									
 		colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-		colName.getStyle().concat("-fx-alignment: CENTER;");
+//		colName.getStyle().concat("-fx-alignment: CENTER;");
+		
 		colImage.setPrefWidth(100);
-		colImage.getStyle().concat("-fx-alignment: CENTER;");
+//		colImage.getStyle().concat("-fx-alignment: CENTER;");
 		colImage.setCellValueFactory(new PropertyValueFactory<>("imageView"));
+		
 		colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-		colPrice.getStyle().concat("-fx-alignment: CENTER;");
-		amountCol.getStyle().concat("-fx-alignment: CENTER;");
+//		colPrice.getStyle().concat("-fx-alignment: CENTER;");
+		
+		labelAmountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+//		labelAmountCol.getStyle().concat("-fx-alignment: CENTER;");
+		
+//		amountCol.getStyle().concat("-fx-alignment: CENTER;");
 		
 		cartTable.setId("my-table");
-
 		cartTable.getItems().clear();
 		cartTable.autosize();
 		cartTable.setItems(FXCollections.observableArrayList(ChatClient.customerCart.keySet()));
 
+		//initial TextField:totalPrice and labelamountCol
 		for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
 			totalPrice += entry.getKey().getPrice()*entry.getValue();
+			entry.getKey().setAmount(entry.getValue());
 		}
 		textFieldPrice.setText(totalPrice.toString());
 	}

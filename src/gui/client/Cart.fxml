@@ -112,9 +112,9 @@
                   <TextField fx:id="textFieldPrice" editable="false" prefHeight="26.0" prefWidth="100.0" />
                </children>
             </HBox>
-            <TableView fx:id="cartTable" editable="true" layoutX="237.0" layoutY="188.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="446.0" prefWidth="631.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@mycss.css">
+            <TableView fx:id="cartTable" editable="true" layoutX="237.0" layoutY="188.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="446.0" prefWidth="592.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@mycss.css">
                <columns>
-                  <TableColumn fx:id="colImage" minWidth="81.0" prefWidth="135.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Image" />
+                  <TableColumn fx:id="colImage" minWidth="81.0" prefWidth="100.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Image" />
                   <TableColumn fx:id="colName" minWidth="0.0" prefWidth="141.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Name" />
                   <TableColumn fx:id="amountCol" prefWidth="75.0" style="-fx-background-color: #fcfcfe; -fx-text-fill: black;" text="Amount">
                      <columns>
