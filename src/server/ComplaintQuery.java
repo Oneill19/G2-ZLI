@@ -64,7 +64,7 @@ public class ComplaintQuery {
 
 	public static ReturnCommand orderExist(Connection con, int orderNumber, int userId) {
 		Statement stmt;
-		String sqlQuery = "SELECT orderNumber FROM zli.orders WHERE orderNumber=" + orderNumber + " AND customerID="
+		String sqlQuery = "SELECT orderNumber FROM zli.orders WHERE orderNumber=" + orderNumber + " AND CustomerID="
 				+ userId + ";";
 		ResultSet rs;
 		try {
