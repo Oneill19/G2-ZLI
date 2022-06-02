@@ -26,35 +26,25 @@ import server.EchoServer;
 public class LoginScreenController {
 
     @FXML
-    private Button dorinConfirmedCustomer;
+    private Button dorinConfirmedCustomer, exit, login, backBtn, disconnectUsers;
+    @FXML  private Text errorLabel;
+    @FXML private TextField mail;
+    @FXML   private PasswordField password;
     
     @FXML
-    private Text errorLabel;
-
-    @FXML
-    private Button exit;
-
-    @FXML
-    private Button login;
+    void onMarketingWorker(ActionEvent event) throws Exception{
+    	mail.setText("naruto@zli");
+    	password.setText("1");
+    	login.fire();
+    }
     
-    @FXML
-    private Button backBtn;
-
-    @FXML
-    private TextField mail;
-
-    @FXML
-    private PasswordField password;
     
-    @FXML
-    private Button disconnectUsers;
-    
-    //TODO
     //Delete when not usable
     @FXML
     void ondorinConfirmedCustomer(ActionEvent event) throws Exception{
     	mail.setText("dorin@zli");
     	password.setText("1");
+    	login.fire();
     }
     
     

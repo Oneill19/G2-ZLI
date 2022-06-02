@@ -45,5 +45,6 @@
       <Text fx:id="errorLabel" fill="#f80000" layoutX="387.0" layoutY="521.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="238.13671875" />
       <Button fx:id="disconnectUsers" layoutX="25.0" layoutY="680.0" mnemonicParsing="false" onAction="#onDisconnectUsers" prefHeight="44.0" prefWidth="200.0" text="Disconnect all users" />
       <Button fx:id="dorinConfirmedCustomer" layoutX="25.0" layoutY="614.0" mnemonicParsing="false" onAction="#ondorinConfirmedCustomer" prefHeight="44.0" prefWidth="200.0" text="Dorin - Confirmed Customer" />
+      <Button fx:id="marketingEmpWorker" layoutX="25.0" layoutY="548.0" mnemonicParsing="false" onAction="#onMarketingWorker" prefHeight="44.0" prefWidth="200.0" text="Dorin - Marketing Employee" />
    </children>
 </Pane>
