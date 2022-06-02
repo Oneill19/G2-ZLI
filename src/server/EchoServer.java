@@ -302,7 +302,22 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
-		
+			case "GetReportByQuarter1":
+				try {
+
+					client.sendToClient(ReportQuery.getReportByQuarterly1(conn, clientMsg[1], clientMsg[2],clientMsg[3]));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
+			case "GetReportByQuarter2":
+				try {
+
+					client.sendToClient(ReportQuery.getReportByQuarterly2(conn, clientMsg[1], clientMsg[2],clientMsg[3]));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
 		default:
 			System.out.println("No Command Found");
 //			System.exit(-1);

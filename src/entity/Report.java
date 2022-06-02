@@ -18,19 +18,21 @@ public class Report implements Serializable {
 	private float revenueProduct;
 	private int amountProduct;
 	private int amountItem;
+	private int quartlyNum;
+	private String storeName;
 	
-	public Report(int reportId, String reportYear, String reportMonth, String reortType, float totalRevenue,
-			float revenueItem, float revenueProduct, int amountProduct, int amountItem) {
+	public Report(int reportId, String storeName,String reportYear, String reportMonth, int amountProduct, int amountItem,float revenueProduct,
+			float revenueItem,int quartlyNum) {
 		super();
 		this.reportId = reportId;
+		this.storeName=storeName;
 		this.reportYear = reportYear;
 		this.reportMonth = reportMonth;
-		this.reortType = reortType;
-		this.totalRevenue = totalRevenue;
-		this.revenueItem = revenueItem;
-		this.revenueProduct = revenueProduct;
 		this.amountProduct = amountProduct;
 		this.amountItem = amountItem;
+		this.revenueProduct = revenueProduct;
+		this.revenueItem = revenueItem;
+		this.quartlyNum=quartlyNum;
 	}
 
 	public int getReportId() {
@@ -104,7 +106,22 @@ public class Report implements Serializable {
 	public void setAmountItem(int amountItem) {
 		this.amountItem = amountItem;
 	}
-}
-	
 
+	public int getQuartlyNum() {
+		return quartlyNum;
+	}
+
+	public void setQuartlyNum(int quartlyNum) {
+		this.quartlyNum = quartlyNum;
+	}
+
+	public String getStoreName() {
+		return storeName;
+	}
+
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
+	}
+	
+}
 

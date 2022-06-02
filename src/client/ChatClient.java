@@ -33,8 +33,9 @@ public class ChatClient extends AbstractClient {
 	public static Order cartOrder = new Order();
 	public static String reportTxt;
 	public static User user = null;
-	
-	
+	public static ArrayList<Report> reportsq1;
+	public static ArrayList<Report> reportsq2;
+
 	public static SurveyReport selectedSurveyReport = null;
 	
 	public static boolean requestSucceed = false;
@@ -116,7 +117,16 @@ public class ChatClient extends AbstractClient {
 			case "getReport":
 				reportTxt=(String)rc.getReturnValue();
 				break;
-			
+			case "generateReport":
+				System.out.println("Report Create");
+				break;
+
+			case "GetReportByQuarter1":
+				reportsq1=(ArrayList<Report>)rc.getReturnValue();
+				break;
+			case "GetReportByQuarter2":
+				reportsq2=(ArrayList<Report>)rc.getReturnValue();
+				break;
 
 			}
 	
