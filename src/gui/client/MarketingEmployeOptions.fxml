@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.MarketingEmployeeOptionsController">
    <children>
       <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1110.0" style="-fx-background-color: #FCFCFE;">
          <children>
@@ -58,11 +57,11 @@
                </font>
             </Button>
             <Button fx:id="exit" alignment="CENTER" layoutX="1034.0" layoutY="24.0" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
-            <Button fx:id="onBack3" alignment="CENTER" layoutX="435.0" layoutY="273.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="223.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Add New Survey" textFill="#fcfcfe" />
-            <Button fx:id="onBack31" alignment="CENTER" layoutX="435.0" layoutY="349.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="223.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Watch Current Surveys" textFill="#fcfcfe" />
+            <Button fx:id="addSaleButton" alignment="CENTER" layoutX="435.0" layoutY="273.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="223.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Add New Sale" textFill="#fcfcfe" />
+            <Button fx:id="watchSaleButton" alignment="CENTER" layoutX="435.0" layoutY="349.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="223.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Watch Current Sale" textFill="#fcfcfe" />
          </children>
       </Pane>
       <Button fx:id="nextBtn" alignment="CENTER" layoutX="834.0" layoutY="749.0" mnemonicParsing="false" onAction="#onNext" prefHeight="44.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: Green; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="Next" textAlignment="CENTER" textFill="#fcfcfe" />
-      <Button fx:id="onBack1" alignment="CENTER" layoutX="79.0" layoutY="753.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
+      <Button fx:id="onBack" alignment="CENTER" layoutX="79.0" layoutY="753.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
    </children>
 </AnchorPane>
