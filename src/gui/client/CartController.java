@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 /**
@@ -72,15 +74,30 @@ public class CartController {
 		for (Map.Entry<AbstractProduct, Integer> ap : ChatClient.customerCart.entrySet()) {
     		ap.getKey().setImageView();
     	}
+		
+		
 
 		// create class DeleteButton
 		class DeleteButton extends TableCell<AbstractProduct, String> {
 			private Button deleteButton = null;
 
 			DeleteButton() {
-				deleteButton = new Button("", new ImageView(new Image(getClass().getResourceAsStream("delete.png"),50,50,false,true)));
+				deleteButton = new Button("", new ImageView(new Image(getClass().getResourceAsStream("delete.png"),40,40,false,true)));
 				deleteButton.setStyle("-fx-background-color:transparent;");
-
+				deleteButton.setOnMouseEntered( new EventHandler<MouseEvent>() {
+			          @Override
+			          public void handle(MouseEvent e) {
+			           deleteButton.setStyle("-fx-border-radius:20.0;" +"border-radius: 5;" + 
+			          "-fx-background-color: #EFE2FE;"+"-fx-padding: 0 0 0 0;");
+			          }
+			        });
+				deleteButton.setOnMouseExited( new EventHandler<MouseEvent>() {
+			          @Override
+			          public void handle(MouseEvent e) {
+			        	  deleteButton.setStyle("-fx-background-color:transparent;");
+			          }
+			        });
+				
 				// Action when the button is pressed
 				deleteButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -150,8 +167,21 @@ public class CartController {
 					private Button minusAmountButton = null;
 
 					minusAmountButton() {
-						minusAmountButton = new Button("", new ImageView(new Image(getClass().getResourceAsStream("minusAmount2.png"))));
+						minusAmountButton = new Button("", new ImageView(new Image(getClass().getResourceAsStream("minusAmount2.png"),30,30,false,false)));
 						minusAmountButton.setStyle("-fx-background-color:transparent;");
+						minusAmountButton.setOnMouseEntered( new EventHandler<MouseEvent>() {
+					          @Override
+					          public void handle(MouseEvent e) {
+					        	  minusAmountButton.setStyle("-fx-background-color: #EFE2FE;"+"-fx-padding: 0 0 0 0;");
+					        	  //+"-fx-padding: 0 0 0 0;"
+					          }
+					        });
+						minusAmountButton.setOnMouseExited( new EventHandler<MouseEvent>() {
+					          @Override
+					          public void handle(MouseEvent e) {
+					        	  minusAmountButton.setStyle("-fx-background-color:transparent;");
+					          }
+					        });
 
 						// Action when the button is pressed
 						minusAmountButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -226,8 +256,21 @@ public class CartController {
 					private Button plusAmountButton = null;
 
 					PlusAmountButton() {
-						plusAmountButton = new Button("", new ImageView(new Image(getClass().getResourceAsStream("plusAmount2.png"))));
+						plusAmountButton = new Button("", new ImageView(new Image(getClass().getResourceAsStream("plusAmount2.png"),30,30,false,false)));
 						plusAmountButton.setStyle("-fx-background-color:transparent;");
+						plusAmountButton.setOnMouseEntered( new EventHandler<MouseEvent>() {
+					          @Override
+					          public void handle(MouseEvent e) {
+					        	  plusAmountButton.setStyle( "-fx-background-color: #EFE2FE;"+"-fx-padding: 0 0 0 0;");
+					        	  //+"-fx-padding: 0 0 0 0;"
+					          }
+					        });
+						plusAmountButton.setOnMouseExited( new EventHandler<MouseEvent>() {
+					          @Override
+					          public void handle(MouseEvent e) {
+					        	  plusAmountButton.setStyle("-fx-background-color:transparent;");
+					          }
+					        });
 
 						// Action when the button is pressed
 						plusAmountButton.setOnAction(new EventHandler<ActionEvent>() {
