@@ -114,12 +114,25 @@ public class PaymentController {
     	
     	
     	//Add products and items in the cart to the DB
-    	Integer orderNumber = ChatClient.cartOrder.getOrderNumber();
-    	try {
-    		ClientUI.chat.accept("addProductsAndItemsInOrderToDB\t"+orderNumber.toString()+"\t"
-    							+sbItems.toString()+"\t"+sbProducts.toString());
-    	}catch(Exception ex) {
-    		ex.printStackTrace();
+    	Integer orderNumber = ChatClient.cartOrder.getOrderNumber();   	
+    	switch(ChatClient.cartOrder.getDeliveryMethod()) {
+    	case "Pickup":
+        	try {
+        		ClientUI.chat.accept("addPickupOrder\t"+orderNumber.toString()+"\t"
+        							+sbItems.toString()+"\t"+sbProducts.toString());
+        	}catch(Exception ex) {
+        		ex.printStackTrace();
+        	}
+        	break;
+//    	case "Delivery":
+//        	try {
+//        		ClientUI.chat.accept("addPickupDelivery\t"+orderNumber.toString()+"\t"
+//        							+sbItems.toString()+"\t"+sbProducts.toString()+"\t"+address.toString());
+//        	}catch(Exception ex) {
+//        		ex.printStackTrace();
+//        	}
+//        	break;
+    		
     	}
     	
     	//show success message and go back to catalog

@@ -27,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputEvent;
 import javafx.scene.layout.HBox;
 
 /**
@@ -40,7 +41,7 @@ public class PersonalDetailsController {
 	@FXML private ComboBox<String> comboStore;
 	@FXML private DatePicker datePicker;
 	@FXML private Button exit, onBack, userOptBtn, nextBtn, logoutBtn;
-	@FXML private TextField fieldAptNumber,fieldBlessing,fieldCity,fieldEmail,fieldFirst,fieldLast,fieldPostal,fieldSt,hourPicker,minutesPicker, fieldDescribtion; 
+	@FXML private TextField fieldAptNumber,fieldBlessing,fieldCity,fieldEmail,fieldFirst,fieldLast,fieldPostal,fieldSt,hourPicker,minutesPicker,fieldDescribtion, nameOfReciever, phoneOfReciever; 
     @FXML private Label labelDestination, labelStore;
     @FXML private HBox HBoxAddress, HBoxstore;
 	
@@ -83,34 +84,76 @@ public class PersonalDetailsController {
 		HBoxstore.setVisible(true);	
 	} 
 	
+	/**
+	 * Get data from textFields and save them in CatClient.customerCart
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	private void onNext(ActionEvent event) throws Exception{
 		String address=null;
+		boolean returnFlag=false;
 		
+		//check delivery method fields are initialed
 		if (DeliveryMethod.getSelectedToggle() == null) {
 			setAlert("Please select delivery method",null).showAndWait();
 			return;
 		}
 
 		if (pickUpRadio.isSelected()) {
+			//Pickup
 			String store = comboStore.getValue();
 			if (store == null) {
 				setAlert("Click on the purple box:\nThen, select a store", "Error_ChooseDestinationStore.png").showAndWait();
 				return;
 			}
-			ChatClient.cartOrder.setDeliveryMethod("Self Pickup");
+			ChatClient.cartOrder.setDeliveryMethod("Pickup");
 			ChatClient.cartOrder.setFromStore(comboStore.getValue());
-		}
-		else {
-			if (fieldCity.getText() == null || fieldSt.getText() == null || fieldAptNumber.getText() == null) {
-				setAlert("Please fill all address fields", null).showAndWait();
+		}//Delivery
+		if (!pickUpRadio.isSelected()) {
+			
+			if (fieldCity.getText() == null ||  fieldCity.getText().trim().isEmpty()) {
+				fieldCity.setStyle(" -fx-text-box-border:red;");
+				returnFlag=true;
+			}
+			
+			if (fieldSt.getText() == null ||  fieldSt.getText().trim().isEmpty()) {
+				fieldSt.setStyle(" -fx-text-box-border:red;");
+				returnFlag=true;
+			}
+			
+			if (fieldAptNumber.getText() == null ||  fieldAptNumber.getText().trim().isEmpty()) {
+				fieldAptNumber.setStyle(" -fx-text-box-border:red;");
+				returnFlag=true;
+			}
+			
+			if (nameOfReciever.getText() == null ||  nameOfReciever.getText().trim().isEmpty()) {
+				nameOfReciever.setStyle(" -fx-text-box-border:red;");
+				returnFlag=true;
+			}
+			
+			if (phoneOfReciever.getText() == null ||  phoneOfReciever.getText().trim().isEmpty()) {
+				phoneOfReciever.setStyle( "-fx-text-box-border:red;");
+				returnFlag=true;
+			}
+			
+			if (fieldPostal.getText() == null ||  fieldPostal.getText().trim().isEmpty()) {
+				fieldPostal.setStyle( "-fx-text-box-border:red;");
+				returnFlag=true;
+			}
+			
+	
+			if (returnFlag) {
+				setAlert("Please fill all address and reciever fields", null).showAndWait();
 				return;
 			}
+			
 			ChatClient.cartOrder.setFromStore(null);
 			address = fieldCity.getText()+" "+fieldSt.getText()+" "+ fieldAptNumber.getText() +" "+fieldPostal.getText();
 			ChatClient.cartOrder.setDeliveryMethod(address);
 		}
 		
+		//check date time fields are initialed 
 		LocalDate today = LocalDate.now();
 		datePicker.setFocusTraversable(true);
 		datePicker.requestFocus();
@@ -146,7 +189,8 @@ public class PersonalDetailsController {
 			}
 		
 		}
-					
+				
+		//set values of customerCart
 		ChatClient.cartOrder.setCustomerID(ChatClient.user.getUserID());
 		ChatClient.cartOrder.setGreetingCard(fieldBlessing.getText());;
 		//TODO - it is not clear what to do with field 'color'
@@ -179,6 +223,32 @@ public class PersonalDetailsController {
 	}
 
 	public void initialize() throws Exception {
+		
+		/**
+		 * causes TextField to change its' border to transparent when gets focus
+		 */
+		class myListener implements ChangeListener<Boolean>{
+			TextField tf;
+			
+			public myListener(TextField tf) {
+				this.tf = tf;
+			}
+			
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean entered) {
+				if(entered) {
+					tf.setStyle("-fx-text-box-border:transparent;");
+				}
+			}
+		}
+		
+		nameOfReciever.focusedProperty().addListener(new myListener(nameOfReciever));
+		fieldAptNumber.focusedProperty().addListener(new myListener(fieldAptNumber));
+		fieldCity.focusedProperty().addListener(new myListener(fieldCity));
+		fieldPostal.focusedProperty().addListener(new myListener(fieldPostal));
+		fieldSt.focusedProperty().addListener(new myListener(fieldSt));
+		phoneOfReciever.focusedProperty().addListener(new myListener(phoneOfReciever));
+		
 		userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
 		fieldEmail.setText(ChatClient.user.getEmail());
 		fieldEmail.setDisable(true);
@@ -187,6 +257,7 @@ public class PersonalDetailsController {
 		fieldLast.setText(ChatClient.user.getLastName());
 		fieldLast.setDisable(true);
 		format.set(DefaultFormat);
+		
 		
 		/**
 		 * Class for catching my special request for Exception.

@@ -37,7 +37,7 @@ public class OrderQuery {
 		}
 	}
 	
-	public static ReturnCommand addProductsAndItemsInOrderToDB(Connection con, String orderNumber, String item_in_order, String product_in_order) {
+	public static ReturnCommand addPickupOrder(Connection con, String orderNumber, String item_in_order, String product_in_order) {
 		PreparedStatement ps;
 		String[] itemArray = item_in_order.split(","), productArray = product_in_order.split(",");
 		

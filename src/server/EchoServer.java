@@ -314,10 +314,10 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
-		case "addProductsAndItemsInOrderToDB":
+		case "addPickupOrder":
 			try {
 				client.sendToClient(
-						OrderQuery.addProductsAndItemsInOrderToDB(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
+						OrderQuery.addPickupOrder(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
