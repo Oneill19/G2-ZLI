@@ -95,13 +95,13 @@ public class PaymentController {
     			productCounter+=ap.getValue();
     			productPriceSum += ap.getKey().getPrice()*ap.getValue();
     			sbProducts.append("'").append(ap.getKey().getSerialNumber()).append("',");
-    			sbProducts.append("'").append(ap.getValue()).append("' ");
+    			sbProducts.append(ap.getValue()).append(" ");
     		}
     		if(ap.getKey() instanceof Item) {
     			itemCounter++;
     			itemPriceSum += ap.getValue();
     			sbItems.append("'").append(ap.getKey().getSerialNumber()).append("',");
-    			sbItems.append("'").append(ap.getValue()).append("',");
+    			sbItems.append(ap.getValue()).append(" ");
     		}
     	}
     	if (sbItems.length() > 0) {
