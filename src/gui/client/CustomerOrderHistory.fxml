@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+   <children>
+      <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1110.0" style="-fx-background-color: #FCFCFE;">
+         <children>
+            <HBox layoutX="4.0" layoutY="40.0" spacing="870.0">
+               <children>
+                  <HBox maxHeight="-Infinity">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <Button fx:id="onBack" alignment="CENTER" layoutX="69.0" layoutY="743.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
+            <HBox alignment="TOP_CENTER" layoutX="149.0" layoutY="10.0" prefHeight="118.0" prefWidth="794.0">
+               <children>
+                  <VBox alignment="CENTER" fillWidth="false" style="-fx-alignment: center;">
+                     <children>
+                        <ImageView fitHeight="72.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Zli_logo_cropped.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Order History" textAlignment="CENTER" textFill="#a297d5">
+                           <font>
+                              <Font name="System Bold" size="31.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <TableView fx:id="ordersTable" editable="true" layoutX="59.0" layoutY="132.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="446.0" prefWidth="804.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;">
+               <stylesheets>
+                  <URL value="@mycss.css" />
+                  <URL value="@buttonHover.css" />
+               </stylesheets>
+               <columns>
+                  <TableColumn prefWidth="85.0" text="Order Number" />
+                  <TableColumn prefWidth="43.0" text="Price" />
+                  <TableColumn prefWidth="123.0" text="Greeting Card" />
+                  <TableColumn prefWidth="75.0" text="Status" />
+                  <TableColumn prefWidth="88.0" text="Complete Date" />
+                  <TableColumn prefWidth="95.0" text="Confirmed Date" />
+                  <TableColumn prefWidth="98.0" text="Delivery Method" />
+                  <TableColumn prefWidth="90.0" text="Creation Date" />
+                  <TableColumn prefWidth="102.0" text="To Supply Date" />
+               </columns>
+            </TableView>
+            <Button fx:id="logoutBtn" defaultButton="true" layoutX="24.0" layoutY="48.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: transparent;" text="Logout |" textFill="#2b0548">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="userOptBtn" layoutX="94.0" layoutY="49.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="exit" alignment="CENTER" layoutX="1034.0" layoutY="24.0" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
