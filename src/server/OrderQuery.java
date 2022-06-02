@@ -11,7 +11,7 @@ import common.ReturnCommand;
 public class OrderQuery {
 	
 	/**
-	 * @param con
+	 * @param con			connection to client
 	 * @param orderString - contains the VALUES to INSERT TO the DB
 	 * @return ReturnCommand
 	 */
@@ -37,30 +37,36 @@ public class OrderQuery {
 		}
 	}
 	
-	public static ReturnCommand addItemsAndProductsInOrder(Connection con, String orderNumber, String item_in_order, String product_in_order) {
+	
+	public static ReturnCommand addItemsInOrder(Connection con, String orderNumber, String item_in_order) {
 		PreparedStatement ps;
-		String[] itemArray = null, productArray = null;
+		String[] itemArray = item_in_order.split(",");
 		
-		try {
-			itemArray = item_in_order.split(",");
-			productArray = product_in_order.split(",");
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		for(String itemSerial : itemArray) {
-			String insertQuery = "INSERT INTO item_in_order(itemSerial, orderNumber) VALUES ("+itemSerial+","+orderNumber.toString()+")";
-			try {
-				ps = con.prepareStatement(insertQuery);
-				ps.executeUpdate();
-			}catch(Exception ex) {
-				System.out.println("Item: "+itemSerial);
-				ex.printStackTrace();
+		//insert items to DB
+		if(item_in_order.length() != 0)
+			for(String itemSerial : itemArray) {
+				String insertQuery = "INSERT INTO item_in_order(itemSerial, orderNumber) VALUES ("+itemSerial+","+orderNumber.toString()+")";
+				System.out.println(insertQuery);
+				try {
+					ps = con.prepareStatement(insertQuery);
+					ps.executeUpdate();
+				}catch(Exception ex) {
+					System.out.println("Item: "+itemSerial);
+					ex.printStackTrace();
+				}
 			}
-		}
+		return new ReturnCommand("addItemsInOrder", "items: " + item_in_order + " were added.");
+	}
+	
+	
+	public static ReturnCommand addProductsInOrder(Connection con, String orderNumber, String product_in_order) {
+		PreparedStatement ps;
+		String[] productArray = product_in_order.split(",");
 		
+		//insert products to DB
 		for(String productSerial : productArray) {
 			String insertQuery = "INSERT INTO product_in_order(productSerial, orderNumber) VALUES ("+productSerial+","+orderNumber.toString()+")";
+//			System.out.println(insertQuery);
 			try {
 				ps = con.prepareStatement(insertQuery);
 				ps.executeUpdate();
@@ -69,14 +75,20 @@ public class OrderQuery {
 				ex.printStackTrace();
 			}
 		}
-		return new ReturnCommand("addProductsAndItemsInOrderToDB",null);
+		return new ReturnCommand("addProductsInOrder", "Products: " + product_in_order + " were added.");
 	}
 	
+	/**
+	 * inserts the address of order into the DB.
+	 * @param con			connection to client
+	 * @param orderNumber	PK in the DB
+	 * @param deliveryData	name of receiver, phone of receiver, and the address to deliver to
+	 * @return
+	 */
 	public static ReturnCommand addDeliveryOrder(Connection con, String orderNumber, String deliveryData) {
 		PreparedStatement ps;
 		String insertQuery = "INSERT INTO orderbydelivery(orderNumber, nameOfReceiver, phoneOfReceiver, receptionAddress)"
 				+"VALUES( "+orderNumber+"," + deliveryData +")";
-		System.out.println("insertQuery: "+insertQuery);
 		try {
 			ps = con.prepareStatement(insertQuery);
 			ps.executeUpdate();

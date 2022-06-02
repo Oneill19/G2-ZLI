@@ -12,6 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -62,6 +64,15 @@ public class CartController {
 	
     @FXML
     void onNext(ActionEvent event) throws IOException {
+    	//check if cart is empty
+    	if (ChatClient.customerCart.size() == 0) {
+    		Alert alert = new Alert(AlertType.INFORMATION);
+    		alert.setTitle("Empty Cart");
+    		alert.setHeaderText("Cart is empty.\nPlease add at least 1 product to continue.");
+    		alert.showAndWait();
+    		cc.changeFXML(event, "Catalog.fxml", "Zer-Li Catalog",null);
+    		return;
+    	}
     	ChatClient.cartOrder.setTotalPrice(totalPrice);
     	cc.changeFXML(event, "PersonalDetails.fxml", "Zer-Li Personal Details",null);
     }

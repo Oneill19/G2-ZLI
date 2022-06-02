@@ -314,10 +314,20 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
-		case "addItemsAndProductsInOrder":
+		case "addItemsInOrder":
 			try {
+				System.out.println(msg.toString());
 				client.sendToClient(
-						OrderQuery.addItemsAndProductsInOrder(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
+						OrderQuery.addItemsInOrder(conn, clientMsg[1], clientMsg[2]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "addProductsInOrder":
+			try {
+				System.out.println(msg.toString());
+				client.sendToClient(
+						OrderQuery.addProductsInOrder(conn, clientMsg[1], clientMsg[2]));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -371,7 +381,6 @@ public class EchoServer extends AbstractServer {
 			}
 			break;
 		case "addDeliveryOrder":
-			System.out.println("msg: "+msg.toString());
 			try {
 				client.sendToClient(OrderQuery.addDeliveryOrder(conn, clientMsg[1], clientMsg[2]));
 			}catch(Exception e) {

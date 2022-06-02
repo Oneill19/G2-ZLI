@@ -96,7 +96,6 @@ public class PersonalDetailsController {
 	 */
 	@FXML
 	private void onNext(ActionEvent event) throws Exception{
-		String address=null;
 		boolean returnFlag=false;
 		
 		//check delivery method fields are initialed
@@ -162,7 +161,6 @@ public class PersonalDetailsController {
 			sb.append("'").append(fieldSt.getText()).append("' ");
 			sb.append("'").append(fieldAptNumber.getText()).append("' ");
 			sb.append("'").append(fieldPostal.getText()).append("' ");
-			
 			deliveryData = sb.toString();
 			ChatClient.cartOrder.setDeliveryMethod("Delivery");
 		}
@@ -201,7 +199,6 @@ public class PersonalDetailsController {
 			}catch(Exception ex) {
 				ex.printStackTrace();
 			}
-		
 		}
 				
 		//set values of customerCart
@@ -227,16 +224,13 @@ public class PersonalDetailsController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Payment.fxml"));
 		root = loader.load();
 		paymentController = loader.getController();
-		paymentController.getData(deliveryData);
-		
+		if (deliveryData!=null) {
+			paymentController.getData(deliveryData);
+		}
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-				
-		//cc.changeFXML(event, "Payment.fxml", "Zer-Li Payment",null);
-		
-		
 	}
 	
 	

@@ -140,7 +140,11 @@ public class ChatClient extends AbstractClient {
 			case "addDeliveryOrder":
 				System.out.println(rc.getReturnValue().toString());
 				break;
-			case "addProductsAndItemsInOrderToDB":
+			case "addItemsInOrder":
+				System.out.println(rc.getReturnValue());
+				break;
+			case "addProductsInOrder":
+				System.out.println(rc.getReturnValue());
 				break;
 			default:
 				//for debug - don't remove.

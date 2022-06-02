@@ -28,7 +28,7 @@ public class PaymentController {
     @FXML private PasswordField cvv, first4, fourth4, second4, third4; 
     @FXML private TextField day, fullName, month; 
     @FXML private Button exit, logoutBtn, nextBtn, onBack, userOptBtn;
-    private String recieverName, recieverPhone, deliveryAddress = new String();
+    private String deliveryAddress = new String();
     
     private CommonController cc = new CommonController();
     
@@ -68,7 +68,7 @@ public class PaymentController {
 
     /**
      * Triggred by pressing the next button
-     * Responsible for adding the products and items to the db.
+     * Responsible for adding the order, products, items and delivery address to the db.
      * also, send data to ChatClient.accept for managing of reports every 30 days.
      * @param event
      * @throws IOException
@@ -102,8 +102,9 @@ public class PaymentController {
     			sbItems.append("'").append(ap.getKey().getSerialNumber()).append("',");
     		}
     	}
-    	if (sbItems.length() > 0)
+    	if (sbItems.length() > 0) {
     		sbItems.delete(sbItems.length()-1, sbItems.length());
+    	}
     	if (sbProducts.length() > 0)
     		sbProducts.delete(sbProducts.length()-1, sbProducts.length());
     	try {
@@ -115,13 +116,21 @@ public class PaymentController {
     	
     	//Add products and items in the cart to the DB
     	Integer orderNumber = ChatClient.cartOrder.getOrderNumber();
-        	try {
-        		ClientUI.chat.accept("addItemsAndProductsInOrder\t"+orderNumber.toString()+"\t"
-        							+sbItems.toString()+"\t"+sbProducts.toString());
+    	if(sbItems.length()>0) {
+    	  	try {
+        		ClientUI.chat.accept("addItemsInOrder\t"+orderNumber.toString()+"\t"+sbItems.toString());
         	}catch(Exception ex) {
         		ex.printStackTrace();
         	}
-    	
+    	}
+    	if(sbProducts.length()>0) {
+        	try {
+        		ClientUI.chat.accept("addProductsInOrder\t"+orderNumber.toString()+"\t"+sbProducts.toString());
+        	}catch(Exception ex) {
+        		ex.printStackTrace();
+        	}
+    	}
+  	
         	//If reception is by delivery than save receivers' name and phone
     	if (ChatClient.cartOrder.getDeliveryMethod().equals("Delivery"))
         	try {
