@@ -37,9 +37,16 @@ public class OrderQuery {
 		}
 	}
 	
-	public static ReturnCommand addPickupOrder(Connection con, String orderNumber, String item_in_order, String product_in_order) {
+	public static ReturnCommand addItemsAndProductsInOrder(Connection con, String orderNumber, String item_in_order, String product_in_order) {
 		PreparedStatement ps;
-		String[] itemArray = item_in_order.split(","), productArray = product_in_order.split(",");
+		String[] itemArray = null, productArray = null;
+		
+		try {
+			itemArray = item_in_order.split(",");
+			productArray = product_in_order.split(",");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		for(String itemSerial : itemArray) {
 			String insertQuery = "INSERT INTO item_in_order(itemSerial, orderNumber) VALUES ("+itemSerial+","+orderNumber.toString()+")";
@@ -63,5 +70,19 @@ public class OrderQuery {
 			}
 		}
 		return new ReturnCommand("addProductsAndItemsInOrderToDB",null);
+	}
+	
+	public static ReturnCommand addDeliveryOrder(Connection con, String orderNumber, String deliveryData) {
+		PreparedStatement ps;
+		String insertQuery = "INSERT INTO orderbydelivery(orderNumber, nameOfReceiver, phoneOfReceiver, receptionAddress)"
+				+"VALUES( "+orderNumber+"," + deliveryData +")";
+		System.out.println("insertQuery: "+insertQuery);
+		try {
+			ps = con.prepareStatement(insertQuery);
+			ps.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return new ReturnCommand("addDeliveryOrder", "Delivery information: "+deliveryData+" was added.");
 	}
 }

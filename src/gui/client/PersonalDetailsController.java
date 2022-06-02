@@ -16,6 +16,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -27,8 +31,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 /**
  * @author DORIN BEERY
@@ -44,6 +48,7 @@ public class PersonalDetailsController {
 	@FXML private TextField fieldAptNumber,fieldBlessing,fieldCity,fieldEmail,fieldFirst,fieldLast,fieldPostal,fieldSt,hourPicker,minutesPicker,fieldDescribtion, nameOfReciever, phoneOfReciever; 
     @FXML private Label labelDestination, labelStore;
     @FXML private HBox HBoxAddress, HBoxstore;
+    private String deliveryData;
 	
 	//Non FXML fields
 	private CommonController cc = new CommonController();
@@ -149,8 +154,17 @@ public class PersonalDetailsController {
 			}
 			
 			ChatClient.cartOrder.setFromStore(null);
-			address = fieldCity.getText()+" "+fieldSt.getText()+" "+ fieldAptNumber.getText() +" "+fieldPostal.getText();
-			ChatClient.cartOrder.setDeliveryMethod(address);
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("'").append(nameOfReciever.getText()).append("', ");
+			sb.append("'").append(phoneOfReciever.getText()).append("', ");
+			sb.append("'").append(fieldCity.getText()).append("' ");
+			sb.append("'").append(fieldSt.getText()).append("' ");
+			sb.append("'").append(fieldAptNumber.getText()).append("' ");
+			sb.append("'").append(fieldPostal.getText()).append("' ");
+			
+			deliveryData = sb.toString();
+			ChatClient.cartOrder.setDeliveryMethod("Delivery");
 		}
 		
 		//check date time fields are initialed 
@@ -203,7 +217,25 @@ public class PersonalDetailsController {
 		ChatClient.cartOrder.setOrderCreationTime( LocalTime.now().truncatedTo(ChronoUnit.MINUTES));
 
 		comboStore.getItems().clear();
-		cc.changeFXML(event, "Payment.fxml", "Zer-Li Payment",null);
+		
+		//move info between screens
+		Parent root=null;
+		Stage stage=null;
+		Scene scene=null;
+		
+		PaymentController paymentController=null;
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("Payment.fxml"));
+		root = loader.load();
+		paymentController = loader.getController();
+		paymentController.getData(deliveryData);
+		
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+				
+		//cc.changeFXML(event, "Payment.fxml", "Zer-Li Payment",null);
+		
 		
 	}
 	

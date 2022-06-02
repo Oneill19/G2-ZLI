@@ -28,6 +28,7 @@ public class PaymentController {
     @FXML private PasswordField cvv, first4, fourth4, second4, third4; 
     @FXML private TextField day, fullName, month; 
     @FXML private Button exit, logoutBtn, nextBtn, onBack, userOptBtn;
+    private String recieverName, recieverPhone, deliveryAddress = new String();
     
     private CommonController cc = new CommonController();
     
@@ -90,12 +91,12 @@ public class PaymentController {
     	double productPriceSum = 0, itemPriceSum = 0;
    	
     	for(Map.Entry<AbstractProduct, Integer> ap : ChatClient.customerCart.entrySet()) {
-    		if (ap instanceof Product) {
+    		if (ap.getKey() instanceof Product) {
     			productCounter+=ap.getValue();
     			productPriceSum += ap.getKey().getPrice()*ap.getValue();
     			sbProducts.append("'").append(ap.getKey().getSerialNumber()).append("',");
     		}
-    		if(ap instanceof Item) {
+    		if(ap.getKey() instanceof Item) {
     			itemCounter++;
     			itemPriceSum += ap.getValue();
     			sbItems.append("'").append(ap.getKey().getSerialNumber()).append("',");
@@ -112,42 +113,42 @@ public class PaymentController {
 			e.printStackTrace();
 		}
     	
-    	
     	//Add products and items in the cart to the DB
-    	Integer orderNumber = ChatClient.cartOrder.getOrderNumber();   	
-    	switch(ChatClient.cartOrder.getDeliveryMethod()) {
-    	case "Pickup":
+    	Integer orderNumber = ChatClient.cartOrder.getOrderNumber();
         	try {
-        		ClientUI.chat.accept("addPickupOrder\t"+orderNumber.toString()+"\t"
+        		ClientUI.chat.accept("addItemsAndProductsInOrder\t"+orderNumber.toString()+"\t"
         							+sbItems.toString()+"\t"+sbProducts.toString());
         	}catch(Exception ex) {
         		ex.printStackTrace();
         	}
-        	break;
-//    	case "Delivery":
-//        	try {
-//        		ClientUI.chat.accept("addPickupDelivery\t"+orderNumber.toString()+"\t"
-//        							+sbItems.toString()+"\t"+sbProducts.toString()+"\t"+address.toString());
-//        	}catch(Exception ex) {
-//        		ex.printStackTrace();
-//        	}
-//        	break;
-    		
-    	}
+    	
+        	//If reception is by delivery than save receivers' name and phone
+    	if (ChatClient.cartOrder.getDeliveryMethod().equals("Delivery"))
+        	try {
+        		ClientUI.chat.accept("addDeliveryOrder\t"+orderNumber.toString()+"\t"+deliveryAddress);
+        	}catch(Exception ex) {
+        		ex.printStackTrace();
+        	}
     	
     	//show success message and go back to catalog
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Order reception completed SUCCESSFULY!");
-		alert.setHeaderText("You're order " + ChatClient.cartOrder.getOrderNumber() + " was set and is waiting"
-				+ " for confirmation within the next 3 hours.\nYou can check its' status at the Watch Orders option.");
-			alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("orderReception.png"))));
-		alert.showAndWait();
-    	
-		ChatClient.customerCart.clear();
-		ChatClient.cartOrder = new Order();
-		cc.changeFXML(event, "Catalog.fxml", "Catalog", null);
+    			Alert alert = new Alert(AlertType.CONFIRMATION);
+    			alert.setTitle("Order reception completed SUCCESSFULY!");
+    			alert.setHeaderText("You're order " + ChatClient.cartOrder.getOrderNumber() + " was set and is waiting"
+    					+ " for confirmation within the next 3 hours.\nYou can check its' status at the Watch Orders option.");
+    				alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("orderReception.png"))));
+    			alert.showAndWait();
+    	    	
+    			ChatClient.customerCart.clear();
+    			ChatClient.cartOrder = new Order();
+    			cc.changeFXML(event, "Catalog.fxml", "Catalog", null);
+    	}
 		
-    }
+    
+
+//private String recieverName, recieverPhone, deliveryAddress;
+	public void getData(String address) {
+		deliveryAddress = (address);
+	}
     
     /**
      * Initials the comboBox

@@ -53,7 +53,7 @@ public class ChatClient extends AbstractClient {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void handleMessageFromServer(Object msg) {
-		System.out.println("--> handleMessageFromServer");
+		//System.out.println("--> handleMessageFromServer");
 		awaitResponse = false;
 		if (msg instanceof ArrayList) {
 			orders = (ArrayList<Order>) msg;
@@ -137,6 +137,14 @@ public class ChatClient extends AbstractClient {
 			case "GetAllOpenComplaintsOfWorker":
 				allComplaints.addAll((ArrayList<Complaint>)rc.getReturnValue());
 				break;
+			case "addDeliveryOrder":
+				System.out.println(rc.getReturnValue().toString());
+				break;
+			case "addProductsAndItemsInOrderToDB":
+				break;
+			default:
+				//for debug - don't remove.
+				System.out.println("ChatClient didn't recognize command");
 			}
 		}
 	}
