@@ -40,7 +40,7 @@ public class CustomerServiceWorkerScreenController {
     @FXML
     void onAddSurveyAnswers(ActionEvent event) throws Exception{
     	ClientUI.chat.accept("GetAllSurveys");
-    	cc.changeFXML(event, "AddSurveyAnswer.fxml", "Zer-Li Add Survey Answer", null);
+    	cc.changeFXML(event, "AddSurveyAnswer.fxml", "Zer-Li Add Survey Answer");
     }
 
     /**
@@ -74,7 +74,7 @@ public class CustomerServiceWorkerScreenController {
     @FXML
     void onShowReports(ActionEvent event) throws Exception {
     	ClientUI.chat.accept("GetSurveysWithReports");
-    	cc.changeFXML(event, "SurveyReports.fxml", "Zer-Li Survey Reports", null);
+    	cc.changeFXML(event, "SurveyReports.fxml", "Zer-Li Survey Reports");
     }
     
     /**
@@ -85,7 +85,7 @@ public class CustomerServiceWorkerScreenController {
      */
     @FXML
     void onAddComplaint(ActionEvent event) throws Exception {
-    	cc.changeFXML(event, "AddComplaint.fxml", "Zer-Li Add Complaint", null);
+    	cc.changeFXML(event, "AddComplaint.fxml", "Zer-Li Add Complaint");
     }
     
     /**
@@ -97,7 +97,7 @@ public class CustomerServiceWorkerScreenController {
     @FXML
     void onWatchComplaints(ActionEvent event) throws Exception {
     	ClientUI.chat.accept("GetAllOpenComplaintsOfWorker" + "\t" + ChatClient.user.getUserID());
-    	cc.changeFXML(event, "ShowComplaints.fxml", "Zer-Li Complaints", null);
+    	cc.changeFXML(event, "ShowComplaints.fxml", "Zer-Li Complaints");
     }
 
     /**

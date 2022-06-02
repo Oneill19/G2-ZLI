@@ -70,7 +70,7 @@ public class PersonalDetailsController {
 	//set onBackButton function
 	@FXML void onBack(ActionEvent event) throws Exception{ 
 		comboStore.getItems().clear();
-		cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart",null); 
+		cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart"); 
 		}
 
 	@FXML void onExit(ActionEvent event) throws Exception{ cc.OnExit(); }

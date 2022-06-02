@@ -49,7 +49,7 @@ public class CartController {
 
 	@FXML
 	void onBack(ActionEvent event) throws IOException {		
-		cc.changeFXML(event, "Catalog.fxml", "Zer-Li Catalog",null);
+		cc.changeFXML(event, "Catalog.fxml", "Zer-Li Catalog");
 	}
 
 	@FXML
@@ -70,11 +70,11 @@ public class CartController {
     		alert.setTitle("Empty Cart");
     		alert.setHeaderText("Cart is empty.\nPlease add at least 1 product to continue.");
     		alert.showAndWait();
-    		cc.changeFXML(event, "Catalog.fxml", "Zer-Li Catalog",null);
+    		cc.changeFXML(event, "Catalog.fxml", "Zer-Li Catalog");
     		return;
     	}
     	ChatClient.cartOrder.setTotalPrice(totalPrice);
-    	cc.changeFXML(event, "PersonalDetails.fxml", "Zer-Li Personal Details",null);
+    	cc.changeFXML(event, "PersonalDetails.fxml", "Zer-Li Personal Details");
     }
 	
 	public void initialize() throws IOException {		
