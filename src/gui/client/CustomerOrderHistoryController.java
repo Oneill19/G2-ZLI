@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -24,20 +25,23 @@ import javafx.scene.text.Text;
 
 public class CustomerOrderHistoryController {
 
-
     @FXML private Button onBack, logoutBtn, userOptBtn, exit;
-    @FXML private TableView<Order> ordersTable;
     @FXML private ScrollPane itemScrollPane;
     @FXML private GridPane grid;
     @FXML private Tooltip tableToolTip;
     @FXML private Text textCreationDate,textSupplyDate,textConfirmedDate,textCompleteDate;
     @FXML private Text textCreationTime,textSupplyTime;
+    @FXML private HBox deliveryHbox;
+    
+    @FXML private TableView<Order> ordersTable;
+    @FXML private TableColumn<Order, Integer> colOrderNumber;
+    @FXML private TableColumn<Order, Double> colPrice;
+    @FXML private TableColumn<Order, String> colGreetingCard,colStatus,colDeliveryMethod,colCancelOrder;
+
     private ArrayList<Order> userOrdersDataFromDB = new ArrayList<Order>();
-    private ArrayList<AbstractProduct> abstractProduct = new ArrayList<>();
+    private ArrayList<AbstractProduct> abstractProduct = new ArrayList<AbstractProduct>();
     private Order selectedOrder = null;
 
-    
-    
     @FXML
     void onBack(ActionEvent event) {
 

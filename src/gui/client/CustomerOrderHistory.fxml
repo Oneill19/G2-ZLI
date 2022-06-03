@@ -14,13 +14,14 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="820.0" prefWidth="1207.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.CustomerOrderHistoryController">
+<AnchorPane prefHeight="859.0" prefWidth="1211.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.CustomerOrderHistoryController">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="820.0" prefWidth="1211.0" style="-fx-background-color: #FCFCFE;">
+      <Pane layoutY="-14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="873.0" prefWidth="1211.0" style="-fx-background-color: #FCFCFE;">
          <children>
             <HBox layoutX="4.0" layoutY="40.0" spacing="870.0">
                <children>
@@ -34,7 +35,7 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <Button fx:id="onBack" alignment="CENTER" layoutX="69.0" layoutY="743.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe">
+            <Button fx:id="onBack" alignment="CENTER" layoutX="66.0" layoutY="806.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe">
                <tooltip>
                   <Tooltip text="Back" />
                </tooltip></Button>
@@ -52,14 +53,14 @@
                   </Label>
                </children>
             </VBox>
-            <TableView fx:id="ordersTable" editable="true" layoutX="75.0" layoutY="132.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="592.0" prefWidth="597.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@mycss.css">
+            <TableView fx:id="ordersTable" editable="true" layoutX="583.0" layoutY="432.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="341.0" prefWidth="597.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@mycss.css">
                <columns>
-                  <TableColumn prefWidth="85.0" text="Order Number" />
-                  <TableColumn prefWidth="43.0" text="Price" />
-                  <TableColumn prefWidth="123.0" text="Greeting Card" />
-                  <TableColumn prefWidth="94.0" text="Status" />
-                  <TableColumn prefWidth="148.0" text="Delivery Method" />
-                  <TableColumn prefWidth="96.0" text="Cancel Order" />
+                  <TableColumn fx:id="colOrderNumber" prefWidth="85.0" text="Order Number" />
+                  <TableColumn fx:id="colPrice" prefWidth="43.0" text="Price" />
+                  <TableColumn fx:id="colGreetingCard" prefWidth="123.0" text="Greeting Card" />
+                  <TableColumn fx:id="colStatus" prefWidth="94.0" text="Status" />
+                  <TableColumn fx:id="colDeliveryMethod" prefWidth="148.0" text="Delivery Method" />
+                  <TableColumn fx:id="colCancelOrder" prefWidth="96.0" text="Cancel Order" />
                </columns>
             </TableView>
             <Button fx:id="logoutBtn" defaultButton="true" layoutX="24.0" layoutY="48.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: transparent;" text="Logout |" textFill="#2b0548">
@@ -73,45 +74,71 @@
                </font>
             </Button>
             <Button fx:id="exit" alignment="CENTER" layoutX="1139.0" layoutY="45.0" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
-            <ScrollPane fx:id="itemScrollPane" hbarPolicy="NEVER" layoutX="695.0" layoutY="313.0" prefHeight="411.0" prefWidth="494.0" style="-fx-background: #FCFCFE; -fx-background-color: #FCFCFE; -fx-border-color: black;">
-               <content>
-                  <GridPane fx:id="grid" prefHeight="105.0" prefWidth="381.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                  </GridPane>
-               </content>
-            </ScrollPane>
-            <Text layoutX="457.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="if store then store's name, else, address of delivry" wrappingWidth="142.00130462646484" />
-            <Text layoutX="813.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 31;" text="Order #33341234" />
-            <HBox layoutX="766.0" layoutY="181.0" prefHeight="111.0" prefWidth="373.0">
+            <Text layoutX="482.0" layoutY="816.0" strokeType="OUTSIDE" strokeWidth="0.0" text="if store then store's name, else, address of delivry" wrappingWidth="142.00130462646484" />
+            <GridPane fx:id="grid" layoutX="24.0" layoutY="155.0" prefHeight="619.0" prefWidth="529.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
                <children>
-                  <VBox prefHeight="111.0" prefWidth="164.0" spacing="5.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Creation Date" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Supply Date" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Confirmed Date" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Complete Date" wrappingWidth="145.8841094970703" />
-                     </children>
-                  </VBox>
-                  <VBox fx:id="dateHBox" prefHeight="118.0" prefWidth="122.0" spacing="5.0">
-                     <children>
-                        <Text fx:id="textCreationDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
-                        <Text fx:id="textSupplyDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
-                        <Text fx:id="textConfirmedDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
-                        <Text fx:id="textCompleteDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
-                     </children>
-                  </VBox>
-                  <VBox fx:id="dateHBox1" prefHeight="111.0" prefWidth="81.0" spacing="5.0">
-                     <children>
-                        <Text fx:id="textCreationTime" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="12:12" />
-                        <Text fx:id="textSupplyTime" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="12:12" />
-                        <Text fx:id="textConfirmedTime" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="12:12" />
-                        <Text fx:id="textCompleteTime" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="12:12" />
-                     </children>
-                  </VBox>
+                  <ScrollPane fx:id="itemScrollPane" hbarPolicy="NEVER" prefHeight="626.0" prefWidth="529.0" style="-fx-background: #FCFCFE; -fx-background-color: #FCFCFE; -fx-border-color: black;" />
                </children>
-            </HBox>
+            </GridPane>
+            <VBox layoutX="671.0" layoutY="155.0" spacing="10.0">
+               <children>
+                  <HBox style="-fx-alignment: top-center;">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 31;" text="Order #33341234" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <VBox prefHeight="111.0" prefWidth="164.0" spacing="5.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Creation Date" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Supply Date" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Confirmed Date" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Complete Date" wrappingWidth="145.8841094970703" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="118.0" prefWidth="122.0" spacing="5.0">
+                           <children>
+                              <Text fx:id="textCreationDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
+                              <Text fx:id="textSupplyDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
+                              <Text fx:id="textConfirmedDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
+                              <Text fx:id="textCompleteDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="dateHBox1" prefHeight="111.0" prefWidth="65.0" spacing="5.0">
+                           <children>
+                              <Text fx:id="textCreationTime" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="12:12" />
+                              <Text fx:id="textSupplyTime" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="12:12" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="deliveryHbox" spacing="10.0">
+                     <children>
+                        <VBox prefHeight="85.0" prefWidth="164.0" spacing="5.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Receiver's Name: " />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Receiver's Phone:" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Delivery Address:" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="85.0" prefWidth="164.0" spacing="5.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Raj" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="054-555-5555" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Karmiel, Ankor 4, 2020876" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </Pane>
    </children>
