@@ -82,7 +82,7 @@ public class Order implements Serializable {
 	}
 	
 	/**
-	 * recieves a String in order to initial an object: Order.
+	 * Receives a String in order to initial an object: Order.
 	 * @param fromDB - string returned from query: SELECT * FROM orders 
 	 */
 	public Order(String fromDB) {
