@@ -5,11 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import common.ReturnCommand;
+import entity.Order;
 
 public class OrderQuery {
-	private static final int ORDERS_CULUMN_NUMBER = 16;
 	
 	/**
 	 * @param con			connection to client
@@ -119,25 +120,28 @@ public class OrderQuery {
 	 */
 	public static ReturnCommand getUserOrders(Connection con, String userID ) {
 		Statement stmt = null;
-		String selectQuery = "SELECT * FROM orders WHERE orderNumber = '"+userID+"';";
+		String selectQuery = "SELECT * FROM orders WHERE cutomerID = "+userID+";";
 		StringBuilder sb = new StringBuilder();
-		System.out.println(selectQuery); //debug
+		int j=1;
+		ResultSet rs=null;
+		ArrayList<Order> userOrdersList= new ArrayList<Order>();
+//		System.out.println(selectQuery); //debug
 		
 		try {
 			stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(selectQuery);
-			rs.next(); 
-			int i,j=0;
-			for(i=1+j ; rs.next() ; i++)
-				sb.append(Integer.toString(rs.getInt(1+j))).append("\t");//orderNumber
-				sb.append(Double.toString(rs.getDouble(2+j))).append("\t");//totalPrice
-				for(j=i;j<=ORDERS_CULUMN_NUMBER*i && rs.next();j++) {
-					sb.append(rs.getString(i)).append("\t");//otherStringData
+			rs = stmt.executeQuery(selectQuery);
+			while(rs.next()) {
+				sb.append(Integer.toString(rs.getInt(1))).append("\t");//orderNumber
+				sb.append(Double.toString(rs.getDouble(2))).append("\t");//totalPrice
+				for(j=3;j<=16;j++)
+					sb.append(rs.getString(j)).append("\t");//otherStringData
+				userOrdersList.add(new Order(sb.toString()));
+				sb.setLength(0);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("sb: "+sb.toString());//debug
-		return new ReturnCommand("getUserOrders", sb.toString());
+//		System.out.println("sb: "+sb.toString());//debug
+		return new ReturnCommand("getUserOrders", userOrdersList);
 	}
 }

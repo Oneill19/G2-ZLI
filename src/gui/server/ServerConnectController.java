@@ -90,6 +90,11 @@ public class ServerConnectController {
 		hostColumn.setCellValueFactory(new PropertyValueFactory<ClientInfo, String>("hostName"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<ClientInfo, String>("status"));
 		connectionTable.setItems(EchoServer.getClientlist());
+		
+		
+		//dorin
+		defaultInsert.fire();
+		connectToDB.fire();
 	}
 
 	public void start(Stage primaryStage) throws Exception {
@@ -98,6 +103,7 @@ public class ServerConnectController {
 		primaryStage.setTitle("Zer-Li Server");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+
 	}
 
 }

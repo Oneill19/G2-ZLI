@@ -33,6 +33,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Complaint> allComplaints = new ArrayList<>();
 	public static ArrayList<Report> reportsq1;
 	public static ArrayList<Report> reportsq2;
+	public static ArrayList<Order> userOrdersHistory;	
 	public static Order cartOrder = new Order();
 	public static String reportTxt;
 	public static User user = null;
@@ -159,6 +160,9 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "GetReportByQuarter2":
 				reportsq2=(ArrayList<Report>)rc.getReturnValue();
+				break;
+			case "getUserOrders":
+				userOrdersHistory = (ArrayList<Order>)rc.getReturnValue();
 				break;
 			default:
 				//for debug - don't remove.

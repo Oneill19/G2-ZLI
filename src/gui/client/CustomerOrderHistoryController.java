@@ -1,5 +1,6 @@
 package gui.client;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import client.ChatClient;
@@ -7,6 +8,7 @@ import entity.AbstractProduct;
 import entity.Item;
 import entity.Order;
 import entity.Product;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -15,6 +17,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -41,25 +44,27 @@ public class CustomerOrderHistoryController {
     private ArrayList<Order> userOrdersDataFromDB = new ArrayList<Order>();
     private ArrayList<AbstractProduct> abstractProduct = new ArrayList<AbstractProduct>();
     private Order selectedOrder = null;
+    private CommonController cc = new CommonController();
 
-    @FXML
-    void onBack(ActionEvent event) {
+	@FXML
+	void onBack(ActionEvent event) throws IOException {		
+		cc.changeFXML(event, "ApprovedCustomerOptions.fxml", "Zer-Li Customer Options");
+	}
 
-    }
+	@FXML
+	void onExit(ActionEvent event) throws Exception {
+		cc.OnExit();
+	}
 
-    @FXML
-    void onExit(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onLogout(ActionEvent event) {
-
-    }
+	@FXML
+	void onLogout(ActionEvent event) throws Exception {
+		cc.onLogout(event);
+	}
     
     //TODO - write the function initialUserOrderDataFromDB
-    private void initialUserOrdersDataFromDB(Object ordersList, Object abstractProductsList) {
-    	
+//    private void initialUserOrdersDataFromDB(ArrayList<Order> ordersList, Object abstractProductsList) {
+    public void initialUserOrdersDataFromDB(ArrayList<Order> ordersList) {
+    	userOrdersDataFromDB = ordersList;
     }
     
     
@@ -72,8 +77,25 @@ public class CustomerOrderHistoryController {
     	
 //    	set the first order in the side bar
     	if (userOrdersDataFromDB.size() > 0)
-    		setChosenOrder(userOrdersDataFromDB.get(0)); 	
-    	}
+    		setChosenOrder(userOrdersDataFromDB.get(0)); 
+    	
+
+		colOrderNumber.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
+		colPrice.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+		colGreetingCard.setCellValueFactory(new PropertyValueFactory<>("greetingCard"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
+        colDeliveryMethod.setCellValueFactory(new PropertyValueFactory<>("deliveryMethod"));
+//        TODO
+//        colCancelOrder.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
+
+        ordersTable.setId("my-table");
+        ordersTable.getItems().clear();
+        ordersTable.autosize();
+        ordersTable.setItems(FXCollections.observableArrayList(ChatClient.userOrdersHistory));
+
+    }
+    
+    
 	
 	
 	

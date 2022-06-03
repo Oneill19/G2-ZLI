@@ -250,15 +250,6 @@ public class CartController {
 						});
 				
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				// create class plusAmountButton				
 				class PlusAmountButton extends TableCell<AbstractProduct, String> {
 					private Button plusAmountButton = null;
@@ -338,19 +329,13 @@ public class CartController {
 						});
 									
 		colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-//		colName.getStyle().concat("-fx-alignment: CENTER;");
 		
 		colImage.setPrefWidth(100);
-//		colImage.getStyle().concat("-fx-alignment: CENTER;");
 		colImage.setCellValueFactory(new PropertyValueFactory<>("imageView"));
 		
 		colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-//		colPrice.getStyle().concat("-fx-alignment: CENTER;");
 		
 		labelAmountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
-//		labelAmountCol.getStyle().concat("-fx-alignment: CENTER;");
-		
-//		amountCol.getStyle().concat("-fx-alignment: CENTER;");
 		
 		cartTable.setId("my-table");
 		cartTable.getItems().clear();

@@ -128,6 +128,7 @@ public class LoginScreenController {
     		ClientUI.chat.accept("GetAllProducts");
     		ClientUI.chat.accept("GetAllItems");
     		if (ChatClient.user.getStatus().equals("CONFIRMED")) {
+    			ClientUI.chat.accept("getUserOrders\t"+Integer.toString(ChatClient.user.getUserID()));
     			root = FXMLLoader.<Pane>load(getClass().getResource("ApprvoedCustomerOptions.fxml"));
     		}
     		else {
