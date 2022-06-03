@@ -70,7 +70,7 @@ public class PersonalDetailsController {
 	//set onBackButton function
 	@FXML void onBack(ActionEvent event) throws Exception{ 
 		comboStore.getItems().clear();
-		cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart",null); 
+		cc.changeFXML(event, "Cart.fxml", "Zer-Li Cart"); 
 		}
 
 	@FXML void onExit(ActionEvent event) throws Exception{ cc.OnExit(); }
@@ -154,6 +154,7 @@ public class PersonalDetailsController {
 			
 			ChatClient.cartOrder.setFromStore(null);
 			
+			//build data for delivery
 			StringBuilder sb = new StringBuilder();
 			sb.append("'").append(nameOfReciever.getText()).append("', ");
 			sb.append("'").append(phoneOfReciever.getText()).append("', ");

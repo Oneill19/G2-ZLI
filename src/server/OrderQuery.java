@@ -40,13 +40,13 @@ public class OrderQuery {
 	
 	public static ReturnCommand addItemsInOrder(Connection con, String orderNumber, String item_in_order) {
 		PreparedStatement ps;
-		String[] itemArray = item_in_order.split(",");
+		String[] itemArray = item_in_order.split(" ");
 		
 		//insert items to DB
 		if(item_in_order.length() != 0)
 			for(String itemSerial : itemArray) {
-				String insertQuery = "INSERT INTO item_in_order(itemSerial, orderNumber) VALUES ("+itemSerial+","+orderNumber.toString()+")";
-				System.out.println(insertQuery);
+				String insertQuery = "INSERT INTO item_in_order(itemSerial,amount,orderNumber) VALUES ("+itemSerial+","+orderNumber.toString()+")";
+				System.out.println("item quey: "+insertQuery);
 				try {
 					ps = con.prepareStatement(insertQuery);
 					ps.executeUpdate();
@@ -61,12 +61,12 @@ public class OrderQuery {
 	
 	public static ReturnCommand addProductsInOrder(Connection con, String orderNumber, String product_in_order) {
 		PreparedStatement ps;
-		String[] productArray = product_in_order.split(",");
+		String[] productArray = product_in_order.split(" ");
 		
 		//insert products to DB
 		for(String productSerial : productArray) {
-			String insertQuery = "INSERT INTO product_in_order(productSerial, orderNumber) VALUES ("+productSerial+","+orderNumber.toString()+")";
-//			System.out.println(insertQuery);
+			String insertQuery = "INSERT INTO product_in_order(productSerial,amount,orderNumber) VALUES ("+productSerial+","+orderNumber.toString()+")";
+			System.out.println("product query: " + insertQuery);
 			try {
 				ps = con.prepareStatement(insertQuery);
 				ps.executeUpdate();

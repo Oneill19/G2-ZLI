@@ -88,7 +88,7 @@ public class ShowComplaintsController {
     void onBack(ActionEvent event) throws Exception {
     	ChatClient.allComplaints.clear();
     	// go to the previous screen
-    	cc.changeFXML(event, "CustomerServiceWorkerScreen.fxml", "Zer-Li Customer Service Worker Screen", null);
+    	cc.changeFXML(event, "CustomerServiceWorkerScreen.fxml", "Zer-Li Customer Service Worker Screen");
     }
     
     /**

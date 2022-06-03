@@ -57,7 +57,7 @@ public class AddComplaintController {
     @FXML
     void onBack(ActionEvent event) throws Exception {
     	// go to the previous screen
-    	cc.changeFXML(event, "CustomerServiceWorkerScreen.fxml", "Zer-Li Customer Service Worker Screen", null);
+    	cc.changeFXML(event, "CustomerServiceWorkerScreen.fxml", "Zer-Li Customer Service Worker Screen");
     }
 
     /**

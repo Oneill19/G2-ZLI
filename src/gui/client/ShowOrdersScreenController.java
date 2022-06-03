@@ -37,66 +37,16 @@ public class ShowOrdersScreenController {
 
 	ObservableList<Order> observableList;
 	private int editedOrderNumber;
-	private String editedColumn;
-	private String editedNewValue;
-
-	// ******************
-	// *****Buttons******
-	// ******************
-	@FXML
-	private Button exitClient;
-	@FXML
-	private Button onBack;
-
-	// ******************
-	// *****Columns******
-	// ******************
-	@FXML
-	private TableColumn<Order, String> colorCol;
-	@FXML
-	private TableColumn<Order, LocalDate> completeDateCol;
-	@FXML
-	private TableColumn<Order, LocalDate> confirmedDateCol;
-	@FXML
-	private TableColumn<Order, Integer> customerIDCol;
-	@FXML
-	private TableColumn<Order, String> deliveryMethidCol;
-	@FXML
-	private TableColumn<Order, LocalDate> orderCreationDateCol;
-	@FXML
-	private TableColumn<Order, LocalTime> orderCreationTimeCol;
-	@FXML
-	private TableColumn<Order, String> orderStatusCol;
-	@FXML
-	private TableColumn<Order, String> paymentMethodCol;
-	@FXML
-	private TableColumn<Order, Integer> orderNumberCol;
-	@FXML
-	private TableColumn<Order, Double> priceCol;
-	@FXML
-	private TableColumn<Order, String> greetingCardCol;
-	@FXML
-	private TableColumn<Order, String> DOrderCol;
-	@FXML
-	private TableColumn<Order, String> shopCol;
-	@FXML
-	private TableColumn<Order, LocalDate> supplyDateCol;
-	@FXML
-	private TableColumn<Order, LocalTime> supplyTimeCol;
-	@FXML
-	private TableColumn<Order, LocalDate> orderDateCol;
-	@FXML
-	private TableColumn<Order, LocalTime> orderTimeCol;
-
-	// ******************
-	// *****Table******
-	// ******************
-	@FXML
-	private TableView<Order> ordersTable;
-
-	// ******************
-	// *****ActionEvent**
-	// ******************
+	private String editedColumn, editedNewValue;
+	
+	@FXML private Button exitClient, onBack; 
+	@FXML private TableColumn<Order, String> colorCol, deliveryMethidCol, orderStatusCol, paymentMethodCol, greetingCardCol,
+											DOrderCol, shopCol;
+	@FXML private TableColumn<Order, LocalDate> completeDateCol, confirmedDateCol, orderCreationDateCol, supplyDateCol, orderDateCol;
+	@FXML private TableColumn<Order, Integer> customerIDCol, orderNumberCol;
+	@FXML private TableColumn<Order, LocalTime> orderCreationTimeCol, supplyTimeCol, orderTimeCol;
+	@FXML private TableColumn<Order, Double> priceCol;
+	@FXML private TableView<Order> ordersTable;
 
 	/**
 	 * @param event of clicking on Back button

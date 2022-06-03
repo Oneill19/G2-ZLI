@@ -19,10 +19,9 @@ public class CommonController {
 	 * @param event the event which triggered the call
 	 * @param fxmlPath the path of target FXML
 	 * @param title the title to give the FXML
-	 * @param cssPath the css file to give to the FXML
 	 * @throws IOException	
 	 */
-	public void changeFXML(Event event, String fxmlPath, String title, String cssPath) throws IOException {
+	public void changeFXML(Event event, String fxmlPath, String title) throws IOException {
 		((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		new FXMLLoader();
@@ -30,8 +29,6 @@ public class CommonController {
 		Scene scene = new Scene(root);
 		primaryStage.setTitle(title);
 		primaryStage.setScene(scene);
-		if (cssPath != null) 
-			scene.getStylesheets().add(cssPath);
 		primaryStage.show();
 	}
 	
@@ -57,6 +54,6 @@ public class CommonController {
     public void onLogout(ActionEvent event) throws Exception {
     	ClientUI.chat.accept("LogoutUser" + "\t" + ChatClient.user.getEmail());
     	ChatClient.user = null;
-    	changeFXML(event, "LoginScreen.fxml", "Zer-Li Client", "css/newCascadeStyleSheet.css" );
+    	changeFXML(event, "LoginScreen.fxml", "Zer-Li Client");
     }
 }

@@ -26,35 +26,25 @@ import server.EchoServer;
 public class LoginScreenController {
 
     @FXML
-    private Button dorinConfirmedCustomer;
+    private Button dorinConfirmedCustomer, exit, login, backBtn, disconnectUsers;
+    @FXML  private Text errorLabel;
+    @FXML private TextField mail;
+    @FXML   private PasswordField password;
     
     @FXML
-    private Text errorLabel;
-
-    @FXML
-    private Button exit;
-
-    @FXML
-    private Button login;
+    void onMarketingWorker(ActionEvent event) throws Exception{
+    	mail.setText("naruto@zli");
+    	password.setText("1");
+    	login.fire();
+    }
     
-    @FXML
-    private Button backBtn;
-
-    @FXML
-    private TextField mail;
-
-    @FXML
-    private PasswordField password;
     
-    @FXML
-    private Button disconnectUsers;
-    
-    //TODO
     //Delete when not usable
     @FXML
     void ondorinConfirmedCustomer(ActionEvent event) throws Exception{
     	mail.setText("dorin@zli");
     	password.setText("1");
+    	login.fire();
     }
     
     
@@ -138,7 +128,7 @@ public class LoginScreenController {
     		ClientUI.chat.accept("GetAllProducts");
     		ClientUI.chat.accept("GetAllItems");
     		if (ChatClient.user.getStatus().equals("CONFIRMED")) {
-    			root = FXMLLoader.<Pane>load(getClass().getResource("Catalog.fxml"));
+    			root = FXMLLoader.<Pane>load(getClass().getResource("ApprvoedCustomerOptions.fxml"));
     		}
     		else {
     			root = FXMLLoader.<Pane>load(getClass().getResource("ReadOnlyCatalog.fxml"));
@@ -163,7 +153,8 @@ public class LoginScreenController {
     		root = FXMLLoader.<Pane>load(getClass().getResource("CEOScreen.fxml"));
     		break;
     	case "MarketingEmployee":
-    		System.out.println("MarketingEmployee");
+//    		System.out.println("MarketingEmployee");
+    		root = FXMLLoader.<Pane>load(getClass().getResource("MarketingEmployeOptions.fxml"));
     		break;
     	case "Delivery":
     		System.out.println("Delivery");
