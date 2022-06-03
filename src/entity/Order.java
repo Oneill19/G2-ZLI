@@ -80,6 +80,31 @@ public class Order implements Serializable {
 		this.supplyDate = supplyDate;
 		this.supplyTime = supplyTime;
 	}
+	
+	/**
+	 * recieves a String in order to initial an object: Order.
+	 * @param fromDB - string returned from query: SELECT * FROM orders 
+	 */
+	public Order(String fromDB) {
+		String[] orderData = fromDB.split("\t");
+		int i=0;
+		orderNumber = Integer.parseInt(orderData[i++]);
+		totalPrice = Double.parseDouble(orderData[i++]);
+		greetingCard = orderData[i++];
+		color = orderData[i++];
+		orderDesc = orderData[i++];
+		fromStore = orderData[i++];
+		orderCreationDate = LocalDate.parse(orderData[i++]);
+		orderCreationTime = LocalTime.parse(orderData[i++]);
+		customerID = Integer.parseInt(orderData[i++]);
+		paymentMethod = orderData[i++];
+		orderStatus = orderData[i++];
+		confirmedDate = orderData[i++];
+		completeDate = orderData[i++];
+		deliveryMethod = orderData[i++];
+		supplyDate = LocalDate.parse(orderData[i++]);
+		supplyTime = LocalTime.parse(orderData[i++]);
+	}
 
 
 	public int getOrderNumber() {
