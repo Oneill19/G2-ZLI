@@ -9,6 +9,8 @@ public class Item extends AbstractProduct {
 
 	private boolean isSoldAlone;
 	private int amountInProduct;
+	private String color;
+	private String priceRange;
 
 	/**
 	 * @param serialNumber
@@ -66,5 +68,25 @@ public class Item extends AbstractProduct {
 	public void setAmountInProduct(int amountInProduct) {
 		this.amountInProduct = amountInProduct;
 	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getPriceRange() {
+		return priceRange;
+	}
+
+	public void setPriceRange(String priceRange) {
+		this.priceRange = priceRange;
+	}
+	
+	
+	
+	
 	
 }
