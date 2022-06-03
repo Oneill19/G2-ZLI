@@ -55,12 +55,12 @@
             </VBox>
             <TableView fx:id="ordersTable" editable="true" layoutX="583.0" layoutY="432.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="341.0" prefWidth="597.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@mycss.css">
                <columns>
-                  <TableColumn fx:id="colOrderNumber" prefWidth="85.0" text="Order Number" />
+                  <TableColumn fx:id="colOrderNumber" prefWidth="56.0" text="Order&#10;Number" />
                   <TableColumn fx:id="colPrice" prefWidth="43.0" text="Price" />
-                  <TableColumn fx:id="colGreetingCard" prefWidth="123.0" text="Greeting Card" />
-                  <TableColumn fx:id="colStatus" prefWidth="94.0" text="Status" />
-                  <TableColumn fx:id="colDeliveryMethod" prefWidth="148.0" text="Delivery Method" />
-                  <TableColumn fx:id="colCancelOrder" prefWidth="96.0" text="Cancel Order" />
+                  <TableColumn fx:id="colGreetingCard" prefWidth="171.0" text="Greeting Card" />
+                  <TableColumn fx:id="colStatus" prefWidth="168.0" text="Status" />
+                  <TableColumn fx:id="colDeliveryMethod" prefWidth="98.0" text="Delivery&#10;Method" />
+                  <TableColumn fx:id="colCancelOrder" prefWidth="54.0" text="Cancel&#10;Order" />
                </columns>
             </TableView>
             <Button fx:id="logoutBtn" defaultButton="true" layoutX="24.0" layoutY="48.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: transparent;" text="Logout |" textFill="#2b0548">

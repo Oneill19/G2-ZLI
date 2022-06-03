@@ -75,9 +75,11 @@ public class CustomerOrderHistoryController {
 //    	set the user button to show the name
     	userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
     	
+    	deliveryHbox.setVisible(false);
 //    	set the first order in the side bar
-    	if (userOrdersDataFromDB.size() > 0)
-    		setChosenOrder(userOrdersDataFromDB.get(0)); 
+    	if (ChatClient.userOrdersHistory.size() > 0) {
+    		setChosenOrder(ChatClient.userOrdersHistory.get(0));
+    	}
     	
 
 		colOrderNumber.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
@@ -115,6 +117,9 @@ public class CustomerOrderHistoryController {
     	textCompleteDate.setText(order.getCompleteDate().toString());
     	textCreationTime.setText(order.getOrderCreationTime().toString());
     	textSupplyTime.setText(order.getSupplyTime().toString());
+    	
+    	if (order.getDeliveryMethod().equals("Delivery"))
+    		deliveryHbox.setVisible(true);
     	
 //    	show items and products of selected order
     	int i=0;
