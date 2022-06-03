@@ -1,7 +1,6 @@
 
 package server;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -90,180 +89,97 @@ public class EchoServer extends AbstractServer {
 		String[] clientMsg = ((String) msg).split("\t");
 		String ipAddress = null;
 		ArrayList<Order> orders;
-		switch (clientMsg[0]) {
-		case "Load":
-			orders = mysqlConnection.loadOrders(conn);
-			if (orders != null) {
-				try {
-					client.sendToClient(orders);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			break;
-		case "Connected":
-			String[] clientInfo = client.toString().split(" ");
-			ipAddress = clientInfo[1].substring(1, clientInfo[1].length() - 1);
-			ClientInfo temp = new ClientInfo(ipAddress, clientInfo[0], "Connected");
-			if (!Clientlist.contains(temp)) {
-				Clientlist.add(temp);
-			}
-			try {
-				client.sendToClient("You are connected");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			break;
-		case "Disconnect":
-			clientInfo = client.toString().split(" ");
-			ipAddress = clientInfo[1].substring(1, clientInfo[1].length() - 1);
-			int position = searchClientByIp(ipAddress);
-			if (position != -1) {
-				Clientlist.remove(position);
-			}
-			try {
-				client.sendToClient("You are disconnected");
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			break;
-		// clientMsg[1]= editedOrderNumber
-		// clientMsg[2]= editedNewValue
-		// clientMsg[3]= editedColumn
-		case "CellUpdate":
-			mysqlConnection.cellUpdate(conn, clientMsg[1], clientMsg[2], clientMsg[3]);
-			try {
-				client.sendToClient("Order Updated");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
+		try {
+			switch (clientMsg[0]) {
 
-		// case for get a user from the database
-		case "GetUser":
-			try {
+			case "Load":
+				orders = mysqlConnection.loadOrders(conn);
+				if (orders != null)
+					client.sendToClient(orders);
+				break;
+			case "Connected":
+				String[] clientInfo = client.toString().split(" ");
+				ipAddress = clientInfo[1].substring(1, clientInfo[1].length() - 1);
+				ClientInfo temp = new ClientInfo(ipAddress, clientInfo[0], "Connected");
+				if (!Clientlist.contains(temp)) {
+					Clientlist.add(temp);
+				}
+				client.sendToClient("You are connected");
+				break;
+			case "Disconnect":
+				clientInfo = client.toString().split(" ");
+				ipAddress = clientInfo[1].substring(1, clientInfo[1].length() - 1);
+				int position = searchClientByIp(ipAddress);
+				if (position != -1) {
+					Clientlist.remove(position);
+				}
+				client.sendToClient("You are disconnected");
+				break;
+			// clientMsg[1]= editedOrderNumber
+			// clientMsg[2]= editedNewValue
+			// clientMsg[3]= editedColumn
+			case "CellUpdate":
+				mysqlConnection.cellUpdate(conn, clientMsg[1], clientMsg[2], clientMsg[3]);
+				client.sendToClient("Order Updated");
+				break;
+			// case for get a user from the database
+			case "GetUser":
 				// send the user back to client
 				client.sendToClient(AuthQuery.getUser(conn, clientMsg[1], clientMsg[2]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-
-		// case for updating logging a user
-		case "LogUser":
-			try {
+				break;
+			// case for updating logging a user
+			case "LogUser":
 				// send a successful message back
 				client.sendToClient(AuthQuery.loginUser(conn, clientMsg[1]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-
-		// case for updating logging out a user
-		case "LogoutUser":
-			try {
+				break;
+			// case for updating logging out a user
+			case "LogoutUser":
 				// send a successful message back
 				client.sendToClient(AuthQuery.logoutUser(conn, clientMsg[1]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		// case to get Users awaiting registration from the database
-		case "GetNotApprovedUsers":
-			try {
+				break;
+			// case to get Users awaiting registration from the database
+			case "GetNotApprovedUsers":
 				// send a successful message back
 				client.sendToClient(StoreManagerQuery.getUsersRegsiter(conn));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		// case to get Pending Orders from the database
-
-		case "GetPendingOrders":
-			try {
+				break;
+			// case to get Pending Orders from the database
+			case "GetPendingOrders":
 				// send a successful message back
 				client.sendToClient(StoreManagerQuery.getPendingOrders(conn));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		case "UpdateStatusOrders":
-			try {
+				break;
+			case "UpdateStatusOrders":
 				// send a successful message back
 				client.sendToClient(StoreManagerQuery.UpdateStatusOrders(conn, clientMsg[1], clientMsg[2]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		case "GetApprovedUsers":
-			try {
+				break;
+			case "GetApprovedUsers":
 				// send a successful message back
 				client.sendToClient(StoreManagerQuery.GetApprovedUsers(conn, clientMsg[1]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		case "ChangeUserStatus":
-			try {
+				break;
+			case "ChangeUserStatus":
 				// send a successful message back
 				client.sendToClient(StoreManagerQuery.UpdateUserStatus(conn, clientMsg[1], clientMsg[2]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-
-		case "GetAllProducts":
-			try {
+				break;
+			case "GetAllProducts":
 				// get all the premade products
 				client.sendToClient(ProductsQuery.getAllProducts(conn));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-
-		case "GetAllItems":
-			try {
+				break;
+			case "GetAllItems":
 				// get all the sold alone items
 				client.sendToClient(ProductsQuery.getAllItems(conn));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-
-		case "GetAllStores":
-			try {
+				break;
+			case "GetAllStores":
 				client.sendToClient(StoreQuery.getAllStores(conn));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-
-		case "GetSurveysWithReports":
-			try {
+				break;
+			case "GetSurveysWithReports":
 				client.sendToClient(SurveyQuery.getSurveysWithReports(conn));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-
-		case "GetSurveyReport":
-			try {
+				break;
+			case "GetSurveyReport":
 				client.sendToClient(SurveyQuery.getSurveyReport(conn, Integer.parseInt(clientMsg[1])));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-
-		case "GetAllSurveys":
-			try {
+				break;
+			case "GetAllSurveys":
 				client.sendToClient(SurveyQuery.getAllSurveys(conn));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-
-		case "AddSurveyAnswer":
-			try {
+				break;
+			case "AddSurveyAnswer":
 				client.sendToClient(SurveyQuery.addSurveyAnswer(conn, Integer.parseInt(clientMsg[1]), // surveyId
 						clientMsg[2], // userMail
 						Integer.parseInt(clientMsg[3]), // answer1
@@ -272,140 +188,71 @@ public class EchoServer extends AbstractServer {
 						Integer.parseInt(clientMsg[6]), // answer4
 						Integer.parseInt(clientMsg[7]), // answer5
 						Integer.parseInt(clientMsg[8]))); // answer6
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		case "AddOrderToDB":
-			try {
+				break;
+			case "AddOrderToDB":
 				// clientMsg[1] has the order in cart
 				client.sendToClient(OrderQuery.saveOrderToDB(conn, clientMsg[1]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		case "numberOfItemsInOrder":
-			try {
-				//client.sendToClient(); // TODO - topaz and koral
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		case "GetRegistersUsers":
-			try {
+				break;
+			case "numberOfItemsInOrder":
+				// client.sendToClient(); // TODO - topaz and koral
+				break;
+			case "GetRegistersUsers":
 				client.sendToClient(StoreManagerQuery.getAllWaitingRegistersUsers(conn));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		case "ConfirmedUserUpdate":
-			try {
+				break;
+			case "ConfirmedUserUpdate":
 				client.sendToClient(StoreManagerQuery.ConfirmedUserUpdate(conn, clientMsg[1], clientMsg[2]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-
-		case "getReport":
-			try {
+				break;
+			case "getReport":
 				client.sendToClient(
 						ReportQuery.getReport(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		case "addItemsInOrder":
-			try {
-				System.out.println(msg.toString());
-				client.sendToClient(
-						OrderQuery.addItemsInOrder(conn, clientMsg[1], clientMsg[2]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		case "addProductsInOrder":
-			try {
-				System.out.println(msg.toString());
-				client.sendToClient(
-						OrderQuery.addProductsInOrder(conn, clientMsg[1], clientMsg[2]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-
-		case "AddComplaint":
-			try {
+				break;
+			case "addItemsInOrder":
+				client.sendToClient(OrderQuery.addItemsInOrder(conn, clientMsg[1], clientMsg[2]));
+				break;
+			case "addProductsInOrder":
+				client.sendToClient(OrderQuery.addProductsInOrder(conn, clientMsg[1], clientMsg[2]));
+				break;
+			case "AddComplaint":
 				client.sendToClient(ComplaintQuery.addComplaint(conn, clientMsg[1]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		
-		case "OrderExist":
-			try {
-				client.sendToClient(ComplaintQuery.orderExist(conn, Integer.parseInt(clientMsg[1]), Integer.parseInt(clientMsg[2])));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-			
-		case "GetAllOpenComplaintsOfWorker":
-			try {
+				break;
+			case "OrderExist":
+				client.sendToClient(ComplaintQuery.orderExist(conn, Integer.parseInt(clientMsg[1]),
+						Integer.parseInt(clientMsg[2])));
+				break;
+			case "GetAllOpenComplaintsOfWorker":
 				client.sendToClient(ComplaintQuery.getAllOpenComplaintsOfWorker(conn, Integer.parseInt(clientMsg[1])));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-			
-		case "RefundForComplaintFullAmount":
-			try {
-				client.sendToClient(ComplaintQuery.refundForComplaintFullAmount(conn, Integer.parseInt(clientMsg[1]), Integer.parseInt(clientMsg[2]), Integer.parseInt(clientMsg[3]), clientMsg[4]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		
-		case "RefundForComplaintNotFull":
-			try {
-				client.sendToClient(ComplaintQuery.refundForComplaintNotFull(conn, Integer.parseInt(clientMsg[1]), Integer.parseInt(clientMsg[2]), Integer.parseInt(clientMsg[3]), Float.parseFloat(clientMsg[4]), clientMsg[5]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-			
-		case "CloseComplaint":
-			try {
+				break;
+			case "RefundForComplaintFullAmount":
+				client.sendToClient(ComplaintQuery.refundForComplaintFullAmount(conn, Integer.parseInt(clientMsg[1]),
+						Integer.parseInt(clientMsg[2]), Integer.parseInt(clientMsg[3]), clientMsg[4]));
+				break;
+			case "RefundForComplaintNotFull":
+				client.sendToClient(ComplaintQuery.refundForComplaintNotFull(conn, Integer.parseInt(clientMsg[1]),
+						Integer.parseInt(clientMsg[2]), Integer.parseInt(clientMsg[3]), Float.parseFloat(clientMsg[4]),
+						clientMsg[5]));
+				break;
+			case "CloseComplaint":
 				client.sendToClient(ComplaintQuery.closeComplaint(conn, Integer.parseInt(clientMsg[1])));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		case "addDeliveryOrder":
-			try {
+				break;
+			case "addDeliveryOrder":
 				client.sendToClient(OrderQuery.addDeliveryOrder(conn, clientMsg[1], clientMsg[2]));
-			}catch(Exception e) {
-				e.printStackTrace();
+				break;
+			case "GetReportByQuarter1":
+				client.sendToClient(ReportQuery.getReportByQuarterly1(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
+				break;
+			case "GetReportByQuarter2":
+				client.sendToClient(ReportQuery.getReportByQuarterly2(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
+				break;
+			case "getUserOrders":
+				client.sendToClient(OrderQuery.getUserOrders(conn, clientMsg[1]));
+				break;
+			default:
+				System.out.println("No Command Found");
+				break;
 			}
-		case "GetReportByQuarter1":
-			try {
-
-				client.sendToClient(ReportQuery.getReportByQuarterly1(conn, clientMsg[1], clientMsg[2],clientMsg[3]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		case "GetReportByQuarter2":
-			try {
-
-				client.sendToClient(ReportQuery.getReportByQuarterly2(conn, clientMsg[1], clientMsg[2],clientMsg[3]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-		default:
-			System.out.println("No Command Found");
-			break;
-
+		} catch (Exception e) {
+			System.out.println(clientMsg[0]);
+			e.printStackTrace();
 		}
 	}
 
