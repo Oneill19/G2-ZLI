@@ -34,8 +34,8 @@ public class ApprovedCustomerOptionsController {
 	}
 	
 	@FXML
-	private void onWatchOrdersButton(ActionEvent event) {
-		//TODO
+	private void onWatchOrdersButton(ActionEvent event) throws IOException {
+		cc.changeFXML(event, "CustomerOrderHistory.fxml", "Zer-Li Order History");
 	}
 	
 	@FXML
