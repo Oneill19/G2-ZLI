@@ -178,6 +178,8 @@ public class ChatClient extends AbstractClient {
 			case "getOrderProducts":
 				orderHistoryProducts=(ArrayList<Product>)rc.getReturnValue();
 				break;
+			case "changeOrderStatus":
+				break;
 			default:
 				//for debug - don't remove.
 				System.out.println("ChatClient didn't recognize command");

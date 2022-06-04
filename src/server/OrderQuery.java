@@ -229,4 +229,18 @@ public class OrderQuery {
 		}
 		return new ReturnCommand("getOrderProducts", products);
 	}
+	
+	public static ReturnCommand changeOrderStatus(Connection conn, String orderNumber, String newStatus ) {
+		PreparedStatement ps;
+
+		String updateQuery = "UPDATE orders SET orderStatus = '"+newStatus+"' WHERE orderNumber = "+orderNumber;
+		System.out.println(updateQuery);
+		try {
+			ps = conn.prepareStatement(updateQuery);
+			ps.executeUpdate();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return new ReturnCommand("changeOrderStatus",null);
+	}
 }

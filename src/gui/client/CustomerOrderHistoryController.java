@@ -193,7 +193,9 @@ public class CustomerOrderHistoryController {
     	textCreationTime.setText(order.getOrderCreationTime().toString());
     	textSupplyTime.setText(order.getSupplyTime().toString());
     	
+    	statusText.setId("status1");
     	statusText.setFont(Font.font(null, FontWeight.BLACK, FontPosture.REGULAR, 20));
+    	deliveryStatusText.setId("status2");
     	deliveryStatusText.setFont(Font.font(null, FontWeight.BLACK, FontPosture.REGULAR, 20));
    	
     	if (order.getDeliveryMethod().equals("Delivery")) {
