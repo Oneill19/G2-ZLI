@@ -23,6 +23,10 @@ public abstract class AbstractProduct implements Serializable {
 	private double priceWithSale;
 	private int amount;
 
+	public AbstractProduct() {
+		super();
+	}
+	
 	/**
 	 * @param serialNumber - primary key of the product/item
 	 * @param name

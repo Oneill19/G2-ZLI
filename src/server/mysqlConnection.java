@@ -54,13 +54,17 @@ public class mysqlConnection {
 				String checkNotNull = rs.getString(14);
 				if (checkNotNull != null)
 					supplyDate = LocalDate.parse(rs.getString(14));
-				else
-					supplyDate = LocalDate.parse("2012-12-12");
+				else {
+//					supplyDate = LocalDate.parse("2012-12-12");
+					supplyDate = null;
+				}
 				checkNotNull = rs.getString(15);
 				if (checkNotNull != null)
 					supplyTime = LocalTime.parse(rs.getString(15));
-				else
-					supplyTime = LocalTime.parse("12:12");
+				else {
+//					supplyTime = LocalTime.parse("12:12");
+					supplyTime = null;
+				}
 				order.setSupplyDate(supplyDate);
 				order.setSuppplyTime(supplyTime);
 				orders.add(order);

@@ -73,8 +73,7 @@ public class PaymentController {
      */
     @FXML
     void onNext(ActionEvent event) throws IOException {
-    	   	
-    	//TODO - does payment method is always credit card?
+
     	ChatClient.cartOrder.setPaymentMethod("Credit Card");
     	
     	//Add Order to DB

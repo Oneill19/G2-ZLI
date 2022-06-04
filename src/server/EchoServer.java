@@ -275,7 +275,8 @@ public class EchoServer extends AbstractServer {
 		return -1;
 	}
 
-	// TODO
+	// TODO - delete before submitting and correct errors that occur from it
+	//it is mainly to disconnect all users from the DB
 	public Connection getConnection() {
 		return conn;
 	}

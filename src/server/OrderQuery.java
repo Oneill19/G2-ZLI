@@ -210,6 +210,7 @@ public class OrderQuery {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(selectQuery);
 			while(rs.next()) {
+				Product product = null;
 				String productSerial = rs.getString(1);
 				String productName = rs.getString(2);
 				double productPrice = rs.getDouble(3);
@@ -217,8 +218,11 @@ public class OrderQuery {
 				String other = rs.getString(5);
 				String productType = rs.getString(6);
 				int sale = rs.getInt(7);
+				@SuppressWarnings("unchecked")
 				ArrayList<Item> madeFrom = (ArrayList<Item>)ProductsQuery.getAllItemsInProduct(conn, productSerial).getReturnValue();
-				products.add(new Product(productSerial, productName, productPrice, productType, productImage, other, madeFrom,sale));
+				product = new Product(productSerial, productName, productPrice, productType, productImage, other, madeFrom,sale);
+				product.setAmount(rs.getInt(9));
+				products.add(product);
 			}	
 		}catch(Exception e) {
 			e.printStackTrace();

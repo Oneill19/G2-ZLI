@@ -10,7 +10,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -20,9 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 /**
@@ -77,72 +74,15 @@ public class CartController {
     	cc.changeFXML(event, "PersonalDetails.fxml", "Zer-Li Personal Details");
     }
 	
-	public void initialize() throws IOException {		
+	public void initialize() throws IOException {
+		
+		textFieldPrice.setId("myTextFieldPrice");
 		//set image view of each product in cart
 		userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
 		
 		for (Map.Entry<AbstractProduct, Integer> ap : ChatClient.customerCart.entrySet()) {
     		ap.getKey().setImageView();
     	}
-	
-		// create class DeleteButton
-		class DeleteButton extends TableCell<AbstractProduct, String> {
-			private Button deleteButton = null;
-
-			DeleteButton() {
-				deleteButton = new Button("", new ImageView(new Image(getClass().getResourceAsStream("delete.png"),40,40,false,true)));
-				deleteButton.setStyle("-fx-background-color:transparent;");
-				deleteButton.setOnMouseEntered( new EventHandler<MouseEvent>() {
-			          @Override
-			          public void handle(MouseEvent e) {
-			           deleteButton.setStyle("-fx-border-radius:20.0;" +"border-radius: 5;" + 
-			          "-fx-background-color: #EFE2FE;"+"-fx-padding: 0 0 0 0;");
-			          }
-			        });
-				deleteButton.setOnMouseExited( new EventHandler<MouseEvent>() {
-			          @Override
-			          public void handle(MouseEvent e) {
-			        	  deleteButton.setStyle("-fx-background-color:transparent;");
-			          }
-			        });
-				
-				// Action when the button is pressed
-				deleteButton.setOnAction(new EventHandler<ActionEvent>() {
-
-					@Override
-					public void handle(ActionEvent t) {
-						// get Selected Item
-						AbstractProduct currentAbstractProduct = (AbstractProduct) DeleteButton.this.getTableView()
-								.getItems().get(DeleteButton.this.getIndex());
-						//remove the product from cart
-						ChatClient.customerCart.remove(currentAbstractProduct); //new due amount
-						
-						//refresh tableview
-						cartTable.getItems().clear();
-						cartTable.setItems(FXCollections.observableArrayList(ChatClient.customerCart.keySet()));//new due amount 
-						
-						//new due amount
-						totalPrice=0.0;
-						for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
-							totalPrice += entry.getKey().getPrice()*entry.getValue();
-						}
-						textFieldPrice.setText(totalPrice.toString());
-					}
-				});
-			}
-
-			// Display button if the row is not empty
-			@Override
-			public void updateItem(String t, boolean empty) {
-				super.updateItem(t, empty);
-				if (empty) {
-					setGraphic(null);
-					setText(null);
-				} else {
-					setGraphic(deleteButton);
-				}
-			}
-		}
 		
 		// Sets colDelete behavior
 		colDelete.setCellValueFactory(
@@ -160,173 +100,52 @@ public class CartController {
 
 					@Override
 					public TableCell<AbstractProduct, String> call(TableColumn<AbstractProduct, String> p) {
-						return new DeleteButton();
+						return new MyButtons().createDeleteButtonForAbstractItem("Delete Item");
 					}
 
 				});
-		
-		
 				
-		//******************
-		//***AmountColumn***
-		//******************		
-		// create class minusAmountButton
-				class minusAmountButton extends TableCell<AbstractProduct, String> {
-					private Button minusAmountButton = null;
+		// Sets colDelete behavior
+		minusAmountCol.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<AbstractProduct, String>, ObservableValue<String>>() {
 
-					minusAmountButton() {
-						minusAmountButton = new Button("", new ImageView(new Image(getClass().getResourceAsStream("minusAmount2.png"),30,30,false,false)));
-						minusAmountButton.setStyle("-fx-background-color:transparent;");
-						minusAmountButton.setOnMouseEntered( new EventHandler<MouseEvent>() {
-					          @Override
-					          public void handle(MouseEvent e) {
-					        	  minusAmountButton.setStyle("-fx-background-color: #EFE2FE;"+"-fx-padding: 0 0 0 0;");
-					        	  //+"-fx-padding: 0 0 0 0;"
-					          }
-					        });
-						minusAmountButton.setOnMouseExited( new EventHandler<MouseEvent>() {
-					          @Override
-					          public void handle(MouseEvent e) {
-					        	  minusAmountButton.setStyle("-fx-background-color:transparent;");
-					          }
-					        });
-
-						// Action when the button is pressed
-						minusAmountButton.setOnAction(new EventHandler<ActionEvent>() {
-
-							@Override
-							public void handle(ActionEvent t) {
-								// get Selected Item
-								AbstractProduct currentAbstractProduct = (AbstractProduct) minusAmountButton.this.getTableView()
-										.getItems().get(minusAmountButton.this.getIndex());
-								//remove one product from cart
-								ChatClient.customerCart.put(currentAbstractProduct, ChatClient.customerCart.get(currentAbstractProduct)-1);															
-								
-								//new due amount
-								totalPrice=0.0;
-								for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
-									totalPrice += entry.getKey().getPrice()*entry.getValue();
-									entry.getKey().setAmount(entry.getValue());
-								}
-								textFieldPrice.setText( Double.toString(totalPrice-currentAbstractProduct.getPrice()));
-								textFieldPrice.setText(totalPrice.toString());
-								cartTable.refresh();
-							}
-						});
-					}
-
-					// Display button if the row is not empty
 					@Override
-					public void updateItem(String t, boolean empty) {
-						super.updateItem(t, empty);
-						if (empty) {
-							setGraphic(null);
-							setText(null);
-						} else {
-							setGraphic(minusAmountButton);
-						}
+					public ObservableValue<String> call(TableColumn.CellDataFeatures<AbstractProduct, String> p) {
+						return new SimpleStringProperty(p.getValue() != null, null);
 					}
-				}
-				
-				// Sets colDelete behavior
-				minusAmountCol.setCellValueFactory(
-						new Callback<TableColumn.CellDataFeatures<AbstractProduct, String>, ObservableValue<String>>() {
+				});
 
-							@Override
-							public ObservableValue<String> call(TableColumn.CellDataFeatures<AbstractProduct, String> p) {
-								return new SimpleStringProperty(p.getValue() != null, null);
-							}
-						});
+		// Adding the Button to the cell
+		minusAmountCol.setCellFactory(
+				new Callback<TableColumn<AbstractProduct, String>, TableCell<AbstractProduct, String>>() {
 
-				// Adding the Button to the cell
-				minusAmountCol.setCellFactory(
-						new Callback<TableColumn<AbstractProduct, String>, TableCell<AbstractProduct, String>>() {
-
-							@Override
-							public TableCell<AbstractProduct, String> call(TableColumn<AbstractProduct, String> p) {
-								return new minusAmountButton();
-							}
-
-						});
-				
-				
-				// create class plusAmountButton				
-				class PlusAmountButton extends TableCell<AbstractProduct, String> {
-					private Button plusAmountButton = null;
-
-					PlusAmountButton() {
-						plusAmountButton = new Button("", new ImageView(new Image(getClass().getResourceAsStream("plusAmount2.png"),30,30,false,false)));
-						plusAmountButton.setStyle("-fx-background-color:transparent;");
-						plusAmountButton.setOnMouseEntered( new EventHandler<MouseEvent>() {
-					          @Override
-					          public void handle(MouseEvent e) {
-					        	  plusAmountButton.setStyle( "-fx-background-color: #EFE2FE;"+"-fx-padding: 0 0 0 0;");
-					        	  //+"-fx-padding: 0 0 0 0;"
-					          }
-					        });
-						plusAmountButton.setOnMouseExited( new EventHandler<MouseEvent>() {
-					          @Override
-					          public void handle(MouseEvent e) {
-					        	  plusAmountButton.setStyle("-fx-background-color:transparent;");
-					          }
-					        });
-
-						// Action when the button is pressed
-						plusAmountButton.setOnAction(new EventHandler<ActionEvent>() {
-
-							@Override
-							public void handle(ActionEvent t) {
-								// get Selected Item
-								AbstractProduct currentAbstractProduct = (AbstractProduct) PlusAmountButton.this.getTableView()
-										.getItems().get(PlusAmountButton.this.getIndex());
-								//remove one product from cart
-								ChatClient.customerCart.put(currentAbstractProduct, ChatClient.customerCart.get(currentAbstractProduct)+1);															
-								
-								//new due amount
-								totalPrice=0.0;
-								for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
-									totalPrice += entry.getKey().getPrice()*entry.getValue();
-									entry.getKey().setAmount(entry.getValue());
-								}
-								textFieldPrice.setText( Double.toString(totalPrice-currentAbstractProduct.getPrice()));
-								textFieldPrice.setText(totalPrice.toString());
-								cartTable.refresh();
-							}
-						});
-					}
-
-					// Display button if the row is not empty
 					@Override
-					public void updateItem(String t, boolean empty) {
-						super.updateItem(t, empty);
-						if (empty) {
-							setGraphic(null);
-							setText(null);
-						} else {
-							setGraphic(plusAmountButton);
-						}
+					public TableCell<AbstractProduct, String> call(TableColumn<AbstractProduct, String> p) {
+						return new MyButtons().createRegularButtonForAbstractItem("Minus");
 					}
-				}
-				
-				// Sets colDelete behavior
-				plusAmountCol.setCellValueFactory(
-						new Callback<TableColumn.CellDataFeatures<AbstractProduct, String>, ObservableValue<String>>() {
 
-							@Override
-							public ObservableValue<String> call(TableColumn.CellDataFeatures<AbstractProduct, String> p) {
-								return new SimpleStringProperty(p.getValue() != null, null);
-							}
-						});
+				});
 
-				// Adding the Button to the cell
-				plusAmountCol.setCellFactory(
-						new Callback<TableColumn<AbstractProduct, String>, TableCell<AbstractProduct, String>>() {
+		
+		// Sets colDelete behavior
+		plusAmountCol.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<AbstractProduct, String>, ObservableValue<String>>() {
 
-							@Override
-							public TableCell<AbstractProduct, String> call(TableColumn<AbstractProduct, String> p) {
-								return new PlusAmountButton();
-							}
-						});
+					@Override
+					public ObservableValue<String> call(TableColumn.CellDataFeatures<AbstractProduct, String> p) {
+						return new SimpleStringProperty(p.getValue() != null, null);
+					}
+				});
+
+		// Adding the Button to the cell
+		plusAmountCol.setCellFactory(
+				new Callback<TableColumn<AbstractProduct, String>, TableCell<AbstractProduct, String>>() {
+
+					@Override
+					public TableCell<AbstractProduct, String> call(TableColumn<AbstractProduct, String> p) {
+						return new MyButtons().createRegularButtonForAbstractItem("Plus");
+					}
+				});
 									
 		colName.setCellValueFactory(new PropertyValueFactory<>("name"));
 		

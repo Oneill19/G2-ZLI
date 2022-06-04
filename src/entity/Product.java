@@ -12,6 +12,10 @@ public class Product extends AbstractProduct {
 	private String other;
 	private ArrayList<Item> madeFrom;
 
+	
+	public Product() {
+		super();
+	}
 	/**
 	 * @param serialNumber
 	 * @param name

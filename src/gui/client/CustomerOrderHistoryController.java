@@ -9,6 +9,7 @@ import entity.AbstractProduct;
 import entity.Item;
 import entity.Order;
 import entity.Product;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,6 +19,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
@@ -26,6 +28,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -33,6 +36,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 
 public class CustomerOrderHistoryController {
 
@@ -50,10 +54,10 @@ public class CustomerOrderHistoryController {
     @FXML private TableColumn<Order, Integer> colOrderNumber;
     @FXML private TableColumn<Order, Double> colPrice;
     @FXML private TableColumn<Order, String> colGreetingCard,colDeliveryMethod,colCancelOrder;
+    
+    @FXML private Pane pane;
 
     private ArrayList<Order> userOrdersDataFromDB = new ArrayList<Order>();
-    private ArrayList<Item> orderHistoryItmes = new ArrayList<Item>();
-    private ArrayList<Product> orderHistoryProducts= new ArrayList<Product>();
     private ArrayList<AbstractProduct> orderHistoryAll = new ArrayList<AbstractProduct>();
     private Order selectedOrder = null;
     private CommonController cc = new CommonController();
@@ -94,9 +98,24 @@ public class CustomerOrderHistoryController {
     	if (ChatClient.userOrdersHistory.size() > 0) {
     		try { setChosenOrder(userOrdersDataFromDB.get(0)); } catch (IOException e) { e.printStackTrace(); }
     	}
+    	else {
+    		Text noOrdersText = new Text("You don't have any order yet\nMake you're first order right now, \nhere:");
+    		noOrdersText.setFont(Font.font(null, FontWeight.BLACK, FontPosture.REGULAR, 20));
+    		Button catalogButton = new MyButtons().createRegularButton();
+
+    		noOrdersText.setLayoutX(764);
+    		noOrdersText.setLayoutY(232);
+    		catalogButton.setLayoutX(820);
+    		catalogButton.setLayoutY(260);
+    		pane.getChildren().addAll(noOrdersText,catalogButton);
+    		
+    	}
 	}
 	
     public void initialize() {
+    	pickupVbox.setVisible(false);
+    	deliveryHbox.setVisible(false);
+    	
     	setOrdersFromDB();
     	
     	Rectangle rect = new Rectangle(0, 0, 100, 100);
@@ -105,15 +124,10 @@ public class CustomerOrderHistoryController {
 //    	set the user button to show the name
     	userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
     	
-    	deliveryHbox.setVisible(false);
-    	pickupVbox.setVisible(false);
-    	
 		colOrderNumber.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
 		colPrice.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
 		colGreetingCard.setCellValueFactory(new PropertyValueFactory<>("greetingCard"));
         colDeliveryMethod.setCellValueFactory(new PropertyValueFactory<>("deliveryMethod"));
-//        TODO
-//        colCancelOrder.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
 
         ordersTable.setId("my-table");
         ordersTable.getItems().clear();
@@ -126,13 +140,26 @@ public class CustomerOrderHistoryController {
 				try { setChosenOrder(newValue); } catch (IOException e) { e.printStackTrace(); }
 			}
         });
+     		
+ 		// Sets colDelete behavior
+		colCancelOrder.setCellValueFactory(
+			new Callback<TableColumn.CellDataFeatures<Order, String>, ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(TableColumn.CellDataFeatures<Order, String> p) {
+					return new SimpleStringProperty(p.getValue() != null, null);
+				}
+			});
+
+ 		// Adding the Button to the cell
+		colCancelOrder.setCellFactory(
+			new Callback<TableColumn<Order, String>, TableCell<Order, String>>() {
+				@Override
+				public TableCell<Order, String> call(TableColumn<Order, String> p) {
+					return new MyButtons().createDeleteButtonForTable();
+				}
+			});
     }
     
-    
-	
-	
-	
-	
     /**
      * @param order
      * method to set the image, name, price and description in the side bar
@@ -185,7 +212,7 @@ public class CustomerOrderHistoryController {
 	        		break;
 	        	case "CANCELED":
 	        		deliveryStatusText.setText("Canceled");
-	        		deliveryStatusText.setFill(Color.GREEN);
+	        		deliveryStatusText.setFill(Color.RED);
 	        		break;
 	        	case "WAITING_FOR_CANCELATION":
 	        		deliveryStatusText.setText("Waiting for cancelation");
@@ -194,6 +221,10 @@ public class CustomerOrderHistoryController {
 	        	case "WAITING_FOR_CONFIRMATION":
 	        		deliveryStatusText.setText("Waiting for confirmation");
 	        		deliveryStatusText.setFill(Color.ORANGE);
+	        		break;
+	        	case "COMPLETED":
+	        		deliveryStatusText.setText("Completed");
+	        		deliveryStatusText.setFill(Color.DARKGREEN);
 	        		break;
         	}
     	}
@@ -220,6 +251,10 @@ public class CustomerOrderHistoryController {
 	        		statusText.setText("Waiting for confirmation");
 	        		statusText.setFill(Color.ORANGE);
 	        		break;
+	        	case "COMPLETED":
+	        		deliveryStatusText.setText("Completed");
+	        		deliveryStatusText.setFill(Color.DARKGREEN);
+	        		break;
         	}
     	}
     	
@@ -230,45 +265,60 @@ public class CustomerOrderHistoryController {
     		ImageView image = new ImageView(new Image(getClass().getResourceAsStream(ap.getImagePath()),100,100,false,false));
     		VBox vbox1 = new VBox(name,image);
     		VBox vbox2=null;
-    		Text itemOrProduct=null, type=null,price=null,color=null,amount = null;
+    		Text itemOrProduct=null, type=null,price=null,color=null,amount = null, madeFrom=null;
+    		
+    		type = new Text("Type: "+ap.getType());
+    		price = new Text("Price: "+ Double.toString(ap.getPrice())+"$");
+    		amount = new Text("Amount: " + Integer.toString(ap.getAmount()));
+    		
+    		name.autosize();
+	    	type.autosize();
+	    	price.autosize();
+    		amount.autosize();
+    		
+    		name.setFont(Font.font(null,FontWeight.EXTRA_BOLD,FontPosture.REGULAR,20));
+    		type.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
+    		price.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
+    		amount.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
+	    		
     		if (ap instanceof Product) {
-    			itemOrProduct = new Text("Product");
-    			vbox2 = new VBox(itemOrProduct);
+    			itemOrProduct = new Text("A Premade Product");
+    			Product product = (Product)ap;
+    			madeFrom = new Text("Made from the items:\n"+product.getMadeFrom().toString());
+    			madeFrom.autosize();
+    			madeFrom.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
+    			vbox2 = new VBox(itemOrProduct,type,price, amount, madeFrom);
     		}
     		else {
     			Item item = (Item)ap;
     			itemOrProduct = new Text("A Custom Item");
-    			type = new Text("Type: "+item.getType());
-    			price = new Text("Price: "+ Double.toString(item.getPrice())+"$");
-    			amount = new Text("Amount: " + Integer.toString(item.getAmount()));
     			color = new Text("Color: " + item.getColor());
+    			color.autosize();
+    			color.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
     			vbox2 = new VBox(itemOrProduct, type, price,amount,color);
     		}
+
+    		itemOrProduct.autosize();
+    		itemOrProduct.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
+    		
     		HBox hbox = new HBox(vbox1, vbox2);
     		hbox.setSpacing(15.0);
-    		vbox1.setAlignment(Pos.CENTER);
-    		vbox1.setPadding(new Insets(20));
     		vbox1.setSpacing(5);
+    		
+    		vbox1.setPadding(new Insets(20));
+    		vbox2.setPadding(new Insets(20));
+
+    		vbox1.setAlignment(Pos.CENTER);
     		vbox2.setAlignment(Pos.CENTER);
+    		
+    		vbox1.setPrefWidth(260);
+    		vbox2.setPrefWidth(260);
     		
     		hbox.setStyle("-fx-border-color: #E5E4E2; -fx-border-radius: 10px");
     		hbox.autosize();
     		
-    		name.autosize();
-    		name.setFont(Font.font(null,FontWeight.EXTRA_BOLD,FontPosture.REGULAR,20));
-    		if(ap instanceof Item) {
-	    		itemOrProduct.autosize();
-	    		type.autosize();
-	    		price.autosize();
-	    		color.autosize();
-	    		amount.autosize();
-	    		
-	    		itemOrProduct.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
-	    		type.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
-	    		price.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
-	    		color.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
-	    		amount.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
-    		}
+
+//    		}
     		grid.add(hbox, 0, i++);
     	}
 		grid.setHgap(10);

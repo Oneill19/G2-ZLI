@@ -126,8 +126,7 @@ public class Item extends AbstractProduct {
 
 	@Override
 	public String toString() {
-		return super.toString()+"Item [isSoldAlone=" + isSoldAlone + ", amountInProduct=" + amountInProduct + ", color=" + color
-				+ ", priceRange=" + priceRange + "]";
+		return super.getName();
 	}
 	
 }
