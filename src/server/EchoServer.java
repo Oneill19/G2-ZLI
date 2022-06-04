@@ -244,7 +244,7 @@ public class EchoServer extends AbstractServer {
 				client.sendToClient(ReportQuery.getReportByQuarterly2(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
 				break;
 			case "getUserOrders":
-//				client.sendToClient(OrderQuery.getUserOrders(conn, clientMsg[1]));
+				client.sendToClient(OrderQuery.getUserOrders(conn, clientMsg[1]));
 				break;
 			case "getOrderDeliveryData":
 				client.sendToClient(OrderQuery.getOrderDeliveryData(conn, clientMsg[1]));
@@ -258,6 +258,8 @@ public class EchoServer extends AbstractServer {
 			case "changeOrderStatus":
 				client.sendToClient(OrderQuery.changeOrderStatus(conn, clientMsg[1], clientMsg[2]));
 				break;
+			case "GetComplaintReportByStore":
+				client.sendToClient(ComplaintQuery.getComplaintReportByStore(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
 			default:
 				System.out.println("No Command Found");
 				break;

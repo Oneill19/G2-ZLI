@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import common.ReturnCommand;
 import entity.Complaint;
+import entity.ComplaintReport;
 import entity.Order;
 
 /**
@@ -285,6 +286,189 @@ public class ComplaintQuery {
 			return new ReturnCommand("GetOrderByNumber", order);
 		} catch (SQLException e) {
 			return null;
+		}
+	}
+	
+	public static ReturnCommand getComplaintReportByStore(Connection con, String year, String quarter, String store) {
+		int[] numberOfOrders = getNumberOrOrdersOfQuearterByStore(con, year, quarter, store);
+		int[] numberOfComplaints = getNumberOfComplaintOfQuarterByStore(con, year, quarter, store);
+		ComplaintReport rp = new ComplaintReport(year, quarter, numberOfOrders, numberOfComplaints);
+		return new ReturnCommand("GetComplaintReportByStore", rp);
+	}
+	
+//	public static int[] getNumberOrOrdersOfQuearter(Connection con, String year, String quarter) {
+//		int[] counter = new int[3];
+//		switch (quarter) {
+//		case "1":
+//			counter[0] = getNumberOfOrdersByYearAndMonth(con, year, "01");
+//			counter[1] = getNumberOfOrdersByYearAndMonth(con, year, "02");
+//			counter[2] = getNumberOfOrdersByYearAndMonth(con, year, "03");
+//			break;
+//		case "2":
+//			counter[0] = getNumberOfOrdersByYearAndMonth(con, year, "04");
+//			counter[1] = getNumberOfOrdersByYearAndMonth(con, year, "05");
+//			counter[2] = getNumberOfOrdersByYearAndMonth(con, year, "06");
+//			break;
+//		case "3":
+//			counter[0] = getNumberOfOrdersByYearAndMonth(con, year, "07");
+//			counter[1] = getNumberOfOrdersByYearAndMonth(con, year, "08");
+//			counter[2] = getNumberOfOrdersByYearAndMonth(con, year, "09");
+//			break;
+//		default:
+//			counter[0] = getNumberOfOrdersByYearAndMonth(con, year, "10");
+//			counter[1] = getNumberOfOrdersByYearAndMonth(con, year, "11");
+//			counter[2] = getNumberOfOrdersByYearAndMonth(con, year, "12");
+//		}
+//		return counter;
+//	}
+//	
+//	public static int getNumberOfOrdersByYearAndMonth(Connection con, String year, String month) {
+//		Statement stmt;
+//		String sqlQuery = "SELECT * FROM zli.orders WHERE orderCreationDate LIKE '" + year + "-" + month + "-%'";
+//		int counter = 0;
+//		ResultSet rs;
+//		try {
+//			stmt = con.createStatement();
+//			rs = stmt.executeQuery(sqlQuery);
+//			while (rs.next()) {
+//				counter++;
+//			}
+//			return counter;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return counter;
+//		}
+//	}
+//	
+//	public static int[] getNumberOfComplaintOfQuarter(Connection con, String year, String quarter) {
+//		int[] counter = new int[3];
+//		switch (quarter) {
+//		case "1":
+//			counter[0] = getNumberOfComplaintsByYearAndMonth(con, year, "01");
+//			counter[1] = getNumberOfComplaintsByYearAndMonth(con, year, "02");
+//			counter[2] = getNumberOfComplaintsByYearAndMonth(con, year, "03");
+//			break;
+//		case "2":
+//			counter[0] = getNumberOfComplaintsByYearAndMonth(con, year, "04");
+//			counter[1] = getNumberOfComplaintsByYearAndMonth(con, year, "05");
+//			counter[2] = getNumberOfComplaintsByYearAndMonth(con, year, "06");
+//			break;
+//		case "3":
+//			counter[0] = getNumberOfComplaintsByYearAndMonth(con, year, "07");
+//			counter[1] = getNumberOfComplaintsByYearAndMonth(con, year, "08");
+//			counter[2] = getNumberOfComplaintsByYearAndMonth(con, year, "09");
+//			break;
+//		default:
+//			counter[0] = getNumberOfComplaintsByYearAndMonth(con, year, "10");
+//			counter[1] = getNumberOfComplaintsByYearAndMonth(con, year, "11");
+//			counter[2] = getNumberOfComplaintsByYearAndMonth(con, year, "12");
+//		}
+//		return counter;
+//	}
+//	
+//	public static int getNumberOfComplaintsByYearAndMonth(Connection con, String year, String month) {
+//		Statement stmt;
+//		String sqlQuery = "SELECT * FROM zli.complaint WHERE ReciveDate LIKE '" + year + "-" + month + "-%'";
+//		int counter = 0;
+//		ResultSet rs;
+//		try {
+//			stmt = con.createStatement();
+//			rs = stmt.executeQuery(sqlQuery);
+//			while (rs.next()) {
+//				counter++;
+//			}
+//			return counter;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return counter;
+//		}
+//	}
+	
+	public static int[] getNumberOrOrdersOfQuearterByStore(Connection con, String year, String quarter, String storeName) {
+		int[] counter = new int[3];
+		switch (quarter) {
+		case "1":
+			counter[0] = getNumberOfOrdersByYearAndMonthByStore(con, year, "01", storeName);
+			counter[1] = getNumberOfOrdersByYearAndMonthByStore(con, year, "02", storeName);
+			counter[2] = getNumberOfOrdersByYearAndMonthByStore(con, year, "03", storeName);
+			break;
+		case "2":
+			counter[0] = getNumberOfOrdersByYearAndMonthByStore(con, year, "04", storeName);
+			counter[1] = getNumberOfOrdersByYearAndMonthByStore(con, year, "05", storeName);
+			counter[2] = getNumberOfOrdersByYearAndMonthByStore(con, year, "06", storeName);
+			break;
+		case "3":
+			counter[0] = getNumberOfOrdersByYearAndMonthByStore(con, year, "07", storeName);
+			counter[1] = getNumberOfOrdersByYearAndMonthByStore(con, year, "08", storeName);
+			counter[2] = getNumberOfOrdersByYearAndMonthByStore(con, year, "09", storeName);
+			break;
+		default:
+			counter[0] = getNumberOfOrdersByYearAndMonthByStore(con, year, "10", storeName);
+			counter[1] = getNumberOfOrdersByYearAndMonthByStore(con, year, "11", storeName);
+			counter[2] = getNumberOfOrdersByYearAndMonthByStore(con, year, "12", storeName);
+		}
+		return counter;
+	}
+	
+	public static int getNumberOfOrdersByYearAndMonthByStore(Connection con, String year, String month, String storeName) {
+		Statement stmt;
+		String sqlQuery = "SELECT * FROM zli.orders WHERE fromStore='" + storeName + "' AND orderCreationDate LIKE '" + year + "-" + month + "-%'";
+		int counter = 0;
+		ResultSet rs;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sqlQuery);
+			while (rs.next()) {
+				counter++;
+			}
+			return counter;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return counter;
+		}
+	}
+	
+	public static int[] getNumberOfComplaintOfQuarterByStore(Connection con, String year, String quarter, String storeName) {
+		int[] counter = new int[3];
+		switch (quarter) {
+		case "1":
+			counter[0] = getNumberOfComplaintsByYearAndMonthByStore(con, year, "01", storeName);
+			counter[1] = getNumberOfComplaintsByYearAndMonthByStore(con, year, "02", storeName);
+			counter[2] = getNumberOfComplaintsByYearAndMonthByStore(con, year, "03", storeName);
+			break;
+		case "2":
+			counter[0] = getNumberOfComplaintsByYearAndMonthByStore(con, year, "04", storeName);
+			counter[1] = getNumberOfComplaintsByYearAndMonthByStore(con, year, "05", storeName);
+			counter[2] = getNumberOfComplaintsByYearAndMonthByStore(con, year, "06", storeName);
+			break;
+		case "3":
+			counter[0] = getNumberOfComplaintsByYearAndMonthByStore(con, year, "07", storeName);
+			counter[1] = getNumberOfComplaintsByYearAndMonthByStore(con, year, "08", storeName);
+			counter[2] = getNumberOfComplaintsByYearAndMonthByStore(con, year, "09", storeName);
+			break;
+		default:
+			counter[0] = getNumberOfComplaintsByYearAndMonthByStore(con, year, "10", storeName);
+			counter[1] = getNumberOfComplaintsByYearAndMonthByStore(con, year, "11", storeName);
+			counter[2] = getNumberOfComplaintsByYearAndMonthByStore(con, year, "12", storeName);
+		}
+		return counter;
+	}
+	
+	public static int getNumberOfComplaintsByYearAndMonthByStore(Connection con, String year, String month, String storeName) {
+		Statement stmt;
+		String sqlQuery = "SELECT * FROM zli.complaint WHERE StoreName='" + storeName + "' AND RecieveDate LIKE '" + year + "-" + month + "-%'";
+		int counter = 0;
+		ResultSet rs;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sqlQuery);
+			while (rs.next()) {
+				counter++;
+			}
+			return counter;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return counter;
 		}
 	}
 }

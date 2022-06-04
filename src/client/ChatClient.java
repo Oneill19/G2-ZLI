@@ -8,6 +8,7 @@ import common.ChatIF;
 import common.ReturnCommand;
 import entity.AbstractProduct;
 import entity.Complaint;
+import entity.ComplaintReport;
 import entity.Item;
 import entity.Order;
 import entity.Product;
@@ -39,6 +40,8 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Item> orderHistoryItems=new ArrayList<Item>();
 	public static ArrayList<Product> orderHistoryProducts=new ArrayList<Product>();
 	public static Order cartOrder = new Order();
+	public static ComplaintReport selectedComplaintReport = null;
+	public static ArrayList<ComplaintReport> allComplaintReports = new ArrayList<>();
 	public static String reportTxt;
 	public static User user = null;
 	
@@ -180,6 +183,9 @@ public class ChatClient extends AbstractClient {
 				orderHistoryProducts=(ArrayList<Product>)rc.getReturnValue();
 				break;
 			case "changeOrderStatus":
+				break;
+			case "GetComplaintReportByStore":
+				selectedComplaintReport = (ComplaintReport)rc.getReturnValue();
 				break;
 			default:
 				//for debug - don't remove.
