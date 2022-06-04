@@ -260,6 +260,7 @@ public class EchoServer extends AbstractServer {
 				break;
 			case "GetComplaintReportByStore":
 				client.sendToClient(ComplaintQuery.getComplaintReportByStore(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
+				break;
 			default:
 				System.out.println("No Command Found");
 				break;

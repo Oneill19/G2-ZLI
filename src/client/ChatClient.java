@@ -41,7 +41,6 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Product> orderHistoryProducts=new ArrayList<Product>();
 	public static Order cartOrder = new Order();
 	public static ComplaintReport selectedComplaintReport = null;
-	public static ArrayList<ComplaintReport> allComplaintReports = new ArrayList<>();
 	public static String reportTxt;
 	public static User user = null;
 	

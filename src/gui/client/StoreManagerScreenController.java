@@ -152,7 +152,7 @@ public class StoreManagerScreenController {
 		new FXMLLoader();
 		Pane root = FXMLLoader.<Pane>load(getClass().getResource("ComplaintsReportsStoreManager.fxml"));
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("Zer-Li->Option Screen->Permission Management");
+		primaryStage.setTitle("Zer-Li->Option Screen->Complaints Management");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }

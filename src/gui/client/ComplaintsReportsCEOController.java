@@ -4,7 +4,6 @@ import client.ChatClient;
 import client.ClientUI;
 import entity.ComplaintReport;
 import entity.StoreWorker;
-import entity.Survey;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -14,10 +13,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
-public class ComplaintsReportsStoreManagerController {
+public class ComplaintsReportsCEOController {
 
     @FXML
     private BarChart<String, Integer> complaintBarChart;
+    
+    @FXML
+    private ComboBox<String> storeComboBox;
+    
+    @FXML
+    private ComboBox<Integer> yearComboBox;
+    
+    @FXML
+    private ComboBox<Integer> quarterComboBox;
 
     @FXML
     private Label errorLabel;
@@ -31,8 +39,6 @@ public class ComplaintsReportsStoreManagerController {
     @FXML
     private Button onBack;
 
-    @FXML
-    private ComboBox<Integer> quarterComboBox;
 
     @FXML
     private Button show;
@@ -40,9 +46,6 @@ public class ComplaintsReportsStoreManagerController {
     @FXML
     private Button userOptBtn;
 
-    @FXML
-    private ComboBox<Integer> yearComboBox;
-    
     private CommonController cc = new CommonController();
     
     private ComplaintReport cp = null;
@@ -60,7 +63,7 @@ public class ComplaintsReportsStoreManagerController {
 		ChatClient.selectedSurveyReport = null;
 		
 		// go to the previous screen
-		cc.changeFXML(event, "StoreManagerScreen.fxml", "Zer-Li Customer Store Manager Screen");
+		cc.changeFXML(event, "CEOScreen.fxml", "Zer-Li Customer Network Manager");
 	}
 
 	/**
@@ -98,14 +101,14 @@ public class ComplaintsReportsStoreManagerController {
     @FXML
     void onShowComplaints(ActionEvent event) throws Exception {
     	// if not all fields are filled
-    	if (quarterComboBox.getValue() == null || yearComboBox.getValue() == null) {
+    	if (quarterComboBox.getValue() == null || yearComboBox.getValue() == null || storeComboBox.getValue() == null) {
     		errorLabel.setText("Please fill all fields");
     		return;
     	}
     	errorLabel.setText("");
     	
-    	// get the complaint report by year, quarter and the store manager store
-    	ClientUI.chat.accept("GetComplaintReportByStore" + "\t" + yearComboBox.getValue() + "\t" + quarterComboBox.getValue() + "\t" + ((StoreWorker)ChatClient.user).getStoreName());
+    	// get the complaint report by year, quarter and the store
+    	ClientUI.chat.accept("GetComplaintReportByStore" + "\t" + yearComboBox.getValue() + "\t" + quarterComboBox.getValue() + "\t" + storeComboBox.getValue());
     	cp = ChatClient.selectedComplaintReport;
     	if (cp == null) {
     		errorLabel.setText("Error getting the data");
@@ -116,12 +119,11 @@ public class ComplaintsReportsStoreManagerController {
     	complaintBarChart.setAnimated(false);
     	
     	// set the histogram title
-    	complaintBarChart.setTitle(((StoreWorker)ChatClient.user).getStoreName() + " " + yearComboBox.getValue() + " Quarter " + quarterComboBox.getValue());
+    	complaintBarChart.setTitle(storeComboBox.getValue() + " " + yearComboBox.getValue() + " Quarter " + quarterComboBox.getValue());
     	
     	// set the chart
     	setChart();
     }
-    
     
     /**
      * sets the histogram values
@@ -147,6 +149,7 @@ public class ComplaintsReportsStoreManagerController {
     	
     	// if quarter two
     	else if (quarterComboBox.getValue() == 2) {
+    		
     		// set the data for the complaints
     		complaintsSeries.getData().add(new XYChart.Data<String, Integer>("April ", cp.getNumberOfComplaints()[0]));
     		complaintsSeries.getData().add(new XYChart.Data<String, Integer>("May", cp.getNumberOfComplaints()[1]));
@@ -160,6 +163,7 @@ public class ComplaintsReportsStoreManagerController {
     	
     	// if quarter three
     	else if (quarterComboBox.getValue() == 3) {
+    		
     		// set the data for the complaints
     		complaintsSeries.getData().add(new XYChart.Data<String, Integer>("July ", cp.getNumberOfComplaints()[0]));
     		complaintsSeries.getData().add(new XYChart.Data<String, Integer>("August", cp.getNumberOfComplaints()[1]));
@@ -173,6 +177,7 @@ public class ComplaintsReportsStoreManagerController {
     	
     	// if quarter four
     	else {
+    		
     		// set the data for the complaints
     		complaintsSeries.getData().add(new XYChart.Data<String, Integer>("October ", cp.getNumberOfComplaints()[0]));
     		complaintsSeries.getData().add(new XYChart.Data<String, Integer>("November", cp.getNumberOfComplaints()[1]));
@@ -196,12 +201,21 @@ public class ComplaintsReportsStoreManagerController {
     
     /**
 	 * initialize the screen
+	 * @throws Exception
 	 */
-	public void initialize() {
+	public void initialize() throws Exception {
 		// set name
 		userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
 		
-		// set the combo boxes values
+		
+		//// set the combo boxes values
+		ClientUI.chat.accept("GetAllStores");
+		
+		storeComboBox.getItems().clear();
+		for (String store : ChatClient.stores) {
+			storeComboBox.getItems().add(store);
+		}
+		
 		quarterComboBox.getItems().clear();
 		quarterComboBox.getItems().add(1);
 		quarterComboBox.getItems().add(2);
