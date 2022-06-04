@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import client.ChatClient;
+import client.ClientUI;
 import entity.AbstractProduct;
 import entity.Order;
 import javafx.collections.FXCollections;
@@ -18,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 /**
  * Class MyButtons() implements Custom-Made by user buttons to simplify code, make it reusable, and shorter.
@@ -88,12 +90,14 @@ public class MyButtons extends Button {
 	 */
 	class DeleteButtonCell<T, V> extends TableCell<T, V> {
 		private Button deleteButton = null;
+		String comand;
 
 		/**
 		 * @param command for special setOnAction.handle() 
 		 * Currently varies by "Cancel Order" and "Delete Item" functionalities.
 		 */
 		DeleteButtonCell(String command) {
+			comand=command;
 			if (command.equals("Cancel Order"))
 				deleteButton = new Button("Cancel Order", new ImageView(
 						new Image(getClass().getResourceAsStream("deleteOrder.png"), 40, 40, false, true)));
@@ -126,8 +130,30 @@ public class MyButtons extends Button {
 				public void handle(ActionEvent t) {
 					// get Selected Item
 					T selected = DeleteButtonCell.this.getTableView().getItems().get(DeleteButtonCell.this.getIndex());
-					if (command.equals("Cancel Order"))
-						((Order) selected).setOrderStatus("WAITING_FOR_CANCELATION");
+					if (command.equals("Cancel Order")) {
+						Order selectedO = (Order)selected;
+						String newStatus = "WAITING_FOR_CANCELATION";
+						selectedO.setOrderStatus(newStatus);
+						try {
+							ClientUI.chat.accept("changeOrderStatus\t"+selectedO.getOrderNumber()+"\t"+newStatus);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						deleteButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+							@Override
+							public void handle(MouseEvent e) {
+								deleteButton.setStyle("-fx-background-color:green;" + "-fx-background-radius:50;"
+										+ "-fx-border-radius:50;" + "-fx-padding: 0 0 0 0;" + "-fx-border-color:#aeaeae;");
+							}
+						});
+						deleteButton.setDisable(true);
+						
+
+						Text text1 = (Text)((Node) t.getTarget()).getScene().lookup("#status1");
+						text1.setText("Waiting for cancelation");
+						Text text2 = (Text)((Node) t.getTarget()).getScene().lookup("#status2");
+						text2.setText("Waiting for cancelation");
+					}
 					else if (command.equals("Delete Item")) {
 						ChatClient.customerCart.remove(selected); // new due amount
 						@SuppressWarnings("unchecked")
@@ -147,7 +173,7 @@ public class MyButtons extends Button {
 							totalPrice += entry.getKey().getPrice() * entry.getValue();
 						}
 						totalPriceField.setText(totalPrice.toString());
-					} 
+					}
 				}
 			});
 		}
@@ -159,7 +185,8 @@ public class MyButtons extends Button {
 			if (empty) {
 				setGraphic(null);
 				setText(null);
-			} else {
+			}
+			else {
 				setGraphic(deleteButton);
 			}
 		}
