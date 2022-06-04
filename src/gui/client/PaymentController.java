@@ -73,8 +73,7 @@ public class PaymentController {
      */
     @FXML
     void onNext(ActionEvent event) throws IOException {
-    	   	
-    	//TODO - does payment method is always credit card?
+
     	ChatClient.cartOrder.setPaymentMethod("Credit Card");
     	
     	//Add Order to DB
@@ -108,12 +107,12 @@ public class PaymentController {
     	}
     	if (sbProducts.length() > 0)
     		sbProducts.delete(sbProducts.length()-1, sbProducts.length());
-    	try {
-			ClientUI.chat.accept("numberOfItemsInOrder\t" + productCounter.toString() + "\t" + itemCounter.toString()+
-					"\t" + productPriceSum +"\t" + itemPriceSum + '\t' + ChatClient.cartOrder.DBToString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//    	try {
+//			ClientUI.chat.accept("numberOfItemsInOrder\t" + productCounter.toString() + "\t" + itemCounter.toString()+
+//					"\t" + productPriceSum +"\t" + itemPriceSum + '\t' + ChatClient.cartOrder.DBToString());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
     	
     	//Add products and items in the cart to the DB
     	Integer orderNumber = ChatClient.cartOrder.getOrderNumber();
@@ -150,7 +149,7 @@ public class PaymentController {
     	    	
     			ChatClient.customerCart.clear();
     			ChatClient.cartOrder = new Order();
-    			cc.changeFXML(event, "Catalog.fxml", "Catalog");
+    			cc.changeFXML(event, "ApprvoedCustomerOptions.fxml", "Catalog");
     	}
 		
     

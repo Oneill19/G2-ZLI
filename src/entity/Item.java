@@ -84,9 +84,10 @@ public class Item extends AbstractProduct {
 	public void setPriceRange(String priceRange) {
 		this.priceRange = priceRange;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return super.getName();
+	}
 	
 }

@@ -34,6 +34,10 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Report> reportsq1;
 	public static ArrayList<Report> reportsq2;
 	public static Order complaintOrder = null;
+	public static ArrayList<Order> userOrdersHistory;
+	public static String orderHistoryDeliveryData = new String();
+	public static ArrayList<Item> orderHistoryItems=new ArrayList<Item>();
+	public static ArrayList<Product> orderHistoryProducts=new ArrayList<Product>();
 	public static Order cartOrder = new Order();
 	public static String reportTxt;
 	public static User user = null;
@@ -157,12 +161,25 @@ public class ChatClient extends AbstractClient {
 			case "generateReport":
 				System.out.println("Report Create");
 				break;
-
 			case "GetReportByQuarter1":
 				reportsq1=(ArrayList<Report>)rc.getReturnValue();
 				break;
 			case "GetReportByQuarter2":
 				reportsq2=(ArrayList<Report>)rc.getReturnValue();
+				break;
+			case "getUserOrders":
+				userOrdersHistory = (ArrayList<Order>)rc.getReturnValue();
+				break;
+			case "getOrderDeliveryData":
+				orderHistoryDeliveryData = (String)rc.getReturnValue();
+				break;
+			case "getOrderItems":
+				orderHistoryItems=(ArrayList<Item>)rc.getReturnValue();
+				break;
+			case "getOrderProducts":
+				orderHistoryProducts=(ArrayList<Product>)rc.getReturnValue();
+				break;
+			case "changeOrderStatus":
 				break;
 			default:
 				//for debug - don't remove.
