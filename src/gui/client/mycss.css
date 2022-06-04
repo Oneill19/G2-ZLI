@@ -9,4 +9,8 @@
 
 #my-table .table-cell {
     -fx-alignment: CENTER;
+    -fx-font-weight: normal;
+    font-weight: normal;
+    -fx-font-size:13px;  
+    font-size:13px;
 }

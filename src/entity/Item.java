@@ -84,9 +84,50 @@ public class Item extends AbstractProduct {
 	public void setPriceRange(String priceRange) {
 		this.priceRange = priceRange;
 	}
+
 	
 	
-	
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + amountInProduct;
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + (isSoldAlone ? 1231 : 1237);
+		result = prime * result + ((priceRange == null) ? 0 : priceRange.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (amountInProduct != other.amountInProduct)
+			return false;
+		if (color == null) {
+			if (other.color != null)
+				return false;
+		} else if (!color.equals(other.color))
+			return false;
+		if (isSoldAlone != other.isSoldAlone)
+			return false;
+		if (priceRange == null) {
+			if (other.priceRange != null)
+				return false;
+		} else if (!priceRange.equals(other.priceRange))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString()+"Item [isSoldAlone=" + isSoldAlone + ", amountInProduct=" + amountInProduct + ", color=" + color
+				+ ", priceRange=" + priceRange + "]";
+	}
 	
 }

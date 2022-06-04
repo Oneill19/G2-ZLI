@@ -89,8 +89,8 @@ public class CatalogController {
     	else {
     		ChatClient.customerCart.put(selectedProduct, 1);
     	}
-    	System.out.println("Cart size:" + ChatClient.customerCart.size());
-    	System.out.println("Value: " + selectedProduct.getName() + ChatClient.customerCart.get(selectedProduct));
+//    	System.out.println("Cart size:" + ChatClient.customerCart.size());
+//    	System.out.println("Value: " + selectedProduct.getName() + ChatClient.customerCart.get(selectedProduct));
     }
 
     /**

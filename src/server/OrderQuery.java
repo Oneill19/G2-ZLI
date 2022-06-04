@@ -8,7 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import common.ReturnCommand;
+import entity.Item;
 import entity.Order;
+import entity.Product;
 
 public class OrderQuery {
 	
@@ -54,12 +56,10 @@ public class OrderQuery {
 		if(item_in_order.length() != 0)
 			for(String itemSerial : itemArray) {
 				String insertQuery = "INSERT INTO item_in_order(itemSerial,amount,orderNumber) VALUES ("+itemSerial+","+orderNumber.toString()+")";
-				System.out.println("item quey: "+insertQuery);
 				try {
 					ps = con.prepareStatement(insertQuery);
 					ps.executeUpdate();
 				}catch(Exception ex) {
-					System.out.println("Item: "+itemSerial);
 					ex.printStackTrace();
 				}
 			}
@@ -80,12 +80,10 @@ public class OrderQuery {
 		//insert products to DB
 		for(String productSerial : productArray) {
 			String insertQuery = "INSERT INTO product_in_order(productSerial,amount,orderNumber) VALUES ("+productSerial+","+orderNumber.toString()+")";
-			System.out.println("product query: " + insertQuery);
 			try {
 				ps = con.prepareStatement(insertQuery);
 				ps.executeUpdate();
 			}catch(Exception ex) {
-				System.out.println("Item: "+productSerial);
 				ex.printStackTrace();
 			}
 		}
@@ -125,7 +123,6 @@ public class OrderQuery {
 		int j=1;
 		ResultSet rs=null;
 		ArrayList<Order> userOrdersList= new ArrayList<Order>();
-//		System.out.println(selectQuery); //debug
 		
 		try {
 			stmt = con.createStatement();
@@ -141,7 +138,91 @@ public class OrderQuery {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-//		System.out.println("sb: "+sb.toString());//debug
 		return new ReturnCommand("getUserOrders", userOrdersList);
+	}
+	
+	/**
+	 * @param con			connection to client
+	 * @param orderNumber	order number of which the delivery data is necessary
+	 * @return				new ReturnCommand() with concated Strings nameOfReceiver+phoneOfReceiver+receptionAddress
+	 */
+	public static ReturnCommand getOrderDeliveryData(Connection con, String orderNumber) {
+		Statement stmt=null;
+		String selectQuery = "SELECT * FROM orderbydelivery WHERE orderNumber = "+orderNumber+";";
+		ResultSet rs=null;
+		String nameOfReceiver = null, phoneOfReceiver = null, receptionAddress = null ;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(selectQuery);
+			while(rs.next()) {
+				nameOfReceiver = rs.getString(2);
+				phoneOfReceiver = rs.getString(3);
+				receptionAddress = rs.getString(4);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		ReturnCommand rc = new ReturnCommand("getOrderDeliveryData", nameOfReceiver+"\t"+phoneOfReceiver+"\t"+receptionAddress);
+		return rc;
+	}
+	
+	public static ReturnCommand getOrderItems(Connection conn, String orderNumber) {
+		Statement stmt;
+		String selectQuery = "SELECT *"
+							+ "FROM item I "
+							+ "INNER JOIN item_in_order IO ON IO.itemSerial=I.itemSerial "
+							+ "WHERE IO.orderNumber="+orderNumber;
+		ResultSet rs = null;
+		ArrayList<Item> itemsList= new ArrayList<Item>();
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(selectQuery);
+			while(rs.next()) {
+				Item item = null;
+				String itemSerial = rs.getString(1);
+				String itemName =	rs.getString(2);
+				Double itemPrice = rs.getDouble(3);
+				String itemImage = rs.getString(5);
+				String itemType = rs.getString(4);
+				Boolean isSoldAlone = rs.getBoolean(6);
+				item = new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone,0,0);
+				item.setAmount(rs.getInt(9));//amount
+				itemsList.add(item);
+			}	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return new ReturnCommand("getOrderItems", (Object)itemsList);
+	}
+	
+	
+	public static ReturnCommand getOrderProducts(Connection conn, String orderNumber) {
+		Statement stmt;
+		String selectQuery = "SELECT *"
+							+ "FROM product I "
+							+ "INNER JOIN product_in_order IO ON IO.productSerial=I.productSerial "
+							+ "WHERE IO.orderNumber="+orderNumber;
+		ResultSet rs = null;
+		ArrayList<Product> products= new ArrayList<Product>();
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(selectQuery);
+			while(rs.next()) {
+				String productSerial = rs.getString(1);
+				String productName = rs.getString(2);
+				double productPrice = rs.getDouble(3);
+				String productImage = rs.getString(4);
+				String other = rs.getString(5);
+				String productType = rs.getString(6);
+				int sale = rs.getInt(7);
+				ArrayList<Item> madeFrom = (ArrayList<Item>)ProductsQuery.getAllItemsInProduct(conn, productSerial).getReturnValue();
+				products.add(new Product(productSerial, productName, productPrice, productType, productImage, other, madeFrom,sale));
+			}	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return new ReturnCommand("getOrderProducts", products);
 	}
 }

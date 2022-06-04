@@ -193,9 +193,9 @@ public class EchoServer extends AbstractServer {
 				// clientMsg[1] has the order in cart
 				client.sendToClient(OrderQuery.saveOrderToDB(conn, clientMsg[1]));
 				break;
-			case "numberOfItemsInOrder":
-				// client.sendToClient(); // TODO - topaz and koral
-				break;
+//			case "numberOfItemsInOrder":
+//				// client.sendToClient(); // TODO - topaz and koral
+//				break;
 			case "GetRegistersUsers":
 				client.sendToClient(StoreManagerQuery.getAllWaitingRegistersUsers(conn));
 				break;
@@ -245,6 +245,15 @@ public class EchoServer extends AbstractServer {
 				break;
 			case "getUserOrders":
 				client.sendToClient(OrderQuery.getUserOrders(conn, clientMsg[1]));
+				break;
+			case "getOrderDeliveryData":
+				client.sendToClient(OrderQuery.getOrderDeliveryData(conn, clientMsg[1]));
+				break;
+			case "getOrderItems":
+				client.sendToClient(OrderQuery.getOrderItems(conn, clientMsg[1]));
+				break;
+			case "getOrderProducts":
+				client.sendToClient(OrderQuery.getOrderProducts(conn, clientMsg[1]));
 				break;
 			default:
 				System.out.println("No Command Found");

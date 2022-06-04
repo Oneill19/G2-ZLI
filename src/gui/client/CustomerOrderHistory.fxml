@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.Tooltip?>
@@ -23,6 +24,18 @@
    <children>
       <Pane layoutY="-14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="873.0" prefWidth="1211.0" style="-fx-background-color: #FCFCFE;">
          <children>
+            <ScrollPane fx:id="itemScrollPane" hbarPolicy="NEVER" layoutX="24.0" layoutY="404.0" prefHeight="369.0" prefWidth="529.0" style="-fx-background: #FCFCFE; -fx-background-color: #FCFCFE; -fx-alignment: CENTER;">
+               <content>
+                  <GridPane fx:id="grid" alignment="CENTER" prefHeight="102.0" prefWidth="528.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints />
+                     </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
             <HBox layoutX="4.0" layoutY="40.0" spacing="870.0">
                <children>
                   <HBox maxHeight="-Infinity">
@@ -53,14 +66,13 @@
                   </Label>
                </children>
             </VBox>
-            <TableView fx:id="ordersTable" editable="true" layoutX="583.0" layoutY="432.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="341.0" prefWidth="597.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@mycss.css">
+            <TableView fx:id="ordersTable" editable="true" layoutX="634.0" layoutY="404.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="369.0" prefWidth="511.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@mycss.css">
                <columns>
-                  <TableColumn fx:id="colOrderNumber" prefWidth="56.0" text="Order&#10;Number" />
-                  <TableColumn fx:id="colPrice" prefWidth="43.0" text="Price" />
-                  <TableColumn fx:id="colGreetingCard" prefWidth="171.0" text="Greeting Card" />
-                  <TableColumn fx:id="colStatus" prefWidth="168.0" text="Status" />
-                  <TableColumn fx:id="colDeliveryMethod" prefWidth="98.0" text="Delivery&#10;Method" />
-                  <TableColumn fx:id="colCancelOrder" prefWidth="54.0" text="Cancel&#10;Order" />
+                  <TableColumn fx:id="colOrderNumber" prefWidth="56.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Order&#10;Number" />
+                  <TableColumn fx:id="colPrice" prefWidth="43.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Price" />
+                  <TableColumn fx:id="colGreetingCard" prefWidth="217.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Greeting Card" />
+                  <TableColumn fx:id="colDeliveryMethod" prefWidth="84.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Delivery&#10;Method" />
+                  <TableColumn fx:id="colCancelOrder" prefWidth="108.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Cancel&#10;Order" />
                </columns>
             </TableView>
             <Button fx:id="logoutBtn" defaultButton="true" layoutX="24.0" layoutY="48.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: transparent;" text="Logout |" textFill="#2b0548">
@@ -73,68 +85,86 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="exit" alignment="CENTER" layoutX="1139.0" layoutY="45.0" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
-            <Text layoutX="482.0" layoutY="816.0" strokeType="OUTSIDE" strokeWidth="0.0" text="if store then store's name, else, address of delivry" wrappingWidth="142.00130462646484" />
-            <GridPane fx:id="grid" layoutX="24.0" layoutY="155.0" prefHeight="619.0" prefWidth="529.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints />
-               </rowConstraints>
-               <children>
-                  <ScrollPane fx:id="itemScrollPane" hbarPolicy="NEVER" prefHeight="626.0" prefWidth="529.0" style="-fx-background: #FCFCFE; -fx-background-color: #FCFCFE; -fx-border-color: black;" />
-               </children>
-            </GridPane>
-            <VBox layoutX="671.0" layoutY="155.0" spacing="10.0">
+            <Button fx:id="exit" alignment="CENTER" layoutX="1138.0" layoutY="45.0" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+            <VBox layoutX="520.0" layoutY="153.0" spacing="10.0">
                <children>
                   <HBox style="-fx-alignment: top-center;">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 31;" text="Order #33341234" />
+                        <Text fx:id="textOrderNumber" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 31;" text="Order #3334" />
                      </children>
                   </HBox>
-                  <HBox>
+               </children>
+            </VBox>
+            <Separator layoutX="588.0" layoutY="369.0" orientation="VERTICAL" prefHeight="403.0" prefWidth="5.0" />
+            <HBox alignment="CENTER" layoutX="634.0" layoutY="363.0" prefHeight="32.0" prefWidth="502.0">
+               <children>
+                  <Text fx:id="textOrderNumber1" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 27;" text="Orders Table" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="20.0" layoutY="363.0" prefHeight="32.0" prefWidth="529.0">
+               <children>
+                  <Text fx:id="textOrderNumber11" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 27;" text="Products of Selected Order" />
+               </children>
+            </HBox>
+            <Separator layoutX="581.0" layoutY="204.0" orientation="VERTICAL" prefHeight="111.0" prefWidth="19.0" />
+            <HBox layoutX="222.0" layoutY="204.0" spacing="10.0">
+               <children>
+                  <VBox spacing="5.0">
                      <children>
-                        <VBox prefHeight="111.0" prefWidth="164.0" spacing="5.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Creation Date" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Supply Date" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Confirmed Date" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Complete Date" wrappingWidth="145.8841094970703" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="118.0" prefWidth="122.0" spacing="5.0">
-                           <children>
-                              <Text fx:id="textCreationDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
-                              <Text fx:id="textSupplyDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
-                              <Text fx:id="textConfirmedDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
-                              <Text fx:id="textCompleteDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
-                           </children>
-                        </VBox>
-                        <VBox fx:id="dateHBox1" prefHeight="111.0" prefWidth="65.0" spacing="5.0">
-                           <children>
-                              <Text fx:id="textCreationTime" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="12:12" />
-                              <Text fx:id="textSupplyTime" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="12:12" />
-                           </children>
-                        </VBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Creation Date: " />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Supply Date: " />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Confirmed Date: " />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Complete Date: " wrappingWidth="145.8841094970703" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="74.0" prefWidth="107.0" spacing="5.0">
+                     <children>
+                        <Text fx:id="textCreationDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
+                        <Text fx:id="textSupplyDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
+                        <Text fx:id="textConfirmedDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
+                        <Text fx:id="textCompleteDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="2022/05/31" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="dateHBox1" spacing="5.0">
+                     <children>
+                        <Text fx:id="textCreationTime" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="12:12" />
+                        <Text fx:id="textSupplyTime" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="12:12" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox fx:id="deliveryHbox" alignment="CENTER" layoutX="624.0" layoutY="208.0" spacing="10.0">
+               <children>
+                  <VBox spacing="5.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Status: " />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Receiver's Name: " />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Receiver's Phone:" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Delivery Address:" />
+                     </children>
+                  </VBox>
+                  <VBox spacing="5.0">
+                     <children>
+                        <Text fx:id="deliveryStatusText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="_status" />
+                        <Text fx:id="receiverNameText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Raj" />
+                        <Text fx:id="receiverPhoneText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="054-555-5555" />
+                        <Text fx:id="receiverAddressText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Karmiel, Ankor 4, 2020876" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox fx:id="pickupVbox" layoutX="714.0" layoutY="234.0" spacing="10.0">
+               <children>
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Status: " />
+                        <Text fx:id="statusText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="_status" />
                      </children>
                   </HBox>
-                  <HBox fx:id="deliveryHbox" spacing="10.0">
+                  <HBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <VBox prefHeight="85.0" prefWidth="164.0" spacing="5.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Receiver's Name: " />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Receiver's Phone:" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Delivery Address:" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="85.0" prefWidth="164.0" spacing="5.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Raj" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="054-555-5555" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Karmiel, Ankor 4, 2020876" />
-                           </children>
-                        </VBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Pickup you're order from: " />
+                        <Text fx:id="storeNameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Store_Name" />
                      </children>
                   </HBox>
                </children>

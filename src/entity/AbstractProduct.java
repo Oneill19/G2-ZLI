@@ -194,13 +194,7 @@ public abstract class AbstractProduct implements Serializable {
 	
 	@Override
 	public String toString() {
-		System.out.println("serialNumber = " + serialNumber);
-		System.out.println(" name = " + name);
-		System.out.println(" price = " + price);
-		System.out.println(" type = " + type);
-		System.out.println(" isItem = " + isItem);
-		System.out.println(" ");
-		return " ";
+		return "serialNumber: "+serialNumber+"\n" +"name: "+ name+"\nprice: " + price+"\ntype: "+ type+"\nisItem: " + isItem;
 	}
 
 }
