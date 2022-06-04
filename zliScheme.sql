@@ -133,7 +133,7 @@ CREATE TABLE `item_in_order` (
 
 LOCK TABLES `item_in_order` WRITE;
 /*!40000 ALTER TABLE `item_in_order` DISABLE KEYS */;
-INSERT INTO `item_in_order` VALUES ('1',1,61),('2',1,61),('3',4,60),('3',3,61);
+INSERT INTO `item_in_order` VALUES ('1',1,61),('1',1,62),('1',1,63),('2',1,61),('3',4,60),('3',3,61);
 /*!40000 ALTER TABLE `item_in_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,7 +243,7 @@ CREATE TABLE `orders` (
   `supplyTime` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`orderNumber`),
   KEY `fk_order_store` (`fromStore`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,7 +252,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (60,798,'',NULL,'','Karmiel','2022-06-03','00:31','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-07-02','13:13'),(61,812,'Happy Birthday!',NULL,'?','Tel Aviv','2022-06-04','02:32','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2023-06-15','13:17');
+INSERT INTO `orders` VALUES (60,798,'',NULL,'','Karmiel','2022-06-03','00:31','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-07-02','13:13'),(61,812,'Happy Birthday!',NULL,'?','Tel Aviv','2022-06-04','02:32','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2023-06-15','13:17'),(62,5,'Happy Shavuot!',NULL,'','Tel Aviv','2022-06-04','10:24','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-07-09','12:13'),(63,255,'For your wife :)',NULL,'','Karmiel','2022-06-04','10:45','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2023-06-21','16:00');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,7 +311,7 @@ CREATE TABLE `product_in_order` (
 
 LOCK TABLES `product_in_order` WRITE;
 /*!40000 ALTER TABLE `product_in_order` DISABLE KEYS */;
-INSERT INTO `product_in_order` VALUES ('1',7,60),('1',2,61),('2',4,61);
+INSERT INTO `product_in_order` VALUES ('1',7,60),('1',2,61),('1',1,63),('2',4,61),('2',1,63);
 /*!40000 ALTER TABLE `product_in_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -613,7 +613,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(4,'Adir','Miller','99999','053-3333','adir@zli','1','CustomerServiceWorker','CONFIRMED',0),(2022,'Naruto','Uzomoki','6666666666666666','0526270996','naruto@zli','1','MarketingEmployee','CONFIRMED',0),(111222333,'Dorin','Beery','1111111111111111','0545344778','dorin@zli','1','Customer','CONFIRMED',1);
+INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(4,'Adir','Miller','99999','053-3333','adir@zli','1','CustomerServiceWorker','CONFIRMED',0),(2022,'Naruto','Uzomoki','6666666666666666','0526270996','naruto@zli','1','MarketingEmployee','CONFIRMED',0),(111222333,'Dorin','Beery','1111111111111111','0545344778','dorin@zli','1','Customer','CONFIRMED',1),(666666666,'I DONT ORDER','Rude','1111111111111111','0541111111','dontorder@zli','1','Customer','CONFIRMED',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -626,4 +626,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-04  3:01:28
+-- Dump completed on 2022-06-04 16:11:18
