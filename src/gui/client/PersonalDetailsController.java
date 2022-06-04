@@ -369,7 +369,6 @@ public class PersonalDetailsController {
 				pickUpRadio.setSelected(true);
 				HBoxAddress.setVisible(false);
 				HBoxstore.setVisible(true);
-				System.out.println(ChatClient.cartOrder.getFromStore());
 				comboStore.setValue(ChatClient.cartOrder.getFromStore());
 			}
 			

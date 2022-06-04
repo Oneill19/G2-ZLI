@@ -166,5 +166,4 @@ public class LoginScreenController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
-
 }
