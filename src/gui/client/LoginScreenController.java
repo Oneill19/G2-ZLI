@@ -125,6 +125,7 @@ public class LoginScreenController {
     	// switch to redirect to the appropriate screen
     	switch (ChatClient.user.getUserRole()) {
     	case "Customer":
+    		ChatClient.products.clear();
     		ClientUI.chat.accept("GetAllProducts");
     		ClientUI.chat.accept("GetAllItems");
     		if (ChatClient.user.getStatus().equals("CONFIRMED")) {
@@ -139,7 +140,10 @@ public class LoginScreenController {
     		root = FXMLLoader.<Pane>load(getClass().getResource("StoreManagerScreen.fxml"));
     		break;
     	case "StoreWorker":
-    		System.out.println("StoreWorker");
+    		root = FXMLLoader.<Pane>load(getClass().getResource("StoreWorkerScreen.fxml"));
+    		break;
+    	case "StoreWorkerApproved":
+    		root = FXMLLoader.<Pane>load(getClass().getResource("StoreWorkerApprovedScreen.fxml"));
     		break;
     	case "CustomerServiceWorker":
 //    		System.out.println("CustomerServiceWorker");
@@ -159,6 +163,10 @@ public class LoginScreenController {
     	case "Delivery":
     		System.out.println("Delivery");
     		break;
+    	}
+    	
+    	if (root == null) {
+    		return;
     	}
     	
     	Scene scene = new Scene(root);

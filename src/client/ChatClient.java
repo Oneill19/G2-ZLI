@@ -33,6 +33,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Complaint> allComplaints = new ArrayList<>();
 	public static ArrayList<Report> reportsq1;
 	public static ArrayList<Report> reportsq2;
+	public static Order complaintOrder = null;
 	public static Order cartOrder = new Order();
 	public static String reportTxt;
 	public static User user = null;
@@ -99,12 +100,14 @@ public class ChatClient extends AbstractClient {
 				ChatClient.stores.addAll((ArrayList<String>) rc.getReturnValue());
 				break;
 			case "GetSurveysWithReports":
+				surveysWithReports.clear();
 				surveysWithReports.addAll((ArrayList<Survey>)rc.getReturnValue());
 				break;	
 			case "GetSurveyReport":
 				selectedSurveyReport = (SurveyReport)rc.getReturnValue();
 				break;	
 			case "GetAllSurveys":
+				allSurveys.clear();
 				allSurveys.addAll((ArrayList<Survey>)rc.getReturnValue());
 				break;
 			case "AddSurveyAnswer":
@@ -139,6 +142,7 @@ public class ChatClient extends AbstractClient {
 				requestSucceed = (boolean)rc.getReturnValue();
 				break;
 			case "GetAllOpenComplaintsOfWorker":
+				allComplaints.clear();
 				allComplaints.addAll((ArrayList<Complaint>)rc.getReturnValue());
 				break;
 			case "addDeliveryOrder":

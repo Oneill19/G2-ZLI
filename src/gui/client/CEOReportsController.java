@@ -1,7 +1,5 @@
 	package gui.client;
 
-	import java.awt.Label;
-import java.io.IOException;
 	import java.time.Year;
 
 	import client.ChatClient;

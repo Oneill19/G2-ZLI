@@ -16,12 +16,6 @@ public class CustomerServiceWorkerScreenController {
 
     @FXML
     private Button User;
-
-    @FXML
-    private Button addSurveyAnswersButton;
-
-    @FXML
-    private Button showReports;
     
     @FXML
     private Button addComplaint;
@@ -30,18 +24,6 @@ public class CustomerServiceWorkerScreenController {
     private Button watchComplaints;
     
     private CommonController cc = new CommonController();
-
-    /**
-     * go to add a survey answer screen
-     * 
-     * @param event
-     * @throws Exception 
-     */
-    @FXML
-    void onAddSurveyAnswers(ActionEvent event) throws Exception{
-    	ClientUI.chat.accept("GetAllSurveys");
-    	cc.changeFXML(event, "AddSurveyAnswer.fxml", "Zer-Li Add Survey Answer");
-    }
 
     /**
      * exit the program
@@ -63,18 +45,6 @@ public class CustomerServiceWorkerScreenController {
     @FXML
     void onLogOut(ActionEvent event) throws Exception {
     	cc.onLogout(event);
-    }
-
-    /**
-     * go to show survey reports screen
-     * 
-     * @param event
-     * @throws Exception
-     */
-    @FXML
-    void onShowReports(ActionEvent event) throws Exception {
-    	ClientUI.chat.accept("GetSurveysWithReports");
-    	cc.changeFXML(event, "SurveyReports.fxml", "Zer-Li Survey Reports");
     }
     
     /**

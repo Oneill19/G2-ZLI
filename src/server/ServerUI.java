@@ -1,5 +1,7 @@
 package server;
 
+import java.io.IOException;
+
 import gui.server.ServerConnectController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -38,10 +40,15 @@ public class ServerUI extends Application {
 		}
 		return true;
 	}
-	
+
 	public static void stopServer() {
-		if (sv != null) {
-			sv.stopListening();
+		try {
+			if (sv != null) {
+				sv.stopListening();
+				sv.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

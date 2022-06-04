@@ -10,8 +10,27 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 public class AddSurveyAnswerController {
+	
+	@FXML
+    private Text question1;
+
+    @FXML
+    private Text question2;
+
+    @FXML
+    private Text question3;
+
+    @FXML
+    private Text question4;
+
+    @FXML
+    private Text question5;
+
+    @FXML
+    private Text question6;
 
     @FXML
     private ComboBox<Number> answer1;
@@ -69,7 +88,7 @@ public class AddSurveyAnswerController {
     	ChatClient.allSurveys.clear();
 		
 		// go to the previous screen
-		cc.changeFXML(event, "CustomerServiceWorkerScreen.fxml", "Zer-Li Customer Service Worker Screen");
+		cc.changeFXML(event, "StoreWorkerApprovedScreen.fxml", "Zer-Li Customer Service Worker Screen");
     }
 
     /**
@@ -99,9 +118,56 @@ public class AddSurveyAnswerController {
 		// logout and go to the login page
 		cc.onLogout(event);
     }
+    
+    /**
+     * load the questions of the survey
+     * 
+     * @param event
+     * @throws Exception
+     */
+    @FXML
+    void onChooseSurvey(ActionEvent event) throws Exception {
+    	Survey survey = null;;
+    	
+    	// check if a survey is selected
+    	if (surveyName.getValue() == null) {
+    		messageLabel.setTextFill(Color.RED);
+    		messageLabel.setText("Please Choose a survey");
+    		return;
+    	}
+    	
+    	// get the selected survey
+    	for (Survey s : ChatClient.allSurveys) {
+    		if (s.getSurveyName().equals(surveyName.getValue())) {
+    			survey = s;
+    			break;
+    		}
+    	}
+    	
+    	if (survey == null) {
+    		return;
+    	}
+    	
+    	// make the user to be able to choose answers
+    	userMail.setDisable(false);
+    	answer1.setDisable(false);
+    	answer2.setDisable(false);
+    	answer3.setDisable(false);
+    	answer4.setDisable(false);
+    	answer5.setDisable(false);
+    	answer6.setDisable(false);
+    	
+    	// initialize the questions
+    	question1.setText(survey.getQuestions()[0]);
+    	question2.setText(survey.getQuestions()[1]);
+    	question3.setText(survey.getQuestions()[2]);
+    	question4.setText(survey.getQuestions()[3]);
+    	question5.setText(survey.getQuestions()[4]);
+    	question6.setText(survey.getQuestions()[5]);
+    }
 
     /**
-     * save the new answer to the db
+     * save the new answer to the database
      * 
      * @param event
      * @throws Exception
@@ -136,6 +202,24 @@ public class AddSurveyAnswerController {
     		messageLabel.setTextFill(Color.RED);
     		messageLabel.setText("Answer Did not Submitted!");
     	}
+    	
+    	// make the user to be able to choose answers
+    	userMail.setDisable(true);
+    	userMail.setText("");
+    	answer1.setDisable(true);
+    	answer2.setDisable(true);
+    	answer3.setDisable(true);
+    	answer4.setDisable(true);
+    	answer5.setDisable(true);
+    	answer6.setDisable(true);
+    	
+    	// initialize the questions
+    	question1.setText("");
+    	question2.setText("");
+    	question3.setText("");
+    	question4.setText("");
+    	question5.setText("");
+    	question6.setText("");
     }
     
     /**

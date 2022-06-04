@@ -133,7 +133,7 @@ public class CatalogController {
      */
     @FXML
     void onUserOptions(ActionEvent event) throws Exception {
-    	System.out.println("On User Options");
+    	cc.changeFXML(event, "ApprvoedCustomerOptions.fxml", "Zer-Li");
     }
     
     /**

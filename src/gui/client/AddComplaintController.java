@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 import client.ChatClient;
 import client.ClientUI;
+import entity.StoreWorker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -102,17 +103,16 @@ public class AddComplaintController {
     		label.setText("Order not exist");
     		return;
     	}
-    	
     	// add the complaint
     	label.setText("");
     	ClientUI.chat.accept("AddComplaint" + "\t" 
-    			+ orderNumber.getText() + ","
-    			+ customerId.getText() + "," 
-    			+ ChatClient.user.getUserID() + "," 
-    			+ "'" + complaintDescriptionTxt.getText() + "',"
-    			+ "'" + LocalDate.now() + "',"
-    			+ "'" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")) + "',"
-    			+ "'OPEN'" + ","
+    			+ orderNumber.getText() + "\t"
+    			+ customerId.getText() + "\t" 
+    			+ ChatClient.user.getUserID() + "\t"
+    			+ complaintDescriptionTxt.getText() + "\t"
+    			+ LocalDate.now() + "\t"
+    			+ LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")) + "\t"
+    			+ "OPEN" + "\t"
     			+ "0");
     	
     	// if the adding was a success show a successful message

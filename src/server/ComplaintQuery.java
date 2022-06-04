@@ -18,10 +18,19 @@ import entity.Order;
  */
 public class ComplaintQuery {
 
-	public static ReturnCommand addComplaint(Connection con, String complaint) {
+	/**
+	 * adding a new complaint to the database
+	 * 
+	 * @param con
+	 * @param complaint
+	 * @return true if complaint added successfully
+	 */
+	public static ReturnCommand addComplaint(Connection con, String orderNumber, String customerId, String workerId, String desc, String date, String time, String status, String isReminded) {
 		Statement stmt;
-		String sqlQuery = "INSERT INTO zli.complaint (OrderNumber,CustomerId,WorkerID,ComplaintDetails,RecieveDate,RecieveTime,Status,IsReminded) VALUES ("
-				+ complaint + ");";
+		String storeName = ((Order)getOrderByNumber(con, Integer.parseInt(orderNumber)).getReturnValue()).getFromStore();
+		String inputs = String.format("%s,%s,%s,'%s','%s','%s','%s','%s',%s", orderNumber, customerId, workerId, storeName, desc, date, time, status, isReminded);
+		String sqlQuery = "INSERT INTO zli.complaint (OrderNumber,CustomerId,WorkerID,StoreName,ComplaintDetails,RecieveDate,RecieveTime,Status,IsReminded) VALUES ("
+				+ inputs + ");";
 		try {
 			stmt = con.createStatement();
 			stmt.executeUpdate(sqlQuery);
@@ -32,6 +41,13 @@ public class ComplaintQuery {
 		}
 	}
 
+	/**
+	 * get all to complaints by the id of the worker made them
+	 * 
+	 * @param con
+	 * @param workerId
+	 * @return array of the complaints of the worker
+	 */
 	public static ReturnCommand getAllOpenComplaintsOfWorker(Connection con, int workerId) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.complaint WHERE WorkerID=" + workerId + " AND Status='OPEN'";
@@ -45,14 +61,15 @@ public class ComplaintQuery {
 				int orderNumber = rs.getInt(2);
 				int customerId = rs.getInt(3);
 				int workerIdinDB = rs.getInt(4);
-				String complaintDetails = rs.getString(5);
-				LocalDate reciveDate = LocalDate.parse(rs.getString(6));
-				LocalTime reciveTime = LocalTime.parse(rs.getString(7));
-				String status = rs.getString(8);
-				boolean isReminded = rs.getInt(9) == 0 ? false : true;
-				float refund = rs.getFloat(10);
-				String refundDetails = rs.getString(11);
-				complaints.add(new Complaint(complaintId, orderNumber, customerId, workerIdinDB, complaintDetails,
+				String storeName = rs.getString(5);
+				String complaintDetails = rs.getString(6);
+				LocalDate reciveDate = LocalDate.parse(rs.getString(7));
+				LocalTime reciveTime = LocalTime.parse(rs.getString(8));
+				String status = rs.getString(9);
+				boolean isReminded = rs.getInt(10) == 0 ? false : true;
+				float refund = rs.getFloat(11);
+				String refundDetails = rs.getString(12);
+				complaints.add(new Complaint(complaintId, orderNumber, customerId, workerIdinDB, storeName, complaintDetails,
 						reciveDate, reciveTime, status, isReminded, refund, refundDetails));
 			}
 			return new ReturnCommand("GetAllOpenComplaintsOfWorker", complaints);
@@ -62,9 +79,17 @@ public class ComplaintQuery {
 		}
 	}
 
+	/**
+	 * check if the order number and user id are match
+	 * 
+	 * @param con
+	 * @param orderNumber
+	 * @param userId
+	 * @return true if the order exist
+	 */
 	public static ReturnCommand orderExist(Connection con, int orderNumber, int userId) {
 		Statement stmt;
-		String sqlQuery = "SELECT orderNumber FROM zli.orders WHERE orderNumber=" + orderNumber + " AND CustomerID="
+		String sqlQuery = "SELECT orderNumber FROM zli.orders WHERE orderNumber=" + orderNumber + " AND cutomerID="
 				+ userId + ";";
 		ResultSet rs;
 		try {
@@ -81,6 +106,13 @@ public class ComplaintQuery {
 		}
 	}
 
+	/**
+	 * update the reminded column in the db
+	 * 
+	 * @param con
+	 * @param complaintId
+	 * @return true if the reminding was successfull
+	 */
 	public static ReturnCommand reminded(Connection con, int complaintId) {
 		Statement stmt;
 		String sqlQuery = "UPDATE zli.complaint SET IsReminded=1 WHERE ComplaintId=" + complaintId + ";";
@@ -94,6 +126,11 @@ public class ComplaintQuery {
 		}
 	}
 
+	/**
+	 * @param con
+	 * @param complaintId
+	 * @return
+	 */
 	public static ReturnCommand closeComplaint(Connection con, int complaintId) {
 		Statement stmt;
 		String sqlQuery = "UPDATE zli.complaint SET Status='CLOSED' WHERE ComplaintId=" + complaintId + ";";
@@ -107,6 +144,14 @@ public class ComplaintQuery {
 		}
 	}
 
+	/**
+	 * @param con
+	 * @param complaintId
+	 * @param customerId
+	 * @param orderNumber
+	 * @param refundDetails
+	 * @return
+	 */
 	public static ReturnCommand refundForComplaintFullAmount(Connection con, int complaintId, int customerId,
 			int orderNumber, String refundDetails) {
 		Statement stmt;
@@ -158,6 +203,15 @@ public class ComplaintQuery {
 		return new ReturnCommand("RefundForComplaintFullAmount", true);
 	}
 
+	/**
+	 * @param con
+	 * @param complaintId
+	 * @param customerId
+	 * @param orderNumber
+	 * @param refundAmount
+	 * @param refundDetails
+	 * @return
+	 */
 	public static ReturnCommand refundForComplaintNotFull(Connection con, int complaintId, int customerId,
 			int orderNumber, float refundAmount, String refundDetails) {
 		Statement stmt;
@@ -197,7 +251,7 @@ public class ComplaintQuery {
 	/**
 	 * @param con
 	 * @param orderNumber
-	 * @return
+	 * @return Order
 	 */
 	public static ReturnCommand getOrderByNumber(Connection con, int orderNumber) {
 		Statement stmt;
