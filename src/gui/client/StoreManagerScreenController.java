@@ -22,6 +22,9 @@ public class StoreManagerScreenController {
 
     @FXML
     private Button Permissionmanagement;
+    
+    @FXML
+    private Button complaintsReport;
 
     @FXML
     private Button Exit;
@@ -134,6 +137,17 @@ public class StoreManagerScreenController {
 		primaryStage.setTitle("Zer-Li->Option Screen->View Monthly Report");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+    }
+    
+    /**
+     * move to the complaints report
+     * 
+     * @param event
+     * @throws Exception
+     */
+    @FXML
+    void onComplaintsReports(ActionEvent event) throws Exception {
+
     }
     
     public void initialize() {

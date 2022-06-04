@@ -4,6 +4,15 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
+/**
+ * Order Status:
+ * CONFIRMED
+ * WAITING_FOR_CONFIRMATION
+ * WAITING_FOR_CANCELTATION
+ * COMPLETED
+ */
+
 @SuppressWarnings("serial")
 public class Order implements Serializable {
 

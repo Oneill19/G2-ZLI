@@ -15,6 +15,7 @@ public class Complaint implements Serializable {
 	private final int orderNumber;
 	private final int customerId;
 	private final int workerId;
+	private final String storeName;
 	private final String complaintDetails;
 	private final LocalDate reciveDate;  
 	private final LocalTime reciveTime;
@@ -28,18 +29,20 @@ public class Complaint implements Serializable {
 	 * @param orderNumber
 	 * @param customerId
 	 * @param workerId
+	 * @param storeName
 	 * @param complaintDetails
 	 * @param reciveDate
 	 * @param reciveTime
 	 * @param status
 	 * @param isReminded
 	 */
-	public Complaint(int complaintId, int orderNumber, int customerId, int workerId, String complaintDetails,
+	public Complaint(int complaintId, int orderNumber, int customerId, int workerId, String storeName, String complaintDetails,
 			LocalDate reciveDate, LocalTime reciveTime, String status, boolean isReminded) {
 		this.complaintId = complaintId;
 		this.orderNumber = orderNumber;
 		this.customerId = customerId;
 		this.workerId = workerId;
+		this.storeName = storeName;
 		this.complaintDetails = complaintDetails;
 		this.reciveDate = reciveDate;
 		this.reciveTime = reciveTime;
@@ -54,6 +57,7 @@ public class Complaint implements Serializable {
 	 * @param orderNumber
 	 * @param customerId
 	 * @param workerId
+	 * @param storeName
 	 * @param complaintDetails
 	 * @param reciveDate
 	 * @param reciveTime
@@ -62,13 +66,14 @@ public class Complaint implements Serializable {
 	 * @param refund
 	 * @param refundDetails
 	 */
-	public Complaint(int complaintId, int orderNumber, int customerId, int workerId, String complaintDetails,
+	public Complaint(int complaintId, int orderNumber, int customerId, int workerId, String storeName, String complaintDetails,
 			LocalDate reciveDate, LocalTime reciveTime, String status, boolean isReminded, float refund,
 			String refundDetails) {
 		this.complaintId = complaintId;
 		this.orderNumber = orderNumber;
 		this.customerId = customerId;
 		this.workerId = workerId;
+		this.storeName = storeName;
 		this.complaintDetails = complaintDetails;
 		this.reciveDate = reciveDate;
 		this.reciveTime = reciveTime;
@@ -155,6 +160,14 @@ public class Complaint implements Serializable {
 	public int getWorkerId() {
 		return workerId;
 	}
+	
+	/**
+	 * @return the storeName
+	 */
+	public String getStoreName() {
+		return storeName;
+	}
+	
 	/**
 	 * @return the complaintDetails
 	 */
@@ -175,14 +188,14 @@ public class Complaint implements Serializable {
 	}
 	
 	public String toString() {
-		return complaintId + "," +
-				orderNumber + "," +
+		return orderNumber + "," +
 				customerId + "," +
 				workerId + "," +
-				complaintDetails + "," +
-				reciveDate + "," +
-				reciveTime + "," +
-				status + "," +
+				"'" + storeName + "'," +
+				"'" + complaintDetails + "'," +
+				"'" + reciveDate + "'," +
+				"'" + reciveTime + "'," +
+				"'" + status + "'," +
 				getIsRemindedNumber();
 	}
 }

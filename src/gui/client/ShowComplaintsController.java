@@ -40,6 +40,9 @@ public class ShowComplaintsController {
     private TableColumn<Complaint, Integer> orderNumber;
     
     @FXML
+    private TableColumn<Complaint, String> storeName;
+    
+    @FXML
     private TableColumn<Complaint, String> complaintDescription;
     
     @FXML
@@ -281,6 +284,7 @@ public class ShowComplaintsController {
     	complaintId.setCellValueFactory(new PropertyValueFactory<>("complaintId"));
     	userId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
     	orderNumber.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
+    	storeName.setCellValueFactory(new PropertyValueFactory<>("storeName"));
     	complaintDescription.setCellValueFactory(new PropertyValueFactory<>("complaintDetails"));
     	complaints.setItems(observableList);
     }

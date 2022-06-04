@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.AddSurveyAnswerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.AddSurveyAnswerController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="450.0" layoutY="3.0">
          <image>
@@ -29,7 +29,7 @@
          </font>
       </Button>
       <Button fx:id="backButton" alignment="CENTER" layoutX="361.0" layoutY="648.0" mnemonicParsing="false" onAction="#onBack" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
-      <ComboBox fx:id="surveyName" layoutX="538.0" layoutY="161.0" prefHeight="25.0" prefWidth="253.0" promptText="Please Choose Survey" style="-fx-font-size: 15;" />
+      <ComboBox fx:id="surveyName" layoutX="538.0" layoutY="161.0" onAction="#onChooseSurvey" prefHeight="25.0" prefWidth="253.0" promptText="Please Choose Survey" style="-fx-font-size: 15;" />
       <Text fill="#2b0548" layoutX="331.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Survey:">
          <font>
             <Font name="System Bold" size="24.0" />
@@ -40,48 +40,48 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="userMail" layoutX="538.0" layoutY="221.0" prefHeight="31.0" prefWidth="253.0" promptText="Enter user mail">
+      <TextField fx:id="userMail" disable="true" layoutX="538.0" layoutY="221.0" prefHeight="31.0" prefWidth="253.0" promptText="Enter user mail">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <Text fill="#2b0548" layoutX="331.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Answer #1:">
+      <Text fx:id="question1" fill="#2b0548" layoutX="33.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question #1" textAlignment="CENTER" wrappingWidth="504.76953125">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Text fill="#2b0548" layoutX="331.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Answer #2:">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Text>
-      <Text fill="#2b0548" layoutX="331.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Answer #3:">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Text>
-      <Text fill="#2b0548" layoutX="331.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Answer #4:">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Text>
-      <Text fill="#2b0548" layoutX="331.0" layoutY="513.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Answer #5:">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Text>
-      <Text fill="#2b0548" layoutX="331.0" layoutY="570.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Answer #6:">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Text>
-      <ComboBox fx:id="answer1" layoutX="538.0" layoutY="277.0" prefHeight="31.0" prefWidth="186.0" promptText="Choose Answer #1" style="-fx-font-size: 15;" />
-      <ComboBox fx:id="answer2" layoutX="538.0" layoutY="330.0" prefHeight="31.0" prefWidth="186.0" promptText="Choose Answer #2" style="-fx-font-size: 15;" />
-      <ComboBox fx:id="answer3" layoutX="538.0" layoutY="380.0" prefHeight="31.0" prefWidth="186.0" promptText="Choose Answer #3" style="-fx-font-size: 15;" />
-      <ComboBox fx:id="answer4" layoutX="538.0" layoutY="433.0" prefHeight="31.0" prefWidth="186.0" promptText="Choose Answer #4" style="-fx-font-size: 15;" />
-      <ComboBox fx:id="answer5" layoutX="538.0" layoutY="488.0" prefHeight="31.0" prefWidth="186.0" promptText="Choose Answer #5" style="-fx-font-size: 15;" />
-      <ComboBox fx:id="answer6" layoutX="538.0" layoutY="546.0" prefHeight="31.0" prefWidth="186.0" promptText="Choose Answer #6" style="-fx-font-size: 15;" />
+      <ComboBox fx:id="answer1" disable="true" layoutX="192.0" layoutY="336.0" prefHeight="31.0" prefWidth="186.0" promptText="Choose Answer #1" style="-fx-font-size: 15;" />
+      <ComboBox fx:id="answer2" disable="true" layoutX="192.0" layoutY="418.0" prefHeight="31.0" prefWidth="186.0" promptText="Choose Answer #2" style="-fx-font-size: 15;" />
+      <ComboBox fx:id="answer3" disable="true" layoutX="192.0" layoutY="505.0" prefHeight="31.0" prefWidth="186.0" promptText="Choose Answer #3" style="-fx-font-size: 15;" />
+      <ComboBox fx:id="answer4" disable="true" layoutX="728.0" layoutY="336.0" prefHeight="31.0" prefWidth="186.0" promptText="Choose Answer #4" style="-fx-font-size: 15;" />
+      <ComboBox fx:id="answer5" disable="true" layoutX="728.0" layoutY="418.0" prefHeight="31.0" prefWidth="186.0" promptText="Choose Answer #5" style="-fx-font-size: 15;" />
+      <ComboBox fx:id="answer6" disable="true" layoutX="728.0" layoutY="505.0" prefHeight="31.0" prefWidth="186.0" promptText="Choose Answer #6" style="-fx-font-size: 15;" />
       <Button fx:id="saveButton" alignment="CENTER" layoutX="561.0" layoutY="648.0" mnemonicParsing="false" onAction="#onSave" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: Green; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Save" textFill="#fcfcfe" />
       <Label fx:id="messageLabel" alignment="CENTER" layoutX="429.0" layoutY="608.0" prefHeight="17.0" prefWidth="243.0" />
+      <Text fx:id="question4" fill="#2b0548" layoutX="569.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question #4:" textAlignment="CENTER" wrappingWidth="504.76953125">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="question2" fill="#2b0548" layoutX="33.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question #2" textAlignment="CENTER" wrappingWidth="504.76953125">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="question3" fill="#2b0548" layoutX="33.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question #3:" textAlignment="CENTER" wrappingWidth="504.76953125">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="question5" fill="#2b0548" layoutX="569.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question #5" textAlignment="CENTER" wrappingWidth="504.76953125">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="question6" fill="#2b0548" layoutX="569.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question #6" textAlignment="CENTER" wrappingWidth="504.76953125">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
