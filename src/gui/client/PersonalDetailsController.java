@@ -9,6 +9,7 @@ import java.time.temporal.ChronoUnit;
 
 import client.ChatClient;
 import client.ClientUI;
+import entity.Order;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -32,6 +33,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
@@ -48,7 +52,9 @@ public class PersonalDetailsController {
 	@FXML private TextField fieldAptNumber,fieldBlessing,fieldCity,fieldEmail,fieldFirst,fieldLast,fieldPostal,fieldSt,hourPicker,minutesPicker,fieldDescribtion, nameOfReciever, phoneOfReciever; 
     @FXML private Label labelDestination, labelStore;
     @FXML private HBox HBoxAddress, HBoxstore;
+    @FXML private Pane pane;
     private String deliveryData;
+    private Label deliveryLabel = new Label();
 	
 	//Non FXML fields
 	private CommonController cc = new CommonController();
@@ -80,13 +86,20 @@ public class PersonalDetailsController {
 	@FXML void onDelivery(ActionEvent event) 
 	{
 		HBoxAddress.setVisible(true);
-		HBoxstore.setVisible(false);	
+		HBoxstore.setVisible(false);
+//		deliveryLabel.setLayoutX(HBoxstore.getLayoutX());
+//		deliveryLabel.setLayoutY(589);
+//		deliveryLabel.setFont(Font.font(null, FontWeight.BLACK, 15));
+//		deliveryLabel.setStyle("-fx-text-fill:red;");
+		deliveryLabel.setVisible(true);
+		
 	}
 
 	@FXML
 	void onPickUp(ActionEvent event) {
 		HBoxAddress.setVisible(false);
 		HBoxstore.setVisible(true);	
+		deliveryLabel.setVisible(false);
 	} 
 	
 	/**
@@ -164,6 +177,9 @@ public class PersonalDetailsController {
 			sb.append("'").append(fieldPostal.getText()).append("' ");
 			deliveryData = sb.toString();
 			ChatClient.cartOrder.setDeliveryMethod("Delivery");
+			Order order = ChatClient.cartOrder;
+			order.setTotalPrice(order.getTotalPrice()+20);
+			
 		}
 		
 		//check date time fields are initialed 
@@ -250,6 +266,15 @@ public class PersonalDetailsController {
 	}
 
 	public void initialize() throws Exception {
+		
+		//set delivery label style
+		deliveryLabel.setText("Delivery by 20$");
+		deliveryLabel.setLayoutX(HBoxstore.getLayoutX());
+		deliveryLabel.setLayoutY(589);
+		deliveryLabel.setFont(Font.font(null, FontWeight.BLACK, 15));
+		deliveryLabel.setStyle("-fx-text-fill:red;");
+		deliveryLabel.setVisible(false);
+		pane.getChildren().add(deliveryLabel);
 		
 		/**
 		 * causes TextField to change its' border to transparent when gets focus
