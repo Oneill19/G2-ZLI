@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import common.ClientInfo;
 import entity.Order;
+import gui.server.ServerConnectController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ocsf.server.AbstractServer;
@@ -278,6 +279,9 @@ public class EchoServer extends AbstractServer {
 				break;
 			case "EditItem":
 				client.sendToClient(ProductsQuery.editItem(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4], clientMsg[5]));
+				break;
+			case "Reminded":
+				client.sendToClient(ComplaintQuery.reminded(conn, Integer.parseInt(clientMsg[1])));
 				break;
 			default:
 				System.out.println("No Command Found");

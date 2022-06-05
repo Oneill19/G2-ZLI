@@ -38,7 +38,6 @@ public class ComplaintsReportsCEOController {
     @FXML
     private Button onBack;
 
-
     @FXML
     private Button show;
 

@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -59,6 +60,9 @@ public class ServerConnectController {
 	
 	@FXML
     private Label statusLabel;
+	
+	@FXML
+	private Button importUsers;
 
 	@FXML
 	void toDefault() {
@@ -80,6 +84,7 @@ public class ServerConnectController {
 
 	@FXML
 	public void onDisconnect(ActionEvent event) throws Exception {
+		connectionTable.getItems().clear();
 		statusLabel.setText("");
 		ServerUI.stopServer();
 	}
@@ -100,5 +105,10 @@ public class ServerConnectController {
 		primaryStage.show();
 
 	}
+	
+	@FXML
+    void onImportUsers(ActionEvent event) {
+		System.out.println("On import");
+    }
 
 }
