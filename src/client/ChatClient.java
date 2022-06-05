@@ -210,6 +210,9 @@ public class ChatClient extends AbstractClient {
 			case "EditItem":
 				requestSucceed = (boolean)rc.getReturnValue();
 				break;
+			case "Reminded":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
 			default:
 				//for debug - don't remove.
 				System.out.println("ChatClient didn't recognize command");

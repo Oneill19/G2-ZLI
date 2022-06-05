@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.server.ServerConnectController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.server.ServerConnectController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="406.0" layoutY="48.0">
          <image>
@@ -65,11 +65,11 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <TableView fx:id="connectionTable" layoutX="500.0" layoutY="175.0" prefHeight="441.0" prefWidth="444.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px;">
+      <TableView fx:id="connectionTable" layoutX="500.0" layoutY="175.0" prefHeight="443.0" prefWidth="444.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px;">
         <columns>
-          <TableColumn fx:id="ipColumn" prefWidth="137.0" style="-fx-background-color: #FCFCFE;" text="IP" />
-          <TableColumn fx:id="hostColumn" prefWidth="187.0" style="-fx-background-color: #FCFCFE;" text="Host" />
-            <TableColumn fx:id="statusColumn" minWidth="0.0" prefWidth="118.0" style="-fx-background-color: #FCFCFE;" text="Status" />
+          <TableColumn fx:id="ipColumn" prefWidth="137.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="IP" />
+          <TableColumn fx:id="hostColumn" prefWidth="187.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Host" />
+            <TableColumn fx:id="statusColumn" minWidth="0.0" prefWidth="118.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Status" />
         </columns>
       </TableView>
       <Button fx:id="defaultInsert" alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" layoutY="568.0" mnemonicParsing="false" onAction="#toDefault" prefHeight="43.0" prefWidth="173.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px; -fx-background-color: #2B0548; -fx-font-size: 20px; -fx-font-weight: bold;" text="Default" textAlignment="CENTER" textFill="#fcfcfe">
@@ -91,5 +91,10 @@
             <Font size="20.0" />
          </font>
       </TextField>
+      <Button fx:id="importUsers" alignment="CENTER" contentDisplay="CENTER" layoutX="636.0" layoutY="632.0" mnemonicParsing="false" onAction="#onImportUsers" prefHeight="43.0" prefWidth="173.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px; -fx-background-color: #2B0548; -fx-font-size: 20px; -fx-font-weight: bold;" text="Import Users" textAlignment="CENTER" textFill="#fcfcfe">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

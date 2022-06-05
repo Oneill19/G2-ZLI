@@ -46,6 +46,12 @@ public class ShowComplaintsController {
     private TableColumn<Complaint, String> complaintDescription;
     
     @FXML
+    private TableColumn<Complaint, String> dateCol;
+    
+    @FXML
+    private TableColumn<Complaint, String> timeCol;
+    
+    @FXML
     private Label messageLabel;
 
     @FXML
@@ -286,6 +292,8 @@ public class ShowComplaintsController {
     	orderNumber.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
     	storeName.setCellValueFactory(new PropertyValueFactory<>("storeName"));
     	complaintDescription.setCellValueFactory(new PropertyValueFactory<>("complaintDetails"));
+    	dateCol.setCellValueFactory(new PropertyValueFactory<>("reciveDate"));
+    	timeCol.setCellValueFactory(new PropertyValueFactory<>("reciveTime"));
     	complaints.setItems(observableList);
     }
 
