@@ -19,6 +19,7 @@ public class Item extends AbstractProduct {
 	 * @param type
 	 * @param image
 	 * @param isSoldAlone
+	 * @param color
 	 */
 	public Item(String serialNumber, 
 			String name, 
@@ -34,6 +35,7 @@ public class Item extends AbstractProduct {
 		super(serialNumber, name, price, image, true, type, sale, color);
 		this.isSoldAlone = isSoldAlone;
 		this.amountInProduct = amountInProduct;
+		this.color = color;
 	}
 	
 	public Item(Item item) {
