@@ -218,6 +218,9 @@ public class ChatClient extends AbstractClient {
 			case "insertItemInSaleToDB":
 				break;
 			case "insertProductsInSaleToDB":
+        break;
+			case "Reminded":
+				requestSucceed = (boolean)rc.getReturnValue();
 				break;
 			default:
 				//for debug - don't remove.
