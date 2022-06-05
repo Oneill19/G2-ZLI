@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 
 public class MarketingEmployeeOptionsController {
 
-    @FXML private Button onBack, logoutBtn, userOptBtn, exit, addSaleButton, watchSaleButton, nextBtn;
+    @FXML private Button onBack, logoutBtn, userOptBtn, exit, addSaleButton, watchSaleButton;
     private CommonController cc = new CommonController();
 
 	@FXML
@@ -25,10 +25,10 @@ public class MarketingEmployeeOptionsController {
 	void onLogout(ActionEvent event) throws Exception {
 		cc.onLogout(event);
 	}
-
+	
     @FXML
-    void onNext(ActionEvent event) {
-
+    void onAddSaleButton(ActionEvent event) throws IOException {
+    	cc.changeFXML(event, "AddSale.fxml", "Zer-li Add Sale");
     }
 
 }

@@ -87,12 +87,7 @@ public class PersonalDetailsController {
 	{
 		HBoxAddress.setVisible(true);
 		HBoxstore.setVisible(false);
-//		deliveryLabel.setLayoutX(HBoxstore.getLayoutX());
-//		deliveryLabel.setLayoutY(589);
-//		deliveryLabel.setFont(Font.font(null, FontWeight.BLACK, 15));
-//		deliveryLabel.setStyle("-fx-text-fill:red;");
 		deliveryLabel.setVisible(true);
-		
 	}
 
 	@FXML

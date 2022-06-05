@@ -41,6 +41,7 @@ public class ChatClient extends AbstractClient {
 	public static Order cartOrder = new Order();
 	public static String reportTxt;
 	public static User user = null;
+	public static int returnSaleID;
 	
 	public static SurveyReport selectedSurveyReport = null;
 	
@@ -180,6 +181,14 @@ public class ChatClient extends AbstractClient {
 				orderHistoryProducts=(ArrayList<Product>)rc.getReturnValue();
 				break;
 			case "changeOrderStatus":
+				break;
+			case "insertNewSale":
+				if(rc.getReturnValue()!= null)
+					returnSaleID=(int)rc.getReturnValue();
+				break;
+			case "insertItemInSaleToDB":
+				break;
+			case "insertProductsInSaleToDB":
 				break;
 			default:
 				//for debug - don't remove.
