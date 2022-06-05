@@ -117,7 +117,7 @@ CREATE TABLE `item` (
   `itemType` varchar(45) NOT NULL,
   `itemImage` varchar(100) DEFAULT NULL,
   `isSoldAlone` tinyint NOT NULL,
-  `idSale` int DEFAULT NULL,
+  `idSale` int DEFAULT '0',
   `Color` varchar(45) NOT NULL,
   PRIMARY KEY (`itemSerial`),
   KEY `a_idx` (`idSale`),
@@ -296,7 +296,7 @@ CREATE TABLE `product` (
   `productImage` varchar(100) DEFAULT NULL,
   `other` varchar(45) DEFAULT NULL,
   `productType` varchar(45) NOT NULL,
-  `idSale` int DEFAULT NULL,
+  `idSale` int DEFAULT '0',
   `Color` varchar(45) NOT NULL,
   PRIMARY KEY (`productSerial`),
   KEY `a_idx` (`idSale`),
@@ -310,7 +310,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES ('1','Red and White Bouquet',110,'/common/Assets/RedWhiteBouquet.png',NULL,'Bouqute',NULL,'Red White'),('2','Yellow Bouquet',140,'/common/Assets/YellowBouquet.png',NULL,'Bouqute',NULL,'Yellow');
+INSERT INTO `product` VALUES ('1','Red and White Bouquet',110,'/common/Assets/RedWhiteBouquet.png',NULL,'Bouqute',1),('2','Yellow Bouquet',140,'/common/Assets/YellowBouquet.png',NULL,'Bouqute',1),('3','Blue Bouquet',150,'/common/Assets/BlueBouquet.png',NULL,'Bouqute',2),('4','Pink Bouquet',100,'/common/Assets/PinkBouquet.png',NULL,'Bouqute',0);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -408,7 +408,6 @@ DROP TABLE IF EXISTS `sale`;
 CREATE TABLE `sale` (
   `idSale` int NOT NULL,
   `saleName` varchar(45) NOT NULL,
-  `saleDate` varchar(45) NOT NULL,
   `discountAmount` int NOT NULL,
   PRIMARY KEY (`idSale`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -420,6 +419,7 @@ CREATE TABLE `sale` (
 
 LOCK TABLES `sale` WRITE;
 /*!40000 ALTER TABLE `sale` DISABLE KEYS */;
+INSERT INTO `sale` VALUES (0,'no sale',0),(1,'firstSale',20),(2,'blueProducts',40);
 /*!40000 ALTER TABLE `sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -655,4 +655,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-05 10:40:03
+-- Dump completed on 2022-06-05 16:39:06

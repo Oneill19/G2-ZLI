@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -38,22 +36,7 @@
                   </GridPane>
                </content>
             </ScrollPane>
-            <HBox layoutX="4.0" layoutY="40.0" spacing="870.0">
-               <children>
-                  <HBox maxHeight="-Infinity">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </HBox>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </HBox>
-            <Button fx:id="onBack" alignment="CENTER" layoutX="66.0" layoutY="806.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe">
-               <tooltip>
-                  <Tooltip text="Back" />
-               </tooltip></Button>
+            <Button fx:id="onBack" alignment="CENTER" layoutX="66.0" layoutY="806.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
             <VBox alignment="CENTER" fillWidth="false" layoutX="507.0" layoutY="10.0" style="-fx-alignment: center;">
                <children>
                   <ImageView fitHeight="72.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true">
@@ -88,15 +71,6 @@
                </font>
             </Button>
             <Button fx:id="exit" alignment="CENTER" layoutX="1138.0" layoutY="45.0" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
-            <VBox layoutX="520.0" layoutY="153.0" spacing="10.0">
-               <children>
-                  <HBox style="-fx-alignment: top-center;">
-                     <children>
-                        <Text fx:id="textOrderNumber" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 31;" text="Order #3334" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
             <Separator layoutX="588.0" layoutY="369.0" orientation="VERTICAL" prefHeight="403.0" prefWidth="5.0" />
             <HBox alignment="CENTER" layoutX="634.0" layoutY="363.0" prefHeight="32.0" prefWidth="502.0">
                <children>
@@ -171,6 +145,7 @@
                   </HBox>
                </children>
             </VBox>
+            <Text fx:id="textOrderNumber" layoutX="504.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 31;" text="Order #3334" />
          </children>
       </Pane>
    </children>

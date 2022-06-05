@@ -293,7 +293,7 @@ public class CustomerOrderHistoryController {
     		}
     		else {
     			Item item = (Item)ap;
-    			itemOrProduct = new Text("A Custom Item");
+    			itemOrProduct = new Text("An Item");
     			color = new Text("Color: " + item.getColor());
     			color.autosize();
     			color.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
