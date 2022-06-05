@@ -22,6 +22,7 @@ public abstract class AbstractProduct implements Serializable {
 	private int sale;
 	private double priceWithSale;
 	private int amount;
+	private String color;
 
 	public AbstractProduct() {
 		super();
@@ -33,8 +34,9 @@ public abstract class AbstractProduct implements Serializable {
 	 * @param price
 	 * @param image
 	 * @param isItem       -true for Item, false for Product
+	 * @param color
 	 */
-	public AbstractProduct(String serialNumber, String name, double price, String image, boolean isItem, String type, int sale) {
+	public AbstractProduct(String serialNumber, String name, double price, String image, boolean isItem, String type, int sale, String color) {
 		super();
 		this.serialNumber = serialNumber;
 		this.name = name;
@@ -44,6 +46,7 @@ public abstract class AbstractProduct implements Serializable {
 		this.type = type;
 		this.sale=sale;
 		priceWithSale=price-price*sale/100;
+		this.color = color;
 	}
 
 	/**
@@ -59,6 +62,7 @@ public abstract class AbstractProduct implements Serializable {
 		this.type = ap.getType();
 		this.sale=ap.getSale();
 		this.priceWithSale = ap.getPriceWithSale();
+		this.color = ap.getColor();
 	}
 	
 
@@ -145,6 +149,14 @@ public abstract class AbstractProduct implements Serializable {
 
 	public void setImageView() {
 		imageView = new ImageView(new Image(getClass().getResourceAsStream(this.imagePath), 100, 100, false, false));
+	}
+	
+	public String getColor() {
+		return color;
+	}
+	
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	@Override

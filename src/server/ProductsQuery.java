@@ -38,8 +38,9 @@ public class ProductsQuery {
 				String other = rs.getString(5);
 				String productType = rs.getString(6);
 				int sale = rs.getInt(7);
+				String color = rs.getString(8);
 				ArrayList<Item> madeFrom = (ArrayList<Item>)getAllItemsInProduct(con, productSerial).getReturnValue();
-				products.add(new Product(productSerial, productName, productPrice, productType, productImage, other, madeFrom,sale));
+				products.add(new Product(productSerial, productName, productPrice, productType, productImage, other, madeFrom,sale, color));
 			}
  			return new ReturnCommand("GetAllProducts", products);
 		} catch (SQLException e) {
@@ -68,7 +69,8 @@ public class ProductsQuery {
 				String itemImage = rs.getString(5);
 				boolean isSoldAlone = rs.getInt(6) == 0 ? false : true;
 				int sale = rs.getInt(7);
-				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone, 0,sale));
+				String color = rs.getString(8);
+				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone, 0,sale, color));
 			}
  			return new ReturnCommand("GetAllItems", items);
 		} catch (SQLException e) {
@@ -98,8 +100,9 @@ public class ProductsQuery {
 				String itemImage = rs.getString(5);
 				boolean isSoldAlone = rs.getInt(6) == 0 ? false : true;
 				int sale = rs.getInt(7);
+				String color = rs.getString(8);
 				int amountInProduct = (int)(getAmountInProduct(con, productSerial, itemSerial).getReturnValue());
-				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone, amountInProduct,sale));
+				items.add(new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone, amountInProduct,sale, color));
 			}
  			return new ReturnCommand("GetItemsInProduct", items);
 		} catch (SQLException e) {
@@ -127,6 +130,24 @@ public class ProductsQuery {
 			}
  			return new ReturnCommand("GetAmountInProduct", amount);
 		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static ReturnCommand getAllColors(Connection con) {
+		Statement stmt;
+		String sqlQuery = "SELECT * FROM zli.colors";
+		ResultSet rs;
+		ArrayList<String> colors = new ArrayList<>();
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sqlQuery);
+			while (rs.next()) {
+				colors.add(rs.getString(1));
+			}
+			return new ReturnCommand("GetAllColors", colors);
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}

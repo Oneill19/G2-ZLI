@@ -186,7 +186,8 @@ public class OrderQuery {
 				String itemImage = rs.getString(5);
 				String itemType = rs.getString(4);
 				Boolean isSoldAlone = rs.getBoolean(6);
-				item = new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone,0,0);
+				String color = rs.getString(8);
+				item = new Item(itemSerial, itemName, itemPrice, itemImage, itemType, isSoldAlone,0,0, color);
 				item.setAmount(rs.getInt(9));//amount
 				itemsList.add(item);
 			}	
@@ -218,9 +219,10 @@ public class OrderQuery {
 				String other = rs.getString(5);
 				String productType = rs.getString(6);
 				int sale = rs.getInt(7);
+				String color = rs.getString(8);
 				@SuppressWarnings("unchecked")
 				ArrayList<Item> madeFrom = (ArrayList<Item>)ProductsQuery.getAllItemsInProduct(conn, productSerial).getReturnValue();
-				product = new Product(productSerial, productName, productPrice, productType, productImage, other, madeFrom,sale);
+				product = new Product(productSerial, productName, productPrice, productType, productImage, other, madeFrom,sale, color);
 				product.setAmount(rs.getInt(9));
 				products.add(product);
 			}	

@@ -39,6 +39,7 @@ public class ChatClient extends AbstractClient {
 	public static String orderHistoryDeliveryData = new String();
 	public static ArrayList<Item> orderHistoryItems=new ArrayList<Item>();
 	public static ArrayList<Product> orderHistoryProducts=new ArrayList<Product>();
+	public static ArrayList<String> colors;
 	public static Order cartOrder = new Order();
 	public static ComplaintReport selectedComplaintReport = null;
 	public static String reportTxt;
@@ -185,6 +186,9 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "GetComplaintReportByStore":
 				selectedComplaintReport = (ComplaintReport)rc.getReturnValue();
+				break;
+			case "GetAllColors":
+				colors = (ArrayList<String>)rc.getReturnValue();
 				break;
 			default:
 				//for debug - don't remove.
