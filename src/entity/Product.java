@@ -66,5 +66,10 @@ public class Product extends AbstractProduct {
 	public void setMadeFrom(ArrayList<Item> madeFrom) {
 		this.madeFrom = madeFrom;
 	}
+	@Override
+	public String toString() {
+		return super.getName();
+	}
 
+	
 }

@@ -157,7 +157,9 @@ public class LoginScreenController {
     		root = FXMLLoader.<Pane>load(getClass().getResource("CEOScreen.fxml"));
     		break;
     	case "MarketingEmployee":
-//    		System.out.println("MarketingEmployee");
+    		ChatClient.products.clear();
+    		ClientUI.chat.accept("GetAllProducts");
+    		ClientUI.chat.accept("GetAllItems");
     		root = FXMLLoader.<Pane>load(getClass().getResource("MarketingEmployeOptions.fxml"));
     		break;
     	case "Delivery":
