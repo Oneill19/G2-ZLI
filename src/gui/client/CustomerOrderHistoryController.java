@@ -59,7 +59,6 @@ public class CustomerOrderHistoryController {
 
     private ArrayList<Order> userOrdersDataFromDB = new ArrayList<Order>();
     private ArrayList<AbstractProduct> orderHistoryAll = new ArrayList<AbstractProduct>();
-    private Order selectedOrder = null;
     private CommonController cc = new CommonController();
 
 	@FXML
@@ -170,7 +169,6 @@ public class CustomerOrderHistoryController {
     	orderHistoryAll.clear();
     	
 //    	set the selected product
-    	selectedOrder = order;
     	textOrderNumber.setText("Order #"+ Integer.toString(order.getOrderNumber()));
     	
     	//get items and products of selected order

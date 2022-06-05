@@ -193,9 +193,6 @@ public class EchoServer extends AbstractServer {
 				// clientMsg[1] has the order in cart
 				client.sendToClient(OrderQuery.saveOrderToDB(conn, clientMsg[1]));
 				break;
-//			case "numberOfItemsInOrder":
-//				// client.sendToClient(); // TODO - topaz and koral
-//				break;
 			case "GetRegistersUsers":
 				client.sendToClient(StoreManagerQuery.getAllWaitingRegistersUsers(conn));
 				break;

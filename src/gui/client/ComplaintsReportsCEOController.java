@@ -3,7 +3,6 @@ package gui.client;
 import client.ChatClient;
 import client.ClientUI;
 import entity.ComplaintReport;
-import entity.StoreWorker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;

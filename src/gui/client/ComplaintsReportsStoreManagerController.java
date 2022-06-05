@@ -4,7 +4,6 @@ import client.ChatClient;
 import client.ClientUI;
 import entity.ComplaintReport;
 import entity.StoreWorker;
-import entity.Survey;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
