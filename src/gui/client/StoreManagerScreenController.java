@@ -147,7 +147,14 @@ public class StoreManagerScreenController {
      */
     @FXML
     void onComplaintsReports(ActionEvent event) throws Exception {
-
+    	((Node) event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		new FXMLLoader();
+		Pane root = FXMLLoader.<Pane>load(getClass().getResource("ComplaintsReportsStoreManager.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setTitle("Zer-Li->Option Screen->Complaints Management");
+		primaryStage.setScene(scene);
+		primaryStage.show();
     }
     
     public void initialize() {

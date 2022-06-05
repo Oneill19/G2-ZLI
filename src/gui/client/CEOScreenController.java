@@ -29,6 +29,9 @@ import javafx.stage.Stage;
 
 	    @FXML
 	    private Button viewMonthlyReport;
+	    
+	    @FXML
+	    private Button viewComplaintsReport;
 
 	    
 	    
@@ -95,6 +98,18 @@ import javafx.stage.Stage;
 			Pane root = FXMLLoader.<Pane>load(getClass().getResource("CEORevenueQuertlyReport.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("Zer-Li->Option Screen->View Quarterly Report");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+	    }
+	    
+	    @FXML
+	    void onViewComplaintsReport(ActionEvent event) throws Exception {
+	    	((Node) event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			new FXMLLoader();
+			Pane root = FXMLLoader.<Pane>load(getClass().getResource("ComplaintsReportsCEO.fxml"));
+			Scene scene = new Scene(root);
+			primaryStage.setTitle("Zer-Li->Option Screen->View Complaints Report");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 	    }

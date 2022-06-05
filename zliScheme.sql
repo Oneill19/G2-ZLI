@@ -41,6 +41,29 @@ LOCK TABLES `canceled_orders` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `colors`
+--
+
+DROP TABLE IF EXISTS `colors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `colors` (
+  `color` varchar(45) NOT NULL,
+  PRIMARY KEY (`color`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `colors`
+--
+
+LOCK TABLES `colors` WRITE;
+/*!40000 ALTER TABLE `colors` DISABLE KEYS */;
+INSERT INTO `colors` VALUES ('Blue'),('Green'),('Orange'),('Pink'),('Purple'),('Red'),('White'),('Yellow');
+/*!40000 ALTER TABLE `colors` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `complaint`
 --
 
@@ -94,7 +117,8 @@ CREATE TABLE `item` (
   `itemType` varchar(45) NOT NULL,
   `itemImage` varchar(100) DEFAULT NULL,
   `isSoldAlone` tinyint NOT NULL,
-  `idSale` int DEFAULT NULL,
+  `idSale` int DEFAULT '0',
+  `Color` varchar(45) NOT NULL,
   PRIMARY KEY (`itemSerial`),
   KEY `a_idx` (`idSale`),
   CONSTRAINT `a` FOREIGN KEY (`idSale`) REFERENCES `sale` (`idSale`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -107,7 +131,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES ('1','White Rose',5,'Single Roses','/common/Assets/WhiteRose.png',1,NULL),('2','Red Rose',6,'Single Roses','/common/Assets/RedRose.png',1,NULL),('3','Blue Rose',7,'Single Roses','/common/Assets/BlueRose.png',1,NULL),('4','Yellow Rose',7,'Single Roses','/common/Assets/YellowRose.png',1,NULL),('5','Pink Rose',6,'Single Roses','/common/Assets/PinkRose.png',1,NULL);
+INSERT INTO `item` VALUES ('1','White Rose',5,'Single Roses','/common/Assets/WhiteRose.png',1,NULL,'White'),('2','Red Rose',6,'Single Roses','/common/Assets/RedRose.png',1,NULL,'Red'),('3','Blue Rose',7,'Single Roses','/common/Assets/BlueRose.png',1,NULL,'Blue'),('4','Yellow Rose',7,'Single Roses','/common/Assets/YellowRose.png',1,NULL,'Yellow'),('5','Pink Rose',6,'Single Roses','/common/Assets/PinkRose.png',1,NULL,'Pink');
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,6 +297,7 @@ CREATE TABLE `product` (
   `other` varchar(45) DEFAULT NULL,
   `productType` varchar(45) NOT NULL,
   `idSale` int DEFAULT '0',
+  `Color` varchar(45) NOT NULL,
   PRIMARY KEY (`productSerial`),
   KEY `a_idx` (`idSale`),
   CONSTRAINT `product_ibfk_1` FOREIGN KEY (`idSale`) REFERENCES `sale` (`idSale`)
