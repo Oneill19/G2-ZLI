@@ -86,18 +86,15 @@ public class PaymentController {
     	//Send data for managing reports every 30 days.
     	StringBuilder sbItems = new StringBuilder(), sbProducts=new StringBuilder();
     	Integer itemCounter= 0, productCounter=0;
-    	double productPriceSum = 0, itemPriceSum = 0;
    	
     	for(Map.Entry<AbstractProduct, Integer> ap : ChatClient.customerCart.entrySet()) {
     		if (ap.getKey() instanceof Product) {
     			productCounter+=ap.getValue();
-    			productPriceSum += ap.getKey().getPrice()*ap.getValue();
     			sbProducts.append("'").append(ap.getKey().getSerialNumber()).append("',");
     			sbProducts.append(ap.getValue()).append(" ");
     		}
     		if(ap.getKey() instanceof Item) {
     			itemCounter++;
-    			itemPriceSum += ap.getValue();
     			sbItems.append("'").append(ap.getKey().getSerialNumber()).append("',");
     			sbItems.append(ap.getValue()).append(" ");
     		}

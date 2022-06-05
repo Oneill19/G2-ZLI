@@ -82,7 +82,6 @@ public class ReportQuery {
 		String orderDate = orderStr[5];
 		String orderDateArr[] = orderDate.split("-"); // [0] year , [1] month
 		String storeName = orderStr[4]; // the name of the store for this order
-		Statement stmt;
 		int productsAmount = Integer.parseInt(productAmount);
 		int itemsAmount = Integer.parseInt(itemAmount);
 		float productsRevenue = Float.parseFloat(productRevenue);
