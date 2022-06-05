@@ -1,7 +1,5 @@
 package server;
 
-import java.io.IOException;
-
 import gui.server.ServerConnectController;
 import javafx.application.Application;
 import javafx.stage.Stage;
