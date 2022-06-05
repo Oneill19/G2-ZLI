@@ -118,10 +118,8 @@ CREATE TABLE `item` (
   `itemImage` varchar(100) DEFAULT NULL,
   `isSoldAlone` tinyint NOT NULL,
   `idSale` int DEFAULT NULL,
-  `Color` varchar(45) NOT NULL,
-  PRIMARY KEY (`itemSerial`),
-  KEY `a_idx` (`idSale`),
-  CONSTRAINT `a` FOREIGN KEY (`idSale`) REFERENCES `sale` (`idSale`) ON DELETE CASCADE ON UPDATE CASCADE
+  `Color` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`itemSerial`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -187,7 +185,7 @@ CREATE TABLE `item_in_product` (
 
 LOCK TABLES `item_in_product` WRITE;
 /*!40000 ALTER TABLE `item_in_product` DISABLE KEYS */;
-INSERT INTO `item_in_product` VALUES ('1','1',10),('1','2',10),('2','4',20);
+INSERT INTO `item_in_product` VALUES ('1','1',10),('1','2',10),('2','4',20),('4','5',10);
 /*!40000 ALTER TABLE `item_in_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,10 +199,7 @@ DROP TABLE IF EXISTS `item_in_sale`;
 CREATE TABLE `item_in_sale` (
   `itemSerial` varchar(45) NOT NULL,
   `idSale` int NOT NULL,
-  PRIMARY KEY (`itemSerial`,`idSale`),
-  KEY `itemSaleID` (`idSale`),
-  CONSTRAINT `item_in_sale_ibfk_1` FOREIGN KEY (`itemSerial`) REFERENCES `item` (`itemSerial`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `item_in_sale_ibfk_2` FOREIGN KEY (`idSale`) REFERENCES `sale` (`idSale`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`itemSerial`,`idSale`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -214,6 +209,7 @@ CREATE TABLE `item_in_sale` (
 
 LOCK TABLES `item_in_sale` WRITE;
 /*!40000 ALTER TABLE `item_in_sale` DISABLE KEYS */;
+INSERT INTO `item_in_sale` VALUES ('36',3),('37',4),('38',4),('39',2),('40',2),('43',1),('44',1);
 /*!40000 ALTER TABLE `item_in_sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,11 +292,9 @@ CREATE TABLE `product` (
   `productImage` varchar(100) DEFAULT NULL,
   `other` varchar(45) DEFAULT NULL,
   `productType` varchar(45) NOT NULL,
-  `idSale` int DEFAULT NULL,
-  `Color` varchar(45) NOT NULL,
-  PRIMARY KEY (`productSerial`),
-  KEY `a_idx` (`idSale`),
-  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`idSale`) REFERENCES `sale` (`idSale`)
+  `idSale` int DEFAULT '0',
+  `Color` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`productSerial`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -310,7 +304,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES ('1','Red and White Bouquet',110,'/common/Assets/RedWhiteBouquet.png',NULL,'Bouqute',NULL,'Red White'),('2','Yellow Bouquet',140,'/common/Assets/YellowBouquet.png',NULL,'Bouqute',NULL,'Yellow');
+INSERT INTO `product` VALUES ('1','Red and White Bouquet',110,'/common/Assets/RedWhiteBouquet.png',NULL,'Bouqute',1,'Red'),('2','Yellow Bouquet',140,'/common/Assets/YellowBouquet.png',NULL,'Bouqute',1,'Yellow'),('3','Blue Bouquet',150,'/common/Assets/BlueBouquet.jpg',NULL,'Bouqute',2,'Blue'),('4','Pink Bouquet',100,'/common/Assets/PinkBouquet.jpg',NULL,'Bouqute',0,'Pink');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,10 +346,7 @@ DROP TABLE IF EXISTS `product_in_sale`;
 CREATE TABLE `product_in_sale` (
   `productSerial` varchar(45) NOT NULL,
   `idSale` int NOT NULL,
-  PRIMARY KEY (`productSerial`,`idSale`),
-  KEY `productSaleID` (`idSale`),
-  CONSTRAINT `product_in_sale_ibfk_1` FOREIGN KEY (`productSerial`) REFERENCES `product` (`productSerial`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `product_in_sale_ibfk_2` FOREIGN KEY (`idSale`) REFERENCES `sale` (`idSale`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`productSerial`,`idSale`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -365,6 +356,7 @@ CREATE TABLE `product_in_sale` (
 
 LOCK TABLES `product_in_sale` WRITE;
 /*!40000 ALTER TABLE `product_in_sale` DISABLE KEYS */;
+INSERT INTO `product_in_sale` VALUES ('41',3),('43',1),('44',1);
 /*!40000 ALTER TABLE `product_in_sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -384,6 +376,8 @@ CREATE TABLE `reports` (
   `amountItem` int DEFAULT NULL,
   `revenueProduct` float DEFAULT NULL,
   `revenueItem` float DEFAULT NULL,
+  `quarterly` int NOT NULL,
+  `totalrevenue` float NOT NULL,
   PRIMARY KEY (`reportID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -394,7 +388,7 @@ CREATE TABLE `reports` (
 
 LOCK TABLES `reports` WRITE;
 /*!40000 ALTER TABLE `reports` DISABLE KEYS */;
-INSERT INTO `reports` VALUES (1,'Karmiel','2022','01',23,35,230.5,2548.2);
+INSERT INTO `reports` VALUES (1,'Karmiel','2022','01',23,35,230.5,2548.2,1,478.5);
 /*!40000 ALTER TABLE `reports` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,12 +400,11 @@ DROP TABLE IF EXISTS `sale`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sale` (
-  `idSale` int NOT NULL,
+  `idSale` int NOT NULL AUTO_INCREMENT,
   `saleName` varchar(45) NOT NULL,
-  `saleDate` varchar(45) NOT NULL,
   `discountAmount` int NOT NULL,
   PRIMARY KEY (`idSale`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -420,6 +413,7 @@ CREATE TABLE `sale` (
 
 LOCK TABLES `sale` WRITE;
 /*!40000 ALTER TABLE `sale` DISABLE KEYS */;
+INSERT INTO `sale` VALUES (0,'no sale',0),(1,'firstSale',20),(2,'blueProducts',40),(25,'',50),(26,'',1),(27,'',1),(28,'',1),(29,'',1),(30,'',1),(31,'',1),(32,'',5),(33,'',1),(34,'',1),(35,'',5),(36,'',5),(37,'',5),(38,'',5),(39,'',5),(40,'',5),(41,'',5),(42,'',5),(43,'',20),(44,'',50);
 /*!40000 ALTER TABLE `sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -610,7 +604,7 @@ CREATE TABLE `user_store_worker` (
 
 LOCK TABLES `user_store_worker` WRITE;
 /*!40000 ALTER TABLE `user_store_worker` DISABLE KEYS */;
-INSERT INTO `user_store_worker` VALUES (2,'Karmiel');
+INSERT INTO `user_store_worker` VALUES (2,'Karmiel'),(5,'Karmiel'),(6,'Karmiel');
 /*!40000 ALTER TABLE `user_store_worker` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -642,7 +636,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(4,'Adir','Miller','99999','053-3333','adir@zli','1','CustomerServiceWorker','CONFIRMED',1),(5,'Shahar','Hasson','2','053-333','shahar@zli','1','StoreWorkerApproved','CONFIRMED',0),(6,'Naor','Zion','3','053-3333','naor@zli','1','StoreWorker','CONFIRMED',0),(2022,'Naruto','Uzumaki','6666666666666666','0526270996','naruto@zli','1','MarketingEmployee','CONFIRMED',0),(111222333,'Dorin','Beery','1111111111111111','0545344778','dorin@zli','1','Customer','CONFIRMED',0),(666666666,'I DONT ORDER','Rude','1111111111111111','0541111111','dontorder@zli','1','Customer','CONFIRMED',0);
+INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(4,'Adir','Miller','99999','053-3333','adir@zli','1','CustomerServiceWorker','CONFIRMED',0),(5,'Shahar','Hasson','2','053-333','shahar@zli','1','StoreWorkerApproved','CONFIRMED',0),(6,'Naor','Zion','3','053-3333','naor@zli','1','StoreWorker','CONFIRMED',0),(2022,'Naruto','Uzumaki','6666666666666666','0526270996','naruto@zli','1','MarketingEmployee','CONFIRMED',0),(111222333,'Dorin','Beery','1111111111111111','0545344778','dorin@zli','1','Customer','CONFIRMED',0),(666666666,'I DONT ORDER','Rude','1111111111111111','0541111111','dontorder@zli','1','Customer','CONFIRMED',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -655,4 +649,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-05 10:40:03
+-- Dump completed on 2022-06-05 20:59:34

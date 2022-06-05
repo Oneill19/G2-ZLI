@@ -264,6 +264,24 @@ public class EchoServer extends AbstractServer {
 			case "GetAllColors":
 				client.sendToClient(ProductsQuery.getAllColors(conn));
 				break;
+			case "GetItemsForEdit":
+				client.sendToClient(ProductsQuery.getItemsForEdit(conn, clientMsg[1]));
+				break;
+			case "GetItemsForCreate":
+				client.sendToClient(ProductsQuery.getItemsForCreate(conn));
+				break;
+			case "CreateProduct":
+				client.sendToClient(ProductsQuery.createProduct(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4], clientMsg[5]));
+				break;
+			case "CreateItem":
+				client.sendToClient(ProductsQuery.createItem(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4]));
+				break;
+			case "EditProduct":
+				client.sendToClient(ProductsQuery.editProduct(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4], clientMsg[5], clientMsg[6]));
+				break;
+			case "EditItem":
+				client.sendToClient(ProductsQuery.editItem(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4], clientMsg[5]));
+				break;
 			default:
 				System.out.println("No Command Found");
 				break;

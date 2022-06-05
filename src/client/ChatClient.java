@@ -39,7 +39,9 @@ public class ChatClient extends AbstractClient {
 	public static String orderHistoryDeliveryData = new String();
 	public static ArrayList<Item> orderHistoryItems=new ArrayList<Item>();
 	public static ArrayList<Product> orderHistoryProducts=new ArrayList<Product>();
-	public static ArrayList<String> colors;
+	public static ArrayList<Item> itemsForEdit = null;
+	public static ArrayList<Item> itemsForCreate = null;
+	public static ArrayList<String> colors = null;
 	public static Order cartOrder = new Order();
 	public static ComplaintReport selectedComplaintReport = null;
 	public static String reportTxt;
@@ -189,6 +191,24 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "GetAllColors":
 				colors = (ArrayList<String>)rc.getReturnValue();
+				break;
+			case "GetItemsForEdit":
+				itemsForEdit = (ArrayList<Item>)rc.getReturnValue();
+				break;
+			case "GetItemsForCreate":
+				itemsForCreate = (ArrayList<Item>)rc.getReturnValue();
+				break;
+			case "CreateProduct":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "CreateItem":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "EditProduct":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "EditItem":
+				requestSucceed = (boolean)rc.getReturnValue();
 				break;
 			default:
 				//for debug - don't remove.

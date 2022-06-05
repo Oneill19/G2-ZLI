@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.CreateProductController">
+   <children>
+      <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="450.0" layoutY="3.0">
+         <image>
+            <Image url="@Zli_logo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="exitBtn" alignment="CENTER" layoutX="1017.0" layoutY="16.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+      <Button fx:id="userOptBtn" layoutX="77.0" layoutY="22.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="logoutBtn" layoutX="16.0" layoutY="21.0" mnemonicParsing="false" onAction="#onLogout" style="-fx-background-color: transparent;" text="Logout | " textFill="#2b0548">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="backButton" alignment="CENTER" layoutX="361.0" layoutY="648.0" mnemonicParsing="false" onAction="#onBack" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
+      <ComboBox fx:id="productType" layoutX="538.0" layoutY="129.0" onAction="#onSelectProduct" prefHeight="25.0" prefWidth="253.0" promptText="Please choose Type" style="-fx-font-size: 15;" />
+      <Text fill="#2b0548" layoutX="344.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Type:">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#2b0548" layoutX="141.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" textAlignment="CENTER" wrappingWidth="200.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="saveButton" alignment="CENTER" layoutX="561.0" layoutY="648.0" mnemonicParsing="false" onAction="#onSave" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: Green; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Save" textFill="#fcfcfe" />
+      <Label fx:id="messageLabel" alignment="CENTER" layoutX="429.0" layoutY="608.0" prefHeight="17.0" prefWidth="243.0" />
+      <Text fill="#2b0548" layoutX="141.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" textAlignment="CENTER" wrappingWidth="200.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="#2b0548" layoutX="141.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color:" textAlignment="CENTER" wrappingWidth="200.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="productName" disable="true" layoutX="304.0" layoutY="263.0" prefHeight="25.0" prefWidth="243.0" promptText="Product name" />
+      <TextField fx:id="productPrice" disable="true" layoutX="304.0" layoutY="312.0" prefHeight="25.0" prefWidth="243.0" promptText="Product price" />
+      <ComboBox fx:id="colorComboBox" disable="true" layoutX="304.0" layoutY="364.0" prefHeight="25.0" prefWidth="243.0" promptText="Select color" />
+      <TableView fx:id="itemTable" disable="true" layoutX="587.0" layoutY="222.0" prefHeight="251.0" prefWidth="409.0">
+         <columns>
+            <TableColumn fx:id="serialCol" prefWidth="75.0" text="Item Serial" />
+            <TableColumn fx:id="nameCol" prefWidth="245.0" text="Name" />
+            <TableColumn fx:id="amountCol" prefWidth="88.0" text="Amount" />
+         </columns>
+      </TableView>
+      <Button fx:id="deleteOne" alignment="CENTER" disable="true" layoutX="605.0" layoutY="533.0" mnemonicParsing="false" onAction="#onDeleteOne" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: red; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Delete One" textFill="#fcfcfe" />
+      <Label fx:id="addLabel" alignment="CENTER" layoutX="672.0" layoutY="492.0" prefHeight="17.0" prefWidth="243.0" textFill="#00ff59">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Text fill="#2b0548" layoutX="694.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items For Product:" textAlignment="CENTER" wrappingWidth="200.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="addOne" alignment="CENTER" disable="true" layoutX="791.0" layoutY="533.0" mnemonicParsing="false" onAction="#onAddOne" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: Green; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Add One" textFill="#fcfcfe" />
+      <Text fill="#2b0548" layoutX="141.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" textAlignment="CENTER" wrappingWidth="200.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="itemType" disable="true" layoutX="304.0" layoutY="413.0" prefHeight="25.0" prefWidth="243.0" promptText="Product type" />
+   </children>
+</Pane>

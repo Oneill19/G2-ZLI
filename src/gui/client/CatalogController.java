@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 /**
@@ -185,7 +186,10 @@ public class CatalogController {
     	for (AbstractProduct product : products) {
     		// create the container
     		HBox box = new HBox();
-    		ImageView img = new ImageView(new Image(getClass().getResourceAsStream(product.getImagePath()), 100, 100, false, false));
+    		ImageView img = null;
+    		if (product.getImagePath() != null) {    			
+    			img = new ImageView(new Image(getClass().getResourceAsStream(product.getImagePath()), 100, 100, false, false));
+    		}
     		Label nameLabel = new Label(product.getName());
     		Label priceLabel = new Label(product.getPrice() + "$");
     		Label typeLabel = new Label((product instanceof Product) ? "Premade Product": "Sold Alone");
@@ -215,7 +219,14 @@ public class CatalogController {
     		viewButton.setStyle("-fx-text-fill: white; -fx-background-color:  #2B0548; -fx-background-radius: 10px; -fx-font-weight: bold; -fx-font-size: 20px");
     		
     		// add all the children to the hbox container
-    		box.getChildren().add(img);
+    		if (img != null) {
+    			box.getChildren().add(img); 
+    		}
+    		else {
+    			Pane pane = new Pane();	
+    			pane.setPrefSize(100, 100);
+    			box.getChildren().add(pane);
+    		}
     		box.getChildren().add(nameLabel);
     		box.getChildren().add(priceLabel);
     		box.getChildren().add(typeLabel);

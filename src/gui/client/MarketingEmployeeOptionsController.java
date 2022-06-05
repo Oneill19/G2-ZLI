@@ -9,6 +9,13 @@ import javafx.scene.control.Button;
 public class MarketingEmployeeOptionsController {
 
     @FXML private Button onBack, logoutBtn, userOptBtn, exit, addSaleButton, watchSaleButton, nextBtn;
+    
+    @FXML
+    private Button createProduct;
+
+    @FXML
+    private Button editProduct;
+    
     private CommonController cc = new CommonController();
 
 	@FXML
@@ -29,6 +36,28 @@ public class MarketingEmployeeOptionsController {
     @FXML
     void onNext(ActionEvent event) {
 
+    }
+    
+    /**
+     * move to the create product screen
+     * 
+     * @param event
+     * @throws Exception
+     */
+    @FXML
+    void onCreateProduct(ActionEvent event) throws Exception {
+    	cc.changeFXML(event, "CreateProduct.fxml", "Zer-Li Create Product");
+    }
+
+    /**
+     * move to the edit product screen
+     * 
+     * @param event
+     * @throws Exception
+     */
+    @FXML
+    void onEditProduct(ActionEvent event) throws Exception {
+    	cc.changeFXML(event, "EditProduct.fxml", "Zer-Li Edit Product");
     }
 
 }
