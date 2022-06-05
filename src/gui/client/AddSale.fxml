@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,8 +12,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.MarketingEmployeeOptionsController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.AddSaleController">
    <children>
       <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1110.0" style="-fx-background-color: #FCFCFE;">
          <children>
@@ -27,7 +30,7 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <Button fx:id="onBack" alignment="CENTER" layoutX="69.0" layoutY="743.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
+            <Button fx:id="onBack" alignment="CENTER" cancelButton="true" layoutX="69.0" layoutY="743.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
             <HBox alignment="TOP_CENTER" layoutX="149.0" layoutY="10.0" prefHeight="118.0" prefWidth="794.0">
                <children>
                   <VBox alignment="CENTER" fillWidth="false" style="-fx-alignment: center;">
@@ -37,7 +40,7 @@
                               <Image url="@Zli_logo_cropped.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-background-color: white;" text="Marketing Employee Options" textAlignment="CENTER" textFill="#a297d5">
+                        <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-background-color: white;" text="Add Sale" textAlignment="CENTER" textFill="#a297d5">
                            <font>
                               <Font name="System Bold" size="31.0" />
                            </font>
@@ -57,12 +60,18 @@
                </font>
             </Button>
             <Button fx:id="exit" alignment="CENTER" layoutX="1034.0" layoutY="24.0" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
-            <Button fx:id="addSaleButton" alignment="CENTER" layoutX="435.0" layoutY="273.0" mnemonicParsing="false" onAction="#onAddSaleButton" prefHeight="43.0" prefWidth="223.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Add New Sale" textFill="#fcfcfe" />
-            <Button fx:id="watchSaleButton" alignment="CENTER" layoutX="435.0" layoutY="349.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="223.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Watch Current Sale" textFill="#fcfcfe" />
-            <Button fx:id="createProduct" alignment="CENTER" layoutX="435.0" layoutY="419.0" mnemonicParsing="false" onAction="#onCreateProduct" prefHeight="43.0" prefWidth="223.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Create Product" textFill="#fcfcfe" />
-            <Button fx:id="editProduct" alignment="CENTER" layoutX="435.0" layoutY="489.0" mnemonicParsing="false" onAction="#onEditProduct" prefHeight="43.0" prefWidth="223.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Edit Product" textFill="#fcfcfe" />
+            <VBox alignment="CENTER" layoutX="24.0" layoutY="140.0" prefHeight="549.0" prefWidth="560.0" spacing="30.0">
+               <children>
+                  <TextField fx:id="saleName" alignment="CENTER" promptText="INSERT NAME FOR SALE" style="-fx-font-size: 25;" />
+                  <TextField fx:id="saleAmount" alignment="CENTER" promptText="INSERT SALE AMOUNT" style="-fx-font-size: 25;" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25;" text="Select products and Items to be included in the SALE" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25;" text="Select multiple items by holding ctrl key" />
+               </children>
+            </VBox>
+            <Text fill="#721313" fontSmoothingType="LCD" layoutX="69.0" layoutY="718.0" style="-fx-font-weight: bold;" text="*NOTE: If a product or item already in a sale, then that sale is overriden by the new one" />
+            <ListView fx:id="itemsList" layoutX="635.0" layoutY="159.0" prefHeight="541.0" prefWidth="452.0" style="-fx-font-size: 20;" />
          </children>
       </Pane>
-      <Button fx:id="onBack" alignment="CENTER" layoutX="79.0" layoutY="753.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
+      <Button fx:id="saveSale" alignment="CENTER" defaultButton="true" layoutX="834.0" layoutY="749.0" mnemonicParsing="false" onAction="#onSave" prefHeight="44.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: Green; -fx-background-radius: 50px; -fx-border-radius: 50px; -fx-focus-traversable: true;" text="Save" textAlignment="CENTER" textFill="#fcfcfe" />
    </children>
 </AnchorPane>

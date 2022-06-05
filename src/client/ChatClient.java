@@ -46,6 +46,7 @@ public class ChatClient extends AbstractClient {
 	public static ComplaintReport selectedComplaintReport = null;
 	public static String reportTxt;
 	public static User user = null;
+	public static int returnSaleID;
 	
 	public static SurveyReport selectedSurveyReport = null;
 	
@@ -209,6 +210,14 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "EditItem":
 				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "insertNewSale":
+				if(rc.getReturnValue()!= null)
+					returnSaleID=(int)rc.getReturnValue();
+				break;
+			case "insertItemInSaleToDB":
+				break;
+			case "insertProductsInSaleToDB":
 				break;
 			default:
 				//for debug - don't remove.
