@@ -327,6 +327,7 @@ public class EchoServer extends AbstractServer {
 				break;
 			case "getOrderSupplyDateTime":
 				client.sendToClient(StoreManagerQuery.getOrderSupplyDateTime(conn, clientMsg[1]));
+				break;
 			case "GetAmountOfCustomProduct":
 				client.sendToClient(ProductsQuery.getAmountOfCustomProduct(conn));
 				break;
@@ -347,9 +348,6 @@ public class EchoServer extends AbstractServer {
 				break;
 			case "UpdateBalance":
 				client.sendToClient(StoreManagerQuery.UpdateBalance(conn, Double.parseDouble(clientMsg[1]), Integer.parseInt(clientMsg[2])));
-        break;
-			case "updateBalance":
-				client.sendToClient(StoreManagerQuery.updateBalance(conn, clientMsg[1], clientMsg[2]));
 				break;
 			default:
 				System.out.println("No Command Found" + clientMsg[0]);

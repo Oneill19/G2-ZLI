@@ -1,7 +1,6 @@
 package server;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,7 +8,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import common.ReturnCommand;
@@ -135,7 +133,6 @@ public class StoreManagerQuery {
 	 */
 	public static ReturnCommand UpdateStatusOrders(Connection con, String OrderNumber, String OrderStatus) {
 		Statement stmt;
-		PreparedStatement ps;
 		String sql = "";
 	    String dateAprrove;
 	    dateAprrove= getAprroveDate();
@@ -145,19 +142,6 @@ public class StoreManagerQuery {
 			sql = "UPDATE zli.orders SET orderStatus='CANCELED' WHERE orderNumber ='" + OrderNumber + "';";
 		}
 		try {
-			if (OrderStatus.equals("WAITING_FOR_CONFIRMATION")) {
-				sql = "UPDATE zli.orders SET orderStatus='CONFIRMED',confirmedDate= " + today + " WHERE orderNumber=' "
-						+ OrderNumber + "';";
-			} else {
-				sql = "UPDATE zli.orders SET orderStatus='CANCELED' WHERE orderNumber = '" + OrderNumber + "';";
-				String orderCancelation = "UPDATE order_cancelation SET orderNumber=?, confirmCancelationDate=?, confirmCancelationTime=? WHERE orderNumber='"
-						+ OrderNumber + "'";
-				ps = con.prepareStatement(orderCancelation);
-				ps.setInt(1, Integer.parseInt(OrderNumber));
-				ps.setString(2, today);
-				ps.setString(3, now);
-				ps.executeUpdate();
-			}
 			stmt = con.createStatement();
 			stmt.executeUpdate(sql);
 			return new ReturnCommand("UpdateStatusOrders", null);
@@ -167,22 +151,7 @@ public class StoreManagerQuery {
 		}
 	}
 
-	public static ReturnCommand getOrderSupplyDateTime(Connection conn, String orderNumber) {
-		Statement stmt;
-		ResultSet rs;
-		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT supplyDate, supplyTime from orders where orderNumber='" + orderNumber + "'");
-			if (rs.next())
-				return new ReturnCommand("getOrderSupplyDateTime", rs.getString(1) + " " + rs.getString(2));
-			return new ReturnCommand("getOrderSupplyDateTime", null);
-		} catch (Exception e) {
-			System.out.println("problem with getOrderSupplyDateTime");
-			e.printStackTrace();
-			return new ReturnCommand("getOrderSupplyDateTime", null);
-		}
-	}
-  
+	
 	/**
 	 *  method to execute sql query that get customer from DB 
 	 * @param con-connection
@@ -213,11 +182,7 @@ public class StoreManagerQuery {
 					double balance = AuthQuery.getCustomerBalance(con, userId);
 					ApprovedUserToPer.add(new Customer(userId, firstName, lastName, creditCard, phone, email,
 							userPassword, userRole, status, isLogged, balance));
-				} else if (rs.getString(8).equals("StoreWorker")) {
-					storeNameWorker = AuthQuery.getStoreWorkerStore(con, userId);
-					if (storeNameWorker.equals(storeName))
-						ApprovedUserToPer.add(new StoreWorker(userId, firstName, lastName, creditCard, phone, email,
-								userPassword, userRole, status, isLogged, storeName));
+
 				}
 
 			}
@@ -416,6 +381,8 @@ public class StoreManagerQuery {
 
 	}
 	
+	
+	
 
 	/**
 	 * Gets all the details for the update
@@ -482,42 +449,27 @@ public class StoreManagerQuery {
 	 */
 	public static String getAprroveDate()
 	{
-	LocalDate date = LocalDate.now();
-	String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-	String timeAndDate = date + " " + time;
-	System.out.println(timeAndDate);
-	return timeAndDate;
-=======
-
-	public static ReturnCommand updateBalance(Connection conn, String userID, String compensationAmount) {
+		LocalDate date = LocalDate.now();
+		String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+		String timeAndDate = date + " " + time;
+		System.out.println(timeAndDate);
+		return timeAndDate;
+	}
+	
+	
+	public static ReturnCommand getOrderSupplyDateTime(Connection conn, String orderNumber) {
 		Statement stmt;
-		PreparedStatement ps;
-		String selectQuery = "select balance from user_customer where userID=" + userID + ";";
-		String updateQuery = "UPDATE user_customer SET balance=? where userID=?";
 		ResultSet rs;
-		double balance=0;
-		
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery(selectQuery);
-			if(rs.next()) { //if a row for specific userID already exists
-				balance+=rs.getDouble(1);
-				balance+=Double.parseDouble(compensationAmount);
-				ps = conn.prepareStatement(updateQuery);
-				ps.setDouble(1, balance);
-				ps.setInt(2,Integer.parseInt(userID));
-				ps.executeUpdate();
-			}
-			else {
-				ps = conn.prepareStatement("INSERT INTO user_customer(userID,balance)VALUES(?,?)");
-				ps.setInt(1, Integer.parseInt(userID));
-				ps.setDouble(2, Double.parseDouble(compensationAmount));
-				ps.executeUpdate();
-			}
-		return new ReturnCommand("updateBalance", true);
-		} catch (SQLException e) {
+			rs = stmt.executeQuery("SELECT supplyDate, supplyTime from orders where orderNumber='" + orderNumber + "'");
+			if (rs.next())
+				return new ReturnCommand("getOrderSupplyDateTime", rs.getString(1) + " " + rs.getString(2));
+			return new ReturnCommand("getOrderSupplyDateTime", null);
+		} catch (Exception e) {
+			System.out.println("problem with getOrderSupplyDateTime");
 			e.printStackTrace();
-			return new ReturnCommand("updateBalance", false);
+			return new ReturnCommand("getOrderSupplyDateTime", null);
 		}
 	}
 }
