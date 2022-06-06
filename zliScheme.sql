@@ -83,13 +83,7 @@ CREATE TABLE `complaint` (
   `IsReminded` int NOT NULL,
   `Refund` float DEFAULT NULL,
   `RefundDetails` varchar(4500) DEFAULT NULL,
-  PRIMARY KEY (`ComplaintID`),
-  KEY `OrderNumber_idx` (`OrderNumber`),
-  KEY `UserID_idx` (`CustomerID`),
-  KEY `WorkerID_idx` (`WorkerID`),
-  CONSTRAINT `CustomerID` FOREIGN KEY (`CustomerID`) REFERENCES `users` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `OrderNumber` FOREIGN KEY (`OrderNumber`) REFERENCES `orders` (`orderNumber`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `WorkerID` FOREIGN KEY (`WorkerID`) REFERENCES `users` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  PRIMARY KEY (`ComplaintID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -99,7 +93,7 @@ CREATE TABLE `complaint` (
 
 LOCK TABLES `complaint` WRITE;
 /*!40000 ALTER TABLE `complaint` DISABLE KEYS */;
-INSERT INTO `complaint` VALUES (5,60,111222333,4,'Karmiel','bad bad very bad','2022-06-04','20:17','OPEN',0,NULL,NULL);
+INSERT INTO `complaint` VALUES (5,60,8,4,'Karmiel','bad bad very bad','2022-06-04','20:17','OPEN',0,NULL,NULL);
 /*!40000 ALTER TABLE `complaint` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +123,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES ('1','White Rose',5,'Single Roses','/common/Assets/WhiteRose.png',1,NULL,'White'),('2','Red Rose',6,'Single Roses','/common/Assets/RedRose.png',1,NULL,'Red'),('3','Blue Rose',7,'Single Roses','/common/Assets/BlueRose.png',1,NULL,'Blue'),('4','Yellow Rose',7,'Single Roses','/common/Assets/YellowRose.png',1,NULL,'Yellow'),('5','Pink Rose',6,'Single Roses','/common/Assets/PinkRose.png',1,NULL,'Pink');
+INSERT INTO `item` VALUES ('1','White Rose',5,'Single Roses','/common/Assets/WhiteRose.png',1,2,'White'),('2','Red Rose',6,'Single Roses','/common/Assets/RedRose.png',1,3,'Red'),('3','Blue Rose',7,'Single Roses','/common/Assets/BlueRose.png',1,4,'Blue'),('4','Yellow Rose',7,'Single Roses','/common/Assets/YellowRose.png',1,0,'Yellow'),('5','Pink Rose',6,'Single Roses','/common/Assets/PinkRose.png',1,0,'Pink');
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -209,7 +203,7 @@ CREATE TABLE `item_in_sale` (
 
 LOCK TABLES `item_in_sale` WRITE;
 /*!40000 ALTER TABLE `item_in_sale` DISABLE KEYS */;
-INSERT INTO `item_in_sale` VALUES ('1',1),('1',4),('2',1),('2',2),('2',4),('3',2),('3',5),('4',1);
+INSERT INTO `item_in_sale` VALUES ('0',2),('1',1),('1',2),('2',1),('2',2),('2',3),('3',2),('3',4),('3',67),('4',1),('4',67),('5',67);
 /*!40000 ALTER TABLE `item_in_sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,7 +259,7 @@ CREATE TABLE `orders` (
   `supplyTime` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`orderNumber`),
   KEY `fk_order_store` (`fromStore`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -274,7 +268,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (60,798,'',NULL,'','Karmiel','2022-06-03','00:31','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-07-02','13:13'),(61,812,'Happy Birthday!',NULL,'?','Tel Aviv','2022-06-04','02:32','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2023-06-15','13:17'),(62,5,'Happy Shavuot!',NULL,'','Tel Aviv','2022-06-04','10:24','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-07-09','12:13'),(63,255,'For your wife :)',NULL,'','Karmiel','2022-06-04','10:45','111222333','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2023-06-21','16:00');
+INSERT INTO `orders` VALUES (60,798,'',NULL,'','Karmiel','2022-06-03','00:31','8','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-07-02','13:13'),(61,812,'Happy Birthday!',NULL,'?','Tel Aviv','2022-06-04','02:32','8','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2023-06-15','13:17'),(62,5,'Happy Shavuot!',NULL,'','Tel Aviv','2022-06-04','10:24','8','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-07-09','12:13'),(63,255,'For your wife :)',NULL,'','Karmiel','2022-06-04','10:45','8','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2023-06-21','16:00'),(64,110,'',NULL,'For My Day','Karmiel','2022-06-06','11:00','1','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-15','12:22');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +326,7 @@ CREATE TABLE `product_in_order` (
 
 LOCK TABLES `product_in_order` WRITE;
 /*!40000 ALTER TABLE `product_in_order` DISABLE KEYS */;
-INSERT INTO `product_in_order` VALUES ('1',7,60),('1',2,61),('1',1,63),('2',4,61),('2',1,63);
+INSERT INTO `product_in_order` VALUES ('1',7,60),('1',2,61),('1',1,63),('1',1,64),('2',4,61),('2',1,63);
 /*!40000 ALTER TABLE `product_in_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -405,7 +399,7 @@ CREATE TABLE `sale` (
   `discountAmount` int NOT NULL,
   `status` varchar(45) NOT NULL DEFAULT 'ACTIVE' COMMENT 'ACTIVE\\nNOT ACTIVE',
   PRIMARY KEY (`idSale`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -414,7 +408,7 @@ CREATE TABLE `sale` (
 
 LOCK TABLES `sale` WRITE;
 /*!40000 ALTER TABLE `sale` DISABLE KEYS */;
-INSERT INTO `sale` VALUES (0,'no sale',0,'ACTIVE'),(1,'firstSale',20,'ACTIVE'),(2,'blueProducts',40,'ACTIVE'),(25,'',50,'ACTIVE'),(26,'',1,'ACTIVE'),(27,'',1,'ACTIVE'),(28,'',1,'ACTIVE'),(29,'',1,'ACTIVE'),(30,'',1,'ACTIVE'),(31,'',1,'ACTIVE'),(32,'',5,'ACTIVE'),(33,'',1,'ACTIVE'),(34,'',1,'ACTIVE'),(35,'',5,'ACTIVE'),(36,'',5,'ACTIVE');
+INSERT INTO `sale` VALUES (0,'no sale',0,'NOT ACTIVE'),(1,'firstSale',20,'NOT ACTIVE'),(2,'blueProducts',40,'ACTIVE'),(52,'THATS IT I SWEAR',100,'ACTIVE'),(53,'NO BE EMET',20,'ACTIVE'),(54,'2020',50,'ACTIVE'),(55,'hrtyhd',30,'ACTIVE'),(56,'sdfs',24,'ACTIVE'),(57,'ada',23,'ACTIVE'),(58,'dgdsdfgd',45,'ACTIVE'),(59,'sdfgsf',34,'ACTIVE'),(60,'AHHHHHHHHHHHHHH!!!!!',25,'ACTIVE'),(61,'asd',2,'ACTIVE'),(62,'seemek',25,'ACTIVE'),(63,'sf',24,'ACTIVE'),(64,'safs',4,'ACTIVE'),(65,'asd',34,'ACTIVE'),(66,'sdfsdf',34,'ACTIVE'),(67,'sdfsf',23,'ACTIVE');
 /*!40000 ALTER TABLE `sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -566,7 +560,7 @@ DROP TABLE IF EXISTS `user_customer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_customer` (
   `userID` int NOT NULL,
-  `balance` double NOT NULL,
+  `balance` double NOT NULL DEFAULT '0',
   PRIMARY KEY (`userID`),
   CONSTRAINT `user_customer_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -578,7 +572,7 @@ CREATE TABLE `user_customer` (
 
 LOCK TABLES `user_customer` WRITE;
 /*!40000 ALTER TABLE `user_customer` DISABLE KEYS */;
-INSERT INTO `user_customer` VALUES (1,0),(111222333,0);
+INSERT INTO `user_customer` VALUES (1,0),(8,0),(11,0),(12,10),(13,0),(14,0),(15,0),(16,0);
 /*!40000 ALTER TABLE `user_customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -605,7 +599,7 @@ CREATE TABLE `user_store_worker` (
 
 LOCK TABLES `user_store_worker` WRITE;
 /*!40000 ALTER TABLE `user_store_worker` DISABLE KEYS */;
-INSERT INTO `user_store_worker` VALUES (2,'Karmiel'),(5,'Karmiel'),(6,'Karmiel');
+INSERT INTO `user_store_worker` VALUES (2,'Karmiel'),(5,'Karmiel'),(6,'Karmiel'),(9,'Tel Aviv'),(10,'Tel Aviv');
 /*!40000 ALTER TABLE `user_store_worker` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -637,8 +631,41 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Oneill','Panker','1234','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','23456','050-000','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','5555','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(4,'Adir','Miller','99999','053-3333','adir@zli','1','CustomerServiceWorker','CONFIRMED',0),(5,'Shahar','Hasson','2','053-333','shahar@zli','1','StoreWorkerApproved','CONFIRMED',0),(6,'Naor','Zion','3','053-3333','naor@zli','1','StoreWorker','CONFIRMED',0),(2022,'Naruto','Uzumaki','6666666666666666','0526270996','naruto@zli','1','MarketingEmployee','CONFIRMED',0),(111222333,'Dorin','Beery','1111111111111111','0545344778','dorin@zli','1','Customer','CONFIRMED',0),(666666666,'I DONT ORDER','Rude','1111111111111111','0541111111','dontorder@zli','1','Customer','CONFIRMED',0);
+INSERT INTO `users` VALUES (1,'Oneill','Panker','111111111111','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','222222222222','053-333','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','333333333333','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(4,'Adir','Miller','444444444444','055-555','adir@zli','1','CustomerServiceWorker','CONFIRMED',0),(5,'Shahar','Hasson','555555555555','056-666','shahar@zli','1','StoreWorkerWithPermission','CONFIRMED',0),(6,'Naor','Zion','666666666666','057-777','naor@zli','1','StoreWorker','CONFIRMED',0),(7,'Naruto','Uzumaki','777777777777','058-888','naruto@zli','1','MarketingEmployee','CONFIRMED',1),(8,'Dorin','Beery','888888888888','059-999','dorin@zli','1','Customer','NOT_CONFIRMED',0),(9,'Shlomi','Koriat','999999999999','050-000','shlomi@zli','1','StoreManager','CONFIRMED',0),(10,'Yuval','Semo','000000000000','051-111','yuval@zli','1','StoreWorkerWithPermission','CONFIRMED',0),(11,'Udi','Kagan','111111111111','052-111','udi@zli','1','Customer','FREEZED',0),(12,'Assi','Cohen','121212121212','053-222','assi@zli','1','Customer','CONFIRMED',0),(13,'Eran','Zarahovich','131313131313','054-333','eran@zli','1','Customer','CONFIRMED',0),(14,'Hen','Mizrahi','141414141414','055-444','hen@zli','1','Customer','CONFIRMED',0),(15,'Guy','Hochman','151515151515','056-555','guy@zli','1','Customer','CONFIRMED',0),(16,'Shalom','Assayag','161616161616','057-666','shalom@zli','1','Customer','CONFIRMED',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users_system`
+--
+
+DROP TABLE IF EXISTS `users_system`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users_system` (
+  `UserID` int NOT NULL,
+  `FirstName` varchar(45) NOT NULL,
+  `LastName` varchar(45) NOT NULL,
+  `CreditCard` varchar(45) NOT NULL,
+  `Phone` varchar(45) NOT NULL,
+  `Email` varchar(45) NOT NULL,
+  `Password` varchar(45) NOT NULL,
+  `UserRole` varchar(45) NOT NULL,
+  `Status` varchar(45) NOT NULL,
+  `storeName` varchar(45) DEFAULT NULL,
+  `balance` double DEFAULT NULL,
+  PRIMARY KEY (`UserID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users_system`
+--
+
+LOCK TABLES `users_system` WRITE;
+/*!40000 ALTER TABLE `users_system` DISABLE KEYS */;
+INSERT INTO `users_system` VALUES (1,'Oneill','Panker','111111111111','052-222','oneill@zli','1','Customer','CONFIRMED',NULL,0),(2,'Topaz','Eldori','222222222222','053-333','topaz@zli','1','StoreManager','CONFIRMED','Karmiel',NULL),(3,'Koral','Biton','333333333333','054-444','koral@zli','1','NetworkManager','CONFIRMED',NULL,NULL),(4,'Adir','Miller','444444444444','055-555','adir@zli','1','CustomerServiceWorker','CONFIRMED',NULL,NULL),(5,'Shahar','Hasson','555555555555','056-666','shahar@zli','1','StoreWorkerWithPermission','CONFIRMED','Karmiel',NULL),(6,'Naor','Zion','666666666666','057-777','naor@zli','1','StoreWorker','CONFIRMED','Karmiel',NULL),(7,'Naruto','Uzumaki','777777777777','058-888','naruto@zli','1','MarketingEmployee','CONFIRMED',NULL,NULL),(8,'Dorin','Beery','888888888888','059-999','dorin@zli','1','Customer','NOT_CONFIRMED',NULL,0),(9,'Shlomi','Koriat','999999999999','050-000','shlomi@zli','1','StoreManager','CONFIRMED','Tel Aviv',NULL),(10,'Yuval','Semo','000000000000','051-111','yuval@zli','1','StoreWorkerWithPermission','CONFIRMED','Tel Aviv',NULL),(11,'Udi','Kagan','111111111111','052-111','udi@zli','1','Customer','FREEZED',NULL,0),(12,'Assi','Cohen','121212121212','053-222','assi@zli','1','Customer','CONFIRMED',NULL,10),(13,'Eran','Zarahovich','131313131313','054-333','eran@zli','1','Customer','CONFIRMED',NULL,0),(14,'Hen','Mizrahi','141414141414','055-444','hen@zli','1','Customer','CONFIRMED',NULL,0),(15,'Guy','Hochman','151515151515','056-555','guy@zli','1','Customer','CONFIRMED',NULL,0),(16,'Shalom','Assayag','161616161616','057-666','shalom@zli','1','Customer','CONFIRMED',NULL,0);
+/*!40000 ALTER TABLE `users_system` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -650,4 +677,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-06  3:12:42
+-- Dump completed on 2022-06-06 14:59:44
