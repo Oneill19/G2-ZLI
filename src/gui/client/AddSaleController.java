@@ -31,8 +31,8 @@ public class AddSaleController {
     private ArrayList<AbstractProduct> apList = new ArrayList<AbstractProduct>();
 
 	@FXML
-	void onBack(ActionEvent event) throws IOException {		
-		logoutBtn.fire();
+	void onBack(ActionEvent event) throws IOException {
+		cc.changeFXML(event, "MarketingEmployeOptions.fxml", "Zer-li Marketing Employe Options");
 	}
 
 	@FXML
@@ -130,10 +130,10 @@ public class AddSaleController {
 		}
 		for(AbstractProduct ap : listItems) {
 			if (ap instanceof Product) {
-				productInSale.append(ap.getSerialNumber()+"\t");
+				productInSale.append(ap.getSerialNumber()+" ");
 			}
 			else if(ap instanceof Item) {
-				itemInSale.append(ap.getSerialNumber()+"\t");
+				itemInSale.append(ap.getSerialNumber()+" ");
 			}
 		}
 		if(productInSale.length()>0)
@@ -148,34 +148,6 @@ public class AddSaleController {
 		return ret;
 	}
 	
-
-	/**
-	 * insert the new sale to table 'sale' in db
-	 * @return the id of the sale in DB
-	 */
-	private int insertSaleToDB() {
-		try {
-			ClientUI.chat.accept("insertNewSale\t"+saleName.getText()+"\t"+saleAmount.getText());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		int returnedIdSale = ChatClient.returnSaleID;
-		return returnedIdSale;
-	}
-	
-	/**
-	 * @param idSale		the id of the sale
-	 * @param itemInSale	the id of the items
-	 */
-	private void insertItemInSaleToDB(int idSale, String itemInSale) {
-		try {
-			System.out.println("idSale: "+idSale+" itemInSale: "+itemInSale);
-			ClientUI.chat.accept("insertItemInSaleToDB\t"+idSale+"\t"+itemInSale);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-	
 	/**
 	 * @param idSale		the id of the sale
 	 * @param productInSale	the id of the products
@@ -188,35 +160,78 @@ public class AddSaleController {
 		}
 	}
 	
-	private void setInstancesSaleID(int idSale) {
-		for(AbstractProduct ap : apList) {
-			ap.setSale(idSale);
-		}
-	}
 	
+	/**
+	 * <li> check saleAmount text field restrictions
+	 * <li> add to table: sale and return idSale
+	 * <li> add to table: item_in_sale according to returned idSale
+	 * <li> update table: item(idSale) to be idSale
+	 * @param event
+	 * @throws IOException
+	 */
 	@SuppressWarnings("unused")
 	@FXML
-	private void onSave(ActionEvent event) throws IOException {
-		String productInSale,itemInSale;
-		String[] ret;
+	private void onSave(ActionEvent event){
+		String productInSale,itemInSale, ret[];
 		int idSale;
 		
+		//• only Integer inputs 
+		//• 100>integer>0
 		if (!checkSaleAmountRestrictions()) return;
 		
-		ret = getListItems();
-		if(ret==null)return;
+		//get list of serial numbers to be added to sale
+		if ((ret = getListItems()) == null)
+			return;
 		productInSale = ret[0];
 		itemInSale = ret[1];
 		
-		idSale = insertSaleToDB();
-		setInstancesSaleID(idSale);
-		if(itemInSale.length()>0) {
-			insertItemInSaleToDB (idSale, itemInSale);
+		try {
+//			insert the new sale to table 'sale' in db
+			ClientUI.chat.accept("insertNewSale\t"+saleName.getText()+"\t"+saleAmount.getText());
+			if (ChatClient.returnSaleID == null) {
+				System.out.println("problem in getting idSale");
+				return;
+			}				
+			idSale = ChatClient.returnSaleID;
+			System.out.println("idSale in AddSaleController: "+idSale);
+			
+//			set saleId of AP instance
+			for(AbstractProduct ap : apList) {
+				ap.setSale(idSale);
+			}
+			
+			//if there are items in the sale
+			if(itemInSale.length()>0) {
+				
+				//insert to item_in_sale
+				ClientUI.chat.accept("insertItemInSale\t"+itemInSale+"\t"+idSale);
+				if (!ChatClient.requestSucceed) {
+					System.out.println("problem in inserting item_in_sale");
+					return;
+				}
+				
+				//change table item(idSale) to updated idSale
+				ClientUI.chat.accept("changeItemIdSale\t"+itemInSale+"\t"+idSale);
+				if(!ChatClient.requestSucceed) {
+
+					System.out.println("problem in inserting item_in_sale");
+					return;
+				}
+			}
+			
+			
+			if(productInSale.length()>0)
+				insertProductInSaleToDB(idSale,productInSale );
+		}catch(Exception e) {
+			System.out.println("problem in sale");
+			e.printStackTrace();
 		}
-		if(productInSale.length()>0)
-			insertProductInSaleToDB(idSale,productInSale );
 		
-		cc.changeFXML(event, "MarketingEmployeOptions.fxml", "Marketing Employe Options");
+		try {
+			cc.changeFXML(event, "MarketingEmployeOptions.fxml", "Marketing Employe Options");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void initList() {

@@ -3,8 +3,18 @@
     -fx-radius:50;
 }
 
+.table-view {
+	-fx-background-color: #FCFCFE;
+	background-color: #FCFCFE;
+	-fx-border-color: black;
+	border-color: black;
+	
+}
 #my-table .table-column{
 	 -fx-alignment: CENTER;
+	 -fx-background-color: #FCFCFE;
+	background-color: #FCFCFE;
+	-fx-text-fill:black;
 }
 
 #my-table .table-cell {

@@ -58,13 +58,7 @@ CREATE TABLE `complaint` (
   `IsReminded` int NOT NULL,
   `Refund` float DEFAULT NULL,
   `RefundDetails` varchar(4500) DEFAULT NULL,
-  PRIMARY KEY (`ComplaintID`),
-  KEY `OrderNumber_idx` (`OrderNumber`),
-  KEY `UserID_idx` (`CustomerID`),
-  KEY `WorkerID_idx` (`WorkerID`),
-  CONSTRAINT `CustomerID` FOREIGN KEY (`CustomerID`) REFERENCES `users` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `OrderNumber` FOREIGN KEY (`OrderNumber`) REFERENCES `orders` (`orderNumber`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `WorkerID` FOREIGN KEY (`WorkerID`) REFERENCES `users` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  PRIMARY KEY (`ComplaintID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -74,7 +68,7 @@ CREATE TABLE `complaint` (
 
 LOCK TABLES `complaint` WRITE;
 /*!40000 ALTER TABLE `complaint` DISABLE KEYS */;
-INSERT INTO `complaint` VALUES (5,60,111222333,4,'Karmiel','bad bad very bad','2022-06-04','20:17','OPEN',0,NULL,NULL);
+INSERT INTO `complaint` VALUES (5,60,8,4,'Karmiel','bad bad very bad','2022-06-04','20:17','OPEN',0,NULL,NULL);
 /*!40000 ALTER TABLE `complaint` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +98,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES ('1','White Rose',5,'Single Roses','/common/Assets/WhiteRose.png',1,NULL,'White'),('2','Red Rose',6,'Single Roses','/common/Assets/RedRose.png',1,NULL,'Red'),('3','Blue Rose',7,'Single Roses','/common/Assets/BlueRose.png',1,NULL,'Blue'),('4','Yellow Rose',7,'Single Roses','/common/Assets/YellowRose.png',1,NULL,'Yellow'),('5','Pink Rose',6,'Single Roses','/common/Assets/PinkRose.png',1,NULL,'Pink');
+INSERT INTO `item` VALUES ('1','White Rose',5,'Single Roses','/common/Assets/WhiteRose.png',1,2,'White'),('2','Red Rose',6,'Single Roses','/common/Assets/RedRose.png',1,3,'Red'),('3','Blue Rose',7,'Single Roses','/common/Assets/BlueRose.png',1,4,'Blue'),('4','Yellow Rose',7,'Single Roses','/common/Assets/YellowRose.png',1,0,'Yellow'),('5','Pink Rose',6,'Single Roses','/common/Assets/PinkRose.png',1,0,'Pink');
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,7 +178,7 @@ CREATE TABLE `item_in_sale` (
 
 LOCK TABLES `item_in_sale` WRITE;
 /*!40000 ALTER TABLE `item_in_sale` DISABLE KEYS */;
-INSERT INTO `item_in_sale` VALUES ('1',1),('1',4),('2',1),('2',2),('2',4),('3',2),('3',5),('4',1);
+INSERT INTO `item_in_sale` VALUES ('0',2),('1',1),('1',2),('2',1),('2',2),('2',3),('3',2),('3',4),('3',67),('4',1),('4',67),('5',67);
 /*!40000 ALTER TABLE `item_in_sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,7 +374,7 @@ CREATE TABLE `sale` (
   `discountAmount` int NOT NULL,
   `status` varchar(45) NOT NULL DEFAULT 'ACTIVE' COMMENT 'ACTIVE\\nNOT ACTIVE',
   PRIMARY KEY (`idSale`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -389,7 +383,7 @@ CREATE TABLE `sale` (
 
 LOCK TABLES `sale` WRITE;
 /*!40000 ALTER TABLE `sale` DISABLE KEYS */;
-INSERT INTO `sale` VALUES (0,'no sale',0,'ACTIVE'),(1,'firstSale',20,'ACTIVE'),(2,'blueProducts',40,'ACTIVE'),(25,'',50,'ACTIVE'),(26,'',1,'ACTIVE'),(27,'',1,'ACTIVE'),(28,'',1,'ACTIVE'),(29,'',1,'ACTIVE'),(30,'',1,'ACTIVE'),(31,'',1,'ACTIVE'),(32,'',5,'ACTIVE'),(33,'',1,'ACTIVE'),(34,'',1,'ACTIVE'),(35,'',5,'ACTIVE'),(36,'',5,'ACTIVE');
+INSERT INTO `sale` VALUES (0,'no sale',0,'NOT ACTIVE'),(1,'firstSale',20,'NOT ACTIVE'),(2,'blueProducts',40,'ACTIVE'),(52,'THATS IT I SWEAR',100,'ACTIVE'),(53,'NO BE EMET',20,'ACTIVE'),(54,'2020',50,'ACTIVE'),(55,'hrtyhd',30,'ACTIVE'),(56,'sdfs',24,'ACTIVE'),(57,'ada',23,'ACTIVE'),(58,'dgdsdfgd',45,'ACTIVE'),(59,'sdfgsf',34,'ACTIVE'),(60,'AHHHHHHHHHHHHHH!!!!!',25,'ACTIVE'),(61,'asd',2,'ACTIVE'),(62,'seemek',25,'ACTIVE'),(63,'sf',24,'ACTIVE'),(64,'safs',4,'ACTIVE'),(65,'asd',34,'ACTIVE'),(66,'sdfsdf',34,'ACTIVE'),(67,'sdfsf',23,'ACTIVE');
 /*!40000 ALTER TABLE `sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -553,7 +547,7 @@ CREATE TABLE `user_customer` (
 
 LOCK TABLES `user_customer` WRITE;
 /*!40000 ALTER TABLE `user_customer` DISABLE KEYS */;
-INSERT INTO `user_customer` VALUES (1,0),(111222333,0);
+INSERT INTO `user_customer` VALUES (1,0),(8,0),(11,0),(12,10),(13,0),(14,0),(15,0),(16,0);
 /*!40000 ALTER TABLE `user_customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -580,7 +574,7 @@ CREATE TABLE `user_store_worker` (
 
 LOCK TABLES `user_store_worker` WRITE;
 /*!40000 ALTER TABLE `user_store_worker` DISABLE KEYS */;
-INSERT INTO `user_store_worker` VALUES (2,'Karmiel'),(5,'Karmiel'),(6,'Karmiel');
+INSERT INTO `user_store_worker` VALUES (2,'Karmiel'),(5,'Karmiel'),(6,'Karmiel'),(9,'Tel Aviv'),(10,'Tel Aviv');
 /*!40000 ALTER TABLE `user_store_worker` ENABLE KEYS */;
 UNLOCK TABLES;
 
