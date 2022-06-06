@@ -311,6 +311,9 @@ public class EchoServer extends AbstractServer {
 			case "updateSale":
 				client.sendToClient(SaleQuery.updateSale(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
 				break;
+			case "deleteAp_in_sale":
+				client.sendToClient(SaleQuery.deleteAp_in_sale(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
+				break;
 			default:
 				System.out.println("No Command Found" + clientMsg[0]);
 				break;

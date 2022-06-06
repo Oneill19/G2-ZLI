@@ -345,4 +345,20 @@ public class SaleQuery {
 			return new ReturnCommand("changeItemIdSale",false);
 		}
 	}
+	
+	
+	public static ReturnCommand deleteAp_in_sale(Connection conn, String serial, String idSale, String table) {
+		String deleteQuery = "DELETE FROM "+table+"_in_sale WHERE idSale="+idSale+" AND "+table+"serial = "+serial+";";
+		PreparedStatement ps;
+		
+		try {
+			ps = conn.prepareStatement(deleteQuery);
+			ps.executeUpdate();
+			System.out.println("change id sale: "+ps); //debug
+			return new ReturnCommand("deleteAp_in_sale",true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ReturnCommand("deleteAp_in_sale",false);
+		}
+	}
 }

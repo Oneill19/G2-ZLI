@@ -67,7 +67,6 @@ public class MarketingEmployeeOptionsController {
      */
     @FXML
     void onWatchSales(ActionEvent event) throws IOException {
-    	ClientUI.chat.accept("selectAllSales");
     	cc.changeFXML(event, "WatchSales.fxml", "Zer-li Watch Sales");
     }
     

@@ -25,7 +25,7 @@
       <Pane fx:id="pane" layoutX="10.0" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="873.0" prefWidth="1211.0" style="-fx-background-color: #FCFCFE;">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a298d417" height="226.0" layoutX="4.0" layoutY="128.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1203.0" />
-            <ScrollPane fx:id="itemScrollPane" hbarPolicy="NEVER" layoutX="52.0" layoutY="414.0" prefHeight="359.0" prefWidth="502.0" style="-fx-background: #FCFCFE; -fx-background-color: #FCFCFE; -fx-alignment: CENTER;">
+            <ScrollPane fx:id="itemScrollPane" hbarPolicy="NEVER" layoutX="32.0" layoutY="414.0" prefHeight="359.0" prefWidth="533.0" style="-fx-background: #FCFCFE; -fx-background-color: #FCFCFE; -fx-alignment: CENTER;">
                <content>
                   <GridPane fx:id="grid" alignment="CENTER" prefHeight="102.0" prefWidth="493.0">
                      <columnConstraints>
@@ -52,13 +52,13 @@
                   </Label>
                </children>
             </VBox>
-            <TableView fx:id="salesTable" editable="true" layoutX="632.0" layoutY="414.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="359.0" prefWidth="522.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@mycss.css">
+            <TableView fx:id="salesTable" editable="true" layoutX="621.0" layoutY="414.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="359.0" prefWidth="552.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@mycss.css">
                <columns>
                   <TableColumn fx:id="saleIdCol" editable="false" prefWidth="49.0" sortType="DESCENDING" text="Sale ID" />
-                  <TableColumn fx:id="namecol" editable="false" prefWidth="126.0" text="Sale Name" />
-                  <TableColumn fx:id="discountCol" editable="false" prefWidth="68.0" text="Discount" />
-                  <TableColumn fx:id="statusCol" editable="false" prefWidth="96.0" text="Status" />
-                  <TableColumn fx:id="actionCol" prefWidth="181.0" text="Action" />
+                  <TableColumn fx:id="namecol" editable="false" prefWidth="148.0" text="Sale Name" />
+                  <TableColumn fx:id="discountCol" editable="false" prefWidth="78.0" text="Discount" />
+                  <TableColumn fx:id="statusCol" editable="false" prefWidth="134.0" text="Status" />
+                  <TableColumn fx:id="actionCol" prefWidth="140.0" text="Action" />
                </columns>
             </TableView>
             <Button fx:id="logoutBtn" defaultButton="true" layoutX="24.0" layoutY="48.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: transparent;" text="Logout |" textFill="#2b0548">
