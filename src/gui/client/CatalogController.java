@@ -1,9 +1,11 @@
 package gui.client;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
 import client.ChatClient;
+import client.ClientUI;
 import common.ButtonEventHandlerStyle;
 import entity.AbstractProduct;
 import entity.Item;
@@ -191,6 +193,19 @@ public class CatalogController {
      * initialize the screen
      */
     public void initialize() {
+    	try {
+			ClientUI.chat.accept("getUserOrders\t"+ChatClient.user.getUserID());
+		} catch (IOException e) {
+			System.out.println("problem getting user orders");
+			e.printStackTrace();
+			return;
+		}
+    	if (ChatClient.userOrdersHistory.size()<1) {
+    		Label firstOrder = new Label("20$ discount on you're first order!");
+    		firstOrder.setStyle("-fx-font-size: 15px;");
+    		firstOrder.setLayoutX(515);
+    		firstOrder.setLayoutY(68);
+    	}
 		
     	//initialize cart size
     	cartCounter.setText(getCartSize() + "");
