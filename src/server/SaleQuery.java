@@ -265,9 +265,9 @@ public class SaleQuery {
 	public static ReturnCommand nullifyIdSaleOfItemsWithCurrentIdSale(Connection conn, String idSale) {
 		Statement stmt;
 		String selectQuery = "	select * from item_in_sale as itemSale "
-				+ "	inner join item as i on i.itemSerial=itemSale.itemSerial "
-				+ "	where i.idSale=itemSale.idSale AND i.idSale='"+idSale+"';";
-		System.out.println(selectQuery);//debug
+				+ "inner join item as i on i.itemSerial=itemSale.itemSerial "
+				+ "where i.idSale=itemSale.idSale AND i.idSale='"+idSale+"';";
+		System.out.println("nullify: "+selectQuery);//debug
 		ResultSet rs=null;
 		StringBuilder sb = new StringBuilder();
 		
@@ -309,7 +309,7 @@ public class SaleQuery {
 				ps.setInt(1, Integer.parseInt(idSale));
 				ps.setString(2, s);
 				ps.executeUpdate();
-				System.out.println(ps);
+				System.out.println("change id sale: "+ps);
 			}
 			return new ReturnCommand("changeItemIdSale",true);
 		} catch (SQLException e) {

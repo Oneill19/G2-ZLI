@@ -164,8 +164,10 @@ public class WatchSalesController {
     	if (ChatClient.saleArray.size() < 1) return;
     	
     	//Check if no items in sale
-		if (!setChosenSale(ChatClient.saleArray.get(0))){
-    		grid.getChildren().clear();
+    	if(ChatClient.saleArray!= null) {
+			if (!setChosenSale(ChatClient.saleArray.get(0))){
+	    		grid.getChildren().clear();
+	    	}	
     	}
 	}
 	

@@ -238,6 +238,12 @@ public class MyButtons extends Button {
 					
 					//If button is of deActivate sale
 					else if(command.equals("Delete Sale")) {
+						
+						//get Screens' objects
+						Node lookup =((Node) t.getTarget()).getScene().lookup("#my-table");
+						TableView<Sale> mytable;
+						mytable = (TableView<Sale>)lookup;
+						
 						Sale sale=null;
 						if (selected instanceof Sale)
 							sale = (Sale)selected;
@@ -257,6 +263,7 @@ public class MyButtons extends Button {
 						//change sale's status
 						try {
 							ClientUI.chat.accept("updateSaleStatus\t"+sale.getIdSale()+"\t"+"NOT ACTIVE");
+							sale.setStatus("NOT ACTIVE");
 						} catch (IOException e) {
 							System.out.println("Update status didn't work.");
 							e.printStackTrace();
@@ -270,7 +277,8 @@ public class MyButtons extends Button {
 							e.printStackTrace();
 						}
 						
-						
+						mytable.getItems().clear();
+						mytable.setItems(FXCollections.observableArrayList(ChatClient.saleArray));
 					}
 				}
 			});
