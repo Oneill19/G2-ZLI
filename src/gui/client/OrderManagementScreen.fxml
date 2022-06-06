@@ -16,21 +16,21 @@
             <Image url="@Zli_logo.png" />
          </image>
       </ImageView>
-      <TableView fx:id="ordersTable" editable="true" layoutX="123.0" layoutY="175.0" prefHeight="401.0" prefWidth="795.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px;" tableMenuButtonVisible="true">
+      <TableView fx:id="ordersTable" editable="true" layoutX="123.0" layoutY="175.0" prefHeight="401.0" prefWidth="795.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548; -fx-padding: 0px;" stylesheets="@mycss.css">
          <columns>
-            <TableColumn fx:id="orderNumberCol" prefWidth="115.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center;" text="Order Number" />
-            <TableColumn fx:id="Status" prefWidth="105.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center;" text="Status" />
-            <TableColumn fx:id="Price" prefWidth="111.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center;" text="Price" />
+            <TableColumn fx:id="orderNumberCol" prefWidth="58.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center;" text="Order&#10;Number" />
+            <TableColumn fx:id="Status" prefWidth="222.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center;" text="Status" />
+            <TableColumn fx:id="Price" prefWidth="51.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-text-alignment: center;" text="Price" />
             <TableColumn fx:id="dOrderCol" prefWidth="159.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Order Description" />
-            <TableColumn fx:id="supplyCol" prefWidth="156.0" style="-fx-background-color: #FCFCFE;" text="Supply Date">
+            <TableColumn prefWidth="156.0" style="-fx-background-color: #FCFCFE;" text="Supply">
                <columns>
-                  <TableColumn fx:id="supplyDateCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Date2" />
+                  <TableColumn fx:id="supplyDateCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Date" />
                   <TableColumn fx:id="supplyTimeCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Time" />
                </columns></TableColumn>
-            <TableColumn fx:id="orderCol" prefWidth="147.0" style="-fx-background-color: #FCFCFE;" text="Order Date">
+            <TableColumn prefWidth="147.0" style="-fx-background-color: #FCFCFE;" text="Order Creation">
                <columns>
-                  <TableColumn fx:id="orderDateCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Date" />
-                  <TableColumn fx:id="orderTimeCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Time" />
+                  <TableColumn fx:id="creationDateCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Date" />
+                  <TableColumn fx:id="creationTimeCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Time" />
                </columns></TableColumn>
          </columns>
       </TableView>

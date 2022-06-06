@@ -176,6 +176,19 @@ public class MyButtons extends Button {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
+						
+						//insert datetime of order request for cancelation
+						try {
+							ClientUI.chat.accept("insertTo_order_cancelation\t"+Integer.toString(selectedO.getOrderNumber()));
+						} catch (IOException e1) {
+							System.out.println("problem inserting to order_cancelation");
+							e1.printStackTrace();
+						}
+						if(!ChatClient.requestSucceed) {
+							System.out.println("insertion to order_cancelation had a problem");
+							return;
+						}
+							
 						deleteButton.setOnMouseExited(new EventHandler<MouseEvent>() {
 							@Override
 							public void handle(MouseEvent e) {
