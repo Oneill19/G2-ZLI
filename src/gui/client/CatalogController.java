@@ -213,7 +213,7 @@ public class CatalogController {
     			img = new ImageView(new Image(getClass().getResourceAsStream(product.getImagePath()), 100, 100, false, false));
     		}
     		Label nameLabel = new Label(product.getName());
-    		Label priceLabel = new Label(product.getPrice() + "$");
+    		Label priceLabel = new Label(product.getPrice() + "NIS");
     		Label typeLabel = new Label((product instanceof Product) ? "Premade Product": "Sold Alone");
     		Button viewButton = new Button();
     		

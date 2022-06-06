@@ -28,7 +28,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <BarChart fx:id="reportChart" barGap="0.0" categoryGap="0.0" horizontalZeroLineVisible="false" layoutX="244.0" layoutY="167.0" prefHeight="435.0" prefWidth="593.0" stylesheets="@../../../G2-WorkSpace/G2-Zli/src/gui/client/chart.css" title="Revenue Quarterly Histogram">
+      <BarChart fx:id="reportChart" barGap="0.0" categoryGap="0.0" horizontalZeroLineVisible="false" layoutX="244.0" layoutY="167.0" prefHeight="435.0" prefWidth="593.0" stylesheets="@chart.css">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>

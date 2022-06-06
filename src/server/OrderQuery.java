@@ -79,6 +79,7 @@ public class OrderQuery {
 	public static ReturnCommand addProductsInOrder(Connection con, String orderNumber, String product_in_order) {
 		PreparedStatement ps;
 		String[] productArray = product_in_order.split(" ");
+		System.out.println(product_in_order);
 		
 		//insert products to DB
 		for(String productSerial : productArray) {
@@ -107,6 +108,7 @@ public class OrderQuery {
 		try {
 			ps = con.prepareStatement(insertQuery);
 			ps.executeUpdate();
+			insertGeneralStoreForDelivery(con, orderNumber);	// to add general as store for delivery
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -254,7 +256,6 @@ public class OrderQuery {
 		String today = LocalDate.now().toString();
 		String now = LocalTime.now().truncatedTo(ChronoUnit.MINUTES).toString();
 //		System.out.println("now: "+now.toString());//debug
-//
 		String insertQuery = "INSERT INTO order_cancelation(orderNumber, requestCancelationDate, requestCancelationTime) VALUES (?,?,?)";
 		try {
 			ps = conn.prepareStatement(insertQuery);
@@ -267,5 +268,16 @@ public class OrderQuery {
 			return new ReturnCommand("insertTo_order_cancelation",false);
 		}
 		return new ReturnCommand("insertTo_order_cancelation",true);
+	}
+	
+	public static void insertGeneralStoreForDelivery(Connection con, String orderNumber) {
+		Statement stmt;
+		String sqlQuery = "UPDATE zli.orders SET fromStore='General' WHERE orderNumber=" + orderNumber + ";";
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sqlQuery);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -1,20 +1,23 @@
 	package gui.client;
 
+	import java.awt.Label;
+import java.io.IOException;
 	import java.time.Year;
 
-import client.ChatClient;
-import client.ClientUI;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
+	import client.ChatClient;
+	import client.ClientUI;
+	import javafx.event.ActionEvent;
+	import javafx.fxml.FXML;
+	import javafx.fxml.FXMLLoader;
+	import javafx.scene.Node;
+	import javafx.scene.Scene;
+	import javafx.scene.control.Button;
+	import javafx.scene.control.ComboBox;
+	import javafx.scene.control.TextArea;
+	import javafx.scene.layout.Pane;
+	import javafx.scene.text.Text;
+	import javafx.stage.Stage;
+	import entity.Store;
 
 
 /**
@@ -61,6 +64,11 @@ public class CEOReportsController {
 		@FXML
 		private ComboBox<String> storeCombo;
 
+		/**
+		 * Go back to the options screen
+		 * @param event
+		 * @throws Exception
+		 */
 		@FXML
 		void onBack(ActionEvent event) throws Exception {
 			((Node) event.getSource()).getScene().getWindow().hide();
@@ -73,6 +81,11 @@ public class CEOReportsController {
 			primaryStage.show();
 		}
 
+		/**
+		 * exit from Zer-Li system 
+		 * @param event
+		 * @throws Exception
+		 */
 		@FXML
 		void onExit(ActionEvent event) throws Exception {
 			ClientUI.chat.accept("LogoutUser" + "\t" + ChatClient.user.getEmail());
@@ -81,6 +94,11 @@ public class CEOReportsController {
 			System.exit(0);
 		}
 
+		/**
+		 * Log out from the user and go back to login screen
+		 * @param event
+		 * @throws Exception
+		 */
 		@FXML
 		void onLogOut(ActionEvent event) throws Exception {
 			ClientUI.chat.accept("LogoutUser" + "\t" + ChatClient.user.getEmail());
@@ -95,6 +113,11 @@ public class CEOReportsController {
 			primaryStage.show();
 		}
 
+		/**
+		 * Select the year of the month The type of monthly report and store that the CEO wants to see and display the report on the screen
+		 * @param event
+		 * @throws Exception
+		 */
 		@FXML
 		void onViewReport(ActionEvent event) throws Exception {
 			String reportNme;
@@ -137,6 +160,10 @@ public class CEOReportsController {
 			reportText.setEditable(false);
 		}
 
+		/**
+		 * Initialize the screen
+		 * @throws Exception
+		 */
 		@FXML
 		 void initialize() throws Exception {
 			User.setText("Hello, " + ChatClient.user.getFirstName());

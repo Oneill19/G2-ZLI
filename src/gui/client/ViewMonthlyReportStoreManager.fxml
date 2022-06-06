@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.StoreManagerReportsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE; -fx-border-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.StoreManagerReportsController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="406.0" layoutY="48.0">
          <image>
@@ -32,7 +32,7 @@
             <Image url="@User.png" />
          </image>
       </ImageView>
-      <Button fx:id="Back" alignment="CENTER" layoutX="32.0" layoutY="674.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Back" textFill="#fcfcfe" />
+      <Button fx:id="Back" alignment="CENTER" layoutX="32.0" layoutY="674.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50;" text="Back" textFill="#fcfcfe" />
       <Button fx:id="Exit" alignment="CENTER" layoutX="918.0" layoutY="12.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #D2042D; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
       <Text fill="#31134a" layoutX="410.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Monthly Reports" wrappingWidth="180.0">
          <font>
@@ -73,7 +73,7 @@
                </font>
             </Text>
             <ComboBox fx:id="ReportType" layoutX="83.0" layoutY="220.0" prefHeight="25.0" prefWidth="140.0" promptText="Report Type" />
-            <Button fx:id="ViewReport" alignment="CENTER" layoutX="97.0" layoutY="284.0" mnemonicParsing="false" onAction="#onViewReport" prefHeight="24.0" prefWidth="106.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: green; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="View " textFill="#fcfcfe" />
+            <Button fx:id="ViewReport" alignment="CENTER" layoutX="97.0" layoutY="284.0" mnemonicParsing="false" onAction="#onViewReport" prefHeight="24.0" prefWidth="106.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: green; -fx-background-radius: 50; -fx-border-radius: 50;" text="View " textFill="#fcfcfe" />
             <Text fill="RED" layoutX="56.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
                <font>
                   <Font size="15.0" />

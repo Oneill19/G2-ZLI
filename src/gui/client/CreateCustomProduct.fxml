@@ -12,14 +12,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.CreateCustomProductController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.CreateCustomProductController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="450.0" layoutY="3.0">
          <image>
             <Image url="@Zli_logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="exitBtn" alignment="CENTER" layoutX="1017.0" layoutY="16.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+      <Button fx:id="exitBtn" alignment="CENTER" layoutX="1017.0" layoutY="16.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #D2042D; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
       <Button fx:id="userOptBtn" layoutX="77.0" layoutY="22.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
          <font>
             <Font size="15.0" />
@@ -59,7 +59,7 @@
             <TableColumn fx:id="priceCol" prefWidth="140.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-alignment: CENTER-LEFT;" text="Price" />
          </columns>
       </TableView>
-      <Button fx:id="deleteOne" alignment="CENTER" layoutX="494.0" layoutY="586.0" mnemonicParsing="false" onAction="#onDeleteOne" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: red; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Delete One" textFill="#fcfcfe" />
+      <Button fx:id="deleteOne" alignment="CENTER" layoutX="494.0" layoutY="586.0" mnemonicParsing="false" onAction="#onDeleteOne" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #D2042D; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Delete One" textFill="#fcfcfe" />
       <Label fx:id="messageLabel" alignment="CENTER" layoutX="105.0" layoutY="356.0" prefHeight="17.0" prefWidth="243.0" textFill="#00ff59">
          <font>
             <Font size="16.0" />
@@ -72,5 +72,10 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
+      <ImageView fitHeight="38.0" fitWidth="43.0" layoutX="184.0" layoutY="18.0">
+         <image>
+            <Image url="@User.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
