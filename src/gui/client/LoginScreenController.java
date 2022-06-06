@@ -142,7 +142,7 @@ public class LoginScreenController {
     	case "StoreWorker":
     		root = FXMLLoader.<Pane>load(getClass().getResource("StoreWorkerScreen.fxml"));
     		break;
-    	case "StoreWorkerApproved":
+    	case "StoreWorkerWithPermission":
     		root = FXMLLoader.<Pane>load(getClass().getResource("StoreWorkerApprovedScreen.fxml"));
     		break;
     	case "CustomerServiceWorker":
@@ -150,7 +150,8 @@ public class LoginScreenController {
     		root = FXMLLoader.<Pane>load(getClass().getResource("CustomerServiceWorkerScreen.fxml"));
     		break;
     	case "ServiceSpecialist":
-    		System.out.println("ServiceSpecialist");
+//    		System.out.println("ServiceSpecialist");
+    		root = FXMLLoader.<Pane>load(getClass().getResource("ServiceSpecialistScreen.fxml"));
     		break;
     	case "NetworkManager":
 //    		System.out.println("NetworkManager");

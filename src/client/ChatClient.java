@@ -48,6 +48,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<String> stores = new ArrayList<>();
 	public static ArrayList<Survey> surveysWithReports = new ArrayList<>();
 	public static ArrayList<Survey> allSurveys = new ArrayList<>();
+	public static ArrayList<Survey> surveysWithNoReports = null;
 	public static ArrayList<Complaint> allComplaints = new ArrayList<>();
 	public static ArrayList<Report> reportsq1;
 	public static ArrayList<Report> reportsq2;
@@ -239,6 +240,12 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "select_product_in_sale":
 				product_in_saleArray = (ArrayList<Product>)rc.getReturnValue();
+				break;
+			case "AddNewSurveyReport":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "GetSurveysWithNoReport":
+				surveysWithNoReports = (ArrayList<Survey>)rc.getReturnValue();
 				break;
 			default:
 				//for debug - don't remove.
