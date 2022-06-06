@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import common.ReturnCommand;
@@ -244,5 +247,25 @@ public class OrderQuery {
 			ex.printStackTrace();
 		}
 		return new ReturnCommand("changeOrderStatus",null);
+	}
+	
+	public static ReturnCommand insertTo_order_cancelation(Connection conn, String orderNumber) {
+		PreparedStatement ps;
+		String today = LocalDate.now().toString();
+		String now = LocalTime.now().truncatedTo(ChronoUnit.MINUTES).toString();
+		System.out.println("now: "+now.toString());//debug
+//
+		String insertQuery = "INSERT INTO order_cancelation(orderNumber, requestCancelationDate, requestCancelationTime) VALUES (?,?,?)";
+		try {
+			ps = conn.prepareStatement(insertQuery);
+			ps.setInt(1, Integer.parseInt(orderNumber));
+			ps.setString(2, today);
+			ps.setString(3, now);
+			ps.executeUpdate();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return new ReturnCommand("insertTo_order_cancelation",false);
+		}
+		return new ReturnCommand("insertTo_order_cancelation",true);
 	}
 }

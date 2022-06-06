@@ -320,6 +320,11 @@ public class EchoServer extends AbstractServer {
 			case "deleteAp_in_sale":
 				client.sendToClient(SaleQuery.deleteAp_in_sale(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
 				break;
+			case "insertTo_order_cancelation":
+				client.sendToClient(OrderQuery.insertTo_order_cancelation(conn, clientMsg[1]));
+				break;
+			case "getOrderSupplyDateTime":
+				client.sendToClient(StoreManagerQuery.getOrderSupplyDateTime(conn, clientMsg[1]));
 			case "GetAmountOfCustomProduct":
 				client.sendToClient(ProductsQuery.getAmountOfCustomProduct(conn));
 				break;

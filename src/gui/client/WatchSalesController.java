@@ -184,8 +184,6 @@ public class WatchSalesController {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-    				
-    				WatchSalesController ws = loader.getController();
     				stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     				scene = new Scene(root);
     				stage.setScene(scene);

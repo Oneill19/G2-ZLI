@@ -34,6 +34,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Order> userOrdersHistory;
 	public static String orderHistoryDeliveryData = new String();
 	public static Order cartOrder = new Order();
+	public static String orderCreationDateTime;
 	
 	//AbstractProduct
 	public static ArrayList<AbstractProduct> products = new ArrayList<>();
@@ -263,6 +264,12 @@ public class ChatClient extends AbstractClient {
 			case "deleteAp_in_sale":
 				requestSucceed = (boolean)rc.getReturnValue();
 				break;
+			case "insertTo_order_cancelation":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "getOrderSupplyDateTime":
+				orderCreationDateTime = (String)rc.getReturnValue();
+        break;
 			case "AddCustomProduct":
 				requestSucceed = (boolean)rc.getReturnValue();
 				break;
