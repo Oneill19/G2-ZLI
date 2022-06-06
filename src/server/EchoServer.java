@@ -302,6 +302,12 @@ public class EchoServer extends AbstractServer {
 			case "select_product_in_sale":
 				client.sendToClient(SaleQuery.select_product_in_sale(conn, clientMsg[1]));
 				break;
+			case "AddNewSurveyReport":
+				client.sendToClient(SurveyQuery.addNewSurveyReport(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4]));
+				break;
+			case "GetSurveysWithNoReport":
+				client.sendToClient(SurveyQuery.getSurveysWithNoReport(conn));
+          break;
 			case "updateSaleStatus":
 				client.sendToClient(SaleQuery.updateSaleStatus(conn, clientMsg[1], clientMsg[2]));
 				break;
@@ -333,7 +339,7 @@ public class EchoServer extends AbstractServer {
 
 	// TODO - delete before submitting and correct errors that occur from it
 	//it is mainly to disconnect all users from the DB
-	public Connection getConnection() {
+	public static Connection getConnection() {
 		return conn;
 	}
 

@@ -1,5 +1,7 @@
 package server;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -163,8 +165,58 @@ public class SurveyQuery {
 			ps.close();
 			return new ReturnCommand("AddSurveyAnswer", true);
 		} catch (Exception e) {
-//			e.printStackTrace();
+			e.printStackTrace();
 			return null;
 		}
 	}
+	
+	public static ReturnCommand getSurveysWithNoReport(Connection con) {
+		Statement stmt;
+		String sqlQuery = "SELECT * FROM zli.survey WHERE zli.survey.SurveyID NOT IN (SELECT SurveyID FROM zli.survey_reports);";
+		ArrayList<Survey> surveys = new ArrayList<>();
+		ResultSet rs = null;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sqlQuery);
+			while (rs.next()) {
+				int surveyId = rs.getInt(1);
+				String surveyName = rs.getString(2);
+				String[] questions = new String[6];
+				questions[0] = rs.getString(3);
+				questions[1] = rs.getString(4);
+				questions[2] = rs.getString(5);
+				questions[3] = rs.getString(6);
+				questions[4] = rs.getString(7);
+				questions[5] = rs.getString(8);
+				surveys.add(new Survey(surveyId, surveyName, questions));
+			}
+			return new ReturnCommand("GetSurveysWithNoReport", surveys);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	public static ReturnCommand addNewSurveyReport(Connection con, String surveyId, String fileName, String uploadDate, String filePath) {
+		PreparedStatement ps;
+		String sqlQuery = "INSERT INTO zli.survey_reports(SurveyID,FileName,DateUploaded,PDFFile) VALUES (?,?,?,?)";
+		try {
+			ps = con.prepareStatement(sqlQuery);
+			ps.setInt(1, Integer.parseInt(surveyId));
+			ps.setString(2, fileName);
+			ps.setString(3, uploadDate);
+			File pdfFile = new File(filePath);
+			FileInputStream fis = new FileInputStream(pdfFile);
+			ps.setBinaryStream(4, fis, pdfFile.length());
+			ps.executeUpdate();
+			return new ReturnCommand("AddNewSurveyReport", true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ReturnCommand("AddNewSurveyReport", false);
+		}
+	}
+	
+	
 }

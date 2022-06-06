@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.CreateProductController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.CreateProductController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="450.0" layoutY="3.0">
          <image>
@@ -57,11 +57,11 @@
       <TextField fx:id="productName" disable="true" layoutX="304.0" layoutY="263.0" prefHeight="25.0" prefWidth="243.0" promptText="Product name" />
       <TextField fx:id="productPrice" disable="true" layoutX="304.0" layoutY="312.0" prefHeight="25.0" prefWidth="243.0" promptText="Product price" />
       <ComboBox fx:id="colorComboBox" disable="true" layoutX="304.0" layoutY="364.0" prefHeight="25.0" prefWidth="243.0" promptText="Select color" />
-      <TableView fx:id="itemTable" disable="true" layoutX="587.0" layoutY="222.0" prefHeight="251.0" prefWidth="409.0">
+      <TableView fx:id="itemTable" disable="true" layoutX="587.0" layoutY="222.0" prefHeight="251.0" prefWidth="409.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2b0548;">
          <columns>
-            <TableColumn fx:id="serialCol" prefWidth="75.0" text="Item Serial" />
-            <TableColumn fx:id="nameCol" prefWidth="245.0" text="Name" />
-            <TableColumn fx:id="amountCol" prefWidth="88.0" text="Amount" />
+            <TableColumn fx:id="serialCol" prefWidth="75.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Item Serial" />
+            <TableColumn fx:id="nameCol" prefWidth="245.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Name" />
+            <TableColumn fx:id="amountCol" prefWidth="88.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Amount" />
          </columns>
       </TableView>
       <Button fx:id="deleteOne" alignment="CENTER" disable="true" layoutX="605.0" layoutY="533.0" mnemonicParsing="false" onAction="#onDeleteOne" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: red; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Delete One" textFill="#fcfcfe" />
