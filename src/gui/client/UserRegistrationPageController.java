@@ -167,8 +167,9 @@ public class UserRegistrationPageController {
 			txt.setText("Saved successfully!");
 			//show message
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Registration completed successfully!");
+			alert.setTitle("Simulation");
 			alert.setHeaderText("Customer registration completed successfully! 20% discount coupon sent for the first purchase!");
+			alert.setContentText("Email: "+ Emailtxt.getText()+"\nPhone: "+Phonetxt.getText());
 			alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("orderReception.png"))));
 			alert.showAndWait();
 
