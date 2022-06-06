@@ -60,39 +60,42 @@ public class SaleQuery {
 	 * @param idSale the idSale of the item
 	 * @return nothing.
 	 */
-	public static ReturnCommand insertItemInSale(Connection con, String serial, String idSale) {
+	public static ReturnCommand insertApInSale(Connection con, String serial, String idSale, String table) {
 		PreparedStatement ps;
-		String insertQuery = "INSERT INTO item_in_sale(itemSerial, idSale)" + "VALUES (?,?);";;
-		String[] allItems = serial.split(" ");
+		String insertQuery=null, updateQuery=null;
+		String columnName = table.equals("item_in_sale") ? "itemSerial":"productSerial";
 
-		System.out.println("idSale in SaleQuery: "+idSale); 
+		insertQuery = "INSERT INTO "+table+" ("+columnName+", idSale)" + "VALUES (?,?);";
+		
+		String[] allAp = serial.split(" ");
+//		System.out.println("idSale in SaleQuery: "+idSale); 
 				
 //		insert the new sale
-		for (String itemSerial : allItems) {
+		for (String apSerial : allAp) {
 			try {
 				ps = con.prepareStatement(insertQuery);
-				ps.setString(1,itemSerial);
+				ps.setString(1,apSerial);
 				ps.setInt(2, Integer.parseInt(idSale));
 				ps.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("problem");
-				return new ReturnCommand("insertItemInSale",false);
+				return new ReturnCommand("insertApInSale",false);
 			}
 		}
 
-//		update the idSale of items
-		for (String itemSerial : allItems) {
-			String updateQuery = "UPDATE item SET idSale = " + idSale + " WHERE itemSerial = '" + itemSerial + "';";
+//		update the idSale of ap
+		for (String apSerial : allAp) {
+			updateQuery = "UPDATE item SET idSale = " + idSale + " WHERE "+columnName+" = '" + apSerial + "';";
 			try {
 				ps = con.prepareStatement(updateQuery);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("problem");
-				return new ReturnCommand("insertItemInSale",false);
+				return new ReturnCommand("insertApInSale",false);
 			}
 		}
-		return new ReturnCommand("insertItemInSale",true);
+		return new ReturnCommand("insertApInSale",true);
 	}
 
 	/**
@@ -104,7 +107,7 @@ public class SaleQuery {
 	public static ReturnCommand insertProductsInSaleToDB(Connection con, String serial, String idSale) {
 		PreparedStatement ps;
 		String insertQuery;
-		String[] allProducts = serial.split("\t");
+		String[] allProducts = serial.split(" ");
 
 //		insert the new sale
 		for (String productSerial : allProducts) {
@@ -257,30 +260,34 @@ public class SaleQuery {
 	
 
 	/**
-	 * nuliify all items that are CURRENTLY connected with sale 'idSale'
+	 * nuliify all abstractProducts(item, product) that are CURRENTLY connected with sale 'idSale'
 	 * @param conn		connection to client
 	 * @param idSale	the id of the sale
 	 * @return
 	 */
-	public static ReturnCommand nullifyIdSaleOfItemsWithCurrentIdSale(Connection conn, String idSale) {
+	public static ReturnCommand nullifyIdSaleOfApWithCurrentIdSale(Connection conn, String idSale,String table) {
 		Statement stmt;
-		String selectQuery = "	select * from item_in_sale as itemSale "
-				+ "	inner join item as i on i.itemSerial=itemSale.itemSerial "
-				+ "	where i.idSale=itemSale.idSale AND i.idSale='"+idSale+"';";
-		System.out.println(selectQuery);//debug
+		String ap_in_sale = table.equals("item")?"item_in_sale":"product_in_sale";
+		String ap = table.equals("item")?"item":"product";
+		String apSerial = table.equals("item")?"itemSerial":"productSerial";
+		
+		String selectQuery = "	select * from "+ap_in_sale+" as itemSale "
+				+ "inner join "+ap+" as i on i."+apSerial+"=itemSale."+apSerial+" "
+				+ "where i.idSale=itemSale.idSale AND i.idSale='"+idSale+"';";
+		System.out.println("nullify: "+selectQuery);//debug
 		ResultSet rs=null;
 		StringBuilder sb = new StringBuilder();
-		
+//		
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(selectQuery);
-			//has all itemSerial of items that's idSale need to be deleted.
+//			has all apSerial of items\products which idSale needs to be deleted.
 			while(rs.next()) {
 				sb.append(Integer.toString(rs.getInt(1))).append(" ");
 			}
-			//nullify the idSale of all items that had currently that '@idSale'
-			
-			ReturnCommand rc = changeItemIdSale(conn, sb.toString(), Integer.toString(0));
+//			nullify the idSale of all items\products that had currently that '@idSale'
+//			
+			ReturnCommand rc = changeApIdSale(conn, sb.toString(), Integer.toString(0),table);
 			boolean retVal = (boolean) rc.getReturnValue();
 			if ( !retVal) {
 				return new ReturnCommand("updateSaleStatus",false);
@@ -299,23 +306,59 @@ public class SaleQuery {
 	 * @param idSale	the idSale to give all 'items'
 	 * @return
 	 */
-	public static ReturnCommand changeItemIdSale(Connection conn, String items, String idSale) {
-		String[] itemsArray = items.split(" ");
-		String updateQuery = "UPDATE item SET idSale=? WHERE itemSerial=?";
+	public static ReturnCommand changeApIdSale(Connection conn, String items, String idSale, String table) {
+		String[] apArray = items.split(" ");
+		String column = table.equals("item") ? "itemSerial" : "productSerial";
+		String updateQuery = "UPDATE "+table+" SET idSale=? WHERE "+column+"=?";
 		PreparedStatement ps;
+		
 		try {
 			ps = conn.prepareStatement(updateQuery);
-			for(String s : itemsArray) {
+			for(String s : apArray) {
 				ps.setInt(1, Integer.parseInt(idSale));
 				ps.setString(2, s);
 				ps.executeUpdate();
-				System.out.println(ps);
+				System.out.println("change id sale: "+ps); //debug
 			}
+			return new ReturnCommand("changeApIdSale",true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ReturnCommand("changeApIdSale",false);
+		}
+		
+	}
+	
+	
+	public static ReturnCommand updateSale(Connection conn, String idSale, String saleName, String discountAmount) {
+		String updateQuery = "UPDATE sale SET saleName=?, discountAmount=? WHERE idSale=?";
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement(updateQuery);
+				ps.setString(1, saleName);
+				ps.setInt(2, Integer.parseInt(discountAmount));
+				ps.setInt(3, Integer.parseInt(idSale));
+				ps.executeUpdate();
+				System.out.println("update sale: "+ps);
 			return new ReturnCommand("changeItemIdSale",true);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return new ReturnCommand("changeItemIdSale",false);
 		}
+	}
+	
+	
+	public static ReturnCommand deleteAp_in_sale(Connection conn, String serial, String idSale, String table) {
+		String deleteQuery = "DELETE FROM "+table+"_in_sale WHERE idSale="+idSale+" AND "+table+"serial = "+serial+";";
+		PreparedStatement ps;
 		
+		try {
+			ps = conn.prepareStatement(deleteQuery);
+			ps.executeUpdate();
+			System.out.println("change id sale: "+ps); //debug
+			return new ReturnCommand("deleteAp_in_sale",true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ReturnCommand("deleteAp_in_sale",false);
+		}
 	}
 }

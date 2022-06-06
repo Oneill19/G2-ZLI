@@ -227,10 +227,8 @@ public class ChatClient extends AbstractClient {
 				returnSaleID = (Integer)rc.getReturnValue();
 				System.out.println("ChatClient returnSaleID "+returnSaleID);
 				break;
-			case "insertItemInSale":
+			case "insertApInSale":
 				requestSucceed = (boolean)rc.getReturnValue();
-				break;
-			case "insertProductsInSaleToDB":
 				break;
 			case "Reminded":
 				requestSucceed = (boolean)rc.getReturnValue();
@@ -253,13 +251,16 @@ public class ChatClient extends AbstractClient {
 			case "updateSaleStatus":
 				requestSucceed = (boolean)rc.getReturnValue();
 				break;
-			case "nullifyIdSaleOfItemsWithCurrentIdSale":
+			case "nullifyIdSaleOfApWithCurrentIdSale":
 				requestSucceed = (boolean)rc.getReturnValue();
 				break;
-			case "changeItemIdSale":
+			case "changeApIdSale":
 				requestSucceed = (boolean)rc.getReturnValue();
 				break;
-			case "commandinsertItemInSale":
+			case "updateSale":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "deleteAp_in_sale":
 				requestSucceed = (boolean)rc.getReturnValue();
 				break;
 			case "AddCustomProduct":

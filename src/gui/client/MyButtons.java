@@ -43,14 +43,12 @@ public class MyButtons extends Button {
 	 */
 	public Button createRegularButton() {
 		catalogButton = new Button("Catalog", new ImageView(new Image(getClass().getResourceAsStream("catalogIcon.png"), 37, 37, false, true)));
-
 		catalogButton.setStyle("-fx-background-color:#a297d5;" + 
 								"-fx-background-radius:50;" + 
 								"-fx-border-radius:50;" + 
 								"-fx-padding: 0 0 0 0;" + 
 								"-fx-border-color:#aeaeae;");
 		catalogButton.setPadding(new Insets(5, 0, 0, 5));
-
 		catalogButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent t) {
@@ -62,27 +60,8 @@ public class MyButtons extends Button {
 			}
 		});
 
-		catalogButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				catalogButton.setStyle("-fx-border-radius:20.0;" + 
-									"-fx-background-radius:50;" + 
-									"-fx-background-color: #EFE2FE;" + 
-									"-fx-padding: 0 0 0 0;" + 
-									"-fx-border-color:#aeaeae;");
-			}
-		});
-
-		catalogButton.setOnMouseExited(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				catalogButton.setStyle("-fx-background-color:#a297d5;" + 
-										"-fx-background-radius:50;" + 
-										"-fx-border-radius:50;" + 
-										"-fx-padding: 0 0 0 0;" + 
-										"-fx-border-color:#aeaeae;");
-			}
-		});
+		catalogButton.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(catalogButton));
+		catalogButton.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnExit(catalogButton));
 
 		return catalogButton;
 	}
@@ -238,6 +217,12 @@ public class MyButtons extends Button {
 					
 					//If button is of deActivate sale
 					else if(command.equals("Delete Sale")) {
+						
+						//get Screens' objects
+						Node lookup =((Node) t.getTarget()).getScene().lookup("#my-table");
+						TableView<Sale> mytable;
+						mytable = (TableView<Sale>)lookup;
+						
 						Sale sale=null;
 						if (selected instanceof Sale)
 							sale = (Sale)selected;
@@ -251,26 +236,36 @@ public class MyButtons extends Button {
 							Alert alert = new Alert(AlertType.CONFIRMATION);
 							alert.setTitle("Sale is Not Active");
 							alert.setHeaderText("Sale #"+sale.getIdSale()+" is already Not Active.");
+							alert.showAndWait();
 							return;
 						}
 							
 						//change sale's status
 						try {
 							ClientUI.chat.accept("updateSaleStatus\t"+sale.getIdSale()+"\t"+"NOT ACTIVE");
+							sale.setStatus("NOT ACTIVE");
 						} catch (IOException e) {
 							System.out.println("Update status didn't work.");
 							e.printStackTrace();
 							return;
 						}
 						
-						//change idSale of items and products that are currently with this sale
+						//change idSale of items that are currently with this sale
 						try {
-							ClientUI.chat.accept("nullifyIdSaleOfItemsWithCurrentIdSale\t"+Integer.toString(sale.getIdSale()));
+							ClientUI.chat.accept("nullifyIdSaleOfApWithCurrentIdSale\t"+Integer.toString(sale.getIdSale())+"\t"+"item");
 						}catch(Exception e) {
 							e.printStackTrace();
 						}
 						
+						//change idSale of products that are currently with this sale
+						try {
+							ClientUI.chat.accept("nullifyIdSaleOfApWithCurrentIdSale\t"+Integer.toString(sale.getIdSale())+"\t"+"product");
+						}catch(Exception e) {
+							e.printStackTrace();
+						}
 						
+						mytable.getItems().clear();
+						mytable.setItems(FXCollections.observableArrayList(ChatClient.saleArray));
 					}
 				}
 			});
