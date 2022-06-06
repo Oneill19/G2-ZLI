@@ -25,6 +25,8 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<User> ApprovedUserToPer;
 	public static ArrayList<User> NotApprovedUsers;
 	public static ArrayList<User> waitingUsers;
+	public static ArrayList<User> workersStore;
+
 	public static ArrayList<AbstractProduct> products = new ArrayList<>();
 	public static HashMap<AbstractProduct, Integer> customerCart = new HashMap<>();
 	public static ArrayList<String> stores = new ArrayList<>();
@@ -40,7 +42,7 @@ public class ChatClient extends AbstractClient {
 	public static SurveyReport selectedSurveyReport = null;
 	
 	public static boolean requestSucceed = false;
-
+	public static double refundAmount;
 	public static boolean awaitResponse = false;
 
 	public ChatClient(String host, int port, ChatIF clientUI) throws IOException {
@@ -160,6 +162,20 @@ public class ChatClient extends AbstractClient {
 			case "GetReportByQuarter2":
 				reportsq2=(ArrayList<Report>)rc.getReturnValue();
 				break;
+			case "GetWorkers":
+				workersStore=(ArrayList<User>)rc.getReturnValue();
+				break;
+			case "ChangeWorkerStatus":
+				System.out.println("Worker Updated");
+				break;
+			case "CheckRefund":
+				refundAmount = (double)rc.getReturnValue();
+				break;
+			case "UpdateBalance":
+				System.out.println("Blance Updated");
+
+				break;
+
 			default:
 				//for debug - don't remove.
 				System.out.println("ChatClient didn't recognize command");

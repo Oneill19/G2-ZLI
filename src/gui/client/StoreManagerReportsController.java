@@ -19,6 +19,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import entity.StoreWorker;
 
+/**
+ * @author Koral Biton, Topaz Eldori 
+ *
+ */
 public class StoreManagerReportsController {
 
 	@FXML
@@ -58,6 +62,7 @@ public class StoreManagerReportsController {
 	private Button reportName;
 
 	/**
+	 * Go back to the options screen
 	 * @param event
 	 * @throws Exception
 	 */
@@ -74,6 +79,7 @@ public class StoreManagerReportsController {
 	}
 
 	/**
+	 * exit from Zer-Li system
 	 * @param event
 	 * @throws Exception
 	 */
@@ -86,6 +92,7 @@ public class StoreManagerReportsController {
 	}
 
 	/**
+	 * Log out from the user and go back to login screen
 	 * @param event
 	 * @throws Exception
 	 */
@@ -108,6 +115,12 @@ public class StoreManagerReportsController {
 		System.out.println("User");
 	}
 
+	/**
+	 *  Select the year of the month The type of monthly report that the store
+	 *   manager wants to see and display his store report on the screen
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	void onViewReport(ActionEvent event) throws Exception {
 		String reportNme;
@@ -147,6 +160,10 @@ public class StoreManagerReportsController {
 		
 	}
 
+	/**
+	 * Initialize the screen
+	 * @throws IOException
+	 */
 	@FXML
 	void initialize() throws IOException {
 		User.setText("Hello, " + ChatClient.user.getFirstName());

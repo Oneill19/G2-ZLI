@@ -12,16 +12,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * @author Koral Biton, Topaz Eldori
+ *
+ */
 public class UserRegistrationPageController {
 
 	ObservableList<User> observableList;
@@ -85,6 +93,7 @@ public class UserRegistrationPageController {
 	User selectedUser;
 
 	/**
+	 * Go back to the options screen
 	 * @param event
 	 * @throws Exception
 	 */
@@ -101,6 +110,11 @@ public class UserRegistrationPageController {
 
 	}
 
+	/**
+	 *  exit from Zer-Li system 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	void onExit(ActionEvent event) throws Exception {
 		ClientUI.chat.accept("LogoutUser" + "\t" + ChatClient.user.getEmail());
@@ -109,6 +123,11 @@ public class UserRegistrationPageController {
 		System.exit(0);
 	}
 
+	/**
+	 * Log out from the user and go back to login screen
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	void onLogOut(ActionEvent event) throws Exception {
 		ClientUI.chat.accept("LogoutUser" + "\t" + ChatClient.user.getEmail());
@@ -124,6 +143,11 @@ public class UserRegistrationPageController {
 
 	}
 
+	/**
+	 * Registration of a user for the Zer-Li system
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	void onSave(ActionEvent event) throws Exception {
 
@@ -141,6 +165,12 @@ public class UserRegistrationPageController {
 			ClientUI.chat.accept("ConfirmedUserUpdate" + "\t" + userId + "\t" + cardNum);
 			// SelectedUser.setStatus(StatusCol.getText());add convert
 			txt.setText("Saved successfully!");
+			//show message
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Registration completed successfully!");
+			alert.setHeaderText("Customer registration completed successfully! 20% discount coupon sent for the first purchase!");
+			alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("orderReception.png"))));
+			alert.showAndWait();
 
 		}
 
@@ -151,9 +181,13 @@ public class UserRegistrationPageController {
 
 	@FXML
 	void onUser(ActionEvent event) throws Exception {
-
+		System.out.println("On User Options");
 	}
 
+	/**
+	 * Check whether a user is selected from the table
+	 * @param event
+	 */
 	@FXML
 	void onSelectedUser(MouseEvent event) {
 		if (userTable == null) {
@@ -175,6 +209,10 @@ public class UserRegistrationPageController {
 
 	}
 
+	/**
+	 * Initialize the screen
+	 * @throws IOException
+	 */
 	@FXML
 	void initialize() throws IOException {
 		User.setText("Hello, " + ChatClient.user.getFirstName());

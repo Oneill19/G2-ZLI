@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="450.0" layoutY="1.0">
          <image>
-            <Image url="@../../../G2-WorkSpace/G2-Zli/src/gui/client/Zli_logo.png" />
+            <Image url="@Zli_logo.png" />
          </image>
       </ImageView>
       <Button fx:id="exit" alignment="CENTER" layoutX="1017.0" layoutY="16.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #D2042D; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
@@ -28,7 +28,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <BarChart fx:id="reportChart1" barGap="0.0" categoryGap="0.0" horizontalZeroLineVisible="false" layoutX="44.0" layoutY="187.0" prefHeight="376.0" prefWidth="508.0" stylesheets="@../../../G2-WorkSpace/G2-Zli/src/gui/client/chart.css" title="Revenue Quarterly Histogram">
+      <BarChart fx:id="reportChart1" barGap="0.0" categoryGap="0.0" horizontalZeroLineVisible="false" layoutX="44.0" layoutY="187.0" prefHeight="376.0" prefWidth="508.0" stylesheets="@chart.css">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -43,7 +43,7 @@
       </Text>
       <ImageView fitHeight="51.0" fitWidth="50.0" layoutX="635.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@WhatsApp%20Image%202022-05-31%20at%2014.31.38.jpeg" />
+            <Image url="@revenue.jpeg" />
          </image>
       </ImageView>
       <ImageView fitHeight="44.0" fitWidth="42.0" layoutX="187.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
@@ -52,7 +52,7 @@
          </image>
       </ImageView>
       <Button fx:id="Back" alignment="CENTER" layoutX="44.0" layoutY="661.0" mnemonicParsing="false" onAction="#onBack" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
-      <BarChart fx:id="reportChart2" barGap="0.0" categoryGap="0.0" horizontalZeroLineVisible="false" layoutX="550.0" layoutY="187.0" prefHeight="376.0" prefWidth="508.0" stylesheets="@../../../G2-WorkSpace/G2-Zli/src/gui/client/chart.css" title="Revenue Quarterly Histogram">
+      <BarChart fx:id="reportChart2" barGap="0.0" categoryGap="0.0" horizontalZeroLineVisible="false" layoutX="550.0" layoutY="187.0" prefHeight="376.0" prefWidth="508.0" stylesheets="@chart.css">
          <xAxis>
             <CategoryAxis side="BOTTOM" />
          </xAxis>
@@ -60,15 +60,5 @@
             <NumberAxis side="LEFT" />
          </yAxis>
       </BarChart>
-      <Text fx:id="name1" layoutX="198.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="200.00000596046448">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Text>
-      <Text fx:id="name2" layoutX="704.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="200.00000596046448">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Text>
    </children>
 </Pane>

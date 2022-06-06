@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import common.ClientInfo;
@@ -182,7 +184,7 @@ public class EchoServer extends AbstractServer {
 		case "GetPendingOrders":
 			try {
 				// send a successful message back
-				client.sendToClient(StoreManagerQuery.getPendingOrders(conn));
+				client.sendToClient(StoreManagerQuery.getPendingOrders(conn,clientMsg[1]));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -286,8 +288,8 @@ public class EchoServer extends AbstractServer {
 			break;
 		case "numberOfItemsInOrder":
 			try {
-				//client.sendToClient(); // TODO - topaz and koral
-			} catch (Exception e) {
+				client.sendToClient(ReportQuery.generateReport(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4],clientMsg[5], clientMsg[6]));	
+				} catch (Exception e) {
 				e.printStackTrace();
 			}
 			break;
@@ -398,6 +400,41 @@ public class EchoServer extends AbstractServer {
 			try {
 
 				client.sendToClient(ReportQuery.getReportByQuarterly2(conn, clientMsg[1], clientMsg[2],clientMsg[3]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "GetWorkers":
+			try {
+
+				client.sendToClient(StoreManagerQuery.GetWorkers(conn, clientMsg[1]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+
+		case "ChangeWorkerStatus":
+			try {
+
+				client.sendToClient(StoreManagerQuery.UpdateWorkerStatus(conn, clientMsg[1], clientMsg[2]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+
+		case "CheckRefund":
+			try {
+
+				client.sendToClient(StoreManagerQuery.CheckRefund(conn, clientMsg[1], LocalDate.parse(clientMsg[2]), LocalTime.parse(clientMsg[3]), Double.parseDouble(clientMsg[4])));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			
+		case "UpdateBalance":
+			try {
+
+				client.sendToClient(StoreManagerQuery.UpdateBalance(conn, Double.parseDouble(clientMsg[1]), Integer.parseInt(clientMsg[2])));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

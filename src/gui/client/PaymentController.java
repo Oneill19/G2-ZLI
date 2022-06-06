@@ -98,7 +98,7 @@ public class PaymentController {
     		}
     		if(ap.getKey() instanceof Item) {
     			itemCounter++;
-    			itemPriceSum += ap.getValue();
+    			itemPriceSum += ap.getKey().getPrice()*ap.getValue();
     			sbItems.append("'").append(ap.getKey().getSerialNumber()).append("',");
     		}
     	}
@@ -109,7 +109,7 @@ public class PaymentController {
     		sbProducts.delete(sbProducts.length()-1, sbProducts.length());
     	try {
 			ClientUI.chat.accept("numberOfItemsInOrder\t" + productCounter.toString() + "\t" + itemCounter.toString()+
-					"\t" + productPriceSum +"\t" + itemPriceSum + '\t' + ChatClient.cartOrder.DBToString());
+					"\t" + productPriceSum +"\t" + itemPriceSum + '\t' + ChatClient.cartOrder.getFromStore() + "\t" + ChatClient.cartOrder.getOrderCreationDate());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

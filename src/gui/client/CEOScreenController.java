@@ -13,6 +13,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
+	/**
+	 * @author Koral Biton,Topaz Eldori
+	 *
+	 */
 	public class CEOScreenController {
 
 	    @FXML
@@ -29,10 +33,14 @@ import javafx.stage.Stage;
 
 	    @FXML
 	    private Button viewMonthlyReport;
+	    
+	    @FXML
+	    private Button viewComplaintsReport;
 
 	    
 	    
 	    /**
+	     *  exit from Zer-Li system 
 	     * @param event
 	     * @throws Exception 
 	     */
@@ -45,6 +53,7 @@ import javafx.stage.Stage;
 	    }
 
 	    /**
+	     * Log out from the user and go back to login screen
 	     * @param event
 	     * @throws Exception
 	     */
@@ -68,6 +77,7 @@ import javafx.stage.Stage;
 	    }
 
 	    /**
+	     * Go to monthly report screen
 	     * @param event
 	     * @throws Exception
 	     */
@@ -76,7 +86,7 @@ import javafx.stage.Stage;
 	    	((Node) event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			new FXMLLoader();
-			Pane root = FXMLLoader.<Pane>load(getClass().getResource("‏‏‏‏ViewMonthlyReportCEO.fxml"));
+			Pane root = FXMLLoader.<Pane>load(getClass().getResource("ViewMonthlyReportCEO.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("Zer-Li->Option Screen->View Monthly Report");
 			primaryStage.setScene(scene);
@@ -84,6 +94,7 @@ import javafx.stage.Stage;
 	    }
 
 	    /**
+	     * Go to  Quarterly Report screen
 	     * @param event
 	     * @throws Exception 
 	     */
@@ -98,7 +109,27 @@ import javafx.stage.Stage;
 			primaryStage.setScene(scene);
 			primaryStage.show();
 	    }
+	    
+	    /**
+	     * move to the complaints report
+	     * @param event
+	     * @throws Exception
+	     */
+	    @FXML
+	    void onViewComplaintsReport(ActionEvent event) throws Exception {
+	    	((Node) event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			new FXMLLoader();
+			Pane root = FXMLLoader.<Pane>load(getClass().getResource("ComplaintsReportsCEO.fxml"));
+			Scene scene = new Scene(root);
+			primaryStage.setTitle("Zer-Li->Option Screen->View Complaints Report");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+	    }
 
+	    /**
+	     * Initialize the screen
+	     */
 	    public void initialize() {
 	    	User.setText("Hello, " + ChatClient.user.getFirstName());
 	    }

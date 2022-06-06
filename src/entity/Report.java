@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 
 /**
+ * class of  reports with the details that should be in the reports
  * @author Topaz Eldori,Koral Biton
  *
  */
@@ -22,7 +23,7 @@ public class Report implements Serializable {
 	private String storeName;
 	
 	public Report(int reportId, String storeName,String reportYear, String reportMonth, int amountProduct, int amountItem,float revenueProduct,
-			float revenueItem,int quartlyNum) {
+			float revenueItem,int quartlyNum,float totalRevenue) {
 		super();
 		this.reportId = reportId;
 		this.storeName=storeName;
@@ -33,6 +34,7 @@ public class Report implements Serializable {
 		this.revenueProduct = revenueProduct;
 		this.revenueItem = revenueItem;
 		this.quartlyNum=quartlyNum;
+		this.totalRevenue=totalRevenue;
 	}
 
 	public int getReportId() {

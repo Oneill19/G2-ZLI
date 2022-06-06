@@ -64,6 +64,11 @@ public class CEOReportsController {
 		@FXML
 		private ComboBox<String> storeCombo;
 
+		/**
+		 * Go back to the options screen
+		 * @param event
+		 * @throws Exception
+		 */
 		@FXML
 		void onBack(ActionEvent event) throws Exception {
 			((Node) event.getSource()).getScene().getWindow().hide();
@@ -76,6 +81,11 @@ public class CEOReportsController {
 			primaryStage.show();
 		}
 
+		/**
+		 * exit from Zer-Li system 
+		 * @param event
+		 * @throws Exception
+		 */
 		@FXML
 		void onExit(ActionEvent event) throws Exception {
 			ClientUI.chat.accept("LogoutUser" + "\t" + ChatClient.user.getEmail());
@@ -84,6 +94,11 @@ public class CEOReportsController {
 			System.exit(0);
 		}
 
+		/**
+		 * Log out from the user and go back to login screen
+		 * @param event
+		 * @throws Exception
+		 */
 		@FXML
 		void onLogOut(ActionEvent event) throws Exception {
 			ClientUI.chat.accept("LogoutUser" + "\t" + ChatClient.user.getEmail());
@@ -98,6 +113,11 @@ public class CEOReportsController {
 			primaryStage.show();
 		}
 
+		/**
+		 * Select the year of the month The type of monthly report and store that the CEO wants to see and display the report on the screen
+		 * @param event
+		 * @throws Exception
+		 */
 		@FXML
 		void onViewReport(ActionEvent event) throws Exception {
 			String reportNme;
@@ -140,6 +160,10 @@ public class CEOReportsController {
 			reportText.setEditable(false);
 		}
 
+		/**
+		 * Initialize the screen
+		 * @throws Exception
+		 */
 		@FXML
 		 void initialize() throws Exception {
 			User.setText("Hello, " + ChatClient.user.getFirstName());
