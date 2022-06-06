@@ -12,14 +12,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.server.ServerConnectController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.server.ServerConnectController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="406.0" layoutY="48.0">
          <image>
             <Image url="@Zli_logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="connectToDB" alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" layoutY="451.0" mnemonicParsing="false" onAction="#onConnect" prefHeight="43.0" prefWidth="173.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px; -fx-background-color: #2B0548; -fx-font-size: 20px; -fx-font-weight: bold;" text="Connect" textAlignment="CENTER" textFill="#fcfcfe">
+      <Button fx:id="connectToDB" alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" layoutY="451.0" mnemonicParsing="false" onAction="#onConnect" prefHeight="43.0" prefWidth="173.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #2B0548; -fx-font-size: 20px; -fx-font-weight: bold;" text="Connect" textAlignment="CENTER" textFill="#fcfcfe">
          <font>
             <Font size="20.0" />
          </font>
@@ -60,7 +60,7 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <Button fx:id="disconnectFromDB" alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" layoutY="510.0" mnemonicParsing="false" onAction="#onDisconnect" prefHeight="43.0" prefWidth="173.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px; -fx-background-color: #2B0548; -fx-font-size: 20px; -fx-font-weight: bold;" text="Disconnect" textAlignment="CENTER" textFill="#fcfcfe">
+      <Button fx:id="disconnectFromDB" alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" layoutY="510.0" mnemonicParsing="false" onAction="#onDisconnect" prefHeight="43.0" prefWidth="173.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #2B0548; -fx-font-size: 20px; -fx-font-weight: bold;" text="Disconnect" textAlignment="CENTER" textFill="#fcfcfe">
          <font>
             <Font size="20.0" />
          </font>
@@ -72,7 +72,7 @@
             <TableColumn fx:id="statusColumn" minWidth="0.0" prefWidth="118.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Status" />
         </columns>
       </TableView>
-      <Button fx:id="defaultInsert" alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" layoutY="568.0" mnemonicParsing="false" onAction="#toDefault" prefHeight="43.0" prefWidth="173.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px; -fx-background-color: #2B0548; -fx-font-size: 20px; -fx-font-weight: bold;" text="Default" textAlignment="CENTER" textFill="#fcfcfe">
+      <Button fx:id="defaultInsert" alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" layoutY="568.0" mnemonicParsing="false" onAction="#toDefault" prefHeight="43.0" prefWidth="173.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #2B0548; -fx-font-size: 20px; -fx-font-weight: bold;" text="Default" textAlignment="CENTER" textFill="#fcfcfe">
          <font>
             <Font size="20.0" />
          </font>
@@ -91,7 +91,7 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <Button fx:id="importUsers" alignment="CENTER" contentDisplay="CENTER" layoutX="636.0" layoutY="632.0" mnemonicParsing="false" onAction="#onImportUsers" prefHeight="43.0" prefWidth="173.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px; -fx-background-color: #2B0548; -fx-font-size: 20px; -fx-font-weight: bold;" text="Import Users" textAlignment="CENTER" textFill="#fcfcfe">
+      <Button fx:id="importUsers" alignment="CENTER" contentDisplay="CENTER" layoutX="636.0" layoutY="632.0" mnemonicParsing="false" onAction="#onImportUsers" prefHeight="43.0" prefWidth="173.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #2B0548; -fx-font-size: 20px; -fx-font-weight: bold;" text="Import Users" textAlignment="CENTER" textFill="#fcfcfe">
          <font>
             <Font size="20.0" />
          </font>

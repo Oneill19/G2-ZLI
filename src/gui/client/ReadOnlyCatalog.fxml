@@ -20,7 +20,7 @@
             <Image url="@Zli_logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="exitBtn" alignment="CENTER" layoutX="1017.0" layoutY="16.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;?import javafx.scene.image.Image?&gt;&lt;?import javafx.scene.image.ImageView?&gt;&lt;ImageView fitHeight=&quot;38.0&quot; fitWidth=&quot;43.0&quot; layoutX=&quot;179.0&quot; layoutY=&quot;18.0&quot; xmlns=&quot;http://javafx.com/javafx/18&quot; xmlns:fx=&quot;http://javafx.com/fxml/1&quot;&gt;   &lt;image&gt;      &lt;Image url=&quot;@User.png&quot; /&gt;   &lt;/image&gt;&lt;/ImageView&gt;; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+      <Button fx:id="exitBtn" alignment="CENTER" layoutX="1017.0" layoutY="16.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #D2042D; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
       <Button fx:id="userOptBtn" layoutX="142.0" layoutY="22.0" mnemonicParsing="false" onAction="#onUserOptions" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
          <font>
             <Font size="15.0" />
