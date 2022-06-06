@@ -49,6 +49,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<String> stores = new ArrayList<>();
 	public static ArrayList<Survey> surveysWithReports = new ArrayList<>();
 	public static ArrayList<Survey> allSurveys = new ArrayList<>();
+	public static ArrayList<Survey> surveysWithNoReports = null;
 	public static ArrayList<Complaint> allComplaints = new ArrayList<>();
 	public static ArrayList<Report> reportsq1;
 	public static ArrayList<Report> reportsq2;
@@ -57,6 +58,7 @@ public class ChatClient extends AbstractClient {
 	public static ComplaintReport selectedComplaintReport = null;
 	public static String reportTxt;
 	public static User user = null;
+	public static int customProductCounter = 0;
 	
 	
 	public static SurveyReport selectedSurveyReport = null;
@@ -240,6 +242,12 @@ public class ChatClient extends AbstractClient {
 			case "select_product_in_sale":
 				product_in_saleArray = (ArrayList<Product>)rc.getReturnValue();
 				break;
+			case "AddNewSurveyReport":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "GetSurveysWithNoReport":
+				surveysWithNoReports = (ArrayList<Survey>)rc.getReturnValue();
+				break;
 			case "updateSaleStatus":
 				requestSucceed = (boolean)rc.getReturnValue();
 				break;
@@ -254,6 +262,12 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "deleteAp_in_sale":
 				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "AddCustomProduct":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "GetAmountOfCustomProduct":
+				customProductCounter = (int)rc.getReturnValue();
 				break;
 			default:
 				//for debug - don't remove.

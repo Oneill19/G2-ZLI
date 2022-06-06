@@ -229,7 +229,7 @@ public class EchoServer extends AbstractServer {
 						clientMsg[5]));
 				break;
 			case "CloseComplaint":
-				client.sendToClient(ComplaintQuery.closeComplaint(conn, Integer.parseInt(clientMsg[1])));
+				client.sendToClient(ComplaintQuery.closeComplaint(conn, Integer.parseInt(clientMsg[1]), Integer.parseInt(clientMsg[2])));
 				break;
 			case "addDeliveryOrder":
 				client.sendToClient(OrderQuery.addDeliveryOrder(conn, clientMsg[1], clientMsg[2]));
@@ -299,6 +299,12 @@ public class EchoServer extends AbstractServer {
 			case "select_product_in_sale":
 				client.sendToClient(SaleQuery.select_product_in_sale(conn, clientMsg[1]));
 				break;
+			case "AddNewSurveyReport":
+				client.sendToClient(SurveyQuery.addNewSurveyReport(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4]));
+				break;
+			case "GetSurveysWithNoReport":
+				client.sendToClient(SurveyQuery.getSurveysWithNoReport(conn));
+          break;
 			case "updateSaleStatus":
 				client.sendToClient(SaleQuery.updateSaleStatus(conn, clientMsg[1], clientMsg[2]));
 				break;
@@ -313,6 +319,12 @@ public class EchoServer extends AbstractServer {
 				break;
 			case "deleteAp_in_sale":
 				client.sendToClient(SaleQuery.deleteAp_in_sale(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
+				break;
+			case "GetAmountOfCustomProduct":
+				client.sendToClient(ProductsQuery.getAmountOfCustomProduct(conn));
+				break;
+			case "AddCustomProduct":
+				client.sendToClient(ProductsQuery.addCustomProduct(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4], clientMsg[5], clientMsg[6]));
 				break;
 			default:
 				System.out.println("No Command Found" + clientMsg[0]);
@@ -336,7 +348,7 @@ public class EchoServer extends AbstractServer {
 
 	// TODO - delete before submitting and correct errors that occur from it
 	//it is mainly to disconnect all users from the DB
-	public Connection getConnection() {
+	public static Connection getConnection() {
 		return conn;
 	}
 

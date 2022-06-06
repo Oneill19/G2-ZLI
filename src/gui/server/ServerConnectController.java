@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -16,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import server.AuthQuery;
 import server.EchoServer;
 import server.ServerUI;
 
@@ -79,6 +82,7 @@ public class ServerConnectController {
 		if (status) {
 			statusLabel.setText("Server Running");			
 		}
+		importUsers.setDisable(false);
 	}
 
 	@FXML
@@ -90,6 +94,7 @@ public class ServerConnectController {
 
 	@FXML
 	public void initialize() {
+		importUsers.setDisable(true);
 		ipColumn.setCellValueFactory(new PropertyValueFactory<ClientInfo, String>("ipAddress"));
 		hostColumn.setCellValueFactory(new PropertyValueFactory<ClientInfo, String>("hostName"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<ClientInfo, String>("status"));
@@ -107,7 +112,19 @@ public class ServerConnectController {
 	
 	@FXML
     void onImportUsers(ActionEvent event) {
-		System.out.println("On import");
+		if (AuthQuery.importUsersFromSystem(EchoServer.getConnection())) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Import User Success");
+			alert.setHeaderText("Importing the users was susccessful!");
+			alert.showAndWait();
+			importUsers.setDisable(true);
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Import User Fail");
+			alert.setHeaderText("Improting the users failed");
+			alert.showAndWait();
+		}
     }
 
 }
