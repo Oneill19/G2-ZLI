@@ -134,10 +134,13 @@ public class ComplaintQuery {
 	 * @param complaintId
 	 * @return
 	 */
-	public static ReturnCommand closeComplaint(Connection con, int complaintId) {
+	public static ReturnCommand closeComplaint(Connection con, int complaintId, int orderNumber) {
 		Statement stmt;
 		String sqlQuery = "UPDATE zli.complaint SET Status='CLOSED' WHERE ComplaintId=" + complaintId + ";";
 		try {
+			if (!setOrderCompleted(con, orderNumber + "")) {
+				throw new SQLException();
+			}
 			stmt = con.createStatement();
 			stmt.executeUpdate(sqlQuery);
 			return new ReturnCommand("CloseComplaint", true);
@@ -166,6 +169,9 @@ public class ComplaintQuery {
 
 		// get the amount to refund from the database
 		try {
+			if (!setOrderCompleted(con, orderNumber + "")) {
+				throw new SQLException();
+			}
 			sqlQuery = "SELECT totalPrice FROM zli.orders WHERE orderNumber=" + orderNumber + ";";
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sqlQuery);
@@ -227,6 +233,9 @@ public class ComplaintQuery {
 
 		// change complaint status to CLOSED
 		try {
+			if (!setOrderCompleted(con, orderNumber + "")) {
+				throw new SQLException();
+			}
 			sqlQuery = "UPDATE zli.complaint SET Status='CLOSED', RefundDetails='" + refundDetails + "',Refund="
 					+ refundAmount + " WHERE ComplaintID=" + complaintId + ";";
 			stmt = con.createStatement();
@@ -434,6 +443,26 @@ public class ComplaintQuery {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return counter;
+		}
+	}
+	
+	/**
+	 * close order after complaint is closed
+	 * 
+	 * @param con
+	 * @param orderId
+	 * @return true if success
+	 */
+	public static boolean setOrderCompleted(Connection con, String orderId) {
+		Statement stmt;
+		String sqlQuery = "UPDATE zli.orders SET orderStatus='COMPLETED' WHERE orderNumber=" + orderId + ";";
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sqlQuery);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return true;
 		}
 	}
 }

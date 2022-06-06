@@ -7,6 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -161,7 +163,7 @@ public class ShowComplaintsController {
     @FXML
     void onCloseComplaint(ActionEvent event) throws Exception {
     	// close the complaint
-    	ClientUI.chat.accept("CloseComplaint" + "\t" + getComplaintId);
+    	ClientUI.chat.accept("CloseComplaint" + "\t" + getComplaintId + "\t" + getOrderNumber);
     	
     	// if the task completed successfully
     	if (ChatClient.requestSucceed) {
@@ -183,6 +185,12 @@ public class ShowComplaintsController {
     	refundByAmountBtn.setDisable(true);
     	amount.clear();
     	amount.setEditable(false);
+    	
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setTitle("Close complaint");
+    	alert.setHeaderText("Complaint closed");
+    	alert.showAndWait();
+    	
     }
 
     /**
@@ -216,6 +224,11 @@ public class ShowComplaintsController {
     	refundByAmountBtn.setDisable(true);
     	amount.clear();
     	amount.setEditable(false);
+    	
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setTitle("Close complaint");
+    	alert.setHeaderText("Complaint closed, Message about the full refund sent by Email and SMS");
+    	alert.showAndWait();
     }
 
     /**
@@ -266,6 +279,11 @@ public class ShowComplaintsController {
     	refundByAmountBtn.setDisable(true);
     	amount.clear();
     	amount.setEditable(false);
+    	
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setTitle("Close complaint");
+    	alert.setHeaderText("Complaint closed, Message about the refund sent by Email and SMS");
+    	alert.showAndWait();
     }
     
     /**

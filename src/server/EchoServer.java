@@ -229,7 +229,7 @@ public class EchoServer extends AbstractServer {
 						clientMsg[5]));
 				break;
 			case "CloseComplaint":
-				client.sendToClient(ComplaintQuery.closeComplaint(conn, Integer.parseInt(clientMsg[1])));
+				client.sendToClient(ComplaintQuery.closeComplaint(conn, Integer.parseInt(clientMsg[1]), Integer.parseInt(clientMsg[2])));
 				break;
 			case "addDeliveryOrder":
 				client.sendToClient(OrderQuery.addDeliveryOrder(conn, clientMsg[1], clientMsg[2]));
