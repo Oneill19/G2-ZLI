@@ -304,7 +304,7 @@ public class ComplaintQuery {
 	 * @param year
 	 * @param quarter
 	 * @param store
-	 * @return
+	 * @return report of complaints and orders
 	 */
 	public static ReturnCommand getComplaintReportByStore(Connection con, String year, String quarter, String store) {
 		int[] numberOfOrders = getNumberOrOrdersOfQuearterByStore(con, year, quarter, store);
@@ -320,7 +320,7 @@ public class ComplaintQuery {
 	 * @param year
 	 * @param quarter
 	 * @param storeName
-	 * @return
+	 * @return number of orders by quarter and store
 	 */
 	public static int[] getNumberOrOrdersOfQuearterByStore(Connection con, String year, String quarter, String storeName) {
 		int[] counter = new int[3];
@@ -355,7 +355,7 @@ public class ComplaintQuery {
 	 * @param year
 	 * @param month
 	 * @param storeName
-	 * @return
+	 * @return int of number of orders by year month and store
 	 */
 	public static int getNumberOfOrdersByYearAndMonthByStore(Connection con, String year, String month, String storeName) {
 		Statement stmt;
@@ -382,7 +382,7 @@ public class ComplaintQuery {
 	 * @param year
 	 * @param quarter
 	 * @param storeName
-	 * @return
+	 * @return int array of number of complaints by store and quarter
 	 */
 	public static int[] getNumberOfComplaintOfQuarterByStore(Connection con, String year, String quarter, String storeName) {
 		int[] counter = new int[3];
@@ -417,7 +417,7 @@ public class ComplaintQuery {
 	 * @param year
 	 * @param month
 	 * @param storeName
-	 * @return
+	 * @return int of complaint by year month and store
 	 */
 	public static int getNumberOfComplaintsByYearAndMonthByStore(Connection con, String year, String month, String storeName) {
 		Statement stmt;

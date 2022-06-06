@@ -1,6 +1,7 @@
 package gui.client;
 
 import client.ChatClient;
+import common.ButtonEventHandlerStyle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -60,6 +61,6 @@ public class ServiceSpecialistScreenController {
      * @throws Exception
      */
     public void initialize() throws Exception {
-    	User.setText("Hello, " + ChatClient.user.getFirstName());
+    	User.setText("Hello, " + ChatClient.user.getFirstName()); 
     }
 }

@@ -107,6 +107,13 @@ public class AuthQuery {
 	}
 	
 	
+	/**
+	 * get customer balance
+	 * 
+	 * @param con
+	 * @param id
+	 * @return ReturnCommand with customer balance
+	 */
 	public static double getCustomerBalance(Connection con, int id) {
 		Statement stmt;
 		String sqlQuery = "SELECT balance From zli.user_customer WHERE userID=" + id;
@@ -124,6 +131,13 @@ public class AuthQuery {
 		}
 	}
 	
+	/**
+	 * return the store of a worker by id
+	 * 
+	 * @param con
+	 * @param id
+	 * @return String of store name
+	 */
 	public static String getStoreWorkerStore(Connection con, int id) {
 		Statement stmt;
 		String sqlQuery = "SELECT storeName From zli.user_store_worker WHERE userID=" + id;
@@ -141,6 +155,12 @@ public class AuthQuery {
 		}
 	}
 	
+	/**
+	 * import users from outside system
+	 * 
+	 * @param con
+	 * @return true if all the users were imported
+	 */
 	public static boolean importUsersFromSystem(Connection con) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.users_system;";
@@ -180,6 +200,21 @@ public class AuthQuery {
 		}
 	}
 	
+	/**
+	 * insert user to zli.users
+	 * 
+	 * @param con
+	 * @param userId
+	 * @param firstName
+	 * @param lastName
+	 * @param creditCard
+	 * @param phone
+	 * @param email
+	 * @param password
+	 * @param userRole
+	 * @param status
+	 * @return true if the user inserted
+	 */
 	public static boolean insertUser(Connection con, int userId, String firstName, String lastName, String creditCard, String phone, String email, String password, String userRole, String status) {
 		PreparedStatement ps;
 		String sqlQuery = "INSERT INTO zli.users (UserID,FirstName,LastName,CreditCard,Phone,Email,Password,UserRole,Status,IsLogged) VALUES (?,?,?,?,?,?,?,?,?,0)";
@@ -202,6 +237,14 @@ public class AuthQuery {
 		}
 	}
 	
+	/**
+	 * insert the customer information to zli.user_customer
+	 * 
+	 * @param con
+	 * @param id
+	 * @param balance
+	 * @return true if the information inserted
+	 */
 	public static boolean insertCustomer(Connection con, int id, double balance) {
 		PreparedStatement ps;
 		String sqlQuery = "INSERT INTO user_customer (userID,balance) VALUES (?,?);";
@@ -217,6 +260,14 @@ public class AuthQuery {
 		}
 	}
 	
+	/**
+	 * insert the store worker information to zli.user_store_worker
+	 * 
+	 * @param con
+	 * @param id
+	 * @param store
+	 * @return true if the information inserted
+	 */
 	public static boolean insertStoreWorker(Connection con, int id, String store) {
 		PreparedStatement ps;
 		String sqlQuery = "INSERT INTO user_store_worker (userID,storeName) VALUES (?,?);";

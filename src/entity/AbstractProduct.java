@@ -240,5 +240,4 @@ public abstract class AbstractProduct implements Serializable {
 	public String toString() {
 		return "serialNumber: "+serialNumber+"\n" +"name: "+ name+"\nprice: " + price+"\ntype: "+ type+"\nisItem: ";
 	}
-
 }
