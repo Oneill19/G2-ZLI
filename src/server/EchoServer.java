@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import common.ClientInfo;
 import entity.Order;
-import gui.server.ServerConnectController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ocsf.server.AbstractServer;
@@ -288,9 +287,18 @@ public class EchoServer extends AbstractServer {
 				break;
 			case "insertProductsInSaleToDB":
 				client.sendToClient(SaleQuery.insertProductsInSaleToDB(conn, clientMsg[1], clientMsg[2]));
-        break;
+				break;
 			case "Reminded":
 				client.sendToClient(ComplaintQuery.reminded(conn, Integer.parseInt(clientMsg[1])));
+				break;
+			case "selectAllSales":
+				client.sendToClient(SaleQuery.selectAllSales(conn));
+				break;
+			case "select_item_in_sale":
+				client.sendToClient(SaleQuery.select_item_in_sale(conn, clientMsg[1]));
+				break;
+			case "select_product_in_sale":
+				client.sendToClient(SaleQuery.select_product_in_sale(conn, clientMsg[1]));
 				break;
 			default:
 				System.out.println("No Command Found");

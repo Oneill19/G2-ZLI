@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="gui.client.WatchSalesController">
+   <children>
+      <Pane fx:id="pane" layoutX="10.0" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="873.0" prefWidth="1211.0" style="-fx-background-color: #FCFCFE;">
+         <children>
+            <ScrollPane fx:id="itemScrollPane" hbarPolicy="NEVER" layoutX="24.0" layoutY="255.0" prefHeight="518.0" prefWidth="672.0" style="-fx-background: #FCFCFE; -fx-background-color: #FCFCFE; -fx-alignment: CENTER;">
+               <content>
+                  <GridPane fx:id="grid" alignment="CENTER" prefHeight="102.0" prefWidth="536.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints />
+                     </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+            <Button fx:id="onBack" alignment="CENTER" layoutX="66.0" layoutY="806.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
+            <VBox alignment="CENTER" fillWidth="false" layoutX="507.0" layoutY="10.0" style="-fx-alignment: center;">
+               <children>
+                  <ImageView fitHeight="72.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Zli_logo_cropped.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Sales History" textAlignment="CENTER" textFill="#a297d5">
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <TableView fx:id="salesTable" editable="true" layoutX="792.0" layoutY="255.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="518.0" prefWidth="394.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@mycss.css">
+               <columns>
+                  <TableColumn fx:id="namecol" prefWidth="100.0" text="Sale Name" />
+                  <TableColumn fx:id="discountCol" prefWidth="68.0" text="Discount" />
+                  <TableColumn fx:id="statusCol" prefWidth="97.0" text="Status" />
+                  <TableColumn fx:id="actionCol" prefWidth="127.0" text="Action" />
+               </columns>
+            </TableView>
+            <Button fx:id="logoutBtn" defaultButton="true" layoutX="24.0" layoutY="48.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: transparent;" text="Logout |" textFill="#2b0548">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="userOptBtn" layoutX="94.0" layoutY="49.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="exit" alignment="CENTER" layoutX="1138.0" layoutY="45.0" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+            <Separator layoutX="738.0" layoutY="255.0" orientation="VERTICAL" prefHeight="518.0" prefWidth="13.0" />
+            <HBox alignment="CENTER" layoutX="791.0" layoutY="201.0" prefHeight="33.0" prefWidth="394.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 27;" text="Sales Table" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="14.0" layoutY="201.0" prefHeight="32.0" prefWidth="529.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 27;" text="Products of Selected Sale" />
+               </children>
+            </HBox>
+            <VBox fx:id="pickupVbox" alignment="CENTER" layoutX="714.0" layoutY="234.0" spacing="10.0">
+               <children>
+                  <HBox alignment="CENTER" spacing="10.0" />
+                  <HBox alignment="CENTER" spacing="10.0" />
+               </children>
+            </VBox>
+            <Text fx:id="textSaleNumber" layoutX="517.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 31;" text="Sale #3334" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

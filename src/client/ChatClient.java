@@ -13,6 +13,7 @@ import entity.Item;
 import entity.Order;
 import entity.Product;
 import entity.Report;
+import entity.Sale;
 import entity.Survey;
 import entity.SurveyReport;
 import entity.User;
@@ -21,13 +22,29 @@ import ocsf.client.AbstractClient;
 public class ChatClient extends AbstractClient {
 
 	ChatIF clientUI;
+	//Sale
+	public static ArrayList<Sale> saleArray = new ArrayList<Sale>();
+	public static ArrayList<Item> item_in_saleArray = new ArrayList<Item>();
+	public static ArrayList<Product> product_in_saleArray = new ArrayList<Product>(); 
+	
+	//Order
 	public static ArrayList<Order> orders;
 	public static ArrayList<Order> NotAprroveorders;
+	public static ArrayList<Order> userOrdersHistory;
+	public static String orderHistoryDeliveryData = new String();
+	public static Order cartOrder = new Order();
+	
+	//AbstractProduct
+	public static ArrayList<AbstractProduct> products = new ArrayList<>();
+	public static HashMap<AbstractProduct, Integer> customerCart = new HashMap<>();
+	public static ArrayList<Item> orderHistoryItems=new ArrayList<Item>();
+	public static ArrayList<Product> orderHistoryProducts=new ArrayList<Product>();
+	public static ArrayList<Item> itemsForEdit = null;
+	public static ArrayList<Item> itemsForCreate = null;
+	
 	public static ArrayList<User> ApprovedUserToPer;
 	public static ArrayList<User> NotApprovedUsers;
 	public static ArrayList<User> waitingUsers;
-	public static ArrayList<AbstractProduct> products = new ArrayList<>();
-	public static HashMap<AbstractProduct, Integer> customerCart = new HashMap<>();
 	public static ArrayList<String> stores = new ArrayList<>();
 	public static ArrayList<Survey> surveysWithReports = new ArrayList<>();
 	public static ArrayList<Survey> allSurveys = new ArrayList<>();
@@ -35,14 +52,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Report> reportsq1;
 	public static ArrayList<Report> reportsq2;
 	public static Order complaintOrder = null;
-	public static ArrayList<Order> userOrdersHistory;
-	public static String orderHistoryDeliveryData = new String();
-	public static ArrayList<Item> orderHistoryItems=new ArrayList<Item>();
-	public static ArrayList<Product> orderHistoryProducts=new ArrayList<Product>();
-	public static ArrayList<Item> itemsForEdit = null;
-	public static ArrayList<Item> itemsForCreate = null;
 	public static ArrayList<String> colors = null;
-	public static Order cartOrder = new Order();
 	public static ComplaintReport selectedComplaintReport = null;
 	public static String reportTxt;
 	public static User user = null;
@@ -51,7 +61,6 @@ public class ChatClient extends AbstractClient {
 	public static SurveyReport selectedSurveyReport = null;
 	
 	public static boolean requestSucceed = false;
-
 	public static boolean awaitResponse = false;
 
 	public ChatClient(String host, int port, ChatIF clientUI) throws IOException {
@@ -218,9 +227,18 @@ public class ChatClient extends AbstractClient {
 			case "insertItemInSaleToDB":
 				break;
 			case "insertProductsInSaleToDB":
-        break;
+				break;
 			case "Reminded":
 				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "selectAllSales":
+				saleArray = (ArrayList<Sale>)rc.getReturnValue();
+				break;
+			case "select_item_in_sale":
+				item_in_saleArray = (ArrayList<Item>)rc.getReturnValue();
+				break;
+			case "select_product_in_sale":
+				product_in_saleArray = (ArrayList<Product>)rc.getReturnValue();
 				break;
 			default:
 				//for debug - don't remove.
