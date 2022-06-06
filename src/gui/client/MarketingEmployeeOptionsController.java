@@ -2,7 +2,6 @@ package gui.client;
 
 import java.io.IOException;
 
-import client.ClientUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

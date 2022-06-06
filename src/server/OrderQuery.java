@@ -241,7 +241,7 @@ public class OrderQuery {
 		PreparedStatement ps;
 
 		String updateQuery = "UPDATE orders SET orderStatus = '"+newStatus+"' WHERE orderNumber = "+orderNumber;
-		System.out.println(updateQuery);
+//		System.out.println(updateQuery);
 		try {
 			ps = conn.prepareStatement(updateQuery);
 			ps.executeUpdate();
@@ -255,8 +255,7 @@ public class OrderQuery {
 		PreparedStatement ps;
 		String today = LocalDate.now().toString();
 		String now = LocalTime.now().truncatedTo(ChronoUnit.MINUTES).toString();
-		System.out.println("now: "+now.toString());//debug
-//
+//		System.out.println("now: "+now.toString());//debug
 		String insertQuery = "INSERT INTO order_cancelation(orderNumber, requestCancelationDate, requestCancelationTime) VALUES (?,?,?)";
 		try {
 			ps = conn.prepareStatement(insertQuery);

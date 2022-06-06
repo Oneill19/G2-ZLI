@@ -190,6 +190,3 @@ public class OrderManagementScreenController {
 		ordersTable.setItems(observableList);
     }
 }
-
-  
-
