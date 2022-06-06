@@ -262,6 +262,9 @@ public class ChatClient extends AbstractClient {
 			case "getOrderSupplyDateTime":
 				orderCreationDateTime = (String)rc.getReturnValue();
 				break;
+			case "updateBalance":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
 			default:
 				//for debug - don't remove.
 				System.out.println("ChatClient didn't recognize command"+rc.getCommand());

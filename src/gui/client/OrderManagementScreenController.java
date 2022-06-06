@@ -83,6 +83,11 @@ public class OrderManagementScreenController {
 					alert.showAndWait();
 
 				}
+				ClientUI.chat.accept("updateBalance\t"+Selectedorder.getCustomerID()+"\t"+compensation);
+				if(!ChatClient.requestSucceed) {
+					System.out.println("problem with updateBalance");
+					return;
+				}
 			}else if(Selectedorder.getOrderStatus().equals("WAITING_FOR_CONFIRMATION")) {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("Sms and Mail");

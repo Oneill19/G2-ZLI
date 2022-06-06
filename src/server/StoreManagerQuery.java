@@ -119,7 +119,8 @@ public class StoreManagerQuery {
 						+ OrderNumber + "';";
 			} else {
 				sql = "UPDATE zli.orders SET orderStatus='CANCELED' WHERE orderNumber = '" + OrderNumber + "';";
-				String orderCancelation = "UPDATE order_cancelation SET orderNumber=?, confirmCancelationDate=?, confirmCancelationTime=? WHERE orderNumber='"+OrderNumber+"'";
+				String orderCancelation = "UPDATE order_cancelation SET orderNumber=?, confirmCancelationDate=?, confirmCancelationTime=? WHERE orderNumber='"
+						+ OrderNumber + "'";
 				ps = con.prepareStatement(orderCancelation);
 				ps.setInt(1, Integer.parseInt(OrderNumber));
 				ps.setString(2, today);
@@ -134,17 +135,17 @@ public class StoreManagerQuery {
 			return null;
 		}
 	}
-	
+
 	public static ReturnCommand getOrderSupplyDateTime(Connection conn, String orderNumber) {
 		Statement stmt;
 		ResultSet rs;
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT supplyDate, supplyTime from orders where orderNumber='"+orderNumber+"'");
+			rs = stmt.executeQuery("SELECT supplyDate, supplyTime from orders where orderNumber='" + orderNumber + "'");
 			if (rs.next())
-				return new ReturnCommand("getOrderSupplyDateTime", rs.getString(1)+" "+rs.getString(2));
+				return new ReturnCommand("getOrderSupplyDateTime", rs.getString(1) + " " + rs.getString(2));
 			return new ReturnCommand("getOrderSupplyDateTime", null);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("problem with getOrderSupplyDateTime");
 			e.printStackTrace();
 			return new ReturnCommand("getOrderSupplyDateTime", null);
@@ -253,6 +254,38 @@ public class StoreManagerQuery {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	public static ReturnCommand updateBalance(Connection conn, String userID, String compensationAmount) {
+		Statement stmt;
+		PreparedStatement ps;
+		String selectQuery = "select balance from user_customer where userID=" + userID + ";";
+		String updateQuery = "UPDATE user_customer SET balance=? where userID=?";
+		ResultSet rs;
+		double balance=0;
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(selectQuery);
+			if(rs.next()) { //if a row for specific userID already exists
+				balance+=rs.getDouble(1);
+				balance+=Double.parseDouble(compensationAmount);
+				ps = conn.prepareStatement(updateQuery);
+				ps.setDouble(1, balance);
+				ps.setInt(2,Integer.parseInt(userID));
+				ps.executeUpdate();
+			}
+			else {
+				ps = conn.prepareStatement("INSERT INTO user_customer(userID,balance)VALUES(?,?)");
+				ps.setInt(1, Integer.parseInt(userID));
+				ps.setDouble(2, Double.parseDouble(compensationAmount));
+				ps.executeUpdate();
+			}
+		return new ReturnCommand("updateBalance", true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ReturnCommand("updateBalance", false);
 		}
 	}
 }

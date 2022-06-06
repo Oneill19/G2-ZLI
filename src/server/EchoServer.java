@@ -320,6 +320,9 @@ public class EchoServer extends AbstractServer {
 			case "getOrderSupplyDateTime":
 				client.sendToClient(StoreManagerQuery.getOrderSupplyDateTime(conn, clientMsg[1]));
 				break;
+			case "updateBalance":
+				client.sendToClient(StoreManagerQuery.updateBalance(conn, clientMsg[1], clientMsg[2]));
+				break;
 			default:
 				System.out.println("No Command Found" + clientMsg[0]);
 				break;
