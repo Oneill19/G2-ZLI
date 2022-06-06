@@ -21,27 +21,32 @@
          <children>
             <VBox prefHeight="239.0" prefWidth="295.0" spacing="15.0">
                <children>
-                  <Button fx:id="ViewMonthlyReport" mnemonicParsing="false" onAction="#onViewMonthlyReport" prefHeight="46.0" prefWidth="309.0" style="-fx-border-color: #2B0548; -fx-background-color: #2B0548; -fx-background-radius: 5px; -fx-border-radius: 5px;" text="View Monthly Report" textAlignment="CENTER" textFill="#fcfcfe">
+                  <Button fx:id="ViewMonthlyReport" mnemonicParsing="false" onAction="#onViewMonthlyReport" prefHeight="46.0" prefWidth="309.0" style="-fx-border-color: #2B0548; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50;" text="View Monthly Report" textAlignment="CENTER" textFill="#fcfcfe">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="UserRegistration" mnemonicParsing="false" onAction="#onUserRegistration" prefHeight="46.0" prefWidth="293.0" style="-fx-border-color: #2B0548; -fx-background-color: #2B0548; -fx-background-radius: 5px; -fx-border-radius: 5px;" text="User Registration" textAlignment="CENTER" textFill="#fcfcfe">
+                  <Button fx:id="UserRegistration" mnemonicParsing="false" onAction="#onUserRegistration" prefHeight="46.0" prefWidth="293.0" style="-fx-border-color: #2B0548; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="User Registration" textAlignment="CENTER" textFill="#fcfcfe">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="OrderManagement" mnemonicParsing="false" onAction="#onOrderManagement" prefHeight="46.0" prefWidth="285.0" style="-fx-border-color: #2B0548; -fx-background-color: #2B0548; -fx-background-radius: 5px; -fx-border-radius: 5px;" text="Order Managment" textAlignment="CENTER" textFill="#fcfcfe">
+                  <Button fx:id="OrderManagement" mnemonicParsing="false" onAction="#onOrderManagement" prefHeight="46.0" prefWidth="285.0" style="-fx-border-color: #2B0548; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50;" text="Order Managment" textAlignment="CENTER" textFill="#fcfcfe">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Permissionmanagement" mnemonicParsing="false" onAction="#onPermissionmanagement" prefHeight="46.0" prefWidth="285.0" style="-fx-border-color: #2B0548; -fx-background-color: #2B0548; -fx-background-radius: 5px; -fx-border-radius: 5px;" text="Permission Management" textAlignment="CENTER" textFill="#fcfcfe">
+                  <Button fx:id="Permissionmanagement" mnemonicParsing="false" onAction="#onPermissionmanagement" prefHeight="46.0" prefWidth="285.0" style="-fx-border-color: #2B0548; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50;" text="User Permission" textAlignment="CENTER" textFill="#fcfcfe">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="complaintsReport" mnemonicParsing="false" onAction="#onComplaintsReports" prefHeight="46.0" prefWidth="285.0" style="-fx-border-color: #2B0548; -fx-background-color: #2B0548; -fx-background-radius: 5px; -fx-border-radius: 5px;" text="Show Complaints Report" textAlignment="CENTER" textFill="#fcfcfe">
+                  <Button fx:id="workerPer" mnemonicParsing="false" onAction="#onWorkerPermission" prefHeight="46.0" prefWidth="285.0" style="-fx-border-color: #2B0548; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50;" text="Worker Permission" textAlignment="CENTER" textFill="#fcfcfe">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="complaintsReport" mnemonicParsing="false" onAction="#onComplaintsReports" prefHeight="46.0" prefWidth="285.0" style="-fx-border-color: #2B0548; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50;" text="Show Complaints Report" textAlignment="CENTER" textFill="#fcfcfe">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -59,7 +64,7 @@
             </VBox>
          </children>
       </HBox>
-      <Button fx:id="Exit" alignment="CENTER" layoutX="917.0" layoutY="14.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+      <Button fx:id="Exit" alignment="CENTER" layoutX="917.0" layoutY="14.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #D2042D; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
       <Button fx:id="User" layoutX="90.0" layoutY="20.0" mnemonicParsing="false" onAction="#onUser" style="-fx-background-color: transparent;" text="Hello User" textFill="#2b0548">
          <font>
             <Font size="15.0" />

@@ -11,14 +11,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.PermissionManagementController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE; -fx-border-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.PermissionManagementController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="406.0" layoutY="48.0">
          <image>
             <Image url="@Zli_logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="Back" alignment="CENTER" layoutX="17.0" layoutY="684.0" mnemonicParsing="false" onAction="#onBack" prefHeight="44.0" prefWidth="158.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Back" textFill="#fcfcfe" />
+      <Button fx:id="Back" alignment="CENTER" layoutX="17.0" layoutY="684.0" mnemonicParsing="false" onAction="#onBack" prefHeight="44.0" prefWidth="158.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50;" text="Back" textFill="#fcfcfe" />
       <Text fill="#31134a" layoutX="400.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Permission Management" textAlignment="CENTER" wrappingWidth="199.99999552965164">
          <font>
             <Font size="18.0" />
@@ -64,7 +64,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Button fx:id="Save" alignment="CENTER" layoutX="143.0" layoutY="566.0" mnemonicParsing="false" onAction="#onSave" prefHeight="44.0" prefWidth="158.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: green; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Save" textFill="#fcfcfe" />
+      <Button fx:id="Save" alignment="CENTER" layoutX="143.0" layoutY="566.0" mnemonicParsing="false" onAction="#onSave" prefHeight="44.0" prefWidth="158.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: green; -fx-background-radius: 50; -fx-border-radius: 50;" text="Save" textFill="#fcfcfe" />
       <Text fx:id="Errormsg" fill="RED" layoutX="287.0" layoutY="635.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="358.0000102519989" />
       <TableView fx:id="userTable" editable="true" layoutX="406.0" layoutY="213.0" onMouseClicked="#onSelectedUser" prefHeight="409.0" prefWidth="552.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" tableMenuButtonVisible="true">
          <columns>

@@ -4,6 +4,8 @@ package server;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import common.ClientInfo;
@@ -145,7 +147,7 @@ public class EchoServer extends AbstractServer {
 			// case to get Pending Orders from the database
 			case "GetPendingOrders":
 				// send a successful message back
-				client.sendToClient(StoreManagerQuery.getPendingOrders(conn));
+				client.sendToClient(StoreManagerQuery.getPendingOrders(conn, clientMsg[1]));
 				break;
 			case "UpdateStatusOrders":
 				// send a successful message back
@@ -325,6 +327,21 @@ public class EchoServer extends AbstractServer {
 				break;
 			case "AddCustomProduct":
 				client.sendToClient(ProductsQuery.addCustomProduct(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4], clientMsg[5], clientMsg[6]));
+				break;
+			case "numberOfItemsInOrder":
+				client.sendToClient(ReportQuery.generateReport(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4],clientMsg[5], clientMsg[6]));
+				break;
+			case "GetWorkers":
+				client.sendToClient(StoreManagerQuery.GetWorkers(conn, clientMsg[1]));
+				break;
+			case "ChangeWorkerStatus":
+				client.sendToClient(StoreManagerQuery.UpdateWorkerStatus(conn, clientMsg[1], clientMsg[2]));
+				break;
+			case "CheckRefund":
+				client.sendToClient(StoreManagerQuery.CheckRefund(conn, clientMsg[1], LocalDate.parse(clientMsg[2]), LocalTime.parse(clientMsg[3]), Double.parseDouble(clientMsg[4])));
+				break;
+			case "UpdateBalance":
+				client.sendToClient(StoreManagerQuery.UpdateBalance(conn, Double.parseDouble(clientMsg[1]), Integer.parseInt(clientMsg[2])));
 				break;
 			default:
 				System.out.println("No Command Found" + clientMsg[0]);

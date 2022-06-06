@@ -15,14 +15,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.ShowComplaintsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.ShowComplaintsController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="450.0" layoutY="-14.0">
          <image>
             <Image url="@Zli_logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="exitBtn" alignment="CENTER" layoutX="1017.0" layoutY="16.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+      <Button fx:id="exitBtn" alignment="CENTER" layoutX="1017.0" layoutY="16.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #D2042D; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
       <Button fx:id="userOptBtn" layoutX="77.0" layoutY="22.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
          <font>
             <Font size="15.0" />
@@ -92,5 +92,10 @@
             </Pane>
          </children>
       </HBox>
+      <ImageView fitHeight="38.0" fitWidth="43.0" layoutX="187.0" layoutY="18.0">
+         <image>
+            <Image url="@User.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

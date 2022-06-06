@@ -3,10 +3,12 @@ package gui.client;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import client.ChatClient;
 import client.ClientUI;
 import entity.Order;
+import entity.StoreWorker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,12 +20,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
 
+/**
+ * @author Koral Biton, Topaz Eldori
+ *
+ */
 public class OrderManagementScreenController {
 
 	private int OrderNumber;
@@ -46,11 +54,6 @@ public class OrderManagementScreenController {
     @FXML
     private TableColumn<Order, String> dOrderCol;
 
-    @FXML
-    private TableColumn<Order, LocalDate> supplyDateCol;
-
-    @FXML
-    private TableColumn<Order, LocalTime> supplyTimeCol;
 
 
 
@@ -79,6 +82,11 @@ public class OrderManagementScreenController {
     @FXML
     private Text ErrorMsg;
 
+    /**
+     * Confirmation of orders awaiting cancellation / confirmation
+     * @param event
+     * @throws Exception
+     */
     @FXML
     void OnAprrove(ActionEvent event) throws Exception {
     	Order Selectedorder= ordersTable.getSelectionModel().getSelectedItem();
@@ -87,6 +95,20 @@ public class OrderManagementScreenController {
     	else {
     		OrderNumber =Selectedorder.getOrderNumber();
     		StatusOrder=Selectedorder.getOrderStatus();
+    		if((StatusOrder.equals("WAITING_FOR_CANCELATION")) && (Selectedorder.getDeliveryMethod().equals("Delivery")))
+    		{
+            	ClientUI.chat.accept("CheckRefund" + "\t" + OrderNumber + "\t" + Selectedorder.getSupplyDate() + "\t" + Selectedorder.getSupplyTime() +  "\t" + Selectedorder.getTotalPrice());
+            	ClientUI.chat.accept("UpdateBalance" + "\t" + ChatClient.refundAmount + "\t" + Selectedorder.getCustomerID());            	if(ChatClient.refundAmount>0)
+            	{
+            		//show message
+        			Alert alert = new Alert(AlertType.CONFIRMATION);
+        			alert.setTitle("Credit updated successfully!");
+        			alert.setHeaderText("A credit message was sent to the customer in the amount of: " + ChatClient.refundAmount + "NIS");
+        			alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("orderReception.png"))));
+        			alert.showAndWait();
+            	}
+    		}
+    		
         	ClientUI.chat.accept("UpdateStatusOrders" + "\t" + OrderNumber + "\t" + StatusOrder );
         	ordersTable.getItems().remove(Selectedorder) ;
         	}
@@ -95,6 +117,7 @@ public class OrderManagementScreenController {
     }
 
     /**
+     *  Go back to the options screen
      * @param event
      * @throws Exception
      */
@@ -113,6 +136,7 @@ public class OrderManagementScreenController {
   
 
     /**
+     *  exit from Zer-Li system 
      * @param event
      * @throws Exception
      */
@@ -125,6 +149,7 @@ public class OrderManagementScreenController {
     }
 
     /**
+     * Log out from the user and go back to login screen
      * @param event
      * @throws Exception
      */
@@ -145,7 +170,7 @@ public class OrderManagementScreenController {
 
     @FXML
     void onUser(ActionEvent event) {
-
+    	System.out.println("On User Options");
     }
     
     //get the pending orders from DB to order TableView
@@ -153,7 +178,7 @@ public class OrderManagementScreenController {
     void initialize() throws IOException {
     	User.setText("Hello, " + ChatClient.user.getFirstName());
 
-    	ClientUI.chat.accept("GetPendingOrders");
+    	ClientUI.chat.accept("GetPendingOrders" + "\t" +((StoreWorker)ChatClient.user).getStoreName());
     	observableList=FXCollections.observableArrayList(ChatClient.NotAprroveorders);
     	ordersTable.getItems().clear();
     	orderNumberCol.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));

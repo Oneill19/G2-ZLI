@@ -5,26 +5,34 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import common.ReturnCommand;
+import entity.Customer;
+import entity.Order;
 import entity.Report;
+import entity.Store;
+import entity.StoreWorker;
+import entity.User;
 
 /**
+ * A class that performs queries related to system reports
  * @author Koral Biton,Topaz Eldori
  *
  */
 public class ReportQuery {
 
 	/**
-	 * method to execute sql query that return the appropirate report
+	 * method to execute sql query that return the appropriate report
 	 * 
-	 * @param con
-	 * @param reportNme
-	 * @param reportMonth
-	 * @param reportYear
-	 * @param storeName
-	 * @return String that contain the deatils of the report
+	 * @param con connection
+	 * @param reportNme -  the name of report type that asked to present 
+	 * @param reportMonth- the month of report type that asked to present
+	 * @param reportYear - the year of report type that asked to present
+	 * @param storeName - the name of store  that asked to present
+	 * @return String that contain the details of the report
 	 */
 	public static ReturnCommand getReport(Connection con, String reportNme, String reportMonth, String reportYear,
 			String storeName) {
@@ -65,23 +73,24 @@ public class ReportQuery {
 
 	}
 
+
 	/**
 	 * method to execute sql query that generate a report automatically
-	 * 
-	 * @param con
-	 * @param order
-	 * @param productAmount
-	 * @param itemAmount
-	 * @param productRevenue
-	 * @param itemRevenue
-	 * @return
+	 * @param con connection
+	 * @param productAmount- amount of product in order 
+	 * @param itemAmount- amount of item in order 
+	 * @param productRevenue-revenue of product in order 
+	 * @param itemRevenue- revenue of item in order 
+	 * @param fromStore- The name of the store where the order was placed
+	 * @param date - the date of the order was placed
+	 * @return massage to client
 	 */
 	public static ReturnCommand generateReport(Connection con, String productAmount, String itemAmount,
-			String productRevenue, String itemRevenue, String order) {
-		String[] orderStr = order.split(",");
-		String orderDate = orderStr[5];
-		String orderDateArr[] = orderDate.split("-"); // [0] year , [1] month
-		String storeName = orderStr[4]; // the name of the store for this order
+			String productRevenue, String itemRevenue, String fromStore, String date) {
+		System.out.println(date + " " + fromStore);
+		String orderDateArr[] = date.split("-"); // [0] year , [1] month
+		String storeName = fromStore; // the name of the store for this order
+		Statement stmt;
 		int productsAmount = Integer.parseInt(productAmount);
 		int itemsAmount = Integer.parseInt(itemAmount);
 		float productsRevenue = Float.parseFloat(productRevenue);
@@ -90,7 +99,7 @@ public class ReportQuery {
 		int sumItemAmount;
 		float sumProductRevenue;
 		float sumItemRevenue;
-
+		float total=productsRevenue+itemsRevenue;
 		// String sqlQuery = "SELECT * From zli.reports WHERE storeName='" + storeName +
 		// "' AND reportMonth='"
 		// orderDateArr[1] + "' AND reportYear='" + orderDateArr[0] + "' ;";
@@ -114,7 +123,7 @@ public class ReportQuery {
 				else
 					quarterlyVal = 4;
 				PreparedStatement insertPs = con.prepareStatement(
-						"INSERT INTO zli.reports ( storeName, reportYear, reportMonth,amountProduct,amountItem,revenueProduct,revenueItem,quarterly)VALUES  (?,?,?,?,?,?,?,?);");
+						"INSERT INTO zli.reports ( storeName, reportYear, reportMonth,amountProduct,amountItem,revenueProduct,revenueItem,quarterly,totalrevenue)VALUES  (?,?,?,?,?,?,?,?,?);");
 				insertPs.setString(1, storeName);
 				insertPs.setString(2, orderDateArr[0]);
 				insertPs.setString(3, orderDateArr[1]);
@@ -123,6 +132,7 @@ public class ReportQuery {
 				insertPs.setFloat(6, productsRevenue);
 				insertPs.setFloat(7, itemsRevenue);
 				insertPs.setInt(8, quarterlyVal);
+				insertPs.setFloat(9, total);
 
 				insertPs.executeUpdate();
 			} else {
@@ -131,11 +141,12 @@ public class ReportQuery {
 				sumProductRevenue = rs.getFloat(7) + productsRevenue;
 				sumItemRevenue = rs.getFloat(8) + itemsRevenue;
 				PreparedStatement updatePs = con.prepareStatement(
-						"UPDATE  zli.reports SET amountProduct = ? WHERE amountItem = ? AND revenueProduct = ? AND revenueItem = ?;");
+						"UPDATE zli.reports SET amountProduct =?, amountItem =?, revenueProduct =?, revenueItem =?, totalrevenue=? WHERE reportYear='" + orderDateArr[0] + "' AND reportMonth='" + orderDateArr[1] + "' AND storeName='" + fromStore + "';");
 				updatePs.setInt(1, sumProductAmount);
 				updatePs.setInt(2, sumItemAmount);
 				updatePs.setFloat(3, sumProductRevenue);
 				updatePs.setFloat(4, sumItemRevenue);
+				updatePs.setFloat(5, total);
 				updatePs.executeUpdate();
 			}
 			return new ReturnCommand("generateReport", null);
@@ -148,6 +159,14 @@ public class ReportQuery {
 
 	}
 
+	/**
+	 * method to execute sql query that get report by the selected quarterly
+	 * @param con 	connection
+	 * @param quareterly- the number of the selected quarterly
+	 * @param year- the number of the selected year
+	 * @param store- the name of the selected store  
+	 * @return arrayList of the reports
+	 */
 	public static ReturnCommand getReportByQuarterly1(Connection con, String quareterly, String year, String store) {
 
 		Statement stmt;
@@ -168,8 +187,8 @@ public class ReportQuery {
 						rs.getInt(6), // AmountItems
 						rs.getFloat(7), // RevenueProducts
 						rs.getFloat(8), // RevenueItems
-						rs.getInt(9) // Quarterly
-						
+						rs.getInt(9), // Quarterly
+						rs.getFloat(10) //totalrevenue
 				));
 			}
 			return new ReturnCommand("GetReportByQuarter1",reports );
@@ -178,6 +197,14 @@ public class ReportQuery {
 			return null;
 		}
 	}
+	/**
+	 *  method to execute sql query that get report by the selected quarterly
+	 * @param con	connection
+	 * @param quareterly- the number of the selected quarterly
+	 * @param year- the number of the selected year
+	 * @param store- the name of the selected store 
+	 * @return arrayList of the reports
+	 */
 	public static ReturnCommand getReportByQuarterly2(Connection con, String quareterly, String year, String store) {
 
 		Statement stmt;
@@ -198,8 +225,9 @@ public class ReportQuery {
 						rs.getInt(6), // AmountItems
 						rs.getFloat(7), // RevenueProducts
 						rs.getFloat(8), // RevenueItems
-						rs.getInt(9) // Quarterly
-						
+						rs.getInt(9), // Quarterly
+						rs.getFloat(10) //totalrevenue
+
 				));
 			}
 			return new ReturnCommand("GetReportByQuarter2",reports );
@@ -208,5 +236,7 @@ public class ReportQuery {
 			return null;
 		}
 	}
+	
+
 
 }

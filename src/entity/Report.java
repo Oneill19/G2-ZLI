@@ -3,6 +3,8 @@ package entity;
 import java.io.Serializable;
 
 /**
+ * class of reports with the details that should be in the reports
+ * 
  * @author Topaz Eldori,Koral Biton
  *
  */
@@ -20,19 +22,20 @@ public class Report implements Serializable {
 	private int amountItem;
 	private int quartlyNum;
 	private String storeName;
-	
-	public Report(int reportId, String storeName,String reportYear, String reportMonth, int amountProduct, int amountItem,float revenueProduct,
-			float revenueItem,int quartlyNum) {
+
+	public Report(int reportId, String storeName, String reportYear, String reportMonth, int amountProduct,
+			int amountItem, float revenueProduct, float revenueItem, int quartlyNum, float totalRevenue) {
 		super();
 		this.reportId = reportId;
-		this.storeName=storeName;
+		this.storeName = storeName;
 		this.reportYear = reportYear;
 		this.reportMonth = reportMonth;
 		this.amountProduct = amountProduct;
 		this.amountItem = amountItem;
 		this.revenueProduct = revenueProduct;
 		this.revenueItem = revenueItem;
-		this.quartlyNum=quartlyNum;
+		this.quartlyNum = quartlyNum;
+		this.totalRevenue = totalRevenue;
 	}
 
 	public int getReportId() {
@@ -106,7 +109,7 @@ public class Report implements Serializable {
 	public void setAmountItem(int amountItem) {
 		this.amountItem = amountItem;
 	}
-	
+
 	public int getQuartlyNum() {
 		return quartlyNum;
 	}
@@ -123,6 +126,3 @@ public class Report implements Serializable {
 		this.storeName = storeName;
 	}
 }
-	
-
-

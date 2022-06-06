@@ -18,7 +18,7 @@
       </ImageView>
       <VBox layoutX="362.0" layoutY="354.0" prefHeight="58.0" prefWidth="288.0" spacing="15.0">
          <children>
-            <Button fx:id="addSurveyAnswersButton" disable="true" mnemonicParsing="false" onAction="#onAddSurveyAnswers" prefHeight="46.0" prefWidth="285.0" style="-fx-border-color: #2B0548; -fx-background-color: #2B0548; -fx-background-radius: 5px; -fx-border-radius: 5px;" text="Add Survey Answers" textAlignment="CENTER" textFill="#fcfcfe">
+            <Button fx:id="addSurveyAnswersButton" disable="true" mnemonicParsing="false" onAction="#onAddSurveyAnswers" prefHeight="46.0" prefWidth="285.0" style="-fx-border-color: #2B0548; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50;" text="Add Survey Answers" textAlignment="CENTER" textFill="#fcfcfe">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -31,7 +31,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </VBox>
-      <Button fx:id="Exit" alignment="CENTER" layoutX="917.0" layoutY="14.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+      <Button fx:id="Exit" alignment="CENTER" layoutX="917.0" layoutY="14.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #D2042D; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
       <Button fx:id="User" layoutX="74.0" layoutY="23.0" mnemonicParsing="false" onAction="#onUser" style="-fx-background-color: transparent;" text="Hello User" textFill="#2b0548">
          <font>
             <Font size="15.0" />
@@ -47,5 +47,10 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <ImageView fitHeight="38.0" fitWidth="43.0" layoutX="177.0" layoutY="17.0">
+         <image>
+            <Image url="@User.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

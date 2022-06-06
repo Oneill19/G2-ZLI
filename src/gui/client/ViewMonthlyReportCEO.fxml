@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.CEOReportsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #FCFCFE; -fx-border-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.CEOReportsController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="406.0" layoutY="48.0">
          <image>
@@ -32,7 +32,7 @@
             <Image url="@User.png" />
          </image>
       </ImageView>
-      <Button fx:id="Back" alignment="CENTER" layoutX="32.0" layoutY="674.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Back" textFill="#fcfcfe" />
+      <Button fx:id="Back" alignment="CENTER" layoutX="32.0" layoutY="674.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50;" text="Back" textFill="#fcfcfe" />
       <Button fx:id="Exit" alignment="CENTER" layoutX="918.0" layoutY="12.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #D2042D; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
       <Text fill="#31134a" layoutX="410.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Monthly Reports" wrappingWidth="180.0">
          <font>
@@ -94,10 +94,15 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <Button fx:id="ViewReport" alignment="CENTER" layoutX="107.0" layoutY="307.0" mnemonicParsing="false" onAction="#onViewReport" prefHeight="24.0" prefWidth="106.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: green; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="View " textFill="#fcfcfe" />
+            <Button fx:id="ViewReport" alignment="CENTER" layoutX="107.0" layoutY="307.0" mnemonicParsing="false" onAction="#onViewReport" prefHeight="24.0" prefWidth="106.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: green; -fx-background-radius: 50; -fx-border-radius: 50;" text="View " textFill="#fcfcfe" />
          </children>
       </Pane>
       <Text fx:id="errortxt" fill="RED" layoutX="86.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="281.13671875">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="errortxt" fill="RED" layoutX="127.0" layoutY="610.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="200.0">
          <font>
             <Font size="14.0" />
          </font>

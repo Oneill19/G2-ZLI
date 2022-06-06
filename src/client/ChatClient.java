@@ -60,6 +60,9 @@ public class ChatClient extends AbstractClient {
 	public static User user = null;
 	public static int customProductCounter = 0;
 	
+	public static ArrayList<User> workersStore;
+	public static double refundAmount;
+	
 	
 	public static SurveyReport selectedSurveyReport = null;
 	
@@ -268,6 +271,18 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "GetAmountOfCustomProduct":
 				customProductCounter = (int)rc.getReturnValue();
+				break;
+			case "GetWorkers":
+				workersStore=(ArrayList<User>)rc.getReturnValue();
+				break;
+			case "ChangeWorkerStatus":
+				System.out.println("Worker Updated");
+				break;
+			case "CheckRefund":
+				refundAmount = (double)rc.getReturnValue();
+				break;
+			case "UpdateBalance":
+				System.out.println("Blance Updated");
 				break;
 			default:
 				//for debug - don't remove.
