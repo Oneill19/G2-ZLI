@@ -26,6 +26,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Sale> saleArray = new ArrayList<Sale>();
 	public static ArrayList<Item> item_in_saleArray = new ArrayList<Item>();
 	public static ArrayList<Product> product_in_saleArray = new ArrayList<Product>(); 
+	public static Integer returnSaleID = null;
 	
 	//Order
 	public static ArrayList<Order> orders;
@@ -57,7 +58,7 @@ public class ChatClient extends AbstractClient {
 	public static ComplaintReport selectedComplaintReport = null;
 	public static String reportTxt;
 	public static User user = null;
-	public static int returnSaleID;
+	
 	
 	public static SurveyReport selectedSurveyReport = null;
 	
@@ -222,10 +223,11 @@ public class ChatClient extends AbstractClient {
 				requestSucceed = (boolean)rc.getReturnValue();
 				break;
 			case "insertNewSale":
-				if(rc.getReturnValue()!= null)
-					returnSaleID=(int)rc.getReturnValue();
+				returnSaleID = (Integer)rc.getReturnValue();
+				System.out.println("ChatClient returnSaleID "+returnSaleID);
 				break;
-			case "insertItemInSaleToDB":
+			case "insertItemInSale":
+				requestSucceed = (boolean)rc.getReturnValue();
 				break;
 			case "insertProductsInSaleToDB":
 				break;
@@ -247,9 +249,20 @@ public class ChatClient extends AbstractClient {
 			case "GetSurveysWithNoReport":
 				surveysWithNoReports = (ArrayList<Survey>)rc.getReturnValue();
 				break;
+			case "updateSaleStatus":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "nullifyIdSaleOfItemsWithCurrentIdSale":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "changeItemIdSale":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "commandinsertItemInSale":
+				requestSucceed = (boolean)rc.getReturnValue();
 			default:
 				//for debug - don't remove.
-				System.out.println("ChatClient didn't recognize command");
+				System.out.println("ChatClient didn't recognize command"+rc.getCommand());
 			}
 		}
 	}

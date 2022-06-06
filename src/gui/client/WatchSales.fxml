@@ -18,14 +18,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="gui.client.WatchSalesController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.WatchSalesController">
    <children>
       <Pane fx:id="pane" layoutX="10.0" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="873.0" prefWidth="1211.0" style="-fx-background-color: #FCFCFE;">
          <children>
-            <ScrollPane fx:id="itemScrollPane" hbarPolicy="NEVER" layoutX="24.0" layoutY="255.0" prefHeight="518.0" prefWidth="672.0" style="-fx-background: #FCFCFE; -fx-background-color: #FCFCFE; -fx-alignment: CENTER;">
+            <ScrollPane fx:id="itemScrollPane" hbarPolicy="NEVER" layoutX="52.0" layoutY="255.0" prefHeight="518.0" prefWidth="502.0" style="-fx-background: #FCFCFE; -fx-background-color: #FCFCFE; -fx-alignment: CENTER;">
                <content>
-                  <GridPane fx:id="grid" alignment="CENTER" prefHeight="102.0" prefWidth="536.0">
+                  <GridPane fx:id="grid" alignment="CENTER" prefHeight="102.0" prefWidth="493.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -50,12 +49,13 @@
                   </Label>
                </children>
             </VBox>
-            <TableView fx:id="salesTable" editable="true" layoutX="792.0" layoutY="255.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="518.0" prefWidth="394.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@mycss.css">
+            <TableView fx:id="salesTable" editable="true" layoutX="632.0" layoutY="255.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="518.0" prefWidth="522.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2B0548;" stylesheets="@mycss.css">
                <columns>
-                  <TableColumn fx:id="namecol" prefWidth="100.0" text="Sale Name" />
-                  <TableColumn fx:id="discountCol" prefWidth="68.0" text="Discount" />
-                  <TableColumn fx:id="statusCol" prefWidth="97.0" text="Status" />
-                  <TableColumn fx:id="actionCol" prefWidth="127.0" text="Action" />
+                  <TableColumn fx:id="saleIdCol" editable="false" prefWidth="49.0" sortType="DESCENDING" text="Sale ID" />
+                  <TableColumn fx:id="namecol" editable="false" prefWidth="126.0" text="Sale Name" />
+                  <TableColumn fx:id="discountCol" editable="false" prefWidth="68.0" text="Discount" />
+                  <TableColumn fx:id="statusCol" editable="false" prefWidth="96.0" text="Status" />
+                  <TableColumn fx:id="actionCol" prefWidth="181.0" text="Action" />
                </columns>
             </TableView>
             <Button fx:id="logoutBtn" defaultButton="true" layoutX="24.0" layoutY="48.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: transparent;" text="Logout |" textFill="#2b0548">
@@ -69,13 +69,13 @@
                </font>
             </Button>
             <Button fx:id="exit" alignment="CENTER" layoutX="1138.0" layoutY="45.0" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
-            <Separator layoutX="738.0" layoutY="255.0" orientation="VERTICAL" prefHeight="518.0" prefWidth="13.0" />
-            <HBox alignment="CENTER" layoutX="791.0" layoutY="201.0" prefHeight="33.0" prefWidth="394.0">
+            <Separator layoutX="588.0" layoutY="244.0" orientation="VERTICAL" prefHeight="518.0" prefWidth="13.0" />
+            <HBox alignment="CENTER" layoutX="673.0" layoutY="201.0" prefHeight="33.0" prefWidth="481.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 27;" text="Sales Table" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="14.0" layoutY="201.0" prefHeight="32.0" prefWidth="529.0">
+            <HBox alignment="CENTER" layoutX="43.0" layoutY="201.0" prefHeight="32.0" prefWidth="473.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 27;" text="Products of Selected Sale" />
                </children>

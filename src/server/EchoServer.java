@@ -282,7 +282,9 @@ public class EchoServer extends AbstractServer {
 			case "insertNewSale":
 				client.sendToClient(SaleQuery.insertNewSale(conn, clientMsg[1], clientMsg[2]));
 				break;
-			case "insertItemInSaleToDB":
+			case "insertItemInSale":
+				//[1]: serial
+				//[2]: idSale
 				client.sendToClient(SaleQuery.insertItemInSale(conn, clientMsg[1], clientMsg[2]));
 				break;
 			case "insertProductsInSaleToDB":
@@ -305,9 +307,18 @@ public class EchoServer extends AbstractServer {
 				break;
 			case "GetSurveysWithNoReport":
 				client.sendToClient(SurveyQuery.getSurveysWithNoReport(conn));
+          break;
+			case "updateSaleStatus":
+				client.sendToClient(SaleQuery.updateSaleStatus(conn, clientMsg[1], clientMsg[2]));
+				break;
+			case "nullifyIdSaleOfItemsWithCurrentIdSale":
+				client.sendToClient(SaleQuery.nullifyIdSaleOfItemsWithCurrentIdSale(conn, clientMsg[1]));
+				break;
+			case "changeItemIdSale":
+				client.sendToClient(SaleQuery.changeItemIdSale(conn, clientMsg[1], clientMsg[2]));
 				break;
 			default:
-				System.out.println("No Command Found");
+				System.out.println("No Command Found" + clientMsg[0]);
 				break;
 			}
 		} catch (Exception e) {

@@ -24,29 +24,33 @@ public class SaleQuery {
 		PreparedStatement ps;
 		Statement stmt;
 		ResultSet rs;
+		int idSale=0;
+		String insertQuery = null, selectQuery = null;
 
-		// insert the new sale
-		String insertQuery = "INSERT INTO sale (saleName, discountAmount)" + "VALUES ('" + saleName + "'," + saleAmount
-				+ ");";
+//		 insert the new sale
+		insertQuery = "INSERT INTO sale (saleName, discountAmount)" + "VALUES ('" + saleName + "'," + saleAmount+ ");";
 //		System.out.println(insertQuery);//debug
 		try {
 			ps = con.prepareStatement(insertQuery);
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			return new ReturnCommand("insertNewSale", null);
 		}
 
-		String selectQuery = "SELECT LAST_INSERT_ID();";
+		selectQuery = "SELECT idSale from sale order by idSale desc limit 1";
 		// get the saleID
 		try {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(selectQuery);
-			rs.next();
-			return new ReturnCommand("insertNewSale", rs.getInt(1));
+			if (rs.next())
+				idSale = rs.getInt(1);
+			System.out.println(idSale);//debug
+			
+			return new ReturnCommand("insertNewSale", (Integer)idSale);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			return new ReturnCommand("insertNewSale", null);
 		}
 	}
 
@@ -58,19 +62,22 @@ public class SaleQuery {
 	 */
 	public static ReturnCommand insertItemInSale(Connection con, String serial, String idSale) {
 		PreparedStatement ps;
-		String insertQuery;
-		String[] allItems = serial.split("\t");
+		String insertQuery = "INSERT INTO item_in_sale(itemSerial, idSale)" + "VALUES (?,?);";;
+		String[] allItems = serial.split(" ");
 
+		System.out.println("idSale in SaleQuery: "+idSale); 
+				
 //		insert the new sale
 		for (String itemSerial : allItems) {
-			insertQuery = "INSERT INTO item_in_sale(itemSerial, idSale)" + "VALUES ('" + itemSerial + "'," + idSale
-					+ ");";
 			try {
 				ps = con.prepareStatement(insertQuery);
+				ps.setString(1,itemSerial);
+				ps.setInt(2, Integer.parseInt(idSale));
 				ps.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
-				return null;
+				System.out.println("problem");
+				return new ReturnCommand("insertItemInSale",false);
 			}
 		}
 
@@ -81,10 +88,11 @@ public class SaleQuery {
 				ps = con.prepareStatement(updateQuery);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return null;
+				System.out.println("problem");
+				return new ReturnCommand("insertItemInSale",false);
 			}
 		}
-		return null;
+		return new ReturnCommand("insertItemInSale",true);
 	}
 
 	/**
@@ -229,5 +237,85 @@ public class SaleQuery {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static ReturnCommand updateSaleStatus(Connection conn, String idSale, String newStatus) {
+		PreparedStatement ps;
+		String updateQuery = "UPDATE sale SET status = '" + newStatus + "' WHERE idSale = '" + idSale + "';";;
+		System.out.println(updateQuery);//debug
+		
+		try {
+			ps = conn.prepareStatement(updateQuery);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ReturnCommand("updateSaleStatus",false);
+		}
+		return new ReturnCommand("updateSaleStatus",true);
+	}
+	
+	
+
+	/**
+	 * nuliify all items that are CURRENTLY connected with sale 'idSale'
+	 * @param conn		connection to client
+	 * @param idSale	the id of the sale
+	 * @return
+	 */
+	public static ReturnCommand nullifyIdSaleOfItemsWithCurrentIdSale(Connection conn, String idSale) {
+		Statement stmt;
+		String selectQuery = "	select * from item_in_sale as itemSale "
+				+ "	inner join item as i on i.itemSerial=itemSale.itemSerial "
+				+ "	where i.idSale=itemSale.idSale AND i.idSale='"+idSale+"';";
+		System.out.println(selectQuery);//debug
+		ResultSet rs=null;
+		StringBuilder sb = new StringBuilder();
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(selectQuery);
+			//has all itemSerial of items that's idSale need to be deleted.
+			while(rs.next()) {
+				sb.append(Integer.toString(rs.getInt(1))).append(" ");
+			}
+			//nullify the idSale of all items that had currently that '@idSale'
+			
+			ReturnCommand rc = changeItemIdSale(conn, sb.toString(), Integer.toString(0));
+			boolean retVal = (boolean) rc.getReturnValue();
+			if ( !retVal) {
+				return new ReturnCommand("updateSaleStatus",false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ReturnCommand("updateSaleStatus",false);
+		}
+		return new ReturnCommand("updateSaleStatus",true);
+	}
+	
+	
+	/**
+	 * @param conn		connection to client
+	 * @param items		the items which column idSale should be set to '@idSale'
+	 * @param idSale	the idSale to give all 'items'
+	 * @return
+	 */
+	public static ReturnCommand changeItemIdSale(Connection conn, String items, String idSale) {
+		String[] itemsArray = items.split(" ");
+		String updateQuery = "UPDATE item SET idSale=? WHERE itemSerial=?";
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement(updateQuery);
+			for(String s : itemsArray) {
+				ps.setInt(1, Integer.parseInt(idSale));
+				ps.setString(2, s);
+				ps.executeUpdate();
+				System.out.println(ps);
+			}
+			return new ReturnCommand("changeItemIdSale",true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ReturnCommand("changeItemIdSale",false);
+		}
+		
 	}
 }

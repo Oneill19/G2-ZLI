@@ -8,6 +8,7 @@ import client.ChatClient;
 import client.ClientUI;
 import entity.AbstractProduct;
 import entity.Order;
+import entity.Sale;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -107,6 +108,9 @@ public class MyButtons extends Button {
 						new Image(getClass().getResourceAsStream("deleteOrder.png"), 40, 40, false, true)));
 			else if (command.equals("Delete Item"))
 				deleteButton = new Button("",
+						new ImageView(new Image(getClass().getResourceAsStream("delete.png"), 40, 40, false, true)));
+			else if(command.equals("Delete Sale"))
+				deleteButton = new Button("DeActivate",
 						new ImageView(new Image(getClass().getResourceAsStream("delete.png"), 40, 40, false, true)));
 
 			deleteButton.setStyle("-fx-background-color:red;" + "-fx-background-radius:50;" + "-fx-border-radius:50;"
@@ -230,6 +234,43 @@ public class MyButtons extends Button {
 							totalPrice += entry.getKey().getPrice() * entry.getValue();
 						}
 						totalPriceField.setText(totalPrice.toString());
+					}
+					
+					//If button is of deActivate sale
+					else if(command.equals("Delete Sale")) {
+						Sale sale=null;
+						if (selected instanceof Sale)
+							sale = (Sale)selected;
+						//HCI
+						deleteButton.setStyle("-fx-background-color:green;" + "-fx-background-radius:50;"
+								+ "-fx-border-radius:50;" + "-fx-padding: 0 0 0 0;" + "-fx-border-color:#aeaeae;");
+						deleteButton.setDisable(true);
+						
+						//check if sale is Active or not
+						if(sale.getStatus().equals("NOT ACTIVE")) {
+							Alert alert = new Alert(AlertType.CONFIRMATION);
+							alert.setTitle("Sale is Not Active");
+							alert.setHeaderText("Sale #"+sale.getIdSale()+" is already Not Active.");
+							return;
+						}
+							
+						//change sale's status
+						try {
+							ClientUI.chat.accept("updateSaleStatus\t"+sale.getIdSale()+"\t"+"NOT ACTIVE");
+						} catch (IOException e) {
+							System.out.println("Update status didn't work.");
+							e.printStackTrace();
+							return;
+						}
+						
+						//change idSale of items and products that are currently with this sale
+						try {
+							ClientUI.chat.accept("nullifyIdSaleOfItemsWithCurrentIdSale\t"+Integer.toString(sale.getIdSale()));
+						}catch(Exception e) {
+							e.printStackTrace();
+						}
+						
+						
 					}
 				}
 			});
@@ -392,6 +433,15 @@ public class MyButtons extends Button {
 	 */
 	public DeleteButtonCell<AbstractProduct, String> createDeleteButtonForAbstractItem(String command) {
 		return new DeleteButtonCell<AbstractProduct, String>(command);
+	}
+	
+	/**
+	 * @return a styled button with red background for deletions,
+	 * with setOnMouseEntered styling and setOnMouseExitStyling.
+	 * It is ment for creating buttons that implement TableCell[Sale,String]
+	 */
+	public DeleteButtonCell<Sale, String> createDeleteButtonForSale(String command) {
+		return new DeleteButtonCell<Sale, String>(command);
 	}
 	
 	/**
