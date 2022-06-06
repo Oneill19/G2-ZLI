@@ -45,7 +45,7 @@
                         <Image url="@Zli_logo_cropped.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="Sales History" textAlignment="CENTER" textFill="#a297d5">
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Watch Sales" textAlignment="CENTER" textFill="#a297d5">
                      <font>
                         <Font name="System Bold" size="31.0" />
                      </font>
@@ -102,6 +102,7 @@
             </HBox>
             <Button fx:id="saveBtn" alignment="CENTER" layoutX="508.0" layoutY="301.0" mnemonicParsing="false" onAction="#onSaveBtn" prefHeight="44.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: Green; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="Save" textAlignment="CENTER" textFill="#fcfcfe" />
             <Text fx:id="textSaleNumber" layoutX="607.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 31;" text="3334" />
+            <Label contentDisplay="CENTER" layoutX="734.0" layoutY="787.0" style="-fx-font-size: 15; -fx-alignment: center;" text="*NOTE: Newest sale is the one with the &#10;highest number at column Sale ID in the table" textAlignment="CENTER" />
          </children>
       </Pane>
    </children>

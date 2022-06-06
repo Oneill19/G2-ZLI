@@ -147,19 +147,7 @@ public class AddSaleController {
 		System.out.println("getListProducts(): "+productInSale);
 		return ret;
 	}
-	
-	/**
-	 * @param idSale		the id of the sale
-	 * @param productInSale	the id of the products
-	 */
-	private void insertProductInSaleToDB(int idSale, String productInSale) {
-		try {
-			ClientUI.chat.accept("insertProductsInSaleToDB\t"+idSale+"\t"+productInSale);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-	
+
 	
 	/**
 	 * <li> check saleAmount text field restrictions
@@ -174,19 +162,19 @@ public class AddSaleController {
 	private void onSave(ActionEvent event){
 		String productInSale,itemInSale, ret[];
 		int idSale;
-		
+
 		//• only Integer inputs 
 		//• 100>integer>0
 		if (!checkSaleAmountRestrictions()) return;
-		
+
 		//get list of serial numbers to be added to sale
 		if ((ret = getListItems()) == null)
 			return;
 		productInSale = ret[0];
 		itemInSale = ret[1];
-		
+
 		try {
-//			insert the new sale to table 'sale' in db
+			//			insert the new sale to table 'sale' in db
 			ClientUI.chat.accept("insertNewSale\t"+saleName.getText()+"\t"+saleAmount.getText());
 			if (ChatClient.returnSaleID == null) {
 				System.out.println("problem in getting idSale");
@@ -194,42 +182,55 @@ public class AddSaleController {
 			}				
 			idSale = ChatClient.returnSaleID;
 			System.out.println("idSale in AddSaleController: "+idSale);
-			
-//			set saleId of AP instance
+
+			//			set saleId of AP instance
 			for(AbstractProduct ap : apList) {
 				ap.setSale(idSale);
 			}
-			
+
 			//if there are items in the sale
 			if(itemInSale.length()>0) {
-				
+
 				//insert to item_in_sale
-				ClientUI.chat.accept("insertItemInSale\t"+itemInSale+"\t"+idSale);
+				ClientUI.chat.accept("insertApInSale\t"+itemInSale+"\t"+idSale+"\t"+"item_in_sale");
 				if (!ChatClient.requestSucceed) {
 					System.out.println("problem in inserting item_in_sale");
 					return;
 				}
-				
-				//change table item(idSale) to updated idSale
-				ClientUI.chat.accept("changeItemIdSale\t"+itemInSale+"\t"+idSale);
-				if(!ChatClient.requestSucceed) {
 
-					System.out.println("problem in inserting item_in_sale");
+				//change table item(idSale) to updated idSale
+				ClientUI.chat.accept("changeApIdSale\t"+itemInSale+"\t"+idSale+"\t"+"item");
+				if(!ChatClient.requestSucceed) {
+					System.out.println("problem");
 					return;
 				}
 			}
-			
-			
-			if(productInSale.length()>0)
-				insertProductInSaleToDB(idSale,productInSale );
+
+			//if there are items in the sale
+			if(productInSale.length()>0) {
+
+				//insert to product_in_sale
+				ClientUI.chat.accept("insertApInSale\t"+productInSale+"\t"+idSale+"\t"+"product_in_sale");
+				if (!ChatClient.requestSucceed) {
+					System.out.println("problem in inserting product_in_sale");
+					return;
+				}
+				//				
+				//				change table product(idSale) to updated idSale
+				ClientUI.chat.accept("changeApIdSale\t"+productInSale+"\t"+idSale+"\t"+"product");
+				if(!ChatClient.requestSucceed) {
+					System.out.println("problem");
+					return;
+				}
+			}
+
+			try {
+				cc.changeFXML(event, "MarketingEmployeOptions.fxml", "Marketing Employe Options");
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}catch(Exception e) {
-			System.out.println("problem in sale");
-			e.printStackTrace();
-		}
-		
-		try {
-			cc.changeFXML(event, "MarketingEmployeOptions.fxml", "Marketing Employe Options");
-		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

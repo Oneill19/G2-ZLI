@@ -282,13 +282,10 @@ public class EchoServer extends AbstractServer {
 			case "insertNewSale":
 				client.sendToClient(SaleQuery.insertNewSale(conn, clientMsg[1], clientMsg[2]));
 				break;
-			case "insertItemInSale":
+			case "insertApInSale":
 				//[1]: serial
 				//[2]: idSale
-				client.sendToClient(SaleQuery.insertItemInSale(conn, clientMsg[1], clientMsg[2]));
-				break;
-			case "insertProductsInSaleToDB":
-				client.sendToClient(SaleQuery.insertProductsInSaleToDB(conn, clientMsg[1], clientMsg[2]));
+				client.sendToClient(SaleQuery.insertApInSale(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
 				break;
 			case "Reminded":
 				client.sendToClient(ComplaintQuery.reminded(conn, Integer.parseInt(clientMsg[1])));
@@ -305,11 +302,11 @@ public class EchoServer extends AbstractServer {
 			case "updateSaleStatus":
 				client.sendToClient(SaleQuery.updateSaleStatus(conn, clientMsg[1], clientMsg[2]));
 				break;
-			case "nullifyIdSaleOfItemsWithCurrentIdSale":
-				client.sendToClient(SaleQuery.nullifyIdSaleOfItemsWithCurrentIdSale(conn, clientMsg[1]));
+			case "nullifyIdSaleOfApWithCurrentIdSale":
+				client.sendToClient(SaleQuery.nullifyIdSaleOfApWithCurrentIdSale(conn, clientMsg[1], clientMsg[2]));
 				break;
-			case "changeItemIdSale":
-				client.sendToClient(SaleQuery.changeItemIdSale(conn, clientMsg[1], clientMsg[2]));
+			case "changeApIdSale":
+				client.sendToClient(SaleQuery.changeApIdSale(conn, clientMsg[1], clientMsg[2], clientMsg[3]));
 				break;
 			case "updateSale":
 				client.sendToClient(SaleQuery.updateSale(conn, clientMsg[1], clientMsg[2], clientMsg[3]));

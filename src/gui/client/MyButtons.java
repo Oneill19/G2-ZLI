@@ -236,6 +236,7 @@ public class MyButtons extends Button {
 							Alert alert = new Alert(AlertType.CONFIRMATION);
 							alert.setTitle("Sale is Not Active");
 							alert.setHeaderText("Sale #"+sale.getIdSale()+" is already Not Active.");
+							alert.showAndWait();
 							return;
 						}
 							
@@ -249,9 +250,16 @@ public class MyButtons extends Button {
 							return;
 						}
 						
-						//change idSale of items and products that are currently with this sale
+						//change idSale of items that are currently with this sale
 						try {
-							ClientUI.chat.accept("nullifyIdSaleOfItemsWithCurrentIdSale\t"+Integer.toString(sale.getIdSale()));
+							ClientUI.chat.accept("nullifyIdSaleOfApWithCurrentIdSale\t"+Integer.toString(sale.getIdSale())+"\t"+"item");
+						}catch(Exception e) {
+							e.printStackTrace();
+						}
+						
+						//change idSale of products that are currently with this sale
+						try {
+							ClientUI.chat.accept("nullifyIdSaleOfApWithCurrentIdSale\t"+Integer.toString(sale.getIdSale())+"\t"+"product");
 						}catch(Exception e) {
 							e.printStackTrace();
 						}
