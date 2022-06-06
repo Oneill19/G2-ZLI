@@ -10,7 +10,6 @@ public class Item extends AbstractProduct {
 	private boolean isSoldAlone;
 	private int amountInProduct;
 	private String color;
-	private String priceRange;
 
 	/**
 	 * @param serialNumber
@@ -32,7 +31,7 @@ public class Item extends AbstractProduct {
 			String color
 			) 
 	{
-		super(serialNumber, name, price, image, true, type, sale, color);
+		super(serialNumber, name, price, image, type, sale, color);
 		this.isSoldAlone = isSoldAlone;
 		this.amountInProduct = amountInProduct;
 		this.color = color;
@@ -42,6 +41,29 @@ public class Item extends AbstractProduct {
 		super(item);
 		this.isSoldAlone = item.isSoldAlone;
 		this.amountInProduct = item.amountInProduct;
+	}
+	
+	
+
+	/**
+	 * newest Item constructor after adding sale to project
+	 * @param serialNumber
+	 * @param name
+	 * @param price
+	 * @param imagePath
+	 * @param type
+	 * @param idSale
+	 * @param discountAmount
+	 * @param isSoldAlone
+	 * @param amountInProduct
+	 * @param color
+	 */
+	public Item(String serialNumber, String name, double price, String imagePath, String type, int idSale
+			, boolean isSoldAlone, int amountInProduct, String color) {
+		super(serialNumber, name, price, imagePath, type, idSale);
+		this.isSoldAlone = isSoldAlone;
+		this.amountInProduct = amountInProduct;
+		this.color = color;
 	}
 
 	/**
@@ -78,14 +100,6 @@ public class Item extends AbstractProduct {
 
 	public void setColor(String color) {
 		this.color = color;
-	}
-
-	public String getPriceRange() {
-		return priceRange;
-	}
-
-	public void setPriceRange(String priceRange) {
-		this.priceRange = priceRange;
 	}
 
 	@Override

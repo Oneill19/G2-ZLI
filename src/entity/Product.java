@@ -28,7 +28,7 @@ public class Product extends AbstractProduct {
 
 	public Product(String serialNumber, String name, double price, String type, String image, String other,
 			ArrayList<Item> madeFrom, int sale, String color) {
-		super(serialNumber, name, price, image, false, type, sale, color);
+		super(serialNumber, name, price, image, type, sale, color);
 		this.other = other;
 		this.madeFrom = madeFrom;
 	}

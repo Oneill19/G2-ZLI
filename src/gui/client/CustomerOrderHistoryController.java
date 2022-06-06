@@ -38,9 +38,16 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
+/**
+ * @author Dorin
+ *
+ */
 public class CustomerOrderHistoryController {
 
     @FXML private Button onBack, logoutBtn, userOptBtn, exit;
+    @FXML private Pane pane;
+    
+    //scroll pane FXMLs
     @FXML private ScrollPane itemScrollPane;
     @FXML private GridPane grid;
     @FXML private Tooltip tableToolTip;
@@ -50,12 +57,11 @@ public class CustomerOrderHistoryController {
     @FXML private HBox deliveryHbox;
     @FXML private VBox pickupVbox;
     
+    //tableview FXMLs
     @FXML private TableView<Order> ordersTable;
     @FXML private TableColumn<Order, Integer> colOrderNumber;
     @FXML private TableColumn<Order, Double> colPrice;
-    @FXML private TableColumn<Order, String> colGreetingCard,colDeliveryMethod,colCancelOrder;
-    
-    @FXML private Pane pane;
+    @FXML private TableColumn<Order, String> colGreetingCard,colDeliveryMethod,colCancelOrder;    
 
     private ArrayList<Order> userOrdersDataFromDB = new ArrayList<Order>();
     private ArrayList<AbstractProduct> orderHistoryAll = new ArrayList<AbstractProduct>();

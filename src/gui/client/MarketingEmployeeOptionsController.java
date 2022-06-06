@@ -2,17 +2,18 @@ package gui.client;
 
 import java.io.IOException;
 
+import client.ClientUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+/**
+ * @author Dorin
+ *
+ */
 public class MarketingEmployeeOptionsController {
 
-    @FXML private Button onBack, logoutBtn, userOptBtn, exit, addSaleButton, watchSaleButton;
-    
-    @FXML private Button createProduct;
-
-    @FXML private Button editProduct;
+    @FXML private Button onBack, logoutBtn, userOptBtn, exit, addSaleButton, watchSaleButton, createProduct, editProduct;
     
     private CommonController cc = new CommonController();
 
@@ -58,5 +59,17 @@ public class MarketingEmployeeOptionsController {
     void onAddSaleButton(ActionEvent event) throws IOException {
     	cc.changeFXML(event, "AddSale.fxml", "Zer-li Add Sale");
     }
+    
+    /**
+     * initials ChatClient.saleArray field with sales from DB
+     * @param event
+     * @throws IOException
+     */
+    @FXML
+    void onWatchSales(ActionEvent event) throws IOException {
+    	ClientUI.chat.accept("selectAllSales");
+    	cc.changeFXML(event, "WatchSales.fxml", "Zer-li Watch Sales");
+    }
+    
 
 }

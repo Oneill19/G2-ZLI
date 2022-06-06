@@ -117,7 +117,7 @@ CREATE TABLE `item` (
   `itemType` varchar(45) NOT NULL,
   `itemImage` varchar(100) DEFAULT NULL,
   `isSoldAlone` tinyint NOT NULL,
-  `idSale` int DEFAULT NULL,
+  `idSale` int DEFAULT '0',
   `Color` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`itemSerial`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -209,7 +209,7 @@ CREATE TABLE `item_in_sale` (
 
 LOCK TABLES `item_in_sale` WRITE;
 /*!40000 ALTER TABLE `item_in_sale` DISABLE KEYS */;
-INSERT INTO `item_in_sale` VALUES ('36',3),('37',4),('38',4),('39',2),('40',2),('43',1),('44',1);
+INSERT INTO `item_in_sale` VALUES ('1',1),('1',4),('2',1),('2',2),('2',4),('3',2),('3',5),('4',1);
 /*!40000 ALTER TABLE `item_in_sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -356,7 +356,7 @@ CREATE TABLE `product_in_sale` (
 
 LOCK TABLES `product_in_sale` WRITE;
 /*!40000 ALTER TABLE `product_in_sale` DISABLE KEYS */;
-INSERT INTO `product_in_sale` VALUES ('41',3),('43',1),('44',1);
+INSERT INTO `product_in_sale` VALUES ('1',0),('1',1),('1',3),('2',1),('3',0);
 /*!40000 ALTER TABLE `product_in_sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -401,10 +401,11 @@ DROP TABLE IF EXISTS `sale`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sale` (
   `idSale` int NOT NULL AUTO_INCREMENT,
-  `saleName` varchar(45) NOT NULL,
+  `saleName` varchar(45) DEFAULT 'sale',
   `discountAmount` int NOT NULL,
+  `status` varchar(45) NOT NULL DEFAULT 'ACTIVE' COMMENT 'ACTIVE\\nNOT ACTIVE',
   PRIMARY KEY (`idSale`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -413,7 +414,7 @@ CREATE TABLE `sale` (
 
 LOCK TABLES `sale` WRITE;
 /*!40000 ALTER TABLE `sale` DISABLE KEYS */;
-INSERT INTO `sale` VALUES (0,'no sale',0),(1,'firstSale',20),(2,'blueProducts',40),(25,'',50),(26,'',1),(27,'',1),(28,'',1),(29,'',1),(30,'',1),(31,'',1),(32,'',5),(33,'',1),(34,'',1),(35,'',5),(36,'',5),(37,'',5),(38,'',5),(39,'',5),(40,'',5),(41,'',5),(42,'',5),(43,'',20),(44,'',50);
+INSERT INTO `sale` VALUES (0,'no sale',0,'ACTIVE'),(1,'firstSale',20,'ACTIVE'),(2,'blueProducts',40,'ACTIVE'),(25,'',50,'ACTIVE'),(26,'',1,'ACTIVE'),(27,'',1,'ACTIVE'),(28,'',1,'ACTIVE'),(29,'',1,'ACTIVE'),(30,'',1,'ACTIVE'),(31,'',1,'ACTIVE'),(32,'',5,'ACTIVE'),(33,'',1,'ACTIVE'),(34,'',1,'ACTIVE'),(35,'',5,'ACTIVE'),(36,'',5,'ACTIVE');
 /*!40000 ALTER TABLE `sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -649,4 +650,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-05 20:59:34
+-- Dump completed on 2022-06-06  3:12:42

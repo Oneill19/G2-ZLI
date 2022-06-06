@@ -17,7 +17,6 @@ public abstract class AbstractProduct implements Serializable {
 	private double price;
 	private String imagePath;
 	private String type;	//for Item - single roses etc, for Product - for wedding etc
-	private boolean isItem; // new
 	private ImageView imageView;
 	private int sale;
 	private double priceWithSale;
@@ -36,13 +35,12 @@ public abstract class AbstractProduct implements Serializable {
 	 * @param isItem       -true for Item, false for Product
 	 * @param color
 	 */
-	public AbstractProduct(String serialNumber, String name, double price, String image, boolean isItem, String type, int sale, String color) {
+	public AbstractProduct(String serialNumber, String name, double price, String image, String type, int sale, String color) {
 		super();
 		this.serialNumber = serialNumber;
 		this.name = name;
 		this.price = price;
 		this.imagePath = image;
-		this.isItem = isItem;
 		this.type = type;
 		this.sale=sale;
 		priceWithSale=price-price*sale/100;
@@ -58,13 +56,37 @@ public abstract class AbstractProduct implements Serializable {
 		this.name = ap.getName();
 		this.price = ap.getPrice();
 		this.imagePath = ap.getImagePath();
-		this.isItem = ap.isItem;
 		this.type = ap.getType();
 		this.sale=ap.getSale();
 		this.priceWithSale = ap.getPriceWithSale();
 		this.color = ap.getColor();
 	}
 	
+	
+	
+
+	/**
+	 * for selecting item_in_sale
+	 * @param serialNumber
+	 * @param name
+	 * @param price
+	 * @param imagePath
+	 * @param type
+	 * @param isItem
+	 * @param idSale
+	 * @param amount
+	 * @param color
+	 */
+	public AbstractProduct(String serialNumber, String name, double price, String imagePath, String type
+			, int idSale) {
+		super();
+		this.serialNumber = serialNumber;
+		this.name = name;
+		this.price = price;
+		this.imagePath = imagePath;
+		this.type = type;
+		this.sale = idSale;
+	}
 
 	/**
 	 * @return the serialNumber
@@ -120,19 +142,6 @@ public abstract class AbstractProduct implements Serializable {
 	 */
 	public void setImagePath(String image) {
 		this.imagePath = image;
-	}
-
-	/**
-	 * GetItem()
-	 * 
-	 * @return boolean isItem
-	 */
-	public boolean isItem() {
-		return isItem;
-	}
-
-	public void setItem(boolean isItem) {
-		this.isItem = isItem;
 	}
 
 	public String getType() {
@@ -206,11 +215,10 @@ public abstract class AbstractProduct implements Serializable {
 		this.amount=amount;
 	}
 	
-	
-	
+		
 	@Override
 	public String toString() {
-		return "serialNumber: "+serialNumber+"\n" +"name: "+ name+"\nprice: " + price+"\ntype: "+ type+"\nisItem: " + isItem;
+		return "serialNumber: "+serialNumber+"\n" +"name: "+ name+"\nprice: " + price+"\ntype: "+ type+"\nisItem: ";
 	}
 
 }
