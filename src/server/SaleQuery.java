@@ -175,7 +175,10 @@ public class SaleQuery {
 					String color = rs.getString(14);
 					int amountInProduct=0;
 					
-					itemsInSaleArray.add(new Item(serialNumber, name, price, imagePath, type, idSale, isSoldAlone, amountInProduct, color));
+					int discountAmount = rs.getInt(3);
+					double priceWithSale = (price-(price*(discountAmount/100.0)));
+					
+					itemsInSaleArray.add(new Item(serialNumber, name, price, imagePath, type, idSale, isSoldAlone, amountInProduct,color, priceWithSale));
 			}
 			if(itemsInSaleArray.size()>0)
 				return new ReturnCommand("select_item_in_sale", itemsInSaleArray);
@@ -212,7 +215,11 @@ public class SaleQuery {
 					int idSale = rs.getInt(1);
 					String color = rs.getString(14);
 					
-					productInSaleArray.add(new Product(serialNumber, name, price, type, imagePath, other, madeFrom, idSale, color));
+
+					int discountAmount = rs.getInt(3);
+					double priceWithSale = (price-(price*(discountAmount/100.0)));
+					
+					productInSaleArray.add(new Product(serialNumber, name, price, type, imagePath, other, madeFrom, idSale, color,priceWithSale));
 			}
 			if(productInSaleArray.size()>0)
 				return new ReturnCommand("select_product_in_sale", productInSaleArray);

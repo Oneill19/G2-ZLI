@@ -35,6 +35,26 @@ public abstract class AbstractProduct implements Serializable {
 	 * @param isItem       -true for Item, false for Product
 	 * @param color
 	 */
+	public AbstractProduct(String serialNumber, String name, double price, String image, String type, int sale, double priceWithSale, String color) {
+		super();
+		this.serialNumber = serialNumber;
+		this.name = name;
+		this.price = price;
+		this.imagePath = image;
+		this.type = type;
+		this.sale=sale;
+		this.priceWithSale=priceWithSale;
+		this.color = color;
+	}
+	
+	/**
+	 * @param serialNumber - primary key of the product/item
+	 * @param name
+	 * @param price
+	 * @param image
+	 * @param isItem       -true for Item, false for Product
+	 * @param color
+	 */
 	public AbstractProduct(String serialNumber, String name, double price, String image, String type, int sale, String color) {
 		super();
 		this.serialNumber = serialNumber;
@@ -43,7 +63,7 @@ public abstract class AbstractProduct implements Serializable {
 		this.imagePath = image;
 		this.type = type;
 		this.sale=sale;
-		priceWithSale=price-price*sale/100;
+		priceWithSale=0.0;
 		this.color = color;
 	}
 

@@ -33,6 +33,13 @@ public class Product extends AbstractProduct {
 		this.madeFrom = madeFrom;
 	}
 	
+	public Product(String serialNumber, String name, double price, String type, String image, String other,
+			ArrayList<Item> madeFrom, int sale, String color, double priceWithSale) {
+		super(serialNumber, name, price, image, type, sale, priceWithSale, color );
+		this.other = other;
+		this.madeFrom = madeFrom;
+	}
+	
 	public Product(Product ap) {
 		super(ap);
 		this.other=  ap.getOther();

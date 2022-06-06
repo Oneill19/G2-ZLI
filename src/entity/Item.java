@@ -53,14 +53,12 @@ public class Item extends AbstractProduct {
 	 * @param imagePath
 	 * @param type
 	 * @param idSale
-	 * @param discountAmount
-	 * @param isSoldAlone
 	 * @param amountInProduct
 	 * @param color
 	 */
 	public Item(String serialNumber, String name, double price, String imagePath, String type, int idSale
-			, boolean isSoldAlone, int amountInProduct, String color) {
-		super(serialNumber, name, price, imagePath, type, idSale);
+			, boolean isSoldAlone, int amountInProduct, String color,double priceWithSale) {
+		super(serialNumber, name, price, imagePath, type, idSale,priceWithSale,color);
 		this.isSoldAlone = isSoldAlone;
 		this.amountInProduct = amountInProduct;
 		this.color = color;

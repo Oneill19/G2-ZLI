@@ -91,18 +91,21 @@ public class WatchSalesController {
     		ImageView image = new ImageView(new Image(getClass().getResourceAsStream(ap.getImagePath()),100,100,false,false));
     		VBox vbox1 = new VBox(name,image);
     		VBox vbox2=null;
-    		Text itemOrProduct=null, type=null,price=null, madeFrom=null;
+    		Text itemOrProduct=null, type=null,price=null, madeFrom=null, priceWithSale=null;
 //    		
     		type = new Text("Type: "+ap.getType());
     		price = new Text("Price: "+ Double.toString(ap.getPrice())+"$");
+    		priceWithSale = new Text("S A L E: "+Double.toString(ap.getPriceWithSale())+"$");
 //    		
     		name.autosize();
 	    	type.autosize();
 	    	price.autosize();
+	    	priceWithSale.autosize();
 //    		
     		name.setFont(Font.font(null,FontWeight.EXTRA_BOLD,FontPosture.REGULAR,20));
     		type.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
     		price.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
+    		priceWithSale.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
 //	    		
     		if (ap instanceof Product) {
     			itemOrProduct = new Text("A Premade Product");
@@ -110,11 +113,11 @@ public class WatchSalesController {
     			madeFrom = new Text("Made from the items:\n"+product.getMadeFrom().toString());
     			madeFrom.autosize();
     			madeFrom.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
-    			vbox2 = new VBox(itemOrProduct,type,price, madeFrom);
+    			vbox2 = new VBox(itemOrProduct,type,price,priceWithSale, madeFrom);
     		}
     		else {
     			itemOrProduct = new Text("An Item");
-    			vbox2 = new VBox(itemOrProduct, type, price);
+    			vbox2 = new VBox(itemOrProduct, type, price,priceWithSale);
     		}
 //
     		itemOrProduct.autosize();
