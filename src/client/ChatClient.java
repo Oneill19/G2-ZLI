@@ -251,8 +251,9 @@ public class ChatClient extends AbstractClient {
 			case "changeItemIdSale":
 				requestSucceed = (boolean)rc.getReturnValue();
 				break;
-			case "commandinsertItemInSale":
+			case "updateSale":
 				requestSucceed = (boolean)rc.getReturnValue();
+				break;
 			default:
 				//for debug - don't remove.
 				System.out.println("ChatClient didn't recognize command"+rc.getCommand());

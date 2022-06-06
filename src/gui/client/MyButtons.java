@@ -43,14 +43,12 @@ public class MyButtons extends Button {
 	 */
 	public Button createRegularButton() {
 		catalogButton = new Button("Catalog", new ImageView(new Image(getClass().getResourceAsStream("catalogIcon.png"), 37, 37, false, true)));
-
 		catalogButton.setStyle("-fx-background-color:#a297d5;" + 
 								"-fx-background-radius:50;" + 
 								"-fx-border-radius:50;" + 
 								"-fx-padding: 0 0 0 0;" + 
 								"-fx-border-color:#aeaeae;");
 		catalogButton.setPadding(new Insets(5, 0, 0, 5));
-
 		catalogButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent t) {
@@ -62,27 +60,8 @@ public class MyButtons extends Button {
 			}
 		});
 
-		catalogButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				catalogButton.setStyle("-fx-border-radius:20.0;" + 
-									"-fx-background-radius:50;" + 
-									"-fx-background-color: #EFE2FE;" + 
-									"-fx-padding: 0 0 0 0;" + 
-									"-fx-border-color:#aeaeae;");
-			}
-		});
-
-		catalogButton.setOnMouseExited(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				catalogButton.setStyle("-fx-background-color:#a297d5;" + 
-										"-fx-background-radius:50;" + 
-										"-fx-border-radius:50;" + 
-										"-fx-padding: 0 0 0 0;" + 
-										"-fx-border-color:#aeaeae;");
-			}
-		});
+		catalogButton.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(catalogButton));
+		catalogButton.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnExit(catalogButton));
 
 		return catalogButton;
 	}

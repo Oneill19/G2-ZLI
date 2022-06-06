@@ -22,6 +22,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * Class controls the ability of Marketing Employee to add a sale to the application.
+ * this class handles all the necessary situations for making changes to 
+ * the tables: item_in_sale, product_in_sale, item, product, sale
+ * in order for the information to be concurrent and reliable.
+ * @author Dorin
+ *
+ */
 public class AddSaleController {
 
 	private CommonController cc = new CommonController();
@@ -44,18 +52,10 @@ public class AddSaleController {
 	void onLogout(ActionEvent event) throws Exception {
 		cc.onLogout(event);
 	}
-
-    @FXML
-    void onNext(ActionEvent event) {
-
-    }
     
     
     /**
-	 * 
 	 * causes TextField to change its' border to transparent when gets focus
-	 * @author Dorin
-	 *
 	 */
 	private class myListener implements ChangeListener<Boolean>{
 		TextField tf;

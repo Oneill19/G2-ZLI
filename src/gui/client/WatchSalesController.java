@@ -21,6 +21,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,6 +36,7 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 /**
+ * Class allows the Marketing Employee entity to view and edit Sales.
  * @author Dorin
  *
  */
@@ -44,12 +46,13 @@ public class WatchSalesController {
     @FXML private Pane pane;
     @FXML private ScrollPane itemScrollPane;
     @FXML private GridPane grid;
-    @FXML private Button onBack, logoutBtn, userOptBtn, exit;
+    @FXML private Button onBack, logoutBtn, userOptBtn, exit, saveBtn;
     @FXML private TableView<Sale> salesTable;
     @FXML private TableColumn<Sale, String> namecol,statusCol,actionCol;
     @FXML private TableColumn<Sale, Integer> discountCol, saleIdCol;
     @FXML private VBox pickupVbox;
     @FXML private Text textSaleNumber;
+    @FXML private TextField nameField, discountField;
 
     //controller fields
     private CommonController cc = new CommonController();
@@ -70,12 +73,34 @@ public class WatchSalesController {
 		cc.onLogout(event);
 	}
 	
+	@FXML
+	void onSaveBtn(ActionEvent event){
+		int saleID = Integer.parseInt(textSaleNumber.getText());
+		try {
+			ClientUI.chat.accept("updateSale\t"+saleID+"\t"+nameField.getText()+"\t"+discountField.getText());
+			if(!ChatClient.requestSucceed)
+				throw new Exception();
+		}catch(Exception e) {
+			System.out.println("problem in save button");
+			e.printStackTrace();
+		}
+	}
+	
+    /**
+     * @param sale			the sale which the current selected cell in the tableview is focused on.
+     * @return				true for success of queries.
+     * @throws IOException	
+     */
     private boolean setChosenSale(Sale sale) throws IOException {
     	grid.getChildren().clear();
     	allAbstractProducts_in_sale.clear();
     	
+    	//update text fields with info
+    	nameField.setText(sale.getSaleName());
+    	discountField.setText(Integer.toString(sale.getDiscountAmount()));
+    	
 //    	set the selected sale
-    	textSaleNumber.setText("Sale #"+ Integer.toString(sale.getIdSale()));
+    	textSaleNumber.setText(Integer.toString(sale.getIdSale()));
 //    	
 //    	//get items and products of selected sale
     	ClientUI.chat.accept("select_item_in_sale\t"+sale.getIdSale());
@@ -173,6 +198,7 @@ public class WatchSalesController {
 	
 	private void initTable() {
 		
+		//Add listener for changes on the selected item of the table.
 		salesTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Sale>() {
 			@Override
 			public void changed(ObservableValue<? extends Sale> observable, Sale oldValue, Sale newValue ) {
@@ -184,26 +210,22 @@ public class WatchSalesController {
 		namecol.setCellValueFactory(new PropertyValueFactory<>("saleName"));
 		discountCol.setCellValueFactory(new PropertyValueFactory<>("discountAmount"));
 		statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-		//TODO add action to sale tableview
-		// Sets colDelete behavior
 		actionCol.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<Sale, String>, ObservableValue<String>>() {
-
-					@Override
-					public ObservableValue<String> call(TableColumn.CellDataFeatures<Sale, String> p) {
-						return new SimpleStringProperty(p.getValue() != null, null);
-					}
-				});
+			new Callback<TableColumn.CellDataFeatures<Sale, String>, ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(TableColumn.CellDataFeatures<Sale, String> p) {
+					return new SimpleStringProperty(p.getValue() != null, null);
+				}
+			});
 
 		// Adding the Button to the cell
 		actionCol.setCellFactory(
-				new Callback<TableColumn<Sale, String>, TableCell<Sale, String>>() {
-
-					@Override
-					public TableCell<Sale, String> call(TableColumn<Sale, String> p) {
-						return new MyButtons().createDeleteButtonForSale("Delete Sale");
-					}
-				});
+			new Callback<TableColumn<Sale, String>, TableCell<Sale, String>>() {
+				@Override
+				public TableCell<Sale, String> call(TableColumn<Sale, String> p) {
+					return new MyButtons().createDeleteButtonForSale("Delete Sale");
+				}
+			});
 		
 		salesTable.setId("my-table");
 		salesTable.getItems().clear();
@@ -212,6 +234,11 @@ public class WatchSalesController {
 	
 	public void initialize() {
 		userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
+		saveBtn.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(saveBtn));
+		saveBtn.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnExit(saveBtn));
+		onBack.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(onBack));
+		onBack.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(onBack));
+		
 		initTable();
 		try {
 			initScrollPane();

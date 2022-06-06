@@ -65,7 +65,7 @@ public class SaleQuery {
 		String insertQuery = "INSERT INTO item_in_sale(itemSerial, idSale)" + "VALUES (?,?);";;
 		String[] allItems = serial.split(" ");
 
-		System.out.println("idSale in SaleQuery: "+idSale); 
+//		System.out.println("idSale in SaleQuery: "+idSale); 
 				
 //		insert the new sale
 		for (String itemSerial : allItems) {
@@ -104,7 +104,7 @@ public class SaleQuery {
 	public static ReturnCommand insertProductsInSaleToDB(Connection con, String serial, String idSale) {
 		PreparedStatement ps;
 		String insertQuery;
-		String[] allProducts = serial.split("\t");
+		String[] allProducts = serial.split(" ");
 
 //		insert the new sale
 		for (String productSerial : allProducts) {
@@ -309,7 +309,7 @@ public class SaleQuery {
 				ps.setInt(1, Integer.parseInt(idSale));
 				ps.setString(2, s);
 				ps.executeUpdate();
-				System.out.println("change id sale: "+ps);
+//				System.out.println("change id sale: "+ps); //debug
 			}
 			return new ReturnCommand("changeItemIdSale",true);
 		} catch (SQLException e) {
@@ -317,5 +317,23 @@ public class SaleQuery {
 			return new ReturnCommand("changeItemIdSale",false);
 		}
 		
+	}
+	
+	
+	public static ReturnCommand updateSale(Connection conn, String idSale, String saleName, String discountAmount) {
+		String updateQuery = "UPDATE sale SET saleName=?, discountAmount=? WHERE idSale=?";
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement(updateQuery);
+				ps.setString(1, saleName);
+				ps.setInt(2, Integer.parseInt(discountAmount));
+				ps.setInt(3, Integer.parseInt(idSale));
+				ps.executeUpdate();
+				System.out.println("update sale: "+ps);
+			return new ReturnCommand("changeItemIdSale",true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ReturnCommand("changeItemIdSale",false);
+		}
 	}
 }
