@@ -1,5 +1,7 @@
 package server;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +18,12 @@ import entity.SurveyReport;
  *
  */
 public class SurveyQuery {
+	/**
+	 * get all the surveys from the data base
+	 * 
+	 * @param con
+	 * @return array of surveys
+	 */
 	public static ReturnCommand getAllSurveys(Connection con) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.survey";
@@ -45,6 +53,13 @@ public class SurveyQuery {
 		}
 	}
 	
+	/**
+	 * get survey by id
+	 * 
+	 * @param con
+	 * @param surveyId
+	 * @return Survey
+	 */
 	public static ReturnCommand getSurveyById(Connection con, int surveyId) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.survey WHERE SurveyID=" + surveyId + ";";
@@ -72,6 +87,12 @@ public class SurveyQuery {
 		}
 	}
 	
+	/**
+	 * get surveys with report
+	 * 
+	 * @param con
+	 * @return array of surveys
+	 */
 	public static ReturnCommand getSurveysWithReports(Connection con) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.survey WHERE zli.survey.SurveyID IN (SELECT SurveyID FROM zli.survey_reports);";
@@ -100,6 +121,13 @@ public class SurveyQuery {
 		}
 	}
 	
+	/**
+	 * get a survey report
+	 * 
+	 * @param con
+	 * @param surveyId
+	 * @return SurveyReport
+	 */
 	public static ReturnCommand getSurveyReport(Connection con, int surveyId) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.survey_reports WHERE SurveyID=" + surveyId + ";";
@@ -122,6 +150,13 @@ public class SurveyQuery {
 		}
 	}
 	
+	/**
+	 * get all the answers of a survey
+	 * 
+	 * @param con
+	 * @param surveyId
+	 * @return survey answers matrix
+	 */
 	public static ReturnCommand getSurveyAnswers(Connection con, int surveyId) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.survey_answers WHERE SurveyID=" + surveyId + ";";
@@ -146,6 +181,20 @@ public class SurveyQuery {
 		}
 	}
 	
+	/**
+	 * add survey answers to the data base
+	 * 
+	 * @param con
+	 * @param surveyId
+	 * @param userMail
+	 * @param answer1
+	 * @param answer2
+	 * @param answer3
+	 * @param answer4
+	 * @param answer5
+	 * @param answer6
+	 * @return true if success
+	 */
 	public static ReturnCommand addSurveyAnswer(Connection con, int surveyId, String userMail, int answer1, int answer2, int answer3, int answer4, int answer5, int answer6) {
 		PreparedStatement ps;
 		String sqlQuery = "INSERT INTO zli.survey_answers (SurveyID, UserEmail, Answer1, Answer2, Answer3, Answer4, Answer5, Answer6) VALUES (?,?,?,?,?,?,?,?);";
@@ -163,8 +212,74 @@ public class SurveyQuery {
 			ps.close();
 			return new ReturnCommand("AddSurveyAnswer", true);
 		} catch (Exception e) {
-//			e.printStackTrace();
+			e.printStackTrace();
 			return null;
 		}
 	}
+	
+	/**
+	 * get all the surveys with no report
+	 * 
+	 * @param con
+	 * @return array of surveys
+	 */
+	public static ReturnCommand getSurveysWithNoReport(Connection con) {
+		Statement stmt;
+		String sqlQuery = "SELECT * FROM zli.survey WHERE zli.survey.SurveyID NOT IN (SELECT SurveyID FROM zli.survey_reports);";
+		ArrayList<Survey> surveys = new ArrayList<>();
+		ResultSet rs = null;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sqlQuery);
+			while (rs.next()) {
+				int surveyId = rs.getInt(1);
+				String surveyName = rs.getString(2);
+				String[] questions = new String[6];
+				questions[0] = rs.getString(3);
+				questions[1] = rs.getString(4);
+				questions[2] = rs.getString(5);
+				questions[3] = rs.getString(6);
+				questions[4] = rs.getString(7);
+				questions[5] = rs.getString(8);
+				surveys.add(new Survey(surveyId, surveyName, questions));
+			}
+			return new ReturnCommand("GetSurveysWithNoReport", surveys);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	/**
+	 * add new survey report to the data base
+	 * 
+	 * @param con
+	 * @param surveyId
+	 * @param fileName
+	 * @param uploadDate
+	 * @param filePath
+	 * @return true if success
+	 */
+	public static ReturnCommand addNewSurveyReport(Connection con, String surveyId, String fileName, String uploadDate, String filePath) {
+		PreparedStatement ps;
+		String sqlQuery = "INSERT INTO zli.survey_reports(SurveyID,FileName,DateUploaded,PDFFile) VALUES (?,?,?,?)";
+		try {
+			ps = con.prepareStatement(sqlQuery);
+			ps.setInt(1, Integer.parseInt(surveyId));
+			ps.setString(2, fileName);
+			ps.setString(3, uploadDate);
+			File pdfFile = new File(filePath);
+			FileInputStream fis = new FileInputStream(pdfFile);
+			ps.setBinaryStream(4, fis, pdfFile.length());
+			ps.executeUpdate();
+			return new ReturnCommand("AddNewSurveyReport", true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ReturnCommand("AddNewSurveyReport", false);
+		}
+	}
+	
+	
 }

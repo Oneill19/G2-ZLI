@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" style="-fx-background-color: #FCFCFE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.CreateCustomProductController">
+   <children>
+      <ImageView fitHeight="104.0" fitWidth="200.0" layoutX="450.0" layoutY="3.0">
+         <image>
+            <Image url="@Zli_logo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="exitBtn" alignment="CENTER" layoutX="1017.0" layoutY="16.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+      <Button fx:id="userOptBtn" layoutX="77.0" layoutY="22.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Hello Name" textFill="#2b0548">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="logoutBtn" layoutX="16.0" layoutY="21.0" mnemonicParsing="false" onAction="#onLogout" style="-fx-background-color: transparent;" text="Logout | " textFill="#2b0548">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="backButton" alignment="CENTER" layoutX="137.0" layoutY="470.0" mnemonicParsing="false" onAction="#onBack" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
+      <Text fill="#2b0548" layoutX="63.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" textAlignment="CENTER" wrappingWidth="200.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="saveButton" alignment="CENTER" layoutX="137.0" layoutY="409.0" mnemonicParsing="false" onAction="#onSave" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: Green; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Save" textFill="#fcfcfe" />
+      <Text fill="#2b0548" layoutX="36.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price Range:" textAlignment="CENTER" wrappingWidth="200.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="#2b0548" layoutX="63.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color:" textAlignment="CENTER" wrappingWidth="200.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="productName" layoutX="226.0" layoutY="195.0" prefHeight="25.0" prefWidth="148.0" promptText="Product name" />
+      <TextField fx:id="productPrice1" layoutX="226.0" layoutY="244.0" prefHeight="25.0" prefWidth="50.0" />
+      <ComboBox fx:id="colorComboBox" layoutX="226.0" layoutY="296.0" prefHeight="25.0" prefWidth="148.0" promptText="Select color" />
+      <TableView fx:id="itemTable" layoutX="397.0" layoutY="126.0" prefHeight="451.0" prefWidth="620.0" style="-fx-background-color: #FCFCFE; -fx-border-color: #2b0548;">
+         <columns>
+            <TableColumn fx:id="imageCol" prefWidth="115.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black;" text="Image" />
+            <TableColumn fx:id="serialCol" prefWidth="87.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-alignment: CENTER-LEFT;" text="Item Serial" />
+            <TableColumn fx:id="nameCol" prefWidth="193.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-alignment: CENTER-LEFT;" text="Name" />
+            <TableColumn fx:id="amountCol" prefWidth="81.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-alignment: CENTER-LEFT;" text="Amount" />
+            <TableColumn fx:id="priceCol" prefWidth="140.0" style="-fx-background-color: #FCFCFE; -fx-text-fill: black; -fx-alignment: CENTER-LEFT;" text="Price" />
+         </columns>
+      </TableView>
+      <Button fx:id="deleteOne" alignment="CENTER" layoutX="494.0" layoutY="586.0" mnemonicParsing="false" onAction="#onDeleteOne" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: red; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Delete One" textFill="#fcfcfe" />
+      <Label fx:id="messageLabel" alignment="CENTER" layoutX="105.0" layoutY="356.0" prefHeight="17.0" prefWidth="243.0" textFill="#00ff59">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="addOne" alignment="CENTER" layoutX="705.0" layoutY="586.0" mnemonicParsing="false" onAction="#onAddOne" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: Green; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Add One" textFill="#fcfcfe" />
+      <TextField fx:id="productPrice2" layoutX="323.0" layoutY="244.0" prefHeight="25.0" prefWidth="50.0" />
+      <Text fill="#2b0548" layoutX="275.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To" textAlignment="CENTER" wrappingWidth="50.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>

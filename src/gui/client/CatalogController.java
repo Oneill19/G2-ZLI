@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import client.ChatClient;
+import common.ButtonEventHandlerStyle;
 import entity.AbstractProduct;
 import entity.Item;
 import entity.Product;
@@ -27,6 +28,12 @@ import javafx.scene.text.Text;
  */
 public class CatalogController {
 
+	@FXML
+    private Label messageLabel;
+	
+	@FXML
+    private Button addCustomButton;
+	
     @FXML
     private Button addToCartBtn;
 
@@ -90,6 +97,8 @@ public class CatalogController {
     	else {
     		ChatClient.customerCart.put(selectedProduct, 1);
     	}
+    	
+    	messageLabel.setText(selectedProduct.getName() + " added!");
 //    	System.out.println("Cart size:" + ChatClient.customerCart.size());
 //    	System.out.println("Value: " + selectedProduct.getName() + ChatClient.customerCart.get(selectedProduct));
     }
@@ -134,7 +143,9 @@ public class CatalogController {
      */
     @FXML
     void onUserOptions(ActionEvent event) throws Exception {
-    	cc.changeFXML(event, "ApprvoedCustomerOptions.fxml", "Zer-Li");
+    	if (ChatClient.user.getStatus().equals("CONFIRMED")) {
+    		cc.changeFXML(event, "ApprvoedCustomerOptions.fxml", "Zer-Li");
+    	}
     }
     
     /**
@@ -163,6 +174,17 @@ public class CatalogController {
     		description += "Sold Alone Beautiful " + product.getName();
     		productDescription.setText(description);
     	}
+    }
+    
+    /**
+     * go to add custom product screen
+     * 
+     * @param event
+     * @throws Exception
+     */
+    @FXML
+    void onAddCustom(ActionEvent event) throws Exception {
+    	cc.changeFXML(event, "CreateCustomProduct.fxml", "Zer-Li Add Custom Product");
     }
     
     /**
@@ -237,6 +259,10 @@ public class CatalogController {
     		grid.setHgap(10);
     		grid.setVgap(10);
     	}
+    	
+//    	// init buttons style
+//    	exitBtn.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
+//		exitBtn.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
     }
     
     private int getCartSize() {
@@ -246,6 +272,5 @@ public class CatalogController {
     	}
     	return counter;
     }
-
 }
 
