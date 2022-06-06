@@ -116,6 +116,13 @@ public class ProductsQuery {
 		}
 	}
 
+	/**
+	 * get item object to edit
+	 * 
+	 * @param con
+	 * @param productSerial
+	 * @return Item
+	 */
 	public static ReturnCommand getItemsForEdit(Connection con, String productSerial) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.item;";
@@ -149,10 +156,12 @@ public class ProductsQuery {
 	}
 
 	/**
+	 * get amount of item in certain product
+	 * 
 	 * @param con
 	 * @param productSerial
 	 * @param itemSerial
-	 * @return ReturnCommand object with the amount of item in certein product
+	 * @return ReturnCommand object with the amount of item in certain product
 	 */
 	public static ReturnCommand getAmountInProduct(Connection con, String productSerial, String itemSerial) {
 		Statement stmt;
@@ -177,7 +186,7 @@ public class ProductsQuery {
 	 * get all the colors of products
 	 * 
 	 * @param con
-	 * @return
+	 * @return string array of colors
 	 */
 	public static ReturnCommand getAllColors(Connection con) {
 		Statement stmt;
@@ -197,6 +206,17 @@ public class ProductsQuery {
 		}
 	}
 
+	/**
+	 * insert a new product to the data base
+	 * 
+	 * @param con
+	 * @param name
+	 * @param price
+	 * @param type
+	 * @param color
+	 * @param items
+	 * @return true is success
+	 */
 	public static ReturnCommand createProduct(Connection con, String name, String price, String type, String color,
 			String items) {
 		PreparedStatement ps;
@@ -207,7 +227,7 @@ public class ProductsQuery {
 			ps.setString(1, productSerial + "");
 			ps.setString(2, name);
 			ps.setDouble(3, Double.parseDouble(price));
-			ps.setString(4, null);
+			ps.setString(4, "/common/Assets/flower.png");
 			ps.setString(5, null);
 			ps.setString(6, type);
 			ps.setString(7, color);
@@ -222,6 +242,14 @@ public class ProductsQuery {
 		}
 	}
 
+	/**
+	 * insert the items the product made from to the database
+	 * 
+	 * @param con
+	 * @param productSerial
+	 * @param items
+	 * @return true if success
+	 */
 	public static boolean insertItemOfProduct(Connection con, String productSerial, String items) {
 		PreparedStatement ps;
 		String sqlQuery = "INSERT INTO zli.item_in_product (productSerial,itemSerial,amount) VALUES (?,?,?)";
@@ -246,6 +274,16 @@ public class ProductsQuery {
 		}
 	}
 
+	/**
+	 * insert a new item to the data base 
+	 * 
+	 * @param con
+	 * @param name
+	 * @param price
+	 * @param type
+	 * @param color
+	 * @return true if success
+	 */
 	public static ReturnCommand createItem(Connection con, String name, String price, String type, String color) {
 		PreparedStatement ps;
 		int itemSerial = getItemNumber(con) + 1;
@@ -256,7 +294,7 @@ public class ProductsQuery {
 			ps.setString(2, name);
 			ps.setDouble(3, Double.parseDouble(price));
 			ps.setString(4, type);
-			ps.setString(5, null);
+			ps.setString(5, "/common/Assets/flower.png");
 			ps.setInt(6, 1);
 			ps.setString(7, color);
 			ps.executeUpdate();
@@ -267,6 +305,12 @@ public class ProductsQuery {
 		}
 	}
 
+	/**
+	 * get the number of items in the data base
+	 * 
+	 * @param con
+	 * @return int
+	 */
 	public static int getItemNumber(Connection con) {
 		Statement stmt;
 		String sqlQuery = "SELECT itemSerial FROM zli.item;";
@@ -285,6 +329,12 @@ public class ProductsQuery {
 		}
 	}
 
+	/**
+	 * get the number of products in the data base
+	 * 
+	 * @param con
+	 * @return int
+	 */
 	public static int getProductNumber(Connection con) {
 		Statement stmt;
 		String sqlQuery = "SELECT productSerial FROM zli.product;";
@@ -303,6 +353,18 @@ public class ProductsQuery {
 		}
 	}
 
+	/**
+	 * edit an existing product
+	 * 
+	 * @param con
+	 * @param serial
+	 * @param name
+	 * @param price
+	 * @param type
+	 * @param color
+	 * @param items
+	 * @return true if success
+	 */
 	public static ReturnCommand editProduct(Connection con, String serial, String name, String price, String type,
 			String color, String items) {
 		Statement stmt;
@@ -324,6 +386,17 @@ public class ProductsQuery {
 		}
 	}
 
+	/**
+	 * edit existing item
+	 * 
+	 * @param con
+	 * @param serial
+	 * @param name
+	 * @param price
+	 * @param type
+	 * @param color
+	 * @return true if success
+	 */
 	public static ReturnCommand editItem(Connection con, String serial, String name, String price, String type,
 			String color) {
 		Statement stmt;
@@ -340,6 +413,13 @@ public class ProductsQuery {
 		}
 	}
 
+	/**
+	 * delete all items that builds a product from zli.item_in_product
+	 * 
+	 * @param con
+	 * @param productSerial
+	 * @return true if success
+	 */
 	public static boolean deleteItemsOfProduct(Connection con, String productSerial) {
 		Statement stmt;
 		String sqlQuery = "DELETE FROM zli.item_in_product WHERE productSerial=" + productSerial + ";";
@@ -353,6 +433,14 @@ public class ProductsQuery {
 		}
 	}
 
+	/**
+	 * add all items that build a product to zli.item_in_product
+	 * 
+	 * @param con
+	 * @param productSerial
+	 * @param items
+	 * @return true if success
+	 */
 	public static boolean addItemsOfProduct(Connection con, String productSerial, String items) {
 		PreparedStatement ps;
 		String sqlQuery = "INSERT INTO zli.item_in_product (productSerial,itemSerial,amount) VALUES (?,?,?)";
@@ -374,6 +462,61 @@ public class ProductsQuery {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	/**
+	 * get number of custom products in the data base
+	 * 
+	 * @param con
+	 * @return true if success
+	 */
+	public static ReturnCommand getAmountOfCustomProduct(Connection con) {
+		Statement stmt;
+		String sqlQuery = "SELECT * FROM zli.custom_product;";
+		int counter = 0;
+		ResultSet rs = null;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sqlQuery);
+			while (rs.next()) {
+				counter++;
+			}
+			return new ReturnCommand("GetAmountOfCustomProduct", counter);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ReturnCommand("GetAmountOfCustomProduct", 0);
+		}
+	}
+	
+	/**
+	 * insert custom product to the data base
+	 * 
+	 * @param con
+	 * @param id
+	 * @param name
+	 * @param price
+	 * @param color
+	 * @param productLists
+	 * @param itemLists
+	 * @return true if success
+	 */
+	public static ReturnCommand addCustomProduct(Connection con, String id, String name, String price, String color, String productLists, String itemLists) {
+		PreparedStatement ps;
+		String sqlQuery = "INSERT INTO zli.custom_product (customProducSerial,customProductName,priceRange,color,productList,itemList,idSale) VALUES (?,?,?,?,?,?,0);";
+		try {
+			ps = con.prepareStatement(sqlQuery);
+			ps.setString(1, id);
+			ps.setString(2, name);
+			ps.setString(3, price);
+			ps.setString(4, color);
+			ps.setString(5, productLists);
+			ps.setString(6, itemLists);
+			ps.executeUpdate();
+			return new ReturnCommand("AddCustomProduct", true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ReturnCommand("AddCustomProduct", false);
 		}
 	}
 }

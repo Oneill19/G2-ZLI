@@ -317,6 +317,12 @@ public class EchoServer extends AbstractServer {
 			case "changeItemIdSale":
 				client.sendToClient(SaleQuery.changeItemIdSale(conn, clientMsg[1], clientMsg[2]));
 				break;
+			case "GetAmountOfCustomProduct":
+				client.sendToClient(ProductsQuery.getAmountOfCustomProduct(conn));
+				break;
+			case "AddCustomProduct":
+				client.sendToClient(ProductsQuery.addCustomProduct(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4], clientMsg[5], clientMsg[6]));
+				break;
 			default:
 				System.out.println("No Command Found" + clientMsg[0]);
 				break;

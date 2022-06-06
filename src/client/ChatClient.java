@@ -58,6 +58,7 @@ public class ChatClient extends AbstractClient {
 	public static ComplaintReport selectedComplaintReport = null;
 	public static String reportTxt;
 	public static User user = null;
+	public static int customProductCounter = 0;
 	
 	
 	public static SurveyReport selectedSurveyReport = null;
@@ -260,6 +261,13 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "commandinsertItemInSale":
 				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "AddCustomProduct":
+				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "GetAmountOfCustomProduct":
+				customProductCounter = (int)rc.getReturnValue();
+				break;
 			default:
 				//for debug - don't remove.
 				System.out.println("ChatClient didn't recognize command"+rc.getCommand());

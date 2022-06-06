@@ -18,6 +18,12 @@ import entity.SurveyReport;
  *
  */
 public class SurveyQuery {
+	/**
+	 * get all the surveys from the data base
+	 * 
+	 * @param con
+	 * @return array of surveys
+	 */
 	public static ReturnCommand getAllSurveys(Connection con) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.survey";
@@ -47,6 +53,13 @@ public class SurveyQuery {
 		}
 	}
 	
+	/**
+	 * get survey by id
+	 * 
+	 * @param con
+	 * @param surveyId
+	 * @return Survey
+	 */
 	public static ReturnCommand getSurveyById(Connection con, int surveyId) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.survey WHERE SurveyID=" + surveyId + ";";
@@ -74,6 +87,12 @@ public class SurveyQuery {
 		}
 	}
 	
+	/**
+	 * get surveys with report
+	 * 
+	 * @param con
+	 * @return array of surveys
+	 */
 	public static ReturnCommand getSurveysWithReports(Connection con) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.survey WHERE zli.survey.SurveyID IN (SELECT SurveyID FROM zli.survey_reports);";
@@ -102,6 +121,13 @@ public class SurveyQuery {
 		}
 	}
 	
+	/**
+	 * get a survey report
+	 * 
+	 * @param con
+	 * @param surveyId
+	 * @return SurveyReport
+	 */
 	public static ReturnCommand getSurveyReport(Connection con, int surveyId) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.survey_reports WHERE SurveyID=" + surveyId + ";";
@@ -124,6 +150,13 @@ public class SurveyQuery {
 		}
 	}
 	
+	/**
+	 * get all the answers of a survey
+	 * 
+	 * @param con
+	 * @param surveyId
+	 * @return survey answers matrix
+	 */
 	public static ReturnCommand getSurveyAnswers(Connection con, int surveyId) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.survey_answers WHERE SurveyID=" + surveyId + ";";
@@ -148,6 +181,20 @@ public class SurveyQuery {
 		}
 	}
 	
+	/**
+	 * add survey answers to the data base
+	 * 
+	 * @param con
+	 * @param surveyId
+	 * @param userMail
+	 * @param answer1
+	 * @param answer2
+	 * @param answer3
+	 * @param answer4
+	 * @param answer5
+	 * @param answer6
+	 * @return true if success
+	 */
 	public static ReturnCommand addSurveyAnswer(Connection con, int surveyId, String userMail, int answer1, int answer2, int answer3, int answer4, int answer5, int answer6) {
 		PreparedStatement ps;
 		String sqlQuery = "INSERT INTO zli.survey_answers (SurveyID, UserEmail, Answer1, Answer2, Answer3, Answer4, Answer5, Answer6) VALUES (?,?,?,?,?,?,?,?);";
@@ -170,6 +217,12 @@ public class SurveyQuery {
 		}
 	}
 	
+	/**
+	 * get all the surveys with no report
+	 * 
+	 * @param con
+	 * @return array of surveys
+	 */
 	public static ReturnCommand getSurveysWithNoReport(Connection con) {
 		Statement stmt;
 		String sqlQuery = "SELECT * FROM zli.survey WHERE zli.survey.SurveyID NOT IN (SELECT SurveyID FROM zli.survey_reports);";
@@ -199,6 +252,16 @@ public class SurveyQuery {
 	}
 	
 	
+	/**
+	 * add new survey report to the data base
+	 * 
+	 * @param con
+	 * @param surveyId
+	 * @param fileName
+	 * @param uploadDate
+	 * @param filePath
+	 * @return true if success
+	 */
 	public static ReturnCommand addNewSurveyReport(Connection con, String surveyId, String fileName, String uploadDate, String filePath) {
 		PreparedStatement ps;
 		String sqlQuery = "INSERT INTO zli.survey_reports(SurveyID,FileName,DateUploaded,PDFFile) VALUES (?,?,?,?)";

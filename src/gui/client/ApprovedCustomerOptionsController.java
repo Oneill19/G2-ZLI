@@ -2,6 +2,7 @@ package gui.client;
 
 import java.io.IOException;
 
+import client.ChatClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -47,5 +48,16 @@ public class ApprovedCustomerOptionsController {
 	private void onOrderNowButton(ActionEvent event) throws IOException {
 		cc.changeFXML(event, "Catalog.fxml", "Zer-Li Catalog");
 	}
+	
+	/**
+	 * initialize the screen
+	 * 
+	 * @throws Exception
+	 */
+	public void initialize() throws Exception {
+		// set the user name
+		userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
+	}
+
 
 }
