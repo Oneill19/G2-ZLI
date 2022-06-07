@@ -21,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -162,7 +163,7 @@ public class CatalogController {
     	// set the image, name, price and description of the selected product
     	productImg.setImage(new Image(getClass().getResourceAsStream(product.getImagePath()), 200, 200, false, false));
     	productName.setText(product.getName());
-    	productPrice.setText(product.getPrice() + "$");
+    	productPrice.setText(product.getPrice() + "NIS");
     	String description = "";
     	if (product instanceof Product) {
     		description += "Premade Product\n"
@@ -193,7 +194,7 @@ public class CatalogController {
     /**
      * initialize the screen
      */
-    public void initialize() {
+    public void initialize() throws Exception {
     	try {
 			ClientUI.chat.accept("getUserOrders\t"+ChatClient.user.getUserID());
 		} catch (IOException e) {
@@ -240,15 +241,28 @@ public class CatalogController {
     			setChosenProduct(product);
     		});
     		
+    		if (product.getSale() != 0) {
+    			ClientUI.chat.accept("GetDiscountAmount" + "\t" + product.getSale());
+    			if (ChatClient.discountAmount != 0) {
+    				double temp = product.getPrice() - product.getPrice() * ((double)ChatClient.discountAmount / 100);
+    				System.out.println(temp);
+    				product.setPriceWithSale(temp);
+    				priceLabel.setText("SALE!\n" + product.getPriceWithSale() + "NIS");
+    			}
+    			else {
+    				priceLabel.setTextFill(Color.BLACK);
+    			}
+    		}
+    		
     		// set styling
     		viewButton.setText("View");
     		box.setAlignment(Pos.CENTER);
     		box.setSpacing(10);
     		
     		nameLabel.setPrefWidth(170);
-    		priceLabel.setPrefWidth(50);
+    		priceLabel.setPrefWidth(60);
     		typeLabel.setPrefWidth(120);
-    		viewButton.setPrefWidth(120); 
+    		viewButton.setPrefWidth(110); 
     		
     		nameLabel.setStyle("-fx-font-size: 15px");
     		priceLabel.setStyle("-fx-font-size: 15px");

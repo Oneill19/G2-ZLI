@@ -169,8 +169,8 @@ public class LoginScreenController {
 			primaryStage.setTitle("Zer-li Marketing Employee");
 			break;
 		case "Delivery":
+			root = FXMLLoader.<Pane>load(getClass().getResource("DeliveryScreen.fxml"));
 			primaryStage.setTitle("Zer-li Delivery");
-			System.out.println("Delivery");
 			break;
 		}
 
