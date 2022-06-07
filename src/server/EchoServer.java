@@ -349,6 +349,16 @@ public class EchoServer extends AbstractServer {
 			case "UpdateBalance":
 				client.sendToClient(StoreManagerQuery.UpdateBalance(conn, Double.parseDouble(clientMsg[1]), Integer.parseInt(clientMsg[2])));
 				break;
+			case "GetAllConfirmedOfDelivery": 
+				client.sendToClient(DeliveryQuery.foundGetAllConfirmedOfDelivery(conn));
+				break;
+			case "ApproveDeliveryOfOrder":
+				client.sendToClient(DeliveryQuery.approveDeliveryOfOrder(conn, clientMsg[1], clientMsg[2]));
+				break;
+			case "FullRefundOf":
+				System.out.println(Double.parseDouble(clientMsg[2]));
+				client.sendToClient(DeliveryQuery.fullRefundOf(conn, clientMsg[1], Double.parseDouble(clientMsg[2])));
+				break;
 			default:
 				System.out.println("No Command Found" + clientMsg[0]);
 				break;

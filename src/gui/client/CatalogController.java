@@ -159,7 +159,7 @@ public class CatalogController {
     	// set the image, name, price and description of the selected product
     	productImg.setImage(new Image(getClass().getResourceAsStream(product.getImagePath()), 200, 200, false, false));
     	productName.setText(product.getName());
-    	productPrice.setText(product.getPrice() + "$");
+    	productPrice.setText(product.getPrice() + "NIS");
     	String description = "";
     	if (product instanceof Product) {
     		description += "Premade Product\n"
@@ -228,9 +228,9 @@ public class CatalogController {
     		box.setSpacing(10);
     		
     		nameLabel.setPrefWidth(170);
-    		priceLabel.setPrefWidth(50);
+    		priceLabel.setPrefWidth(60);
     		typeLabel.setPrefWidth(120);
-    		viewButton.setPrefWidth(120); 
+    		viewButton.setPrefWidth(110); 
     		
     		nameLabel.setStyle("-fx-font-size: 15px");
     		priceLabel.setStyle("-fx-font-size: 15px");

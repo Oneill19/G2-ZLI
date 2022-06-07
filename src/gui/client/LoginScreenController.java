@@ -165,7 +165,8 @@ public class LoginScreenController {
 			root = FXMLLoader.<Pane>load(getClass().getResource("MarketingEmployeOptions.fxml"));
 			break;
 		case "Delivery":
-			System.out.println("Delivery");
+//			System.out.println("Delivery");
+			root = FXMLLoader.<Pane>load(getClass().getResource("DeliveryScreen.fxml"));
 			break;
 		}
 

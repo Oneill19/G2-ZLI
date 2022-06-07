@@ -9,6 +9,7 @@ import common.ReturnCommand;
 import entity.AbstractProduct;
 import entity.Complaint;
 import entity.ComplaintReport;
+import entity.Customer;
 import entity.Item;
 import entity.Order;
 import entity.Product;
@@ -60,6 +61,9 @@ public class ChatClient extends AbstractClient {
 	public static String reportTxt;
 	public static User user = null;
 	public static int customProductCounter = 0;
+	
+	public static ArrayList<Order> confirmedOfDelivery = null;
+	public static Customer customerOfDelivery = null;
 	
 	public static ArrayList<User> workersStore;
 	public static double refundAmount;
@@ -272,7 +276,7 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "getOrderSupplyDateTime":
 				orderCreationDateTime = (String)rc.getReturnValue();
-        break;
+				break;
 			case "AddCustomProduct":
 				requestSucceed = (boolean)rc.getReturnValue();
 				break;
@@ -290,9 +294,15 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "UpdateBalance":
 				System.out.println("Blance Updated");
-          break;
+				break;
 			case "updateBalance":
 				requestSucceed = (boolean)rc.getReturnValue();
+				break;
+			case "GetAllConfirmedOfDelivery":
+				confirmedOfDelivery = (ArrayList<Order>)rc.getReturnValue();
+				break;
+			case "ApproveDeliveryOfOrder":
+				customerOfDelivery = (Customer)rc.getReturnValue();
 				break;
 			default:
 				//for debug - don't remove.
