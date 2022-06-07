@@ -32,17 +32,16 @@ public class CustomProduct extends AbstractProduct {
 	
 
 	/**
+	 *
 	 * @param serialNumber
 	 * @param name
 	 * @param price
-	 * @param image
-	 * @param type
-	 * @param idSale
-	 * @param priceWithSale
-	 * @param color
 	 * @param priceRange
+	 * @param color
 	 * @param productList
 	 * @param itemList
+	 * @param idSale
+	 * @param priceWithSale
 	 */
 	public CustomProduct(String serialNumber, 
 							String name,

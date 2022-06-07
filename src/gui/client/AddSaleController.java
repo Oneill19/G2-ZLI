@@ -171,8 +171,8 @@ public class AddSaleController {
 		String productInSale,itemInSale,customInSale, ret[];
 		int idSale;
 
-		//• only Integer inputs 
-		//• 100>integer>0
+		// only Integer inputs 
+		// 100>integer>0
 		if (!checkSaleAmountRestrictions()) return;
 
 		//get list of serial numbers to be added to sale

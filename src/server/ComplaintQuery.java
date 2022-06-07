@@ -21,9 +21,16 @@ public class ComplaintQuery {
 
 	/**
 	 * adding a new complaint to the database
-	 * 
+	 *
 	 * @param con
-	 * @param complaint
+	 * @param orderNumber
+	 * @param customerId
+	 * @param workerId
+	 * @param desc
+	 * @param date
+	 * @param time
+	 * @param status
+	 * @param isReminded
 	 * @return true if complaint added successfully
 	 */
 	public static ReturnCommand addComplaint(Connection con, String orderNumber, String customerId, String workerId, String desc, String date, String time, String status, String isReminded) {

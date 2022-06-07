@@ -52,5 +52,10 @@
             <Font size="17.0" />
          </font>
       </Text>
+      <Text fill="#31134a" layoutX="420.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Managment" textAlignment="CENTER" wrappingWidth="180.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

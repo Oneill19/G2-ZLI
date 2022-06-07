@@ -65,12 +65,11 @@ public class SaleQuery {
 	public static ReturnCommand insertApInSale(Connection con, String serial, String idSale, String table) {
 		PreparedStatement ps;
 		String insertQuery = null, updateQuery = null;
-		String columnName = table.equals("item_in_sale") ? "itemSerial" : "productSerial";
 
-		insertQuery = "INSERT INTO " + table + "_in_sale (" + columnName + ", idSale)" + "VALUES (?,?);";
+		insertQuery = "INSERT INTO " + table + "_in_sale (" + table + "Serial, idSale)" + "VALUES (?,?);";
 
 		String[] allAp = serial.split(" ");
-
+		System.out.println(table);
 //		insert the new sale
 		for (String apSerial : allAp) {
 			try {
@@ -87,7 +86,7 @@ public class SaleQuery {
 
 //		update the idSale of ap
 		for (String apSerial : allAp) {
-			updateQuery = "UPDATE item SET idSale = " + idSale + " WHERE " + columnName + " = '" + apSerial + "';";
+			updateQuery = "UPDATE item SET idSale = " + idSale + " WHERE " + table + "Serial = '" + apSerial + "';";
 			try {
 				ps = con.prepareStatement(updateQuery);
 			} catch (Exception e) {

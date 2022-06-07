@@ -12,6 +12,8 @@ public class Item extends AbstractProduct {
 	private String color;
 
 	/**
+	 * constructor
+	 * 
 	 * @param serialNumber
 	 * @param name
 	 * @param price
@@ -47,14 +49,17 @@ public class Item extends AbstractProduct {
 
 	/**
 	 * newest Item constructor after adding sale to project
+	 *
 	 * @param serialNumber
 	 * @param name
 	 * @param price
 	 * @param imagePath
 	 * @param type
 	 * @param idSale
+	 * @param isSoldAlone
 	 * @param amountInProduct
 	 * @param color
+	 * @param priceWithSale
 	 */
 	public Item(String serialNumber, String name, double price, String imagePath, String type, int idSale
 			, boolean isSoldAlone, int amountInProduct, String color,double priceWithSale) {

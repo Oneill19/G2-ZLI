@@ -68,8 +68,37 @@ CREATE TABLE `complaint` (
 
 LOCK TABLES `complaint` WRITE;
 /*!40000 ALTER TABLE `complaint` DISABLE KEYS */;
-INSERT INTO `complaint` VALUES (5,60,8,4,'Karmiel','bad bad very bad','2022-06-04','20:17','CLOSED',1,NULL,NULL),(6,70,12,4,'Karmiel','Very Bad','2022-06-07','13:13','OPEN',0,NULL,NULL),(7,75,13,4,'Karmiel','Very Bad','2022-06-06','14:14','OPEN',0,NULL,NULL),(8,76,12,4,'Karmiel','Very Bad','2022-06-07','12:12','OPEN',0,NULL,NULL),(9,78,14,4,'Karmiel','Very Bad','2022-06-05','13:13','OPEN',0,NULL,NULL),(10,80,15,4,'Karmiel','Very Bad','2022-06-04','13:00','OPEN',0,NULL,NULL),(11,67,12,4,'Karmiel','Very Bad','2022-06-05','17:00','OPEN',0,NULL,NULL),(12,71,13,4,'Karmiel','Very Bad','2022-06-04','12:00','OPEN',0,NULL,NULL),(13,73,14,4,'Karmiel','Very Bad','2022-06-07','19:00','CLOSED',1,NULL,NULL),(14,76,12,4,'Haifa','Very Bad','2022-06-07','20:00','CLOSED',1,NULL,NULL),(15,78,16,4,'Haifa','Very Bad','2022-06-04','21:10','CLOSED',1,NULL,NULL),(16,71,17,4,'Haifa','Very Bad','2022-06-09','12:30','CLOSED',1,NULL,NULL),(17,72,18,4,'Haifa','Very Bad','2022-06-01','11:11','OPEN',0,NULL,NULL),(18,74,12,4,'Haifa','Very Bad','2022-06-03','12:45','OPEN',0,NULL,NULL),(19,76,13,4,'Haifa','Very Bad','2022-06-05','12:07','OPEN',0,NULL,NULL),(20,77,12,4,'Eilat','Very Bad','2022-06-07','11:11','OPEN',0,NULL,NULL),(21,79,12,4,'Eilat','Very Bad','2022-06-01','13:13','OPEN',0,NULL,NULL),(22,80,13,4,'Eilat','Very Bad','2022-06-06','12:14','OPEN',0,NULL,NULL),(23,84,14,4,'Eilat','Very Bad','2022-06-05','13:00','OPEN',0,NULL,NULL),(24,85,15,4,'Jerusalem','Very Bad','2022-06-04','17:17','OPEN',0,NULL,NULL),(25,86,16,4,'Jerusalem','Very Bad','2022-06-04','08:30','OPEN',0,NULL,NULL),(26,87,17,4,'Jerusalem','Very Bad','2022-06-05','09:09','OPEN',0,NULL,NULL),(27,88,17,4,'Jerusalem','Very Bad','2022-06-04','10:01','OPEN',0,NULL,NULL),(28,89,18,4,'Karmiel','Very Bad','2022-06-04','11:12','OPEN',0,NULL,NULL),(29,90,1,4,'Tel Aviv','Very Bad','2022-06-04','13:14','OPEN',0,NULL,NULL),(30,75,8,4,'Tel Aviv','Very Bad','2022-06-03','13:10','OPEN',0,NULL,NULL),(31,76,34,4,'Tel Aviv','Very Bad','2022-06-07','12:00','OPEN',0,NULL,NULL),(32,88,35,4,'Kiryat Bialik','Very Bad','2022-06-05','17:00','OPEN',0,NULL,NULL),(33,90,36,4,'Kiryat Bialik','Very Bad','2022-06-02','14:14','OPEN',0,NULL,NULL),(34,81,34,4,'Kiryat Bialik','Very Bad','2022-06-02','12:12','OPEN',0,NULL,NULL);
+INSERT INTO `complaint` VALUES (5,60,8,4,'Karmiel','bad bad very bad','2022-06-04','20:17','CLOSED',1,NULL,NULL),(6,70,12,4,'Karmiel','Very Bad','2022-06-07','13:13','OPEN',0,NULL,NULL),(7,75,13,4,'Karmiel','Very Bad','2022-06-06','14:14','OPEN',0,NULL,NULL),(8,76,12,4,'Karmiel','Very Bad','2022-06-07','12:12','OPEN',0,NULL,NULL),(9,78,14,4,'Karmiel','Very Bad','2022-06-05','13:13','OPEN',0,NULL,NULL),(10,80,15,4,'Karmiel','Very Bad','2022-06-04','13:00','OPEN',0,NULL,NULL),(11,67,12,4,'Karmiel','Very Bad','2022-06-05','17:00','OPEN',0,NULL,NULL),(12,71,13,4,'Karmiel','Very Bad','2022-06-04','12:00','OPEN',0,NULL,NULL),(13,73,14,4,'Karmiel','Very Bad','2022-06-07','19:00','CLOSED',1,NULL,NULL),(14,76,12,4,'Haifa','Very Bad','2022-06-07','20:00','CLOSED',1,NULL,NULL),(15,78,16,4,'Haifa','Very Bad','2022-06-04','21:10','CLOSED',1,NULL,NULL),(16,71,17,4,'Haifa','Very Bad','2022-06-09','12:30','CLOSED',1,NULL,NULL),(17,72,18,4,'Haifa','Very Bad','2022-06-01','11:11','OPEN',0,NULL,NULL),(18,74,12,4,'Haifa','Very Bad','2022-06-03','12:45','OPEN',0,NULL,NULL),(19,76,13,4,'Haifa','Very Bad','2022-06-05','12:07','OPEN',0,NULL,NULL),(20,77,12,4,'Eilat','Very Bad','2022-06-07','11:11','OPEN',0,NULL,NULL),(21,79,12,4,'Eilat','Very Bad','2022-06-01','13:13','OPEN',0,NULL,NULL),(22,80,13,4,'Eilat','Very Bad','2022-06-06','12:14','OPEN',0,NULL,NULL),(23,84,14,4,'Eilat','Very Bad','2022-06-05','13:00','OPEN',0,NULL,NULL),(24,85,15,4,'Jerusalem','Very Bad','2022-06-04','17:17','OPEN',0,NULL,NULL),(25,86,16,4,'Jerusalem','Very Bad','2022-06-04','08:30','OPEN',1,NULL,NULL),(26,87,17,4,'Jerusalem','Very Bad','2022-06-05','09:09','OPEN',1,NULL,NULL),(27,88,17,4,'Jerusalem','Very Bad','2022-06-04','10:01','OPEN',1,NULL,NULL),(28,89,18,4,'Karmiel','Very Bad','2022-06-04','11:12','OPEN',0,NULL,NULL),(29,90,1,4,'Tel Aviv','Very Bad','2022-06-04','13:14','OPEN',0,NULL,NULL),(30,75,8,4,'Tel Aviv','Very Bad','2022-06-03','13:10','OPEN',0,NULL,NULL),(31,76,34,4,'Tel Aviv','Very Bad','2022-06-07','12:00','OPEN',0,NULL,NULL),(32,88,35,4,'Kiryat Bialik','Very Bad','2022-06-05','17:00','OPEN',0,NULL,NULL),(33,90,36,4,'Kiryat Bialik','Very Bad','2022-06-02','14:14','OPEN',0,NULL,NULL),(34,81,34,4,'Kiryat Bialik','Very Bad','2022-06-02','12:12','OPEN',0,NULL,NULL);
 /*!40000 ALTER TABLE `complaint` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `custom`
+--
+
+DROP TABLE IF EXISTS `custom`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `custom` (
+  `customSerial` varchar(45) NOT NULL,
+  `customName` varchar(45) NOT NULL,
+  `priceRange` varchar(45) NOT NULL,
+  `color` varchar(45) NOT NULL,
+  `productList` varchar(45) NOT NULL,
+  `itemList` varchar(45) NOT NULL,
+  `idSale` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`customSerial`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `custom`
+--
+
+LOCK TABLES `custom` WRITE;
+/*!40000 ALTER TABLE `custom` DISABLE KEYS */;
+INSERT INTO `custom` VALUES ('1','Wedding ','100-300','Red','1 3,2 3,3 2,','',0),('2','Wedding2','100-200','Green','1 4,2 2,','',0),('3','Test','12313-123312313','Blue','1 4,','',0),('4','New Red White','100-400','Red','1 1,','',0);
+/*!40000 ALTER TABLE `custom` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -93,35 +122,8 @@ CREATE TABLE `custom_in_order` (
 
 LOCK TABLES `custom_in_order` WRITE;
 /*!40000 ALTER TABLE `custom_in_order` DISABLE KEYS */;
+INSERT INTO `custom_in_order` VALUES ('1',1,'92'),('2',1,'92');
 /*!40000 ALTER TABLE `custom_in_order` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `custom_product`
---
-
-DROP TABLE IF EXISTS `custom_product`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `custom_product` (
-  `customProducSerial` varchar(45) NOT NULL,
-  `customProductName` varchar(45) NOT NULL,
-  `priceRange` varchar(45) NOT NULL,
-  `color` varchar(45) NOT NULL,
-  `productList` varchar(45) NOT NULL,
-  `itemList` varchar(45) NOT NULL,
-  `idSale` int NOT NULL DEFAULT '0',
-  PRIMARY KEY (`customProducSerial`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `custom_product`
---
-
-LOCK TABLES `custom_product` WRITE;
-/*!40000 ALTER TABLE `custom_product` DISABLE KEYS */;
-/*!40000 ALTER TABLE `custom_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -150,7 +152,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES ('1','White Rose',5,'Single Roses','/common/Assets/WhiteRose.png',1,0,'White'),('2','Red Rose',6,'Single Roses','/common/Assets/RedRose.png',1,0,'Red'),('3','Blue Rose',7,'Single Roses','/common/Assets/BlueRose.png',1,0,'Blue'),('4','Yellow Rose',7,'Single Roses','/common/Assets/YellowRose.png',1,0,'Yellow'),('5','Pink Rose',6,'Single Roses','/common/Assets/PinkRose.png',1,0,'Pink');
+INSERT INTO `item` VALUES ('1','White Rose',5,'Single Roses','/common/Assets/WhiteRose.png',1,0,'White'),('2','Red Rose',6,'Single Roses','/common/Assets/RedRose.png',1,0,'Red'),('3','Blue Rose',7,'Single Roses','/common/Assets/BlueRose.png',1,0,'Blue'),('4','Yellow Rose',7,'Single Roses','/common/Assets/YellowRose.png',1,48,'Yellow'),('5','Pink Rose',6,'Single Roses','/common/Assets/PinkRose.png',1,0,'Pink');
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,6 +232,7 @@ CREATE TABLE `item_in_sale` (
 
 LOCK TABLES `item_in_sale` WRITE;
 /*!40000 ALTER TABLE `item_in_sale` DISABLE KEYS */;
+INSERT INTO `item_in_sale` VALUES ('4',48);
 /*!40000 ALTER TABLE `item_in_sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +285,7 @@ CREATE TABLE `orderbydelivery` (
 
 LOCK TABLES `orderbydelivery` WRITE;
 /*!40000 ALTER TABLE `orderbydelivery` DISABLE KEYS */;
-INSERT INTO `orderbydelivery` VALUES (68,'dani@zli','235235','Kiryat Atta111'),(72,'dorin@zli','dorin@zli','Karmiel1222121'),(73,'sdafa','fasd','asfdfasdffasdffasf');
+INSERT INTO `orderbydelivery` VALUES (68,'dani@zli','235235','Kiryat Atta111'),(72,'dorin@zli','dorin@zli','Karmiel1222121'),(73,'sdafa','fasd','asfdfasdffasdffasf'),(93,'asfsasfha','4332424','safdasdfasfdafasfdasasfdsafd');
 /*!40000 ALTER TABLE `orderbydelivery` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,7 +315,7 @@ CREATE TABLE `orders` (
   `supplyTime` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`orderNumber`),
   KEY `fk_order_store` (`fromStore`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -321,7 +324,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (60,798,'',NULL,'','Karmiel','2022-06-03','00:31','8','Credit Card','COMPLETED',NULL,NULL,'Pickup','2022-07-02','13:13'),(61,812,'Happy Birthday!',NULL,'?','Tel Aviv','2022-06-04','02:32','8','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2023-06-15','13:17'),(62,5,'Happy Shavuot!',NULL,'','Tel Aviv','2022-06-04','10:24','8','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-07-09','12:13'),(63,255,'For your wife :)',NULL,'','Karmiel','2022-06-04','10:45','8','Credit Card','CONFIRMED','2022-06-07 00:00',NULL,'Pickup','2023-06-21','16:00'),(64,110,'',NULL,'For My Day','Karmiel','2022-06-06','11:00','1','Credit Card','CONFIRMED','2022-06-07 00:00',NULL,'Pickup','2022-06-15','12:22'),(65,110,NULL,NULL,NULL,'Karmiel','2022-05-06','11:00','1','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-10','12:22'),(66,560,'',NULL,'','Karmiel','2022-06-07','00:20','15','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-14','12:22'),(67,150,'',NULL,'','Karmiel','2022-06-07','00:21','14','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-14','14:44'),(68,135,'',NULL,'','General','2022-06-07','00:25','17','Credit Card','CONFIRMED','2022-06-07 00:00',NULL,'Delivery','2022-06-07','14:44'),(69,500,'',NULL,'','Karmiel','2022-06-07','00:40','1','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-22','22:22'),(70,1100,'',NULL,'','Karmiel','2022-06-07','00:41','1','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-20','13:13'),(71,2300,'',NULL,'','Karmiel','2022-06-07','00:44','1','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-22','08:00'),(72,4520,'',NULL,'','Karmiel','2022-06-07','00:51','8','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-22','22:22'),(73,1140,'',NULL,'','Karmiel','2022-06-07','01:03','35','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-16','12:22'),(75,2589.9,'Love You','',NULL,'Haifa','2022-05-03','13:13','13','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Pickup','2022-06-20','13:15'),(76,154.5,NULL,NULL,NULL,'Haifa','2022-06-07','14:00','12','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-19','12:12'),(77,2022,NULL,NULL,NULL,'Eilat','2022-06-07','14:30','13','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-16','13:00'),(78,104,NULL,NULL,NULL,'Karmiel','2022-06-07','13:00','14','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-16','09:00'),(79,1250,NULL,NULL,NULL,'Haifa','2022-06-07','15:00','15','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-16','10:00'),(80,150.2,NULL,NULL,NULL,'Karmiel','2022-06-07','15:30','16','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-16','15:00'),(81,79.9,NULL,NULL,NULL,'Eilat','2022-06-07','16:00','17','Credit Card','CONFIRMED','2022-06-07 00:00',NULL,'Delivery','2022-06-16','14:30'),(82,200,NULL,NULL,NULL,'Kiryat Bialik','2022-06-07','17:00','17','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-06-16','12:45'),(83,450,NULL,NULL,NULL,'Kiryat Bialik','2022-06-07','08:00','8','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-06-16','12:12'),(84,205,NULL,NULL,NULL,'Jerusalem','2022-06-07','09:09','9','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-16','07:30'),(85,284,'',NULL,NULL,'Jerusalem','2022-06-07','16:12','1','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Pickup','2022-06-16','09:30'),(86,281,NULL,NULL,NULL,'Jerusalem','2022-06-07','07:00','35','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Pickup','2022-06-16','20:00'),(87,1581,NULL,NULL,NULL,'Tiberias','2022-06-07','12:12','12','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Pickup','2022-06-16','14:00'),(88,250,NULL,NULL,NULL,'Tiberias','2022-06-07','13:00','17','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-07-16','16:25'),(89,147,NULL,NULL,NULL,'Tiberias','2022-06-07','15:15','13','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-08-16','17:45'),(90,459,NULL,NULL,NULL,'Karmiel','2022-06-07','19:00','14','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-09-15','14:00');
+INSERT INTO `orders` VALUES (60,798,'',NULL,'','Karmiel','2022-06-03','00:31','8','Credit Card','COMPLETED',NULL,NULL,'Pickup','2022-07-02','13:13'),(61,812,'Happy Birthday!',NULL,'?','Tel Aviv','2022-06-04','02:32','8','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2023-06-15','13:17'),(62,5,'Happy Shavuot!',NULL,'','Tel Aviv','2022-06-04','10:24','8','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-07-09','12:13'),(63,255,'For your wife :)',NULL,'','Karmiel','2022-06-04','10:45','8','Credit Card','CONFIRMED','2022-06-07 00:00',NULL,'Pickup','2023-06-21','16:00'),(64,110,'',NULL,'For My Day','Karmiel','2022-06-06','11:00','1','Credit Card','CONFIRMED','2022-06-07 00:00',NULL,'Pickup','2022-06-15','12:22'),(65,110,NULL,NULL,NULL,'Karmiel','2022-05-06','11:00','1','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-10','12:22'),(66,560,'',NULL,'','Karmiel','2022-06-07','00:20','15','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-14','12:22'),(67,150,'',NULL,'','Karmiel','2022-06-07','00:21','14','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-14','14:44'),(68,135,'',NULL,'','General','2022-06-07','00:25','17','Credit Card','CONFIRMED','2022-06-07 00:00',NULL,'Delivery','2022-06-07','14:44'),(69,500,'',NULL,'','Karmiel','2022-06-07','00:40','1','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-22','22:22'),(70,1100,'',NULL,'','Karmiel','2022-06-07','00:41','1','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-20','13:13'),(71,2300,'',NULL,'','Karmiel','2022-06-07','00:44','1','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-22','08:00'),(72,4520,'',NULL,'','Karmiel','2022-06-07','00:51','8','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-22','22:22'),(73,1140,'',NULL,'','Karmiel','2022-06-07','01:03','35','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-16','12:22'),(75,2589.9,'Love You','',NULL,'Haifa','2022-05-03','13:13','13','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Pickup','2022-06-20','13:15'),(76,154.5,NULL,NULL,NULL,'Haifa','2022-06-07','14:00','12','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-19','12:12'),(77,2022,NULL,NULL,NULL,'Eilat','2022-06-07','14:30','13','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-16','13:00'),(78,104,NULL,NULL,NULL,'Karmiel','2022-06-07','13:00','14','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-16','09:00'),(79,1250,NULL,NULL,NULL,'Haifa','2022-06-07','15:00','15','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-16','10:00'),(80,150.2,NULL,NULL,NULL,'Karmiel','2022-06-07','15:30','16','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Delivery','2022-06-16','15:00'),(81,79.9,NULL,NULL,NULL,'Eilat','2022-06-07','16:00','17','Credit Card','CONFIRMED','2022-06-07 00:00',NULL,'Delivery','2022-06-16','14:30'),(82,200,NULL,NULL,NULL,'Kiryat Bialik','2022-06-07','17:00','17','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-06-16','12:45'),(83,450,NULL,NULL,NULL,'Kiryat Bialik','2022-06-07','08:00','8','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-06-16','12:12'),(84,205,NULL,NULL,NULL,'Jerusalem','2022-06-07','09:09','9','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-16','07:30'),(85,284,'',NULL,NULL,'Jerusalem','2022-06-07','16:12','1','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Pickup','2022-06-16','09:30'),(86,281,NULL,NULL,NULL,'Jerusalem','2022-06-07','07:00','35','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Pickup','2022-06-16','20:00'),(87,1581,NULL,NULL,NULL,'Tiberias','2022-06-07','12:12','12','Credit Card','WAITING_FOR_CANCELATION',NULL,NULL,'Pickup','2022-06-16','14:00'),(88,250,NULL,NULL,NULL,'Tiberias','2022-06-07','13:00','17','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-07-16','16:25'),(89,147,NULL,NULL,NULL,'Tiberias','2022-06-07','15:15','13','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-08-16','17:45'),(90,459,NULL,NULL,NULL,'Karmiel','2022-06-07','19:00','14','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-09-15','14:00'),(91,99,'',NULL,'','Karmiel','2022-06-07','09:37','1','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-22','14:14'),(92,350,'Happy Wedding',NULL,'','Karmiel','2022-06-07','09:53','1','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Pickup','2022-06-23','22:26'),(93,2990,'',NULL,'','General','2022-06-07','10:54','1','Credit Card','WAITING_FOR_CONFIRMATION',NULL,NULL,'Delivery','2022-06-29','08:00');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -351,7 +354,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES ('1','Red and White Bouquet',110,'/common/Assets/RedWhiteBouquet.png',NULL,'Bouqute',1,'Red'),('2','Yellow Bouquet',140,'/common/Assets/YellowBouquet.png',NULL,'Bouqute',1,'Yellow'),('3','Blue Bouquet',150,'/common/Assets/BlueBouquet.jpg',NULL,'Bouqute',2,'Blue'),('4','Pink Bouquet',100,'/common/Assets/PinkBouquet.jpg',NULL,'Bouqute',0,'Pink'),('5','new premade',100,'/common/Assets/flower.png',NULL,'boud',0,'Green');
+INSERT INTO `product` VALUES ('1','Red and White Bouquet',110,'/common/Assets/RedWhiteBouquet.png',NULL,'Bouqute',1,'Red'),('2','Yellow Bouquet',140,'/common/Assets/YellowBouquet.png',NULL,'Bouqute',48,'Yellow'),('3','Blue Bouquet',150,'/common/Assets/BlueBouquet.jpg',NULL,'Bouqute',2,'Blue'),('4','Pink Bouquet',100,'/common/Assets/PinkBouquet.jpg',NULL,'Bouqute',0,'Pink'),('5','new premade',100,'/common/Assets/flower.png',NULL,'boud',0,'Green');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -379,7 +382,7 @@ CREATE TABLE `product_in_order` (
 
 LOCK TABLES `product_in_order` WRITE;
 /*!40000 ALTER TABLE `product_in_order` DISABLE KEYS */;
-INSERT INTO `product_in_order` VALUES ('1',7,60),('1',2,61),('1',1,63),('1',1,64),('1',1,65),('1',2,69),('2',4,61),('2',1,63),('2',8,73),('3',30,72);
+INSERT INTO `product_in_order` VALUES ('1',7,60),('1',2,61),('1',1,63),('1',1,64),('1',1,65),('1',2,69),('1',1,91),('1',30,93),('2',4,61),('2',1,63),('2',8,73),('3',30,72),('3',1,92),('4',2,92);
 /*!40000 ALTER TABLE `product_in_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,7 +406,7 @@ CREATE TABLE `product_in_sale` (
 
 LOCK TABLES `product_in_sale` WRITE;
 /*!40000 ALTER TABLE `product_in_sale` DISABLE KEYS */;
-INSERT INTO `product_in_sale` VALUES ('1',0),('1',1),('1',3),('2',1),('3',0);
+INSERT INTO `product_in_sale` VALUES ('1',0),('1',3),('2',1),('2',48),('3',0);
 /*!40000 ALTER TABLE `product_in_sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -435,7 +438,7 @@ CREATE TABLE `reports` (
 
 LOCK TABLES `reports` WRITE;
 /*!40000 ALTER TABLE `reports` DISABLE KEYS */;
-INSERT INTO `reports` VALUES (1,'Karmiel','2022','01',23,35,2800,235,1,3035),(2,'Karmiel','2022','02',17,70,2380,490,1,2870),(3,'Karmiel','2022','03',10,10,1500,1570,1,3070),(4,'Tel Aviv','2017','04',1,1,140,7,2,147),(5,'Tel aviv','2018','05',2,2,220,13,2,233),(6,'Tel Aviv','2010','09',10,30,1450,180,3,1630),(7,'Haifa','2007','12',5,5,750,25,4,775),(8,'Haifa','2020','10',15,100,2100,700,4,2800),(9,'Karmiel','2020','10',15,200,1650,1300,4,2950),(10,'Karmiel','2020','11',10,12,110,60,4,1160),(11,'Karmiel','2020','12',10,50,1250,350,4,1600),(12,'Haifa','2020','11',15,30,1860,150,4,2010),(13,'Haifa','2020','12',2,600,220,3000,4,3220),(14,'Eilat','2012','07',22,150,2800,900,3,3700),(15,'Eilat','2012','08',20,400,2900,2600,3,5500),(16,'Eilat','2012','09',20,500,2200,2500,3,4700),(17,'Tel Aviv','2012','07',25,250,3350,1750,3,5100),(18,'Tel Aviv ','2012','08',20,200,2500,1400,3,3900),(19,'Tel Aviv ','2012','09',25,200,3300,2600,3,5900),(20,'Kiryat Bialik','2016','06',30,450,3150,2250,2,5400),(21,'Kiryat Bialik','2021','05',20,150,2900,900,2,3800),(22,'Tiberias','2021','02',20,200,2200,1400,1,3600),(23,'Tiberias','2005','03',30,100,3150,700,1,3850),(24,'Jerusalem','2021','04',15,400,1860,2600,2,4460),(25,'Jerusalem','2021','05',21,300,3010,1500,2,4510),(26,'Jerusalem','2021','06',21,550,2940,2750,2,5690),(27,'Tiberias','2004','07',25,150,2200,900,3,3100),(28,'Tiberias','2003','08',15,350,1860,1750,3,3610),(29,'Tiberias','2019','12',22,450,2800,2950,4,5750),(30,'Jerusalem','2019','03',10,550,1500,3025,1,4525),(31,'Kiryat Bialik','2017','06',20,650,2500,3900,3,6400),(32,'Karmiel','2022','06',39,1,4510,100,2,2300),(33,'null','2022','06',39,1,5720,15,2,1120);
+INSERT INTO `reports` VALUES (1,'Karmiel','2022','01',23,35,2800,235,1,3035),(2,'Karmiel','2022','02',17,70,2380,490,1,2870),(3,'Karmiel','2022','03',10,10,1500,1570,1,3070),(4,'Tel Aviv','2017','04',1,1,140,7,2,147),(5,'Tel aviv','2018','05',2,2,220,13,2,233),(6,'Tel Aviv','2010','09',10,30,1450,180,3,1630),(7,'Haifa','2007','12',5,5,750,25,4,775),(8,'Haifa','2020','10',15,100,2100,700,4,2800),(9,'Karmiel','2020','10',15,200,1650,1300,4,2950),(10,'Karmiel','2020','11',10,12,110,60,4,1160),(11,'Karmiel','2020','12',10,50,1250,350,4,1600),(12,'Haifa','2020','11',15,30,1860,150,4,2010),(13,'Haifa','2020','12',2,600,220,3000,4,3220),(14,'Eilat','2012','07',22,150,2800,900,3,3700),(15,'Eilat','2012','08',20,400,2900,2600,3,5500),(16,'Eilat','2012','09',20,500,2200,2500,3,4700),(17,'Tel Aviv','2012','07',25,250,3350,1750,3,5100),(18,'Tel Aviv ','2012','08',20,200,2500,1400,3,3900),(19,'Tel Aviv ','2012','09',25,200,3300,2600,3,5900),(20,'Kiryat Bialik','2016','06',30,450,3150,2250,2,5400),(21,'Kiryat Bialik','2021','05',20,150,2900,900,2,3800),(22,'Tiberias','2021','02',20,200,2200,1400,1,3600),(23,'Tiberias','2005','03',30,100,3150,700,1,3850),(24,'Jerusalem','2021','04',15,400,1860,2600,2,4460),(25,'Jerusalem','2021','05',21,300,3010,1500,2,4510),(26,'Jerusalem','2021','06',21,550,2940,2750,2,5690),(27,'Tiberias','2004','07',25,150,2200,900,3,3100),(28,'Tiberias','2003','08',15,350,1860,1750,3,3610),(29,'Tiberias','2019','12',22,450,2800,2950,4,5750),(30,'Jerusalem','2019','03',10,550,1500,3025,1,4525),(31,'Kiryat Bialik','2017','06',20,650,2500,3900,3,6400),(32,'Karmiel','2022','06',43,3,4970,100,2,350),(33,'General','2022','06',69,1,9020,15,2,3300);
 /*!40000 ALTER TABLE `reports` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -452,7 +455,7 @@ CREATE TABLE `sale` (
   `discountAmount` int NOT NULL,
   `status` varchar(45) NOT NULL DEFAULT 'ACTIVE' COMMENT 'ACTIVE\\nNOT ACTIVE',
   PRIMARY KEY (`idSale`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -461,6 +464,7 @@ CREATE TABLE `sale` (
 
 LOCK TABLES `sale` WRITE;
 /*!40000 ALTER TABLE `sale` DISABLE KEYS */;
+INSERT INTO `sale` VALUES (1,'sale',10,'ACTIVE'),(46,'Yellow Sale',25,'NOT ACTIVE'),(47,'Blue Sale',20,'NOT ACTIVE'),(48,'Yeeeeellow',25,'ACTIVE');
 /*!40000 ALTER TABLE `sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -623,7 +627,6 @@ CREATE TABLE `user_customer` (
 
 LOCK TABLES `user_customer` WRITE;
 /*!40000 ALTER TABLE `user_customer` DISABLE KEYS */;
-INSERT INTO `user_customer` VALUES (1,0),(8,0),(11,0),(12,10),(13,0),(14,0),(15,0),(16,150.2),(17,135),(20,0),(21,0),(22,0),(23,0),(24,0),(25,0),(31,0),(32,0),(34,0),(35,0),(36,0),(37,0),(38,0),(39,0),(40,0),(41,0),(42,0),(43,0),(44,0),(49,0),(55,0),(56,0);
 /*!40000 ALTER TABLE `user_customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -647,7 +650,6 @@ CREATE TABLE `user_store_worker` (
 
 LOCK TABLES `user_store_worker` WRITE;
 /*!40000 ALTER TABLE `user_store_worker` DISABLE KEYS */;
-INSERT INTO `user_store_worker` VALUES (2,'Karmiel'),(6,'Karmiel'),(9,'Tel Aviv'),(10,'Tel Aviv'),(18,'Eilat'),(19,'Eilat'),(26,'Kiryat Bialik'),(27,'Tiberias'),(28,'Jerusalem'),(29,'Tel Aviv'),(45,'Tiberias'),(46,'Jerusalem'),(47,'Eilat'),(48,'Tel Aviv'),(50,'Haifa'),(51,'Haifa'),(52,'Jerusalem'),(53,'Tiberias'),(54,'Kiryat Bialik'),(58,'Karmiel'),(59,'Karmiel'),(60,'General');
 /*!40000 ALTER TABLE `user_store_worker` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -679,7 +681,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Oneill','Panker','111111111111','052-222','oneill@zli','1','Customer','CONFIRMED',0),(2,'Topaz','Eldori','222222222222','053-333','topaz@zli','1','StoreManager','CONFIRMED',0),(3,'Koral','Biton','333333333333','054-444','koral@zli','1','NetworkManager','CONFIRMED',0),(4,'Adir','Miller','444444444444','055-555','adir@zli','1','CustomerServiceWorker','CONFIRMED',0),(5,'Shahar','Hasson','555555555555','056-666','shahar@zli','1','StoreWorkerWithPermmision','CONFIRMED',0),(6,'Naor','Zion','666666666666','057-777','naor@zli','1','StoreWorker','CONFIRMED',0),(7,'Naruto','Uzumaki','777777777777','058-888','naruto@zli','1','MarketingEmployee','CONFIRMED',0),(8,'Dorin','Beery','222222222222','059-999','dorin@zli','1','Customer','CONFIRMED',0),(9,'Shlomi','Koriat','999999999999','050-000','shlomi@zli','1','StoreManager','CONFIRMED',0),(10,'Yuval','Semo','000000000000','051-111','yuval@zli','1','StoreWorkerWithPermission','CONFIRMED',0),(11,'Udi','Kagan','111111111111','052-111','udi@zli','1','Customer','FREEZED',0),(12,'Assi','Cohen','121212121212','053-222','assi@zli','1','Customer','CONFIRMED',0),(13,'Eran','Zarahovich','131313131313','054-333','eran@zli','1','Customer','CONFIRMED',0),(14,'Hen','Mizrahi','141414141414','055-444','hen@zli','1','Customer','CONFIRMED',0),(15,'Guy','Hochman','151515151515','056-555','guy@zli','1','Customer','CONFIRMED',0),(16,'Shalom','Assayag','161616161616','057-666','shalom@zli','1','Customer','CONFIRMED',0),(17,'Dani','Sender','457093548641','054-578','dani@zli','1','Customer','CONFIRMED',0),(18,'Shani','Shilon','187764890851','050-854','shani@zli','1','StoreManager','CONFIRMED',0),(19,'Shoam','Choen','484124842458','052-123','Shoan@zli','1','StoreWorkerWithPermission','CONFIRMED',0),(20,'Liron','Tal','','054-121','Liron@zli','1','Customer','NOT_CONFIRMED',0),(21,'Lital','Sabach','','053-878','Lital@zli','1','Customer','NOT_CONFIRMED',0),(22,'Danit','Danit',NULL,'056-958','Danit@zli','1','Customer','NOT_CONFIRMED',0),(23,'Avi','Avi',NULL,'052-784','Avi@zli','1','Customer','NOT_CONFIRMED',0),(24,'Sarit','Bonit',NULL,'051-714','Sarit@zli','1','Customer','NOT_CONFIRMED',0),(25,'Orit','Or',NULL,'056-999','Orit@zli','1','Customer','NOT_CONFIRMED',0),(26,'Uri','Dev','21200545861','054-895','Uri@zli','1','StoreManager','CONFIRMED',0),(27,'Shimon','Lev','20261854785','012-781','Shimon@zli','1','StoreManager','CONFIRMED',0),(28,'Rinat','Shir','94214575423','054-771','Rinat@zli','1','StoreManager','CONFIRMED',0),(29,'Daniel','Buri','58487104574','053-333','Daniel@zli','1','StoreWorkerWithPermission','CONFIRMED',0),(30,'Liran','Liran','85489841521','058-785','Liran@zli','1','MarketingEmployee','CONFIRMED',0),(31,'Ronen','Ron','','054-892','Ronen@zli','1','Customer','NOT_CONFIRMED',0),(32,'Refael','Refaelov','','052-789','Rafael@zli','1','Customer','NOT_CONFIRMED',0),(33,'David','David','54842047487','051--812','David@zli','1','ServiceSpecialist','CONFIRMED',0),(34,'Dina','Dina','25812018542','051-888','Dina@zli','1','Customer','CONFIRMED',0),(35,'Shimi','Shimi','54841578848','054-789','Shimi@zli','1','Customer','CONFIRMED',0),(36,'Gila','Gila','41655145454','052-569','Gila@zli','1','Customer','CONFIRMED',0),(37,'Dotan','Dotan','','054-520','Dotan@zli','1','Customer','NOT_CONFIRMED',0),(38,'Izhak','Lir',NULL,'053-547','Izhak@zli','1','Customer','NOT_CONFIRMED',0),(39,'Tzipi','Bres',NULL,'058-789','Tzipi@zli','1','Customer','NOT_CONFIRMED',0),(40,'Dor','Dor',NULL,'054-333','Dor@zli','1','Customer','NOT_CONFIRMED',0),(41,'Dana','Dana',NULL,'050-888','Dana@zli','1','Customer','NOT_CONFIRMED',0),(42,'Solomon','Solom',NULL,'055-747','Solomon@zli','1','Customer','NOT_CONFIRMED',0),(43,'Vered','Veri',NULL,'052-965','Vered@zli','1','Customer','NOT_CONFIRMED',0),(44,'Gal','Gad',NULL,'087-415','Gal@zli','1','Customer','NOT_CONFIRMED',0),(45,'Golan','Tel','54185485484','058-789','Golan@zli','1','StoreWorker','CONFIRMED',0),(46,'Shira','Shtinbuch','54185412158','052-770','Shira@zli','1','StoreWorker','CONFIRMED',0),(47,'Anatoly','Krilanko','98598785447','056-963','Anatoly@zli','1','StoreWorker','CONFIRMED',0),(48,'Nisim','Nisim','41147798524','054-711','Nisim@zli','1','StoreWorker','CONFIRMED',0),(49,'Avihai','Avihai',NULL,'055-699','Avihai@zli','1','Customer','NOT_CONFIRMED',0),(50,'Kfir','Sharoni','47825933641','055-488','Kfir@zli','1','StoreWorker','CONFIRMED',0),(51,'Tal','Tal','84102181185','057-965','Tal@zli','1','StoreWorker','CONFIRMED',0),(52,'Shimrit','Shimrit','54874052184','056-698','Shimrit@zli','1','StoreWorker','CONFIRMED',0),(53,'Lori','Lori','58695874151','058-888','Lori@zli','1','StoreWorker','CONFIRMED',0),(54,'Gidi','Gidi','84544444445','055-883','Gidi@zli','1','StoreWorker','CONFIRMED',0),(55,'Shuni','Shuni',NULL,'025-937','Shuni@zli','1','Customer','NOT_CONFIRMED',0),(56,'Or','Or','','054-854','Or@zli','1','Customer','NOT_CONFIRMED',0),(57,'Lian','Lian','52874185715','059-871','Lian@zli','1','MarketingEmployee','CONFIRMED',0),(58,'Beni','Ben','43056732583','04-1111','beni@zli','1','StoreWorker','CONFIRMED',0),(59,'Vadim','Katz','37128931273','04-2222','vadim@zli','1','StoreWorker','CONFIRMED',0),(60,'Tom','Cruise','14672961927','04-3333','tom@zli','1','StoreManager','CONFIRMED',0),(61,'dilan','Hank','12412443214141','05-4444','dilan@zli','1','Delivery','CONFIRMED',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -725,4 +726,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-07  4:49:44
+-- Dump completed on 2022-06-07 11:19:48

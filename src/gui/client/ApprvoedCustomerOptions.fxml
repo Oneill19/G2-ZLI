@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.ApprovedCustomerOptionsController">
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.ApprovedCustomerOptionsController">
    <children>
       <Pane layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1110.0" style="-fx-background-color: #FCFCFE;">
          <children>
@@ -56,12 +56,12 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="exit" alignment="CENTER" layoutX="1034.0" layoutY="24.0" mnemonicParsing="false" onAction="#onExit" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
+            <Button fx:id="exit" alignment="CENTER" layoutX="1017.0" layoutY="10.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #D2042D; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
             <Button fx:id="watchOrdersButton" alignment="CENTER" layoutX="435.0" layoutY="355.0" mnemonicParsing="false" onAction="#onWatchOrdersButton" prefHeight="43.0" prefWidth="223.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Watch Orders" textFill="#fcfcfe" />
             <Button fx:id="watchCatalogButton" alignment="CENTER" layoutX="435.0" layoutY="287.0" mnemonicParsing="false" onAction="#onWatchCatalogButton" prefHeight="43.0" prefWidth="223.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Watch Catalog" textFill="#fcfcfe" />
-            <Button fx:id="orderNowButton" alignment="CENTER" layoutX="435.0" layoutY="418.0" mnemonicParsing="false" onAction="#onOrderNowButton" prefHeight="43.0" prefWidth="223.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: green; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Order Now :)" textFill="#fcfcfe" />
+            <Button fx:id="orderNowButton" alignment="CENTER" layoutX="435.0" layoutY="418.0" mnemonicParsing="false" onAction="#onOrderNowButton" prefHeight="43.0" prefWidth="223.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: green; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Create Order" textFill="#fcfcfe" />
          </children>
       </Pane>
-      <Button fx:id="onBack" alignment="CENTER" layoutX="89.0" layoutY="763.0" mnemonicParsing="false" onAction="#onBack" prefHeight="43.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
+      <Button fx:id="onBack" alignment="CENTER" layoutX="89.0" layoutY="763.0" mnemonicParsing="false" onAction="#onBack" prefHeight="44.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #2B0548; -fx-background-radius: 50; -fx-border-radius: 50px;" text="Back" textFill="#fcfcfe" />
    </children>
 </AnchorPane>

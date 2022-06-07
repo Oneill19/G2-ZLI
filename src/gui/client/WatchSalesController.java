@@ -104,6 +104,10 @@ public class WatchSalesController {
     	grid.getChildren().clear();
     	allAbstractProducts_in_sale.clear();
     	
+    	if (sale == null) {
+    		return false;
+    	}
+    	
     	//update text fields with info
     	nameField.setText(sale.getSaleName());
     	discountField.setText(Integer.toString(sale.getDiscountAmount()));

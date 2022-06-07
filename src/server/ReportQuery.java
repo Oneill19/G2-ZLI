@@ -80,6 +80,7 @@ public class ReportQuery {
 	 */
 	public static ReturnCommand generateReport(Connection con, String productAmount, String itemAmount,
 			String productRevenue, String itemRevenue, String fromStore, String date) {
+		fromStore = fromStore.equals("null") ? "General" : fromStore;
 		System.out.println(date + " " + fromStore);
 		String orderDateArr[] = date.split("-"); // [0] year , [1] month
 		String storeName = fromStore; // the name of the store for this order

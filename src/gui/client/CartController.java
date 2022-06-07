@@ -79,8 +79,8 @@ public class CartController {
 	
 	public void initialize() throws IOException {
 		
-		textFieldPrice.setId("myTextFieldPrice");
-		textFieldPrice.setId("myTextFieldSale");
+		textFieldPrice.setId("textFieldPrice");
+		textFieldSale.setId("textFieldSale");
 		//set image view of each product in cart
 		userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
 		

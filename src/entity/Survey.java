@@ -38,7 +38,7 @@ public class Survey implements Serializable {
 	}
 
 	/**
-	 * @param set the survey name
+	 * @param surveyName
 	 */
 	public void setSurveyName(String surveyName) {
 		this.surveyName = surveyName;
@@ -52,7 +52,7 @@ public class Survey implements Serializable {
 	}
 
 	/**
-	 * @param set the questions
+	 * @param questions
 	 */
 	public void setQuestions(String[] questions) {
 		this.questions = questions;

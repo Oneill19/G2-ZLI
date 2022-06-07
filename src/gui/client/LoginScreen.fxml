@@ -43,8 +43,8 @@
       </Button>
       <Button fx:id="exit" alignment="CENTER" layoutX="917.0" layoutY="14.0" mnemonicParsing="false" onAction="#onExit" prefHeight="44.0" prefWidth="69.0" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-background-color: #D2042D; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="X" textFill="#fcfcfe" />
       <Text fx:id="errorLabel" fill="#f80000" layoutX="387.0" layoutY="521.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="238.13671875" />
-      <Button fx:id="disconnectUsers" layoutX="25.0" layoutY="680.0" mnemonicParsing="false" onAction="#onDisconnectUsers" prefHeight="44.0" prefWidth="200.0" text="Disconnect all users" />
-      <Button fx:id="dorinConfirmedCustomer" layoutX="25.0" layoutY="614.0" mnemonicParsing="false" onAction="#ondorinConfirmedCustomer" prefHeight="44.0" prefWidth="200.0" text="Dorin - Confirmed Customer" />
-      <Button fx:id="marketingEmpWorker" layoutX="25.0" layoutY="548.0" mnemonicParsing="false" onAction="#onMarketingWorker" prefHeight="44.0" prefWidth="200.0" text="Dorin - Marketing Employee" />
+      <Button fx:id="disconnectUsers" disable="true" layoutX="25.0" layoutY="680.0" mnemonicParsing="false" onAction="#onDisconnectUsers" opacity="0.0" prefHeight="44.0" prefWidth="200.0" text="Disconnect all users" />
+      <Button fx:id="dorinConfirmedCustomer" disable="true" layoutX="25.0" layoutY="614.0" mnemonicParsing="false" onAction="#ondorinConfirmedCustomer" opacity="0.0" prefHeight="44.0" prefWidth="200.0" text="Dorin - Confirmed Customer" />
+      <Button fx:id="marketingEmpWorker" disable="true" layoutX="25.0" layoutY="548.0" mnemonicParsing="false" onAction="#onMarketingWorker" opacity="0.0" prefHeight="44.0" prefWidth="200.0" text="Dorin - Marketing Employee" />
    </children>
 </Pane>
