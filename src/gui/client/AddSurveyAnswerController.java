@@ -258,13 +258,13 @@ public class AddSurveyAnswerController {
 		}
 
 //		// init buttons style
-//		backButton.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(backButton));
-//		backButton.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(backButton));
-//		
-//		exitBtn.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
-//		exitBtn.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
-//		
-//		saveButton.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(saveButton));
-//		saveButton.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnEnter(saveButton));
+		backButton.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(backButton));
+		backButton.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(backButton));
+		
+		exitBtn.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnEnter(exitBtn));
+		exitBtn.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
+		
+		saveButton.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(saveButton));
+		saveButton.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnExit(saveButton));
 	}
 }

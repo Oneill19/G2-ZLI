@@ -369,14 +369,14 @@ public class CreateProductController {
 		}
 
 //		// init buttons style
-//		backButton.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(backButton));
-//		backButton.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(backButton));
-//		
-//		addOne.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(addOne));
-//		addOne.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnEnter(addOne));
-//		
-//		deleteOne.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnEnter(deleteOne));
-//		deleteOne.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnEnter(deleteOne));
+		backButton.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(backButton));
+		backButton.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(backButton));
+		
+		addOne.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(addOne));
+		addOne.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnExit(addOne));
+		
+		deleteOne.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnEnter(deleteOne));
+		deleteOne.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(deleteOne));
 	}
 
 	/**
