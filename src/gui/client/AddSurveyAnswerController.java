@@ -2,7 +2,6 @@ package gui.client;
 
 import client.ChatClient;
 import client.ClientUI;
-import common.ButtonEventHandlerStyle;
 import entity.Survey;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

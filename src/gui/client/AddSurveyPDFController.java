@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 import client.ChatClient;
 import client.ClientUI;
-import common.ButtonEventHandlerStyle;
 import entity.Survey;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -2,7 +2,6 @@ package gui.client;
 
 import client.ClientController;
 import client.ClientUI;
-import common.ButtonEventHandlerStyle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

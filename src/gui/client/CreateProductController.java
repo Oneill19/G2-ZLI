@@ -5,7 +5,6 @@ import java.util.Map;
 
 import client.ChatClient;
 import client.ClientUI;
-import common.ButtonEventHandlerStyle;
 import entity.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
