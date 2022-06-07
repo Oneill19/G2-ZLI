@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import client.ChatClient;
 import client.ClientUI;
 import entity.AbstractProduct;
+import entity.CustomProduct;
 import entity.Item;
 import entity.Product;
 import javafx.beans.value.ChangeListener;
@@ -112,12 +113,14 @@ public class AddSaleController {
 	
 	/**
 	 * <li>Extracts serialNumber into corresponding list
-	 * @return [0]: productInSale, [1]: itemInSale
+	 * @return [0]: productInSale, [1]: itemInSale, [2]:customInSale
 	 */
 	private String[] getListItems() {
 	    StringBuilder productInSale = new StringBuilder();
 	    StringBuilder itemInSale = new StringBuilder();
-	    String[] ret = new String[2];	    
+	    StringBuilder custonInSale = new StringBuilder();
+	    
+	    String[] ret = new String[3];	    
 		ObservableList<AbstractProduct> listItems;
 		listItems = itemsList.getSelectionModel().getSelectedItems();
 		apList.addAll(listItems);
@@ -134,17 +137,22 @@ public class AddSaleController {
 			}
 			else if(ap instanceof Item) {
 				itemInSale.append(ap.getSerialNumber()+" ");
+			}else if(ap instanceof CustomProduct) {
+				custonInSale.append(ap.getSerialNumber()+" ");
 			}
 		}
 		if(productInSale.length()>0)
 			productInSale.delete(productInSale.length()-1, productInSale.length());
 		if(itemInSale.length()>0)
 			itemInSale.delete(itemInSale.length()-1, itemInSale.length());
+		if(custonInSale.length()>0)
+			custonInSale.delete(custonInSale.length()-1, custonInSale.length());
 		
 		ret[0] = productInSale.toString();
 		ret[1] = itemInSale.toString();
-		System.out.println("getListItems(): "+itemInSale);
-		System.out.println("getListProducts(): "+productInSale);
+		ret[2]=custonInSale.toString();
+		
+		System.out.println("list custom products:: "+custonInSale);
 		return ret;
 	}
 
@@ -160,7 +168,7 @@ public class AddSaleController {
 	@SuppressWarnings("unused")
 	@FXML
 	private void onSave(ActionEvent event){
-		String productInSale,itemInSale, ret[];
+		String productInSale,itemInSale,customInSale, ret[];
 		int idSale;
 
 		//• only Integer inputs 
@@ -172,6 +180,7 @@ public class AddSaleController {
 			return;
 		productInSale = ret[0];
 		itemInSale = ret[1];
+		customInSale = ret[2];
 
 		try {
 			//			insert the new sale to table 'sale' in db
@@ -181,9 +190,8 @@ public class AddSaleController {
 				return;
 			}				
 			idSale = ChatClient.returnSaleID;
-			System.out.println("idSale in AddSaleController: "+idSale);
 
-			//			set saleId of AP instance
+			//set saleId of AP instance
 			for(AbstractProduct ap : apList) {
 				ap.setSale(idSale);
 			}
