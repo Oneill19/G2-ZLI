@@ -36,6 +36,9 @@ public class ChatClient extends AbstractClient {
 	public static Order cartOrder = new Order();
 	public static String orderCreationDateTime;
 	
+	//TODO make sure this is nullified after Payment
+	public static boolean firstOrder=false;
+	
 	//AbstractProduct
 	public static ArrayList<AbstractProduct> products = new ArrayList<>();
 	public static HashMap<AbstractProduct, Integer> customerCart = new HashMap<>();

@@ -209,23 +209,24 @@ public class MyButtons extends Button {
 					else if (command.equals("Delete Item")) {
 						
 						//Get screens' objects
-							Node lookup =((Node) t.getTarget()).getScene().lookup("#my-table");
-							TableView<AbstractProduct> mytable;
-							mytable = (TableView<AbstractProduct>)lookup;
-							
-							lookup =  ((Node) t.getTarget()).getScene().lookup("#myTextFieldPrice");
-							TextField totalPriceField;
-							totalPriceField = (TextField)lookup;
+						TableView<AbstractProduct> mytable =(TableView<AbstractProduct>)((Node) t.getTarget()).getScene().lookup("#my-table");
+						TextField totalPriceField = (TextField)((Node) t.getTarget()).getScene().lookup("#myTextFieldPrice");
+						TextField totalPriceSale =  (TextField)((Node) t.getTarget()).getScene().lookup("#myTextFieldSale");
 							
 						//set updates to table and label
 						ChatClient.customerCart.remove(selected); // new due amount
 						mytable.getItems().clear();
 						mytable.setItems(FXCollections.observableArrayList(ChatClient.customerCart.keySet()));
 						Double totalPrice = 0.0;
+						Double totalSale = 0.0;
 						for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
 							totalPrice += entry.getKey().getPrice() * entry.getValue();
+							totalSale +=entry.getKey().getPriceWithSale()*entry.getValue();
 						}
 						totalPriceField.setText(totalPrice.toString());
+						if(ChatClient.firstOrder)
+							totalSale=totalSale-(totalSale*0.2);
+						totalPriceSale.setText(totalSale.toString());
 					}
 					
 					//If button is of deActivate sale
@@ -347,40 +348,51 @@ public class MyButtons extends Button {
 						AbstractProduct selectedproduct = (AbstractProduct) RegularButtonCell.this.getTableView().getItems()
 								.get(RegularButtonCell.this.getIndex());
 						
-						if(ChatClient.customerCart.get(selectedproduct) == 1) 
-							{
+						if(ChatClient.customerCart.get(selectedproduct) == 1){
 							ChatClient.customerCart.remove(selectedproduct); // new due amount
+							
+							//Add Screen objects
 							@SuppressWarnings("unchecked")
-							TableView<AbstractProduct> mytable = (TableView<AbstractProduct>) ((Node) t.getTarget())
-									.getScene().lookup("#my-table");
-
+							TableView<AbstractProduct> mytable = (TableView<AbstractProduct>) ((Node) t.getTarget()).getScene().lookup("#my-table");
+							TextField totalPriceField = (TextField) ((Node) t.getTarget()).getScene().lookup("#myTextFieldPrice");
+							TextField totalSaleField = (TextField) ((Node) t.getTarget()).getScene().lookup("#myTextFieldSale");
+							
 							ChatClient.customerCart.remove(selectedproduct); // new due amount
 							mytable.getItems().clear();
 							mytable.setItems(FXCollections.observableArrayList(ChatClient.customerCart.keySet()));// new due
-																													// amount
 
-							TextField totalPriceField = (TextField) ((Node) t.getTarget()).getScene()
-									.lookup("#myTextFieldPrice");
 							// new due amount
 							Double totalPrice = 0.0;
+							Double totalSale = 0.0;
 							for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
 								totalPrice += entry.getKey().getPrice() * entry.getValue();
+								totalSale += entry.getKey().getPriceWithSale()* entry.getValue();
 							}
 							totalPriceField.setText(totalPrice.toString());
+							if(ChatClient.firstOrder)
+								totalSale=totalSale-(totalSale*0.2);
+							totalSaleField.setText(totalSale.toString());
 							return;
-							}
+						}
+						
+						
 						ChatClient.customerCart.put(selectedproduct, ChatClient.customerCart.get(selectedproduct) - 1);
 						
 						// new due amount
 						Double totalPrice = 0.0;
+						Double totalPriceSale=0.0;
 						for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
 							totalPrice += entry.getKey().getPrice() * entry.getValue();
+							totalPriceSale +=entry.getKey().getPriceWithSale()*entry.getValue();
 							entry.getKey().setAmount(entry.getValue());
 						}
 						
-						TextField totalPriceField = (TextField) ((Node) t.getTarget()).getScene()
-								.lookup("#myTextFieldPrice");
+						TextField totalPriceField = (TextField) ((Node) t.getTarget()).getScene().lookup("#myTextFieldPrice");
+						TextField totalSaleField = (TextField) ((Node) t.getTarget()).getScene().lookup("#myTextFieldSale");
 						totalPriceField.setText(totalPrice.toString());
+						if(ChatClient.firstOrder)
+							totalPriceSale=totalPriceSale-(totalPriceSale*0.2);
+						totalSaleField.setText(totalPriceSale.toString());
 
 						@SuppressWarnings("unchecked")
 						TableView<AbstractProduct> mytable = (TableView<AbstractProduct>) ((Node) t.getTarget())
@@ -396,13 +408,18 @@ public class MyButtons extends Button {
 
 						// new due amount
 						Double totalPrice = 0.0;
-						TextField totalPriceField = (TextField) ((Node) t.getTarget()).getScene()
-								.lookup("#myTextFieldPrice");
+						Double totalSale = 0.0;
+						TextField totalPriceField = (TextField) ((Node) t.getTarget()).getScene().lookup("#myTextFieldPrice");
+						TextField totalSaleField = (TextField) ((Node) t.getTarget()).getScene().lookup("#myTextFieldSale");
 						for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
 							totalPrice += entry.getKey().getPrice() * entry.getValue();
+							totalSale += entry.getKey().getPriceWithSale()*entry.getValue();
 							entry.getKey().setAmount(entry.getValue());
 						}
 						totalPriceField.setText(totalPrice.toString());
+						if(ChatClient.firstOrder)
+							totalSale = totalSale-(totalSale*0.2);
+						totalSaleField.setText(totalSale.toString());
 						@SuppressWarnings("unchecked")
 						TableView<AbstractProduct> mytable = (TableView<AbstractProduct>) ((Node) t.getTarget())
 								.getScene().lookup("#my-table");

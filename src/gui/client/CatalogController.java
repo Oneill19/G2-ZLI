@@ -6,7 +6,6 @@ import java.util.Map;
 
 import client.ChatClient;
 import client.ClientUI;
-import common.ButtonEventHandlerStyle;
 import entity.AbstractProduct;
 import entity.Item;
 import entity.Product;
@@ -74,6 +73,8 @@ public class CatalogController {
     
     @FXML
     private GridPane grid;
+    
+    @FXML private Pane pane;
     
     private ArrayList<AbstractProduct> products = ChatClient.products;
     
@@ -203,8 +204,10 @@ public class CatalogController {
     	if (ChatClient.userOrdersHistory.size()<1) {
     		Label firstOrder = new Label("20$ discount on you're first order!");
     		firstOrder.setStyle("-fx-font-size: 15px;");
-    		firstOrder.setLayoutX(515);
-    		firstOrder.setLayoutY(68);
+    		firstOrder.setLayoutX(435);
+    		firstOrder.setLayoutY(81);
+    		pane.getChildren().add(firstOrder);
+    		ChatClient.firstOrder=true;
     	}
 		
     	//initialize cart size
@@ -276,8 +279,8 @@ public class CatalogController {
     	}
     	
 //    	// init buttons style
-//    	exitBtn.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
-//		exitBtn.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
+    	exitBtn.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnEnter(exitBtn));
+		exitBtn.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
     }
     
     private int getCartSize() {

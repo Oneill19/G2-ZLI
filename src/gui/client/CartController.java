@@ -36,11 +36,12 @@ public class CartController {
 	@FXML private TableView<AbstractProduct> cartTable;
 	@FXML private TableColumn<AbstractProduct, String> colDelete,colName,minusAmountCol,plusAmountCol,amountCol;
 	@FXML private TableColumn<AbstractProduct, ImageView> colImage;
-	@FXML private TableColumn<AbstractProduct, Double> colPrice;
+	@FXML private TableColumn<AbstractProduct, Double> colPrice, colAfterSale;
 	@FXML private TableColumn<AbstractProduct, Integer> labelAmountCol;
-	@FXML private TextField textFieldPrice;
+	@FXML private TextField textFieldPrice, textFieldSale;
 	@FXML private Button exit, exitClient, logoutBtn, onBack, userOptBtn, nextBtn; 
 	private Double totalPrice = new Double(0);
+	private Double totalPriceAfterSale = new Double(0);
     
     private CommonController cc = new CommonController();
 
@@ -71,76 +72,44 @@ public class CartController {
     		return;
     	}
     	ChatClient.cartOrder.setTotalPrice(totalPrice);
+    	if (ChatClient.firstOrder)
+    		totalPriceAfterSale=totalPriceAfterSale-(totalPriceAfterSale*0.2);
+    	ChatClient.cartOrder.setTotalPriceWithSale(totalPriceAfterSale);
     	cc.changeFXML(event, "PersonalDetails.fxml", "Zer-Li Personal Details");
     }
 	
 	public void initialize() throws IOException {
 		
 		textFieldPrice.setId("myTextFieldPrice");
+		textFieldPrice.setId("myTextFieldSale");
 		//set image view of each product in cart
 		userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
 		
 		for (Map.Entry<AbstractProduct, Integer> ap : ChatClient.customerCart.entrySet()) {
     		ap.getKey().setImageView();
     	}
-		
-		// Sets colDelete behavior
-		colDelete.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<AbstractProduct, String>, ObservableValue<String>>() {
-
-					@Override
-					public ObservableValue<String> call(TableColumn.CellDataFeatures<AbstractProduct, String> p) {
-						return new SimpleStringProperty(p.getValue() != null, null);
-					}
-				});
 
 		// Adding the Button to the cell
 		colDelete.setCellFactory(
-				new Callback<TableColumn<AbstractProduct, String>, TableCell<AbstractProduct, String>>() {
-
+				new Callback<TableColumn<AbstractProduct, String>, TableCell<AbstractProduct, String>>() { 
 					@Override
 					public TableCell<AbstractProduct, String> call(TableColumn<AbstractProduct, String> p) {
 						return new MyButtons().createDeleteButtonForAbstractItem("Delete Item");
-					}
-
-				});
-				
-		// Sets colDelete behavior
-		minusAmountCol.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<AbstractProduct, String>, ObservableValue<String>>() {
-
-					@Override
-					public ObservableValue<String> call(TableColumn.CellDataFeatures<AbstractProduct, String> p) {
-						return new SimpleStringProperty(p.getValue() != null, null);
 					}
 				});
 
 		// Adding the Button to the cell
 		minusAmountCol.setCellFactory(
 				new Callback<TableColumn<AbstractProduct, String>, TableCell<AbstractProduct, String>>() {
-
 					@Override
 					public TableCell<AbstractProduct, String> call(TableColumn<AbstractProduct, String> p) {
 						return new MyButtons().createRegularButtonForAbstractItem("Minus");
-					}
-
-				});
-
-		
-		// Sets colDelete behavior
-		plusAmountCol.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<AbstractProduct, String>, ObservableValue<String>>() {
-
-					@Override
-					public ObservableValue<String> call(TableColumn.CellDataFeatures<AbstractProduct, String> p) {
-						return new SimpleStringProperty(p.getValue() != null, null);
 					}
 				});
 
 		// Adding the Button to the cell
 		plusAmountCol.setCellFactory(
 				new Callback<TableColumn<AbstractProduct, String>, TableCell<AbstractProduct, String>>() {
-
 					@Override
 					public TableCell<AbstractProduct, String> call(TableColumn<AbstractProduct, String> p) {
 						return new MyButtons().createRegularButtonForAbstractItem("Plus");
@@ -153,6 +122,7 @@ public class CartController {
 		colImage.setCellValueFactory(new PropertyValueFactory<>("imageView"));
 		
 		colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+		colAfterSale.setCellValueFactory(new PropertyValueFactory<>("priceWithSale"));
 		
 		labelAmountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
 		
@@ -164,8 +134,13 @@ public class CartController {
 		//initial TextField:totalPrice and labelamountCol
 		for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
 			totalPrice += entry.getKey().getPrice()*entry.getValue();
+			totalPriceAfterSale += entry.getKey().getPriceWithSale()*entry.getValue();
 			entry.getKey().setAmount(entry.getValue());
 		}
 		textFieldPrice.setText(totalPrice.toString());
+		if(ChatClient.firstOrder)
+			totalPriceAfterSale=totalPriceAfterSale-(totalPriceAfterSale*0.2);
+		textFieldSale.setText(totalPriceAfterSale.toString());
+		
 	}
 }
