@@ -6,7 +6,6 @@ import java.sql.Statement;
 
 import client.ChatClient;
 import client.ClientUI;
-import common.ButtonEventHandlerStyle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -186,10 +185,10 @@ public class LoginScreenController {
 	 */
 	public void initialize() throws Exception {
 //		// init buttons style
-//		exit.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(exit));
-//		exit.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(exit));
-//		
-//		login.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(login));
-//		login.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(login));
+		exit.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(exit));
+		exit.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(exit));
+		
+		login.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(login));
+		login.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(login));
 	}
 }

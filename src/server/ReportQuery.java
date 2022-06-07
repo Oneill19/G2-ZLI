@@ -5,17 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 import common.ReturnCommand;
-import entity.Customer;
-import entity.Order;
 import entity.Report;
-import entity.Store;
-import entity.StoreWorker;
-import entity.User;
 
 /**
  * A class that performs queries related to system reports

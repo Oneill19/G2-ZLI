@@ -2,7 +2,6 @@ package gui.client;
 
 import client.ChatClient;
 import client.ClientUI;
-import common.ButtonEventHandlerStyle;
 import entity.ComplaintReport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -234,14 +233,14 @@ public class ComplaintsReportsCEOController {
 		yearComboBox.getItems().add(2022);
 
 //		// init buttons style
-//		onBack.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(onBack));
-//		onBack.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(onBack));
-//
-//		exitBtn.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
-//		exitBtn.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
-//		
-//		show.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(show));
-//		show.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnEnter(show));
+		onBack.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(onBack));
+		onBack.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(onBack));
+
+		exitBtn.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnEnter(exitBtn));
+		exitBtn.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
+		
+		show.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(show));
+		show.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnExit(show));
 	}
 
 }

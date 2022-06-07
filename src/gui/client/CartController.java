@@ -6,8 +6,6 @@ import java.util.Map;
 
 import client.ChatClient;
 import entity.AbstractProduct;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

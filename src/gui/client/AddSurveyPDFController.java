@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 import client.ChatClient;
 import client.ClientUI;
-import common.ButtonEventHandlerStyle;
 import entity.Survey;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -158,13 +157,13 @@ public class AddSurveyPDFController {
 		itemTable.setItems(observableList);
 
 //		// init buttons style
-//		backButton.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(backButton));
-//		backButton.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(backButton));
-//		
-//		exitBtn.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnExit(exitBtn));
-//		exitBtn.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(exitBtn));
-//		
-//		saveButton.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(saveButton));
-//		saveButton.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnEnter(saveButton));
+		backButton.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(backButton));
+		backButton.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(backButton));
+		
+		exitBtn.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(exitBtn));
+		exitBtn.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(exitBtn));
+		
+		saveButton.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(saveButton));
+		saveButton.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnExit(saveButton));
 	}
 }
