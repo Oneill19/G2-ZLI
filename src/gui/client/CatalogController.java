@@ -75,6 +75,8 @@ public class CatalogController {
     @FXML
     private GridPane grid;
     
+    @FXML private Pane pane;
+    
     private ArrayList<AbstractProduct> products = ChatClient.products;
     
     private AbstractProduct selectedProduct;
@@ -203,8 +205,10 @@ public class CatalogController {
     	if (ChatClient.userOrdersHistory.size()<1) {
     		Label firstOrder = new Label("20$ discount on you're first order!");
     		firstOrder.setStyle("-fx-font-size: 15px;");
-    		firstOrder.setLayoutX(515);
-    		firstOrder.setLayoutY(68);
+    		firstOrder.setLayoutX(435);
+    		firstOrder.setLayoutY(81);
+    		pane.getChildren().add(firstOrder);
+    		
     	}
 		
     	//initialize cart size
