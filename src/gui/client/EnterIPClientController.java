@@ -101,11 +101,11 @@ public class EnterIPClientController {
 	public void initialize() throws Exception {
 		
 //		// init buttons style
-		connectToClient.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(connectToClient));
-		connectToClient.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(connectToClient));
+		connectToClient.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(connectToClient));
+		connectToClient.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnExit(connectToClient));
 		
-		exitClient.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(exitClient));
-		exitClient.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(exitClient));
+		exitClient.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnEnter(exitClient));
+		exitClient.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(exitClient));
 		
 		insertDefault.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(insertDefault));
 		insertDefault.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(insertDefault));

@@ -131,39 +131,45 @@ public class LoginScreenController {
 			ClientUI.chat.accept("GetAllItems");
 			if (ChatClient.user.getStatus().equals("CONFIRMED")) {
 				root = FXMLLoader.<Pane>load(getClass().getResource("ApprvoedCustomerOptions.fxml"));
+				primaryStage.setTitle("Zer-li Options Screen");
 			} else {
 				root = FXMLLoader.<Pane>load(getClass().getResource("ReadOnlyCatalog.fxml"));
+				primaryStage.setTitle("Zer-li Catalog");
 			}
 			break;
 		case "StoreManager":
-//    		System.out.println("StoreManager");
 			root = FXMLLoader.<Pane>load(getClass().getResource("StoreManagerScreen.fxml"));
+			primaryStage.setTitle("Zer-li Store Manager");
 			break;
 		case "StoreWorker":
 			root = FXMLLoader.<Pane>load(getClass().getResource("StoreWorkerScreen.fxml"));
+			primaryStage.setTitle("Zer-li Store Worker");
 			break;
 		case "StoreWorkerWithPermission":
 			root = FXMLLoader.<Pane>load(getClass().getResource("StoreWorkerApprovedScreen.fxml"));
+			primaryStage.setTitle("Zer-li Store Worker");
 			break;
 		case "CustomerServiceWorker":
-//    		System.out.println("CustomerServiceWorker");
 			root = FXMLLoader.<Pane>load(getClass().getResource("CustomerServiceWorkerScreen.fxml"));
+			primaryStage.setTitle("Zer-li Customer Service Worker");
 			break;
 		case "ServiceSpecialist":
-//    		System.out.println("ServiceSpecialist");
 			root = FXMLLoader.<Pane>load(getClass().getResource("ServiceSpecialistScreen.fxml"));
+			primaryStage.setTitle("Zer-li Service Specialist");
 			break;
 		case "NetworkManager":
-//    		System.out.println("NetworkManager");
 			root = FXMLLoader.<Pane>load(getClass().getResource("CEOScreen.fxml"));
+			primaryStage.setTitle("Zer-li CEO");
 			break;
 		case "MarketingEmployee":
 			ChatClient.products.clear();
 			ClientUI.chat.accept("GetAllProducts");
 			ClientUI.chat.accept("GetAllItems");
 			root = FXMLLoader.<Pane>load(getClass().getResource("MarketingEmployeOptions.fxml"));
+			primaryStage.setTitle("Zer-li Marketing Employee");
 			break;
 		case "Delivery":
+			primaryStage.setTitle("Zer-li Delivery");
 			System.out.println("Delivery");
 			break;
 		}
@@ -173,7 +179,7 @@ public class LoginScreenController {
 		}
 
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("Zer-Li Client");
+//		primaryStage.setTitle("Zer-Li Client");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -185,10 +191,10 @@ public class LoginScreenController {
 	 */
 	public void initialize() throws Exception {
 //		// init buttons style
-		exit.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(exit));
-		exit.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(exit));
+		exit.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnEnter(exit));
+		exit.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(exit));
 		
-		login.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(login));
-		login.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(login));
+		login.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(login));
+		login.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnExit(login));
 	}
 }
