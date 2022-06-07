@@ -332,7 +332,12 @@ public class EchoServer extends AbstractServer {
 				client.sendToClient(ProductsQuery.getAmountOfCustomProduct(conn));
 				break;
 			case "AddCustomProduct":
-				client.sendToClient(ProductsQuery.addCustomProduct(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4], clientMsg[5], clientMsg[6]));
+				if (clientMsg.length < 7) {
+					client.sendToClient(ProductsQuery.addCustomProduct(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4], clientMsg[5], ""));
+				}
+				else {
+					client.sendToClient(ProductsQuery.addCustomProduct(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4], clientMsg[5], clientMsg[6]));					
+				}
 				break;
 			case "numberOfItemsInOrder":
 				client.sendToClient(ReportQuery.generateReport(conn, clientMsg[1], clientMsg[2], clientMsg[3], clientMsg[4],clientMsg[5], clientMsg[6]));
@@ -356,8 +361,10 @@ public class EchoServer extends AbstractServer {
 				client.sendToClient(DeliveryQuery.approveDeliveryOfOrder(conn, clientMsg[1], clientMsg[2]));
 				break;
 			case "FullRefundOf":
-				System.out.println(Double.parseDouble(clientMsg[2]));
 				client.sendToClient(DeliveryQuery.fullRefundOf(conn, clientMsg[1], Double.parseDouble(clientMsg[2])));
+				break;
+			case "GetDiscountAmount":
+				client.sendToClient(ProductsQuery.getDiscountAmount(conn, Integer.parseInt(clientMsg[1])));
 				break;
 			default:
 				System.out.println("No Command Found" + clientMsg[0]);

@@ -67,7 +67,7 @@ public class ChatClient extends AbstractClient {
 	
 	public static ArrayList<User> workersStore;
 	public static double refundAmount;
-	
+	public static int discountAmount = 0;
 	
 	public static SurveyReport selectedSurveyReport = null;
 	
@@ -303,6 +303,9 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "ApproveDeliveryOfOrder":
 				customerOfDelivery = (Customer)rc.getReturnValue();
+				break;
+			case "GetDiscountAmount":
+				discountAmount = (int)rc.getReturnValue();
 				break;
 			default:
 				//for debug - don't remove.

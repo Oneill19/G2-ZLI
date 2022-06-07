@@ -519,4 +519,21 @@ public class ProductsQuery {
 			return new ReturnCommand("AddCustomProduct", false);
 		}
 	}
+	
+	public static ReturnCommand getDiscountAmount(Connection con, int idSale) {
+		Statement stmt;
+		String sqlQuery = "SELECT discountAmount FROM zli.sale WHERE status='ACTIVE' AND idSale=" + idSale +";";
+		ResultSet rs = null;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sqlQuery);
+			if (rs.next()) {
+				return new ReturnCommand("GetDiscountAmount", rs.getInt(1));
+			}
+			return new ReturnCommand("GetDiscountAmount", 0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ReturnCommand("GetDiscountAmount", 0);
+		}
+	}
 }

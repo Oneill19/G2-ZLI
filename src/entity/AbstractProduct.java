@@ -227,6 +227,10 @@ public abstract class AbstractProduct implements Serializable {
 		return priceWithSale;
 	}
 	
+	public void setPriceWithSale(double priceWithSale) {
+		this.priceWithSale = priceWithSale;
+	}
+	
 	public int getAmount() {
 		return amount;
 	}
