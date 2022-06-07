@@ -174,6 +174,7 @@ public class PersonalDetailsController {
 			ChatClient.cartOrder.setDeliveryMethod("Delivery");
 			Order order = ChatClient.cartOrder;
 			order.setTotalPrice(order.getTotalPrice()+20);
+			order.setTotalPriceWithSale(order.getTotalPriceWithSale()+20);
 			
 		}
 		

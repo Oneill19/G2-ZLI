@@ -6,7 +6,6 @@ import java.util.Map;
 
 import client.ChatClient;
 import client.ClientUI;
-import common.ButtonEventHandlerStyle;
 import entity.AbstractProduct;
 import entity.CustomProduct;
 import entity.Product;
@@ -14,8 +13,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -279,14 +278,14 @@ public class CreateCustomProductController {
 		updateTable();
 
 //		// init buttons style
-//		backButton.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(backButton));
-//		backButton.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(backButton));
-//
-//		addOne.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(addOne));
-//		addOne.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnEnter(addOne));
-//
-//		deleteOne.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnEnter(deleteOne));
-//		deleteOne.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnEnter(deleteOne));
+		backButton.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(backButton));
+		backButton.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(backButton));
+
+		addOne.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(addOne));
+		addOne.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnExit(addOne));
+
+		deleteOne.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnEnter(deleteOne));
+		deleteOne.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(deleteOne));
 	}
 
 	private int addToHashMap(HashMap<String, Integer> hm, TempProduct ap) {

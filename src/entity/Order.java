@@ -17,11 +17,14 @@ import java.time.LocalTime;
 public class Order implements Serializable {
 
 	private int orderNumber = 0, customerID = 0;
-	private double totalPrice = 0;
+	private double totalPrice = 0, totalPriceWithSale;
 	private String greetingCard = null, color = null, orderDesc = null, fromStore = null, paymentMethod = null;
 	private String orderStatus = null, confirmedDate = null, completeDate = null, deliveryMethod = null;
 	private LocalDate orderCreationDate = null, supplyDate = null;
 	private LocalTime orderCreationTime = null, supplyTime = null;
+	
+	//for 20$ discount on first order
+	private boolean isfirstorder=false;
 
 	// Empty Constructor
 	public Order() {
@@ -253,15 +256,43 @@ public class Order implements Serializable {
 				+ ", orderDate=" + orderCreationDate + ", expectedDateInStore=" + supplyDate + ", orderTime="
 				+ orderCreationTime + ", expectedTimeInStore=" + supplyTime + "]";
 	}
+	
+	
 
 	
+	public boolean isIsfirstorder() {
+		return isfirstorder;
+	}
+
+
+	public void setIsfirstorder(boolean isfirstorder) {
+		this.isfirstorder = isfirstorder;
+	}
+	
+	
+
+
+	public double getTotalPriceWithSale() {
+		return totalPriceWithSale;
+	}
+
+
+	public void setTotalPriceWithSale(double totalPriceWithSale) {
+		this.totalPriceWithSale = totalPriceWithSale;
+	}
+
+
 	/**
 	 * @return String values of Order, by the order they present in DB.
 	 */
 	public String DBToString() {
 		StringBuilder sb = new StringBuilder();
 		//orderNumber is incremental
-		sb.append(totalPrice).append(",");
+		//old
+//		sb.append(totalPrice).append(",");
+		//new
+		sb.append(totalPriceWithSale).append(",");
+		
 		sb.append("'").append(greetingCard).append("'").append(",");
 		sb.append(color).append(",");
 		sb.append("'").append(orderDesc).append("'").append(",");

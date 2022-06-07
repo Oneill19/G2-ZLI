@@ -2,7 +2,6 @@ package gui.client;
 
 import client.ClientController;
 import client.ClientUI;
-import common.ButtonEventHandlerStyle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -102,13 +101,13 @@ public class EnterIPClientController {
 	public void initialize() throws Exception {
 		
 //		// init buttons style
-//		connectToClient.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(connectToClient));
-//		connectToClient.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(connectToClient));
-//		
-//		exitClient.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(exitClient));
-//		exitClient.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(exitClient));
-//		
-//		insertDefault.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(insertDefault));
-//		insertDefault.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(insertDefault));
+		connectToClient.setOnMouseEntered(new ButtonEventHandlerStyle.greenBackgroundOnEnter(connectToClient));
+		connectToClient.setOnMouseExited(new ButtonEventHandlerStyle.greenBackgroundOnExit(connectToClient));
+		
+		exitClient.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnEnter(exitClient));
+		exitClient.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(exitClient));
+		
+		insertDefault.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(insertDefault));
+		insertDefault.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(insertDefault));
 	}
 }

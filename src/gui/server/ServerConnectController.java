@@ -3,6 +3,8 @@ package gui.server;
 import java.io.IOException;
 
 import common.ClientInfo;
+import gui.client.ButtonEventHandlerStyle;
+import gui.client.ButtonEventHandlerStyle.purpleBackgroundOnEnter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -99,6 +101,20 @@ public class ServerConnectController {
 		hostColumn.setCellValueFactory(new PropertyValueFactory<ClientInfo, String>("hostName"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<ClientInfo, String>("status"));
 		connectionTable.setItems(EchoServer.getClientlist());
+		
+		disconnectFromDB.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(disconnectFromDB));
+		disconnectFromDB.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(disconnectFromDB));
+		
+		connectToDB.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(connectToDB));
+		connectToDB.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(connectToDB));
+		
+		defaultInsert.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(defaultInsert));
+		defaultInsert.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(defaultInsert));
+		
+		importUsers.setOnMouseEntered(new ButtonEventHandlerStyle.purpleBackgroundOnEnter(importUsers));
+		importUsers.setOnMouseExited(new ButtonEventHandlerStyle.purpleBackgroundOnExit(importUsers));
+		
+		
 	}
 
 	public void start(Stage primaryStage) throws Exception {

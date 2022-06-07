@@ -9,7 +9,7 @@ public class ButtonEventHandlerStyle{
 	/*
 	 * PURPLE
 	 */
-	static class purpleBackgroundOnEnter implements EventHandler<MouseEvent>{
+	public static class purpleBackgroundOnEnter implements EventHandler<MouseEvent>{
 		Button btn;
 		
 		public purpleBackgroundOnEnter(Button btn) {
@@ -28,7 +28,7 @@ public class ButtonEventHandlerStyle{
 		}
 	}
 		
-	static class purpleBackgroundOnExit implements EventHandler<MouseEvent>{
+	public static class purpleBackgroundOnExit implements EventHandler<MouseEvent>{
 		Button btn;
 	
 		public purpleBackgroundOnExit(Button btn) {
@@ -51,7 +51,7 @@ public class ButtonEventHandlerStyle{
 	/*
 	 * Green
 	 */
-	static class greenBackgroundOnEnter implements EventHandler<MouseEvent>{
+	public static class greenBackgroundOnEnter implements EventHandler<MouseEvent>{
 		Button btn;
 		
 		public greenBackgroundOnEnter(Button btn) {
@@ -70,7 +70,7 @@ public class ButtonEventHandlerStyle{
 		}
 	}
 		
-	static class greenBackgroundOnExit implements EventHandler<MouseEvent>{
+	public static class greenBackgroundOnExit implements EventHandler<MouseEvent>{
 		Button btn;
 	
 		public greenBackgroundOnExit(Button btn) {
@@ -93,7 +93,7 @@ public class ButtonEventHandlerStyle{
 	/*
 	 * RED
 	 */
-	static class redBackgroundOnEnter implements EventHandler<MouseEvent>{
+	public static class redBackgroundOnEnter implements EventHandler<MouseEvent>{
 		Button btn;
 		
 		public redBackgroundOnEnter(Button btn) {
@@ -112,7 +112,7 @@ public class ButtonEventHandlerStyle{
 		}
 	}
 		
-	static class redBackgroundOnExit implements EventHandler<MouseEvent>{
+	public static class redBackgroundOnExit implements EventHandler<MouseEvent>{
 		Button btn;
 	
 		public redBackgroundOnExit(Button btn) {

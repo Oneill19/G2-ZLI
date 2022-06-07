@@ -143,10 +143,10 @@
             </TextField>
             <HBox layoutX="316.0" layoutY="401.0" prefHeight="40.0" prefWidth="362.0">
                <children>
-                  <TextField fx:id="first4" editable="false" prefWidth="87.0" promptText="0000" style="-fx-font-size: 30; -fx-font-family: Averia Serif Libre; -fx-border-color: transparent; -fx-font-fill: black; -fx-background-color: transparent;" />
-                  <TextField fx:id="second4" editable="false" prefHeight="26.0" prefWidth="89.0" promptText="0000" style="-fx-font-size: 30; -fx-font-family: Averia Serif Libre; -fx-border-color: transparent; -fx-font-fill: black; -fx-background-color: transparent;" />
-                  <TextField fx:id="third4" editable="false" prefHeight="26.0" prefWidth="89.0" promptText="0000" style="-fx-font-size: 30; -fx-font-family: Averia Serif Libre; -fx-border-color: transparent; -fx-font-fill: black; -fx-background-color: transparent;" />
-                  <TextField fx:id="fourth4" editable="false" prefHeight="40.0" prefWidth="96.0" promptText="0000" style="-fx-font-size: 30; -fx-font-family: Averia Serif Libre; -fx-border-color: transparent; -fx-font-fill: black; -fx-background-color: transparent;" />
+                  <TextField fx:id="first4" editable="false" prefWidth="110.0" promptText="0000" style="-fx-font-size: 30; -fx-font-family: Averia Serif Libre; -fx-border-color: transparent; -fx-font-fill: black; -fx-background-color: transparent;" />
+                  <TextField fx:id="second4" editable="false" prefHeight="26.0" prefWidth="110.0" promptText="0000" style="-fx-font-size: 30; -fx-font-family: Averia Serif Libre; -fx-border-color: transparent; -fx-font-fill: black; -fx-background-color: transparent;" />
+                  <TextField fx:id="third4" editable="false" prefHeight="26.0" prefWidth="110.0" promptText="0000" style="-fx-font-size: 30; -fx-font-family: Averia Serif Libre; -fx-border-color: transparent; -fx-font-fill: black; -fx-background-color: transparent;" />
+                  <TextField fx:id="fourth4" editable="false" prefHeight="40.0" prefWidth="110.0" promptText="0000" style="-fx-font-size: 30; -fx-font-family: Averia Serif Libre; -fx-border-color: transparent; -fx-font-fill: black; -fx-background-color: transparent;" />
                </children>
             </HBox>
             <ImageView fitHeight="72.0" fitWidth="84.0" layoutX="298.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true">
