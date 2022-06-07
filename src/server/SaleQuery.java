@@ -65,10 +65,10 @@ public class SaleQuery {
 		String insertQuery=null, updateQuery=null;
 		String columnName = table.equals("item_in_sale") ? "itemSerial":"productSerial";
 
+//		insertQuery = "INSERT INTO "+table+" ("+columnName+", idSale)" + "VALUES (?,?);";
 		insertQuery = "INSERT INTO "+table+" ("+columnName+", idSale)" + "VALUES (?,?);";
 		
 		String[] allAp = serial.split(" ");
-//		System.out.println("idSale in SaleQuery: "+idSale); 
 				
 //		insert the new sale
 		for (String apSerial : allAp) {

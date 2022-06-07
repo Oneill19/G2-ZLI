@@ -69,9 +69,10 @@ public class CartController {
     		cc.changeFXML(event, "Catalog.fxml", "Zer-Li Catalog");
     		return;
     	}
-    	ChatClient.cartOrder.setTotalPrice(totalPrice);
+
     	if (ChatClient.firstOrder)
     		totalPriceAfterSale=totalPriceAfterSale-(totalPriceAfterSale*0.2);
+    	ChatClient.cartOrder.setTotalPrice(totalPrice);
     	ChatClient.cartOrder.setTotalPriceWithSale(totalPriceAfterSale);
     	cc.changeFXML(event, "PersonalDetails.fxml", "Zer-Li Personal Details");
     }
