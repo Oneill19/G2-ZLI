@@ -9,6 +9,7 @@ import common.ReturnCommand;
 import entity.AbstractProduct;
 import entity.Complaint;
 import entity.ComplaintReport;
+import entity.CustomProduct;
 import entity.Customer;
 import entity.Item;
 import entity.Order;
@@ -27,6 +28,7 @@ public class ChatClient extends AbstractClient {
 	public static ArrayList<Sale> saleArray = new ArrayList<Sale>();
 	public static ArrayList<Item> item_in_saleArray = new ArrayList<Item>();
 	public static ArrayList<Product> product_in_saleArray = new ArrayList<Product>(); 
+	public static ArrayList<CustomProduct> custom_in_saleArray = new ArrayList<CustomProduct>();
 	public static Integer returnSaleID = null;
 	
 	//Order
@@ -36,6 +38,7 @@ public class ChatClient extends AbstractClient {
 	public static String orderHistoryDeliveryData = new String();
 	public static Order cartOrder = new Order();
 	public static String orderCreationDateTime;
+	public static ArrayList<CustomProduct> orderHistoryCustom = new ArrayList<CustomProduct>();
 	
 	//TODO make sure this is nullified after Payment
 	public static boolean firstOrder=false;
@@ -309,6 +312,17 @@ public class ChatClient extends AbstractClient {
 				break;
 			case "GetDiscountAmount":
 				discountAmount = (int)rc.getReturnValue();
+				break;
+			case "select_custom_in_sale":
+				custom_in_saleArray = (ArrayList<CustomProduct>)rc.getReturnValue();
+				break;
+			case "getItemsBySerial":
+				item_in_saleArray = (ArrayList<Item>)rc.getReturnValue();
+				break;
+			case "select_custom_in_order":
+				orderHistoryCustom = (ArrayList<CustomProduct>)rc.getReturnValue();
+				break;
+			case "addCustomsInOrder":
 				break;
 			default:
 				//for debug - don't remove.

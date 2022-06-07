@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import client.ChatClient;
 import client.ClientUI;
 import entity.AbstractProduct;
+import entity.CustomProduct;
 import entity.Item;
 import entity.Order;
 import entity.Product;
@@ -180,8 +181,12 @@ public class CustomerOrderHistoryController {
     	//get items and products of selected order
     	ClientUI.chat.accept("getOrderItems\t"+order.getOrderNumber());
     	ClientUI.chat.accept("getOrderProducts\t"+order.getOrderNumber());
+    	ClientUI.chat.accept("getOrderCustom\t"+order.getOrderNumber());
+    	
     	orderHistoryAll.addAll(ChatClient.orderHistoryItems);
     	orderHistoryAll.addAll(ChatClient.orderHistoryProducts);
+    	if(ChatClient.orderHistoryCustom != null)
+    		orderHistoryAll.addAll(ChatClient.orderHistoryCustom);
     	
 //    	set selected order header info
     	textCreationDate.setText(order.getOrderCreationDate().toString());
@@ -295,10 +300,19 @@ public class CustomerOrderHistoryController {
     			madeFrom.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
     			vbox2 = new VBox(itemOrProduct,type,price, amount, madeFrom);
     		}
-    		else {
+    		else if(ap instanceof Item){
     			Item item = (Item)ap;
-    			itemOrProduct = new Text("An Item");
+    			itemOrProduct = new Text("A Premade Item");
     			color = new Text("Color: " + item.getColor());
+    			color.autosize();
+    			color.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
+    			vbox2 = new VBox(itemOrProduct, type, price,amount,color);
+    		} 
+    		else if(ap instanceof CustomProduct) {
+    			System.out.println("here");
+    			CustomProduct custom = (CustomProduct)ap;
+    			itemOrProduct = new Text("A Custom Product");
+    			color = new Text("Color: " + custom.getColor());
     			color.autosize();
     			color.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
     			vbox2 = new VBox(itemOrProduct, type, price,amount,color);

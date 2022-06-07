@@ -6,6 +6,7 @@ import java.util.Map;
 import client.ChatClient;
 import client.ClientUI;
 import entity.AbstractProduct;
+import entity.CustomProduct;
 import entity.Item;
 import entity.Order;
 import entity.Product;
@@ -84,7 +85,7 @@ public class PaymentController {
 		}
     	
     	//Send data for managing reports every 30 days.
-    	StringBuilder sbItems = new StringBuilder(), sbProducts=new StringBuilder();
+    	StringBuilder sbItems = new StringBuilder(), sbProducts=new StringBuilder(), sbCustom = new StringBuilder();
     	Integer itemCounter= 0, productCounter=0;
     	double productPriceSum = 0, itemPriceSum = 0;
    	
@@ -101,12 +102,18 @@ public class PaymentController {
     			sbItems.append("'").append(ap.getKey().getSerialNumber()).append("',");
     			sbItems.append(ap.getValue()).append(" ");
     		}
+    		if(ap.getKey() instanceof CustomProduct) {
+    			itemCounter++;
+    			sbCustom.append("'").append(ap.getKey().getSerialNumber()).append("',");
+    			sbCustom.append(ap.getValue()).append(" ");
+    		}
     	}
-    	if (sbItems.length() > 0) {
+    	if (sbItems.length() > 0) 
     		sbItems.delete(sbItems.length()-1, sbItems.length());
-    	}
     	if (sbProducts.length() > 0)
     		sbProducts.delete(sbProducts.length()-1, sbProducts.length());
+    	if (sbCustom.length() > 0)
+    		sbCustom.delete(sbCustom.length()-1, sbCustom.length());
     	try {
 			ClientUI.chat.accept("numberOfItemsInOrder\t" + productCounter.toString() + "\t" + itemCounter.toString()+
 					"\t" + productPriceSum +"\t" + itemPriceSum + '\t' + ChatClient.cartOrder.getFromStore() + "\t" + ChatClient.cartOrder.getOrderCreationDate());
@@ -126,6 +133,13 @@ public class PaymentController {
     	if(sbProducts.length()>0) {
         	try {
         		ClientUI.chat.accept("addProductsInOrder\t"+orderNumber.toString()+"\t"+sbProducts.toString());
+        	}catch(Exception ex) {
+        		ex.printStackTrace();
+        	}
+    	}
+    	if(sbCustom.length()>0) {
+        	try {
+        		ClientUI.chat.accept("addCustomInOrder\t"+orderNumber.toString()+"\t"+sbCustom.toString());
         	}catch(Exception ex) {
         		ex.printStackTrace();
         	}

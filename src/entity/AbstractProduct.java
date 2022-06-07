@@ -63,7 +63,7 @@ public abstract class AbstractProduct implements Serializable {
 		this.imagePath = image;
 		this.type = type;
 		this.sale=sale;
-		priceWithSale=0.0;
+		priceWithSale=price;
 		this.color = color;
 	}
 

@@ -217,8 +217,8 @@ public class MyButtons extends Button {
 						ChatClient.customerCart.remove(selected); // new due amount
 						mytable.getItems().clear();
 						mytable.setItems(FXCollections.observableArrayList(ChatClient.customerCart.keySet()));
-						Double totalPrice = 0.0;
-						Double totalSale = 0.0;
+						Double totalPrice = new Double(0);
+						Double totalSale = new Double(0);
 						for (Map.Entry<AbstractProduct, Integer> entry : ChatClient.customerCart.entrySet()) {
 							totalPrice += entry.getKey().getPrice() * entry.getValue();
 							totalSale +=entry.getKey().getPriceWithSale()*entry.getValue();

@@ -536,4 +536,40 @@ public class ProductsQuery {
 			return new ReturnCommand("GetDiscountAmount", 0);
 		}
 	}
+	
+	
+	public static ReturnCommand getItemsBySerial(Connection conn, String serials) {
+		PreparedStatement ps;
+		String selectQuery = "SELECT * from item WHERE itemSerial=?";
+		ResultSet rs;
+		Item item;
+		ArrayList<Item> itemArrayList = new ArrayList<Item>();
+		try {
+			ps = conn.prepareStatement(selectQuery);
+			for(String serial : serials.split(",")) {
+				ps.setString(1, serial.split(" ")[0]);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					String serialNumber = rs.getString(1);
+					String name = rs.getString(2);
+					double price = rs.getDouble(3);
+					String imagePath = rs.getString(5);
+					String type = rs.getString(4);
+					int idSale = rs.getInt(7);
+					boolean isSoldAlone = rs.getBoolean(6);
+					String color = rs.getString(8);
+					
+					item=new Item(serialNumber, name, price, imagePath, type, idSale, isSoldAlone, 0, color, price);
+					item.setAmount(Integer.parseInt(serial.split(" ")[1]));
+					itemArrayList.add(item);
+				}
+			}
+			return new ReturnCommand("getItemsBySerial", itemArrayList);
+		} catch (SQLException e) {
+			return new ReturnCommand("getItemsBySerial", null);
+		}
+	}
+	
+	
+	
 }

@@ -204,6 +204,22 @@ public class CreateCustomProductController {
 		String color = colorComboBox.getValue();
 		String productLists = buildItemsString(products);
 		String itemLists = buildItemsString(items);
+		
+		//calculate max price
+//		ClientUI.chat.accept("getProductsBySerials\t"+productLists);
+//		ClientUI.chat.accept("getItemsBySerial\t"+itemLists);
+//		ArrayList<AbstractProduct> ap = new ArrayList<AbstractProduct>();
+//		double maxPrice = 0;
+//		if(ChatClient.item_in_saleArray != null)
+//			ap.addAll(ChatClient.item_in_saleArray);
+//		if(ChatClient.product_in_saleArray != null)
+//			ap.addAll(ChatClient.product_in_saleArray);
+//		for(AbstractProduct abs : ap) {
+//			maxPrice += abs.getPrice()*abs.getAmount();
+//		}
+//		
+//		if (maxPrice > Double.parseDouble(price.split("-")[1]))
+//			price = productPrice1.getText() + "-" + maxPrice;
 
 		ClientUI.chat.accept("GetAmountOfCustomProduct");
 		String id = (ChatClient.customProductCounter + 1) + "";

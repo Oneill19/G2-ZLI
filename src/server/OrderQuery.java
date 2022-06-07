@@ -11,6 +11,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import common.ReturnCommand;
+import entity.CustomProduct;
 import entity.Item;
 import entity.Order;
 import entity.Product;
@@ -92,6 +93,24 @@ public class OrderQuery {
 			}
 		}
 		return new ReturnCommand("addProductsInOrder", "Products: " + product_in_order + " were added.");
+	}
+	
+	public static ReturnCommand addCustomsInOrder(Connection con, String orderNumber, String custom_in_order) {
+		PreparedStatement ps;
+		String[] customArray = custom_in_order.split(" ");
+		System.out.println(custom_in_order);
+		
+		//insert products to DB
+		for(String customSerial : customArray) {
+			String insertQuery = "INSERT INTO custom_in_order(customSerial,amount,orderNumber) VALUES ("+customSerial+","+orderNumber.toString()+")";
+			try {
+				ps = con.prepareStatement(insertQuery);
+				ps.executeUpdate();
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		return new ReturnCommand("addCustomsInOrder", "Customs:: " + custom_in_order + " were added.");
 	}
 	
 	/**
@@ -278,6 +297,42 @@ public class OrderQuery {
 			stmt.executeUpdate(sqlQuery);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static ReturnCommand select_custom_in_order(Connection conn, String orderNumber) {
+		Statement stmt;
+		String selectQuery = "SELECT *"
+							+ "FROM custom I "
+							+ "INNER JOIN custom_in_order IO ON IO.customSerial=I.customSerial "
+							+ "WHERE IO.orderNumber="+orderNumber;
+//		System.out.println(selectQuery); //debug
+		ResultSet rs = null;
+		ArrayList<CustomProduct> customInOrderArray = new ArrayList<CustomProduct>();
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(selectQuery);
+			while (rs.next()) {
+							String serialNumber = rs.getString(1);
+							String name = rs.getString(2);
+							double price = Double.parseDouble(rs.getString(3).split("-")[1]);
+							String priceRange = rs.getString(3);
+							String color = rs.getString(4);
+							String productList = rs.getString(5);
+							String itemList = rs.getString(6);
+							int idSale = rs.getInt(7);
+				
+							CustomProduct custom = new CustomProduct(serialNumber, name, price, priceRange, color, productList, itemList, idSale, price);
+							customInOrderArray.add(custom);
+			}
+			if(customInOrderArray.size()>0)
+				return new ReturnCommand("select_custom_in_order", customInOrderArray);
+			else
+				return new ReturnCommand("select_custom_in_order", null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ReturnCommand("select_custom_in_order", null);
 		}
 	}
 }
