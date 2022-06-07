@@ -473,7 +473,7 @@ public class ProductsQuery {
 	 */
 	public static ReturnCommand getAmountOfCustomProduct(Connection con) {
 		Statement stmt;
-		String sqlQuery = "SELECT * FROM zli.custom_product;";
+		String sqlQuery = "SELECT * FROM custom;";
 		int counter = 0;
 		ResultSet rs = null;
 		try {
@@ -503,7 +503,7 @@ public class ProductsQuery {
 	 */
 	public static ReturnCommand addCustomProduct(Connection con, String id, String name, String price, String color, String productLists, String itemLists) {
 		PreparedStatement ps;
-		String sqlQuery = "INSERT INTO zli.custom_product (customProducSerial,customProductName,priceRange,color,productList,itemList,idSale) VALUES (?,?,?,?,?,?,0);";
+		String sqlQuery = "INSERT INTO custom (customSerial,customName,priceRange,color,productList,itemList,idSale) VALUES (?,?,?,?,?,?,0);";
 		try {
 			ps = con.prepareStatement(sqlQuery);
 			ps.setString(1, id);
