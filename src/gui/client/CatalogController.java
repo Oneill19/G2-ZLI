@@ -6,7 +6,6 @@ import java.util.Map;
 
 import client.ChatClient;
 import client.ClientUI;
-import common.ButtonEventHandlerStyle;
 import entity.AbstractProduct;
 import entity.Item;
 import entity.Product;
@@ -208,7 +207,7 @@ public class CatalogController {
     		firstOrder.setLayoutX(435);
     		firstOrder.setLayoutY(81);
     		pane.getChildren().add(firstOrder);
-    		
+    		ChatClient.firstOrder=true;
     	}
 		
     	//initialize cart size
@@ -280,8 +279,8 @@ public class CatalogController {
     	}
     	
 //    	// init buttons style
-//    	exitBtn.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
-//		exitBtn.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
+    	exitBtn.setOnMouseEntered(new ButtonEventHandlerStyle.redBackgroundOnEnter(exitBtn));
+		exitBtn.setOnMouseExited(new ButtonEventHandlerStyle.redBackgroundOnExit(exitBtn));
     }
     
     private int getCartSize() {
