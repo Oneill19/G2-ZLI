@@ -150,7 +150,7 @@ public class AddSaleController {
 		
 		ret[0] = productInSale.toString();
 		ret[1] = itemInSale.toString();
-		ret[2]=custonInSale.toString();
+		ret[2] = custonInSale.toString();
 		
 		System.out.println("list custom products:: "+custonInSale);
 		return ret;
@@ -200,7 +200,7 @@ public class AddSaleController {
 			if(itemInSale.length()>0) {
 
 				//insert to item_in_sale
-				ClientUI.chat.accept("insertApInSale\t"+itemInSale+"\t"+idSale+"\t"+"item_in_sale");
+				ClientUI.chat.accept("insertApInSale\t"+itemInSale+"\t"+idSale+"\t"+"item");
 				if (!ChatClient.requestSucceed) {
 					System.out.println("problem in inserting item_in_sale");
 					return;
@@ -218,7 +218,7 @@ public class AddSaleController {
 			if(productInSale.length()>0) {
 
 				//insert to product_in_sale
-				ClientUI.chat.accept("insertApInSale\t"+productInSale+"\t"+idSale+"\t"+"product_in_sale");
+				ClientUI.chat.accept("insertApInSale\t"+productInSale+"\t"+idSale+"\t"+"product");
 				if (!ChatClient.requestSucceed) {
 					System.out.println("problem in inserting product_in_sale");
 					return;
@@ -226,6 +226,24 @@ public class AddSaleController {
 				//				
 				//				change table product(idSale) to updated idSale
 				ClientUI.chat.accept("changeApIdSale\t"+productInSale+"\t"+idSale+"\t"+"product");
+				if(!ChatClient.requestSucceed) {
+					System.out.println("problem");
+					return;
+				}
+			}
+			
+			//if there are items in the sale
+			if(customInSale.length()>0) {
+
+				//insert to product_in_sale
+				ClientUI.chat.accept("insertApInSale\t"+customInSale+"\t"+idSale+"\t"+"custom");
+				if (!ChatClient.requestSucceed) {
+					System.out.println("problem in inserting product_in_sale");
+					return;
+				}
+				//				
+				//				change table product(idSale) to updated idSale
+				ClientUI.chat.accept("changeApIdSale\t"+customInSale+"\t"+idSale+"\t"+"custom");
 				if(!ChatClient.requestSucceed) {
 					System.out.println("problem");
 					return;
@@ -252,7 +270,6 @@ public class AddSaleController {
     public void initialize() {
     	userOptBtn.setText("Hello, " + ChatClient.user.getFirstName());
     	saleAmount.focusedProperty().addListener(new myListener(saleAmount));
-//    	checkSaleAmountRestrictions();
     	initList();
     }
 

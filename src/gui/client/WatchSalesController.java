@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import client.ChatClient;
 import client.ClientUI;
 import entity.AbstractProduct;
+import entity.CustomProduct;
+import entity.Item;
 import entity.Product;
 import entity.Sale;
 import javafx.beans.property.SimpleStringProperty;
@@ -116,6 +118,8 @@ public class WatchSalesController {
     		allAbstractProducts_in_sale.addAll(ChatClient.item_in_saleArray);
     	if (ChatClient.product_in_saleArray != null)
     		allAbstractProducts_in_sale.addAll(ChatClient.product_in_saleArray);
+    	if(ChatClient.custom_in_saleArray != null)
+    		allAbstractProducts_in_sale.addAll(ChatClient.custom_in_saleArray);
     	
     	if(allAbstractProducts_in_sale.size()<1) {
         	grid.getChildren().clear();
@@ -220,11 +224,15 @@ public class WatchSalesController {
     			vbox2 = new VBox(itemOrProduct,type,serialNumber,price,priceWithSale, madeFrom);
     			
     		}
-    		else {
+    		else if (ap instanceof Item){
     			itemOrProduct = new Text("A Premade Item");
     			vbox2 = new VBox(itemOrProduct, type,serialNumber, price,priceWithSale);
+    		}else if(ap instanceof CustomProduct) {
+    			itemOrProduct = new Text("A Custom Product");
+    			vbox2 = new VBox(itemOrProduct, type,serialNumber, price,priceWithSale);
     		}
-//
+    		
+
     		itemOrProduct.autosize();
     		itemOrProduct.setFont(Font.font(null,FontWeight.BOLD,FontPosture.REGULAR,15));
     		
