@@ -6,15 +6,15 @@
 </p>
 
 ## Table of content
-1. **[Contributers](#contributers)**
+1. **[Contributors](#contributors)**
 2. **[System Description](#system-description)**
 3. **[Features](#features)**
 4. **[SQL Settings](#sql)**
 5. **[Screenshots](#screenshots)**
 6. **[Versions](#versions)**
 
-<a id="contributers"></a>
-## Contributers
+<a id="contributors"></a>
+## Contributors
 - [Oneill Panker](https://github.com/oneill19)
 - [Dorin Beery](https://github.com/DorinBe)
 - [Topaz Eldori](https://github.com/TopazEld)
