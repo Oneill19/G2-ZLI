@@ -5,7 +5,7 @@
     <a href="#"><img align="center" src="https://user-images.githubusercontent.com/66797449/179539964-66b7b78f-3d63-493a-9bdd-6b048f7faaac.svg" title="MySQL" width="70" height="60"/></a>
 </p>
 
-## Table of content
+## Table of Content
 1. **[Contributors](#contributors)**
 2. **[System Description](#system-description)**
 3. **[Features](#features)**
