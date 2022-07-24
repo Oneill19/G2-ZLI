@@ -70,7 +70,7 @@ zli
 - import the data from ```zliScheme.sql```
 
 <br/>
-(Please make sure you import the users from server gui to be able to log in)
+(Please make sure you import the users from the server GUI, only once after importing the data to be able to log in)
 
 <a id="screenshots"></a>
 ## Screenshots
